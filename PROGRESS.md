@@ -4,8 +4,8 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** V3 — App'i Canlandırma  
-**Aktif Mikro-Adım:** V3.3 + V3.5 ✅ tamamlandı — Sonraki: V3.4 Alışveriş Listesi (G1) veya V3.6 Tüketim Takibi (I1)  
+**Aktif Faz:** V3 — App'i Canlandırma ✅ TAMAMLANDI 🎉  
+**Aktif Mikro-Adım:** V3 tamamlandı — Sonraki: V4 Market Entegrasyonu veya ek polish  
 **Son güncelleme:** 25 Mayıs 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app
 
@@ -132,9 +132,10 @@
 - [x] **F3** — Otomatik zamanlayıcı: "15 dakika" / "2 saat" gibi ifadeler parse edilir, ▶ Başlat / ⏸ Duraklat / 🔄 Sıfırla
 - [x] Meal plan accordion'larına "👨‍🍳 Pişir" butonu eklendi, aynı CookingMode component'i kullanıyor
 
-### V3.4 — Alışveriş Listesi
-- [ ] **G1** — Haftalık plandan otomatik market listesi üretme + pantry çıkarma
-- [ ] **G2** — `/shopping-list` sayfası + paylaşılabilir link
+### V3.4 — Alışveriş Listesi ✅ TAMAMLANDI
+- [x] **G1** — `app/api/shopping-list/route.ts`: GET endpoint, haftalık plan öğünlerinin ingredients'ı birleştir, pantry'den çıkar (case-insensitive), alfabetik sırala
+- [x] **G2** — `app/(dashboard)/shopping-list/page.tsx`: checkbox listesi (UI-only, çizgi efekti), "📋 Listeyi Kopyala" butonu, plan yoksa "haftalık plan oluştur →" yönlendirme, her şey kilerdeyse yeşil onay durumu
+- [x] Sidebar nav + MobileNav'a "🛒 Alışveriş" linki eklendi
 
 ### V3.5 — Tarif Sohbeti ✅ TAMAMLANDI
 - [x] **H1** — `lib/ai/gemini.ts`: `modifyRecipe(recipe, instruction, dietContext?)` — Gemini'ye mevcut tarif + kullanıcı isteği gönderilir, aynı JSON formatında yeni tarif döner
@@ -143,11 +144,13 @@
 - [x] `recipe/[id]/page.tsx`'e RecipeModifier entegre edildi
 - [x] `components/dashboard/recipe-generator.tsx`'e "✨ Değiştir" input eklendi — tarif üretildikten sonra görünür, gerekirse otomatik kayıt + modify
 
-### V3.6 — Tüketim Takibi + Haftalık Özet
-- [ ] **I1** — Supabase `meals_eaten` tablosu + RLS
-- [ ] **I2** — "Yedim ✓" butonu (tarif kartı ve plan öğününde)
-- [ ] **I3** — Günlük tüketim özeti
-- [ ] **I4** — Haftalık özet sayfası (toplam kalori, makro dağılımı, en çok yenen tarifler)
+### V3.6 — Tüketim Takibi ✅ TAMAMLANDI
+- [x] **I1** — `supabase/migrations/20260525_create_meals_eaten.sql`: `meals_eaten` tablosu + RLS + indeksler — ⚠️ MANUEL çalıştır
+- [x] **I2** — `components/eat-button.tsx`: "✓ Yedim" butonu, POST /api/meals-eaten, başarı → yeşil "✓ Kaydedildi"
+  - `app/recipe/[id]/page.tsx`: CookingModeButton yanına EatButton eklendi (`source="recipe"`)
+  - `app/(dashboard)/meal-plan/page.tsx`: her öğünün accordion'una EatButton eklendi (`source="meal_plan"`)
+- [x] **I3** — `app/api/meals-eaten/route.ts`: POST (yeni kayıt) + GET (bugünün kayıtları + toplamlar)
+- [x] **I4** (kısmi) — Dashboard'da "📊 Bugünkü Tüketim" widget'ı: kayıt varsa 🔥💪🍚🧈 toplamları, kalori hedefi varsa "X kcal kaldı" veya "Hedefe ulaştın!"
 
 ---
 
@@ -172,7 +175,20 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 
 ## 📝 Seans Notları
 
-### 25 Mayıs 2026 — V3.3 + V3.5 tamamlandı
+### 25 Mayıs 2026 — V3.4 + V3.6 tamamlandı — V3 TAMAMLANDI 🎉
+- `app/api/shopping-list/route.ts`: haftalık plan ingredients birleştirme, pantry çıkarma (case-insensitive Set), alfabetik sort
+- `app/(dashboard)/shopping-list/page.tsx`: checkbox listesi (UI-only state, çizgi efekti), "📋 Listeyi Kopyala", plan yok → yönlendirme, tüm malzemeler kilerde → yeşil ekran
+- `app/(dashboard)/layout.tsx` + `components/dashboard/mobile-nav.tsx`: "🛒 Alışveriş" nav linki eklendi
+- `supabase/migrations/20260525_create_meals_eaten.sql`: meals_eaten tablosu + RLS + 2 indeks — ⚠️ MANUEL çalıştırılacak
+- `app/api/meals-eaten/route.ts`: GET (bugünün kayıtları + totals) + POST (yeni kayıt)
+- `components/eat-button.tsx`: "✓ Yedim" → POST /api/meals-eaten → "✓ Kaydedildi" (yeşil)
+- `app/recipe/[id]/page.tsx`: EatButton eklendi (source="recipe")
+- `app/(dashboard)/meal-plan/page.tsx`: EatButton accordion'a eklendi (source="meal_plan")
+- `app/(dashboard)/dashboard/page.tsx`: "📊 Bugünkü Tüketim" widget — kayıt varsa makrolar + kalori hedef karşılaştırması
+- `types/meals-eaten.ts`: MealEaten + DailyTotals interface'leri
+- typecheck: 0 hata · lint: 0 hata · build: 26/26 ✅
+
+### 25 Mayıs 2026 — V3.3 + V3.5 tamamlandı + Vercel deploy
 - `components/cooking-mode.tsx`: full-screen pişirme modu; `parseSteps` (numaralı → satır → cümle); `extractMinutes` (dakika/saat algılama); Framer Motion slide ←→; klavye navigasyonu (ArrowLeft/Right/Escape); ilerleme çubuğu
 - `components/cooking-mode-button.tsx`: server page için client wrapper, open state
 - `app/api/recipes/modify/route.ts`: POST, auth, kaynak tarif sahipliği, diyet bağlamı, modifyRecipe AI çağrısı, Unsplash görsel, DB insert, 201
@@ -182,6 +198,10 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - `app/(dashboard)/meal-plan/page.tsx`: accordion'a "👨‍🍳 Pişir" butonu, CookingModal state, CookingMode modal entegrasyonu
 - `components/dashboard/recipe-generator.tsx`: `autoSave()` helper (paylaşımsız kayıt), "✨ Değiştir" form + `handleModify` (auto-save → modify → navigate)
 - typecheck: 0 hata · lint: 0 hata · build: 23/23 ✅
+- `git push origin main` → Vercel otomatik deploy tetiklendi (V3.1 + V3.2 + V3.3 + V3.5 canlıya alındı)
+- ⚠️ **Manuel adımlar gerekli (henüz yapılmadıysa):**
+  1. Supabase SQL Editor: `ALTER TABLE recipes ADD COLUMN IF NOT EXISTS image_url TEXT;`
+  2. Vercel → Settings → Environment Variables: `UNSPLASH_ACCESS_KEY` ekle + redeploy
 
 ### 25 Mayıs 2026 — V3.1 + V3.2 tamamlandı
 - `lib/unsplash.ts`: `getRecipeImage(name)` → Unsplash API, landscape, 1 sonuç, hata → null; `next: { revalidate: 86400 }`

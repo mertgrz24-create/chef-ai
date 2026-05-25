@@ -5,6 +5,7 @@ import { RecipeGenerator } from '@/components/dashboard/recipe-generator'
 import { StatCard } from '@/components/dashboard/stat-card'
 import type { Profile } from '@/types/profile'
 import type { MealPlanDay } from '@/types/meal-plan'
+import type { DailyTotals } from '@/types/meals-eaten'
 
 type RecentRecipe = { id: string; name: string; created_at: string }
 
@@ -80,6 +81,26 @@ export default async function DashboardPage() {
 
   const savedCount = (savedCountResult.count as number | null) ?? 0
   const recentRecipes = (recentData ?? []) as RecentRecipe[]
+
+  // Fetch today's meals — table may not exist yet if migration hasn't been run
+  type MealEatenRow = { calories: number | null; protein_g: number | null; carbs_g: number | null; fat_g: number | null }
+  let todayMeals: MealEatenRow[] = []
+  const { data: todayMealsRaw } = await supabase
+    .from('meals_eaten')
+    .select('calories, protein_g, carbs_g, fat_g')
+    .eq('user_id', user!.id)
+    .gte('eaten_at', new Date().toISOString().split('T')[0])
+  todayMeals = (todayMealsRaw ?? []) as MealEatenRow[]
+
+  const todayTotals = todayMeals.reduce<DailyTotals>(
+    (acc, m) => ({
+      calories: acc.calories + (m.calories ?? 0),
+      protein_g: acc.protein_g + (m.protein_g ?? 0),
+      carbs_g: acc.carbs_g + (m.carbs_g ?? 0),
+      fat_g: acc.fat_g + (m.fat_g ?? 0),
+    }),
+    { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0 }
+  )
 
   const todayMeal = mealPlanData
     ? ((mealPlanData.meals as MealPlanDay[]).find((d) => d.day === getTodayDayKey()) ?? null)
@@ -217,6 +238,39 @@ export default async function DashboardPage() {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Bugünkü Tüketim — only show when there are records */}
+      {todayMeals.length > 0 && (
+        <div className="mt-8">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-[var(--text-primary)]">📊 Bugünkü Tüketim</h2>
+          </div>
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 shadow-sm">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              <span>🔥 <span className="font-semibold text-[var(--text-primary)]">{todayTotals.calories} kcal</span></span>
+              <span>💪 <span className="font-semibold text-[var(--text-primary)]">{todayTotals.protein_g}g</span> <span className="text-[var(--text-muted)]">protein</span></span>
+              <span>🍚 <span className="font-semibold text-[var(--text-primary)]">{todayTotals.carbs_g}g</span> <span className="text-[var(--text-muted)]">karb</span></span>
+              <span>🧈 <span className="font-semibold text-[var(--text-primary)]">{todayTotals.fat_g}g</span> <span className="text-[var(--text-muted)]">yağ</span></span>
+            </div>
+            {profile?.daily_calorie_goal != null && (
+              <p className="mt-3 text-xs text-[var(--text-muted)]">
+                Hedefin:{' '}
+                <span className="font-medium text-[var(--text-secondary)]">{profile.daily_calorie_goal} kcal</span>
+                {' — '}Bugün:{' '}
+                <span className="font-medium text-[var(--text-secondary)]">{todayTotals.calories} kcal</span>
+                {todayTotals.calories < profile.daily_calorie_goal && (
+                  <span className="ml-1 text-amber-600 dark:text-amber-400">
+                    ({profile.daily_calorie_goal - todayTotals.calories} kaldı)
+                  </span>
+                )}
+                {todayTotals.calories >= profile.daily_calorie_goal && (
+                  <span className="ml-1 text-green-600 dark:text-green-400">(Hedefe ulaştın! ✓)</span>
+                )}
+              </p>
+            )}
           </div>
         </div>
       )}

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CookingMode } from '@/components/cooking-mode'
+import { EatButton } from '@/components/eat-button'
 import type { MealPlan, MealItem } from '@/types/meal-plan'
 
 const DAY_LABELS: Record<string, string> = {
@@ -296,15 +297,22 @@ export default function MealPlanPage() {
                                     <MacroBadge icon="🧈" value={`${mealItem.macros.fat_g}g yağ`} />
                                   </div>
                                 )}
-                                {mealItem.instructions && (
-                                  <button
-                                    type="button"
-                                    onClick={() => setCookingModal({ recipeName: mealItem.name, instructions: mealItem.instructions })}
-                                    className="mt-1 flex items-center gap-1.5 rounded-xl border border-[var(--border)] px-4 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
-                                  >
-                                    👨‍🍳 Pişir
-                                  </button>
-                                )}
+                                <div className="mt-1 flex flex-wrap gap-2">
+                                  {mealItem.instructions && (
+                                    <button
+                                      type="button"
+                                      onClick={() => setCookingModal({ recipeName: mealItem.name, instructions: mealItem.instructions })}
+                                      className="flex items-center gap-1.5 rounded-xl border border-[var(--border)] px-4 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
+                                    >
+                                      👨‍🍳 Pişir
+                                    </button>
+                                  )}
+                                  <EatButton
+                                    recipeName={mealItem.name}
+                                    macros={mealItem.macros}
+                                    source="meal_plan"
+                                  />
+                                </div>
                               </div>
                             </motion.div>
                           )}

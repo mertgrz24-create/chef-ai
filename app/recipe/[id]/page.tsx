@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { CookingModeButton } from '@/components/cooking-mode-button'
 import { RecipeModifier } from '@/components/recipe-modifier'
+import { EatButton } from '@/components/eat-button'
 import type { Recipe } from '@/types/recipe'
 
 function formatDate(iso: string): string {
@@ -106,11 +107,16 @@ export default async function PublicRecipePage({ params }: { params: { id: strin
               </div>
             )}
 
-            {/* Cooking mode button */}
-            <div className="mb-4">
+            {/* Action buttons */}
+            <div className="mb-4 flex flex-wrap gap-2">
               <CookingModeButton
                 recipeName={recipe.name}
                 instructions={recipe.instructions}
+              />
+              <EatButton
+                recipeName={recipe.name}
+                macros={recipe.macros}
+                source="recipe"
               />
             </div>
 
