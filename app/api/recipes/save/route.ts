@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { getRecipeImage } from '@/lib/unsplash'
 import type { Recipe } from '@/types/recipe'
 
-// POST /api/recipes/save — persist a generated recipe for the current user
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -35,15 +35,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'instructions alanı zorunlu.' }, { status: 400 })
   }
 
+  const recipeName = body.name.trim()
+  const image_url = await getRecipeImage(recipeName)
+
   const { data, error } = await supabase
     .from('recipes')
     .insert({
       user_id: user.id,
-      name: body.name.trim(),
+      name: recipeName,
       ingredients: body.ingredients as string[],
       instructions: body.instructions.trim(),
       macros: body.macros ?? null,
       diet_context: typeof body.diet_context === 'string' ? body.diet_context : null,
+      image_url,
       is_public: true,
     })
     .select()

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Providers } from "@/components/providers";
 import { PwaRegister } from "@/components/pwa-register";
 import "./globals.css";
 
@@ -29,10 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" suppressHydrationWarning>
       <body className={`${inter.variable}`}>
-        {children}
-        <PwaRegister />
+        <Providers>
+          {children}
+          <PwaRegister />
+        </Providers>
       </body>
     </html>
   );

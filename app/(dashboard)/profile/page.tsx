@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 import type { Profile } from '@/types/profile'
 
 const inputCls =
-  'w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100 disabled:opacity-60'
-const labelCls = 'mb-1.5 block text-sm font-medium text-gray-700'
-const sectionCls = 'rounded-2xl border border-gray-100 bg-white p-6 shadow-sm'
-const headingCls = 'mb-5 flex items-center gap-2 text-base font-semibold text-gray-800'
+  'w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3 text-sm text-[var(--text-primary)] outline-none transition placeholder:text-[var(--text-muted)] focus:border-amber-400 focus:ring-2 focus:ring-amber-100 dark:focus:ring-amber-900/30 disabled:opacity-60'
+const labelCls = 'mb-1.5 block text-sm font-medium text-[var(--text-secondary)]'
+const sectionCls = 'rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-sm'
+const headingCls = 'mb-5 flex items-center gap-2 text-base font-semibold text-[var(--text-primary)]'
 
 const DIET_OPTIONS = [
   { label: 'Normal', value: 'omnivore' },
@@ -98,7 +98,7 @@ function NumberInput({
         disabled={disabled}
         className={`${inputCls} pr-16`}
       />
-      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-[var(--text-muted)]">
         {suffix}
       </span>
     </div>
@@ -181,10 +181,10 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div>
-        <h1 className="mb-2 text-2xl font-bold text-gray-900">Profil</h1>
-        <p className="mb-8 text-sm text-gray-500">Diyet hedeflerin ve hesap ayarların.</p>
+        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
+        <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
         <div className="flex items-center justify-center py-20">
-          <p className="text-sm text-gray-400">Yükleniyor…</p>
+          <p className="text-sm text-[var(--text-muted)]">Yükleniyor…</p>
         </div>
       </div>
     )
@@ -193,9 +193,9 @@ export default function ProfilePage() {
   if (fetchError) {
     return (
       <div>
-        <h1 className="mb-2 text-2xl font-bold text-gray-900">Profil</h1>
-        <p className="mb-8 text-sm text-gray-500">Diyet hedeflerin ve hesap ayarların.</p>
-        <div className="rounded-xl border border-red-100 bg-red-50 p-4 text-sm text-red-600">
+        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
+        <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
+        <div className="rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-600 dark:text-red-400">
           {fetchError}
         </div>
       </div>
@@ -204,8 +204,8 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold text-gray-900">Profil</h1>
-      <p className="mb-8 text-sm text-gray-500">Diyet hedeflerin ve hesap ayarların.</p>
+      <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
+      <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
 
       <form onSubmit={handleSubmit} className="flex max-w-2xl flex-col gap-6">
         {/* Section 1 — Beslenme Hedefleri */}
@@ -384,8 +384,8 @@ export default function ProfilePage() {
           <div
             className={`rounded-xl border px-4 py-3 text-sm font-medium ${
               message.ok
-                ? 'border-green-100 bg-green-50 text-green-700'
-                : 'border-red-100 bg-red-50 text-red-600'
+                ? 'border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400'
+                : 'border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400'
             }`}
           >
             {message.text}

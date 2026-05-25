@@ -4,9 +4,9 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** V3 — App'i Canlandırma (başlamadı)  
-**Aktif Mikro-Adım:** Sonraki: V3.1 — Tarif Görselleri (Unsplash API)  
-**Son güncelleme:** 12 Mayıs 2026  
+**Aktif Faz:** V3 — App'i Canlandırma  
+**Aktif Mikro-Adım:** V3.3 + V3.5 ✅ tamamlandı — Sonraki: V3.4 Alışveriş Listesi (G1) veya V3.6 Tüketim Takibi (I1)  
+**Son güncelleme:** 25 Mayıs 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app
 
 ## 🗺️ Genel Yol Haritası
@@ -115,28 +115,33 @@
 
 > V3 amacı: V2'nin temel özellikleri üzerine görsel zenginlik, etkileşim ve keyif katmanları eklemek.
 
-### V3.1 — Tarif Görselleri
-- [ ] **D1** — `lib/unsplash.ts` wrapper (Unsplash API, tarif adına göre fotoğraf çek)
-- [ ] **D2** — Tarif kartları, public tarif sayfası, haftalık plan accordion'larına görsel entegrasyonu
+### V3.1 — Tarif Görselleri ✅ TAMAMLANDI
+- [x] **D1** — `lib/unsplash.ts` wrapper (Unsplash API, tarif adına göre fotoğraf çek, hata → null)
+- [x] **D2** — `app/api/recipes/save/route.ts` — kayıt sırasında getRecipeImage çağrısı, image_url DB'ye yazılıyor
+- [x] **D3** — `components/dashboard/recipe-generator.tsx` (kayıt sonrası görsel), `app/recipe/[id]/page.tsx` (hero görsel), `app/(dashboard)/recipes/page.tsx` (60×60 thumbnail)
+- [x] `supabase/migrations/20260512_add_image_url_to_recipes.sql` — ⚠️ Supabase SQL Editor'da manuel çalıştırılacak
 
-### V3.2 — Dark Mode + Animasyonlar
-- [ ] **E1** — Theme toggle (light/dark) + localStorage persistence
-- [ ] **E2** — `globals.css`'te dark mode CSS variables
-- [ ] **E3** — Framer Motion ile sayfa geçişleri ve kart animasyonları
+### V3.2 — Dark Mode + Animasyonlar ✅ TAMAMLANDI
+- [x] **E1** — `tailwind.config.ts`: `darkMode: 'class'`; `components/theme-toggle.tsx` (☀️/🌙 toggle); `next-themes` ThemeProvider
+- [x] **E2** — `globals.css`: CSS custom properties (--bg, --bg-card, --border, --text-* vb.) light + dark versiyonları
+- [x] **E3** — `components/dashboard/page-transition.tsx`: AnimatePresence + usePathname ile sayfa geçişi; `components/dashboard/stat-card.tsx`: whileHover scale 1.02; meal-plan accordion'u smooth height animasyonu
 
-### V3.3 — Adım Adım Pişirme Modu
-- [ ] **F1** — Public tarif sayfasına "👨‍🍳 Pişirmeye Başla" butonu
-- [ ] **F2** — Full-screen step-by-step mod (tek adım, ileri/geri)
-- [ ] **F3** — Zamanlayıcı entegrasyonu (tarifteki dakikaları algıla)
+### V3.3 — Adım Adım Pişirme Modu ✅ TAMAMLANDI
+- [x] **F1** — `components/cooking-mode.tsx`: full-screen overlay, adım parse (numaralı liste → satır → cümle sırasıyla), slide animasyonu, keyboard nav (←→ Esc)
+- [x] **F2** — `components/cooking-mode-button.tsx`: server page için client wrapper; `recipe/[id]/page.tsx`'e "👨‍🍳 Pişirmeye Başla" butonu eklendi
+- [x] **F3** — Otomatik zamanlayıcı: "15 dakika" / "2 saat" gibi ifadeler parse edilir, ▶ Başlat / ⏸ Duraklat / 🔄 Sıfırla
+- [x] Meal plan accordion'larına "👨‍🍳 Pişir" butonu eklendi, aynı CookingMode component'i kullanıyor
 
 ### V3.4 — Alışveriş Listesi
 - [ ] **G1** — Haftalık plandan otomatik market listesi üretme + pantry çıkarma
 - [ ] **G2** — `/shopping-list` sayfası + paylaşılabilir link
 
-### V3.5 — Tarif Sohbeti
-- [ ] **H1** — Tarif altına "Bu tarifi şöyle değiştir" input'u
-- [ ] **H2** — Gemini'ye context ile yeniden gönderme ("daha az kalorili", "vejetaryen yap" vb.)
-- [ ] **H3** — Yeni varyant olarak kaydetme seçeneği
+### V3.5 — Tarif Sohbeti ✅ TAMAMLANDI
+- [x] **H1** — `lib/ai/gemini.ts`: `modifyRecipe(recipe, instruction, dietContext?)` — Gemini'ye mevcut tarif + kullanıcı isteği gönderilir, aynı JSON formatında yeni tarif döner
+- [x] **H2** — `app/api/recipes/modify/route.ts`: POST endpoint, auth + kaynak tarif sahipliği kontrolü, profil diyet bağlamı eklenir, yeni tarif DB'ye kaydedilir + Unsplash görseli çekilir
+- [x] **H3** — `components/recipe-modifier.tsx`: "✨ Bu Tarifi Değiştir" UI, 401 → giriş linki, başarıda `/recipe/[newId]`'ye yönlendirme
+- [x] `recipe/[id]/page.tsx`'e RecipeModifier entegre edildi
+- [x] `components/dashboard/recipe-generator.tsx`'e "✨ Değiştir" input eklendi — tarif üretildikten sonra görünür, gerekirse otomatik kayıt + modify
 
 ### V3.6 — Tüketim Takibi + Haftalık Özet
 - [ ] **I1** — Supabase `meals_eaten` tablosu + RLS
@@ -166,6 +171,34 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 > Chef-AI V3 projesindeyim. CLAUDE.md ve PROGRESS.md'yi oku, iki cümleyle özetle: nerede kaldık, sıradaki mikro-adım ne? Mikro-adım modunda kal, Türkçe konuş.
 
 ## 📝 Seans Notları
+
+### 25 Mayıs 2026 — V3.3 + V3.5 tamamlandı
+- `components/cooking-mode.tsx`: full-screen pişirme modu; `parseSteps` (numaralı → satır → cümle); `extractMinutes` (dakika/saat algılama); Framer Motion slide ←→; klavye navigasyonu (ArrowLeft/Right/Escape); ilerleme çubuğu
+- `components/cooking-mode-button.tsx`: server page için client wrapper, open state
+- `app/api/recipes/modify/route.ts`: POST, auth, kaynak tarif sahipliği, diyet bağlamı, modifyRecipe AI çağrısı, Unsplash görsel, DB insert, 201
+- `lib/ai/gemini.ts`: `modifyRecipe(recipe, instruction, dietContext?)` → MODIFY_RECIPE_SYSTEM_PROMPT, aynı JSON parse mantığı, `ModifyRecipeInput` + `ModifyRecipeResult` interface'leri
+- `components/recipe-modifier.tsx`: "✨ Bu Tarifi Değiştir" input + submit + 401 guard + router.push
+- `app/recipe/[id]/page.tsx`: CookingModeButton + RecipeModifier entegrasyonu (server → client prop geçişi)
+- `app/(dashboard)/meal-plan/page.tsx`: accordion'a "👨‍🍳 Pişir" butonu, CookingModal state, CookingMode modal entegrasyonu
+- `components/dashboard/recipe-generator.tsx`: `autoSave()` helper (paylaşımsız kayıt), "✨ Değiştir" form + `handleModify` (auto-save → modify → navigate)
+- typecheck: 0 hata · lint: 0 hata · build: 23/23 ✅
+
+### 25 Mayıs 2026 — V3.1 + V3.2 tamamlandı
+- `lib/unsplash.ts`: `getRecipeImage(name)` → Unsplash API, landscape, 1 sonuç, hata → null; `next: { revalidate: 86400 }`
+- `next.config.mjs`: `images.remotePatterns` → images.unsplash.com
+- `supabase/migrations/20260512_add_image_url_to_recipes.sql`: `ALTER TABLE recipes ADD COLUMN IF NOT EXISTS image_url TEXT` — ⚠️ MANUEL çalıştır
+- `app/api/recipes/save/route.ts`: kayıt öncesi `getRecipeImage` çağrısı, `image_url` DB'ye yazılıyor ve response'a dahil
+- Görseller: tarif kartı (kayıt sonrası → Unsplash, yoksa amber gradient placeholder), `recipe/[id]` hero görsel, recipes sayfasında 60px thumbnail
+- `next-themes` kuruldu; `components/providers.tsx` ThemeProvider wrapper; `app/layout.tsx`: suppressHydrationWarning + Providers
+- `tailwind.config.ts`: `darkMode: 'class'`
+- `globals.css`: CSS variables (--bg, --bg-card, --bg-sidebar, --border, --border-subtle, --text-primary, --text-secondary, --text-muted, --accent, --accent-light, --accent-border) — light + dark set
+- `components/theme-toggle.tsx`: ☀️/🌙 buton, useTheme, mount guard
+- `components/dashboard/page-transition.tsx`: AnimatePresence + usePathname key, opacity 0→1, y 10→0, 0.2s
+- `components/dashboard/stat-card.tsx`: motion.div, whileHover scale 1.02
+- Tüm dashboard sayfaları (`dashboard`, `recipes`, `meal-plan`, `profile`) + public `recipe/[id]` + dashboard `layout.tsx` — CSS variable dark mode sınıflarına geçirildi
+- `meal-plan/page.tsx`: accordion AnimatePresence + height 0→auto smooth animasyonu
+- `.env.example` oluşturuldu (UNSPLASH_ACCESS_KEY dahil)
+- typecheck: 0 hata · lint: 0 hata
 
 ### 12 Mayıs 2026 — V3 yol haritası planlandı — V2 TAMAMLANDI 🎉
 - V2.1 diyet hedefleri tamamlandı (profil sayfası, dashboard kartları)

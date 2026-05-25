@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PhotoAnalyzer } from '@/components/dashboard/photo-analyzer'
 import { RecipeGenerator } from '@/components/dashboard/recipe-generator'
+import { StatCard } from '@/components/dashboard/stat-card'
 import type { Profile } from '@/types/profile'
 import type { MealPlanDay } from '@/types/meal-plan'
 
@@ -90,12 +91,10 @@ export default async function DashboardPage() {
   sevenDaysLater.setDate(today.getDate() + 7)
 
   const pantryCount = pantryItems?.length ?? 0
-  // upcoming: expires today through next 7 days (not yet expired)
   const wasteAlertCount = pantryItems?.filter((item) => {
     const expiry = new Date(item.expiry_date)
     return expiry >= today && expiry <= sevenDaysLater
   }).length ?? 0
-  // already past expiry: strictly before today
   const expiredCount = pantryItems?.filter((item) => {
     const expiry = new Date(item.expiry_date)
     return expiry < today
@@ -144,33 +143,23 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <h1 className="mb-8 text-2xl font-bold text-gray-900">
+      <h1 className="mb-8 text-2xl font-bold text-[var(--text-primary)]">
         Merhaba, {user?.email} 👋
       </h1>
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm"
-          >
-            <div className="mb-3 text-3xl">{stat.icon}</div>
-            <div className="text-3xl font-bold" style={{ color: '#ffa51f' }}>
-              {stat.value}
-            </div>
-            <div className="mt-1 text-sm text-gray-500">{stat.label}</div>
-          </div>
+          <StatCard key={stat.label} icon={stat.icon} value={stat.value} label={stat.label} />
         ))}
 
         {expiredCount > 0 && (
-          <Link
-            href="/pantry"
-            className="block rounded-2xl border border-red-100 bg-red-50 p-6 shadow-sm transition hover:bg-red-100"
-          >
-            <div className="mb-3 text-3xl">🗑️</div>
-            <div className="text-3xl font-bold text-red-600">{expiredCount} ürün</div>
-            <div className="mt-1 text-sm text-red-400">Tüketim Tarihi Geçmiş</div>
+          <Link href="/pantry" className="block">
+            <div className="rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-6 shadow-sm transition hover:bg-red-100 dark:hover:bg-red-950/50">
+              <div className="mb-3 text-3xl">🗑️</div>
+              <div className="text-3xl font-bold text-red-600 dark:text-red-400">{expiredCount} ürün</div>
+              <div className="mt-1 text-sm text-red-400 dark:text-red-500">Tüketim Tarihi Geçmiş</div>
+            </div>
           </Link>
         )}
       </div>
@@ -178,15 +167,15 @@ export default async function DashboardPage() {
       {/* Hedeflerim */}
       <div className="mt-8">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-800">🎯 Hedeflerim</h2>
+          <h2 className="text-lg font-semibold text-[var(--text-primary)]">🎯 Hedeflerim</h2>
           <Link href="/profile" className="text-xs text-amber-500 hover:underline">
             Düzenle →
           </Link>
         </div>
 
         {goalItems.length === 0 ? (
-          <div className="rounded-2xl border-2 border-dashed border-gray-200 bg-white p-6 text-center">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card)] p-6 text-center">
+            <p className="text-sm text-[var(--text-muted)]">
               Henüz hedef girilmemiş.{' '}
               <Link href="/profile" className="text-amber-500 hover:underline">
                 Hedeflerini belirle →
@@ -198,11 +187,11 @@ export default async function DashboardPage() {
             {goalItems.map((g) => (
               <div
                 key={g.label}
-                className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
+                className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4 shadow-sm"
               >
                 <div className="mb-1 text-xl">{g.icon}</div>
-                <div className="text-sm font-semibold text-gray-800">{g.value}</div>
-                <div className="mt-0.5 text-xs text-gray-400">{g.label}</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)]">{g.value}</div>
+                <div className="mt-0.5 text-xs text-[var(--text-muted)]">{g.label}</div>
               </div>
             ))}
           </div>
@@ -212,13 +201,13 @@ export default async function DashboardPage() {
       {/* Geçmiş Tariflerim */}
       {recentRecipes.length > 0 && (
         <div className="mt-8">
-          <h2 className="mb-4 text-lg font-semibold text-gray-800">📋 Geçmiş Tariflerim</h2>
-          <div className="divide-y divide-gray-50 rounded-2xl border border-gray-100 bg-white shadow-sm">
+          <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">📋 Geçmiş Tariflerim</h2>
+          <div className="divide-y divide-[var(--border-subtle)] rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] shadow-sm">
             {recentRecipes.map((r) => (
               <div key={r.id} className="flex items-center justify-between px-5 py-3.5">
                 <div className="min-w-0 flex-1 pr-4">
-                  <p className="truncate text-sm font-medium text-gray-800">{r.name}</p>
-                  <p className="text-xs text-gray-400">{formatDate(r.created_at)}</p>
+                  <p className="truncate text-sm font-medium text-[var(--text-primary)]">{r.name}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{formatDate(r.created_at)}</p>
                 </div>
                 <Link
                   href={`/recipe/${r.id}`}
@@ -235,28 +224,28 @@ export default async function DashboardPage() {
       {/* Bu Haftaki Planın */}
       <div className="mt-8">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-800">🗓️ Bu Haftaki Planın</h2>
+          <h2 className="text-lg font-semibold text-[var(--text-primary)]">🗓️ Bu Haftaki Planın</h2>
           <Link href="/meal-plan" className="text-xs text-amber-500 hover:underline">
             Tüm Planı Gör →
           </Link>
         </div>
 
         {todayMeal ? (
-          <div className="divide-y divide-gray-50 rounded-2xl border border-gray-100 bg-white shadow-sm">
+          <div className="divide-y divide-[var(--border-subtle)] rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] shadow-sm">
             <div className="flex items-center gap-3 px-5 py-3.5">
               <span className="text-lg">🌅</span>
-              <span className="w-16 flex-shrink-0 text-xs font-medium text-gray-400">Kahvaltı</span>
-              <span className="text-sm font-medium text-gray-800">{todayMeal.breakfast.name}</span>
+              <span className="w-16 flex-shrink-0 text-xs font-medium text-[var(--text-muted)]">Kahvaltı</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">{todayMeal.breakfast.name}</span>
             </div>
             <div className="flex items-center gap-3 px-5 py-3.5">
               <span className="text-lg">🌙</span>
-              <span className="w-16 flex-shrink-0 text-xs font-medium text-gray-400">Akşam</span>
-              <span className="text-sm font-medium text-gray-800">{todayMeal.dinner.name}</span>
+              <span className="w-16 flex-shrink-0 text-xs font-medium text-[var(--text-muted)]">Akşam</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">{todayMeal.dinner.name}</span>
             </div>
           </div>
         ) : (
-          <div className="rounded-2xl border-2 border-dashed border-gray-200 bg-white p-6 text-center">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card)] p-6 text-center">
+            <p className="text-sm text-[var(--text-muted)]">
               Haftalık plan oluşturulmamış.{' '}
               <Link href="/meal-plan" className="text-amber-500 hover:underline">
                 Haftalık planı oluştur →

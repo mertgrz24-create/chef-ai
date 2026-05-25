@@ -239,6 +239,95 @@ export async function generateSingleMeal(
   return parseMealItemJson(rawText)
 }
 
+// ─── Recipe modification ──────────────────────────────────────────────────────
+
+const MODIFY_RECIPE_SYSTEM_PROMPT = `Sen Chef-AI'nin tarif düzenleme asistanısın. Kullanıcının verdiği mevcut tarifi, isteğine göre değiştirirsin.
+
+Kurallar:
+- Her zaman Türkçe yanıt ver.
+- SADECE geçerli bir JSON nesnesi döndür; markdown, açıklama veya başka metin ekleme.
+- Mevcut tarifi kullanıcının talebine göre düzenle (kalori azalt, vejetaryen yap, porsiyon değiştir vb.).
+- Tarif adını gerektiğinde güncelle; instructions içindeki adımları \\n ile ayır.
+- macros değerleri tahmini olabilir; değişikliği yansıt.
+
+Çıktı formatı (sadece bu JSON, başka hiçbir şey):
+{
+  "name": "Güncellenmiş Tarif Adı",
+  "ingredients": ["malzeme 1 (miktar)", "malzeme 2 (miktar)"],
+  "instructions": "1. İlk adım.\\n2. İkinci adım.\\n3. Üçüncü adım.",
+  "macros": {
+    "calories": 350,
+    "protein_g": 25,
+    "carbs_g": 30,
+    "fat_g": 10
+  }
+}`
+
+export interface ModifyRecipeInput {
+  name: string
+  ingredients: string[]
+  instructions: string
+}
+
+export interface ModifyRecipeResult {
+  name: string
+  ingredients: string[]
+  instructions: string
+  macros: RecipeMacros | null
+}
+
+export async function modifyRecipe(
+  recipe: ModifyRecipeInput,
+  instruction: string,
+  dietContext?: string
+): Promise<ModifyRecipeResult> {
+  const model = client.getGenerativeModel({
+    model: 'gemini-2.5-pro',
+    systemInstruction: MODIFY_RECIPE_SYSTEM_PROMPT,
+  })
+
+  const userMessage = `Mevcut tarif:
+Ad: ${recipe.name}
+Malzemeler: ${recipe.ingredients.join(', ')}
+Hazırlık: ${recipe.instructions}
+
+Kullanıcının isteği: ${instruction}${dietContext ? `\nDiyet hedefleri: ${dietContext}` : ''}
+
+Bu tarifi kullanıcının isteğine göre düzenle.`
+
+  const result = await model.generateContent(userMessage)
+  const rawText = result.response.text().trim()
+
+  let jsonStr = rawText
+  if (jsonStr.startsWith('```')) {
+    jsonStr = jsonStr.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
+  }
+
+  const parsed = JSON.parse(jsonStr) as {
+    name?: string
+    ingredients?: string[]
+    instructions?: string
+    macros?: Partial<RecipeMacros>
+  }
+
+  const m = parsed.macros
+  const macros: RecipeMacros | null =
+    m &&
+    typeof m.calories === 'number' &&
+    typeof m.protein_g === 'number' &&
+    typeof m.carbs_g === 'number' &&
+    typeof m.fat_g === 'number'
+      ? { calories: m.calories, protein_g: m.protein_g, carbs_g: m.carbs_g, fat_g: m.fat_g }
+      : null
+
+  return {
+    name: parsed.name ?? recipe.name,
+    ingredients: parsed.ingredients ?? recipe.ingredients,
+    instructions: parsed.instructions ?? recipe.instructions,
+    macros,
+  }
+}
+
 export async function analyzeIngredients(
   imageBase64: string,
   mimeType: 'image/jpeg' | 'image/png' | 'image/webp'
