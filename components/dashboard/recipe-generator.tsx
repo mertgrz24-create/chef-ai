@@ -48,9 +48,13 @@ export function RecipeGenerator() {
   const [saveError, setSaveError] = useState<string | null>(null)
 
   // Modify state
+  // Modify state
   const [modifyInput, setModifyInput] = useState('')
   const [modifying, setModifying] = useState(false)
   const [modifyError, setModifyError] = useState<string | null>(null)
+
+  // Freemium limit state
+  const [limitReached, setLimitReached] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -73,6 +77,7 @@ export function RecipeGenerator() {
     setParsedRecipe(null)
     setModifyInput('')
     setModifyError(null)
+    setLimitReached(false)
 
     try {
       const res = await fetch('/api/recipes', {
@@ -85,9 +90,12 @@ export function RecipeGenerator() {
         recipe?: string
         macros?: RecipeMacros | null
         error?: string
+        message?: string
       }
 
-      if (!res.ok) {
+      if (res.status === 403 && data.error === 'limit_reached') {
+        setLimitReached(true)
+      } else if (!res.ok) {
         setError(data.error ?? 'Bir hata oluştu.')
       } else {
         const text = data.recipe ?? null
@@ -234,6 +242,7 @@ export function RecipeGenerator() {
     setParsedRecipe(null)
     setModifyInput('')
     setModifyError(null)
+    setLimitReached(false)
   }
 
   return (
@@ -258,6 +267,33 @@ export function RecipeGenerator() {
           {loading ? 'Tarif üretiliyor…' : 'Tarif Üret →'}
         </button>
       </form>
+
+      <AnimatePresence>
+        {limitReached && (
+          <motion.div
+            key="limit"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="mt-4 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-5"
+          >
+            <p className="mb-3 text-sm font-semibold text-amber-800 dark:text-amber-300">
+              Bu ay 5 ücretsiz tarifini kullandın 🎉
+            </p>
+            <p className="mb-4 text-xs text-amber-700 dark:text-amber-400">
+              Sınırsız tarif, yemek planı ve daha fazlası için Premium&apos;a geçebilirsin.
+            </p>
+            <a
+              href="/premium"
+              className="inline-block rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+              style={{ backgroundColor: '#ffa51f' }}
+            >
+              Premium&apos;a Geç →
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {error && (

@@ -4,9 +4,9 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** V3 — App'i Canlandırma ✅ TAMAMLANDI 🎉  
-**Aktif Mikro-Adım:** V3 tamamlandı — Sonraki: V4 Market Entegrasyonu veya ek polish  
-**Son güncelleme:** 25 Mayıs 2026  
+**Aktif Faz:** V4 — Freemium + Sağlık Export + Tavsiye Programı ✅ TAMAMLANDI 🎉  
+**Aktif Mikro-Adım:** V4.1 + V4.2 + V4.3 tamamlandı — Sonraki: Stripe entegrasyonu veya V5  
+**Son güncelleme:** 26 Mayıs 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app
 
 ## 🗺️ Genel Yol Haritası

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { customAlphabet } from 'nanoid'
 import type { Profile } from '@/types/profile'
+
+const genCode = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6)
 
 const NUMERIC_FIELD_LIST = [
   'daily_calorie_goal', 'protein_goal_g', 'carbs_goal_g', 'fat_goal_g',
@@ -33,7 +36,21 @@ export async function GET() {
     return NextResponse.json({ error: 'Profil getirilemedi.' }, { status: 500 })
   }
 
-  return NextResponse.json({ profile: data as Profile })
+  const profile = data as Profile
+
+  // Auto-generate referral_code if missing
+  if (!profile.referral_code) {
+    const referral_code = `CHEF-${genCode()}`
+    const { data: updated } = await supabase
+      .from('profiles')
+      .update({ referral_code })
+      .eq('id', user.id)
+      .select()
+      .single()
+    if (updated) return NextResponse.json({ profile: updated as Profile })
+  }
+
+  return NextResponse.json({ profile })
 }
 
 // PUT /api/profile — update current user's profile

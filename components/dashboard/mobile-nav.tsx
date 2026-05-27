@@ -10,6 +10,7 @@ const links = [
   { href: '/recipes',       label: 'Tariflerim',  icon: '📋' },
   { href: '/meal-plan',     label: 'Yemek Planı', icon: '🗓️' },
   { href: '/shopping-list', label: 'Alışveriş',   icon: '🛒' },
+  { href: '/premium',       label: 'Premium',     icon: '⭐' },
   { href: '/profile',       label: 'Profil',      icon: '👤' },
 ]
 

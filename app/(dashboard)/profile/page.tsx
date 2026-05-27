@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import type { Profile } from '@/types/profile'
 
@@ -112,6 +112,31 @@ export default function ProfilePage() {
   const [fetchError, setFetchError] = useState<string | null>(null)
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
 
+  // Profile data (for referral + premium status)
+  const [profile, setProfile] = useState<Profile | null>(null)
+
+  // Health export
+  const [exporting, setExporting] = useState(false)
+
+  // Referral copy
+  const [copied, setCopied] = useState(false)
+
+  const applyReferral = useCallback(async (p: Profile) => {
+    if (p.referred_by) return
+    const ref = localStorage.getItem('chef_ref')
+    if (!ref) return
+    try {
+      await fetch('/api/referral', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: ref }),
+      })
+      localStorage.removeItem('chef_ref')
+    } catch {
+      // non-fatal
+    }
+  }, [])
+
   useEffect(() => {
     void (async () => {
       try {
@@ -121,6 +146,8 @@ export default function ProfilePage() {
           setFetchError(data.error ?? 'Profil yüklenemedi.')
         } else if (data.profile) {
           setForm(profileToForm(data.profile))
+          setProfile(data.profile)
+          void applyReferral(data.profile)
         }
       } catch {
         setFetchError('Sunucuya ulaşılamadı.')
@@ -128,7 +155,7 @@ export default function ProfilePage() {
         setLoading(false)
       }
     })()
-  }, [])
+  }, [applyReferral])
 
   function set(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -169,12 +196,47 @@ export default function ProfilePage() {
         setMessage({ ok: false, text: data.error ?? 'Kaydetme başarısız.' })
       } else {
         setMessage({ ok: true, text: 'Hedefler kaydedildi ✓' })
-        if (data.profile) setForm(profileToForm(data.profile))
+        if (data.profile) {
+          setForm(profileToForm(data.profile))
+          setProfile(data.profile)
+        }
       }
     } catch {
       setMessage({ ok: false, text: 'Sunucuya ulaşılamadı. Lütfen tekrar deneyin.' })
     } finally {
       setSaving(false)
+    }
+  }
+
+  async function handleExport() {
+    setExporting(true)
+    try {
+      const res = await fetch('/api/health-export')
+      if (!res.ok) return
+      const data = await res.json() as { exports: unknown[] }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'chef-ai-health-export.json'
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      // silently ignore
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  async function handleCopyCode() {
+    if (!profile?.referral_code) return
+    const shareUrl = `https://chef-ai-puce-zeta.vercel.app/signup?ref=${profile.referral_code}`
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+    } catch {
+      // silently ignore
     }
   }
 
@@ -402,6 +464,79 @@ export default function ProfilePage() {
           {saving ? 'Kaydediliyor…' : 'Hedefleri Kaydet'}
         </button>
       </form>
+
+      {/* Health Export */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: 'easeOut', delay: 0.2 }}
+        className={`mt-6 max-w-2xl ${sectionCls}`}
+      >
+        <h2 className={headingCls}>
+          <span>📱</span> Sağlık Uygulaması Export
+        </h2>
+        <p className="mb-4 text-sm text-[var(--text-muted)]">
+          Son 30 günün tüketim verisini Apple Health / Google Fit&apos;e aktarabilirsin.
+        </p>
+        <button
+          type="button"
+          onClick={() => { void handleExport() }}
+          disabled={exporting}
+          className="rounded-xl border border-[var(--border)] px-5 py-2.5 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400 disabled:opacity-50"
+        >
+          {exporting ? 'İndiriliyor…' : '📥 Apple Health / Google Fit\'e Aktar'}
+        </button>
+        <p className="mt-3 text-xs text-[var(--text-muted)]">
+          İndirilen JSON dosyasını sağlık uygulamanıza aktarabilirsiniz.
+        </p>
+      </motion.div>
+
+      {/* Referral */}
+      {profile?.referral_code && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, ease: 'easeOut', delay: 0.25 }}
+          className={`mt-6 max-w-2xl ${sectionCls}`}
+        >
+          <h2 className={headingCls}>
+            <span>🎁</span> Arkadaşını Davet Et
+          </h2>
+
+          {/* Code display */}
+          <div className="mb-4 flex items-center gap-3">
+            <span className="rounded-xl border-2 border-dashed border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-5 py-3 text-xl font-bold tracking-widest text-amber-700 dark:text-amber-300">
+              {profile.referral_code}
+            </span>
+            <button
+              type="button"
+              onClick={() => { void handleCopyCode() }}
+              className="rounded-xl border border-[var(--border)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
+            >
+              {copied ? '✓ Kopyalandı' : '📋 Kodu Kopyala'}
+            </button>
+          </div>
+
+          <p className="mb-2 text-sm text-[var(--text-muted)]">
+            Paylaşım linki:{' '}
+            <span className="font-mono text-xs text-[var(--text-secondary)]">
+              chef-ai-puce-zeta.vercel.app/signup?ref={profile.referral_code}
+            </span>
+          </p>
+
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3">
+            <span className="text-lg">👥</span>
+            <span className="text-sm text-[var(--text-secondary)]">
+              Davet ettiğin kişi sayısı:{' '}
+              <span className="font-bold text-[var(--text-primary)]">{profile.referral_count ?? 0} kişi</span>
+            </span>
+          </div>
+
+          <p className="mt-3 text-xs text-[var(--text-muted)]">
+            Davet ettiğin her 3 kişi için 1 ay Premium kazan! <span className="italic">(yakında)</span>
+          </p>
+        </motion.div>
+      )}
     </div>
   )
 }

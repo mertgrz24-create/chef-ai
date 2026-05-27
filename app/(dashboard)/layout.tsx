@@ -33,6 +33,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <NavLink href="/recipes">Tariflerim</NavLink>
             <NavLink href="/meal-plan">🗓️ Yemek Planı</NavLink>
             <NavLink href="/shopping-list">🛒 Alışveriş</NavLink>
+            <NavLink href="/premium">⭐ Premium</NavLink>
             <NavLink href="/profile">Profil</NavLink>
           </nav>
 

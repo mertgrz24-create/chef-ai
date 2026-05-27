@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateRecipeWithGemini } from '@/lib/ai/gemini'
 
+const FREE_MONTHLY_LIMIT = 5
+
 type ProfileRow = {
   daily_calorie_goal: number | null
   protein_goal_g: number | null
@@ -9,6 +11,9 @@ type ProfileRow = {
   fat_goal_g: number | null
   water_goal_l: number | null
   diet_type: string | null
+  is_premium: boolean
+  recipe_count_this_month: number
+  recipe_count_reset_at: string
 }
 
 function buildDietContext(profile: ProfileRow | null): string | undefined {
@@ -22,6 +27,11 @@ function buildDietContext(profile: ProfileRow | null): string | undefined {
   if (profile.diet_type) parts.push(`diyet tipi: ${profile.diet_type}`)
   if (parts.length === 0) return undefined
   return `Diyet hedeflerim: ${parts.join(', ')}. Bu hedeflere uygun tarif öner.`
+}
+
+function getMonthStart(): string {
+  const now = new Date()
+  return new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
 }
 
 export async function POST(request: NextRequest) {
@@ -52,21 +62,44 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
   }
 
-  // TODO: Rate limiting — günlük 3 tarif (ücretsiz) kontrolü
-
-  // 3. Fetch diet profile for context (non-fatal if unavailable)
+  // 3. Fetch profile (diet context + usage data)
   const { data: profileData } = await supabase
     .from('profiles')
-    .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, diet_type')
+    .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, diet_type, is_premium, recipe_count_this_month, recipe_count_reset_at')
     .eq('id', user.id)
     .single()
 
-  const dietContext = buildDietContext(profileData as ProfileRow | null)
+  const profile = profileData as ProfileRow | null
 
-  // 4. Generate recipe with Gemini
+  // 4. Freemium limit check
+  const monthStart = getMonthStart()
+  let currentCount = profile?.recipe_count_this_month ?? 0
+
+  // Reset counter if it's a new month
+  if (profile && profile.recipe_count_reset_at < monthStart) {
+    currentCount = 0
+    await supabase
+      .from('profiles')
+      .update({ recipe_count_this_month: 0, recipe_count_reset_at: new Date().toISOString() })
+      .eq('id', user.id)
+  }
+
+  if (!profile?.is_premium && currentCount >= FREE_MONTHLY_LIMIT) {
+    return NextResponse.json(
+      {
+        error: 'limit_reached',
+        message: `Bu ay ${FREE_MONTHLY_LIMIT} ücretsiz tarifini kullandın. Premium'a geç!`,
+      },
+      { status: 403 }
+    )
+  }
+
+  // 5. Generate recipe
+  const dietContext = buildDietContext(profile)
+
+  let result: Awaited<ReturnType<typeof generateRecipeWithGemini>>
   try {
-    const result = await generateRecipeWithGemini(ingredients, dietContext)
-    return NextResponse.json({ recipe: result.text, macros: result.macros })
+    result = await generateRecipeWithGemini(ingredients, dietContext)
   } catch (err) {
     console.error('[/api/recipes] Tarif üretme hatası:', err)
     return NextResponse.json(
@@ -74,4 +107,12 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
+
+  // 6. Increment usage counter (non-fatal)
+  await supabase
+    .from('profiles')
+    .update({ recipe_count_this_month: currentCount + 1 })
+    .eq('id', user.id)
+
+  return NextResponse.json({ recipe: result.text, macros: result.macros })
 }

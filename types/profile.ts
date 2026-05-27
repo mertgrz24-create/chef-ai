@@ -26,6 +26,16 @@ export interface Profile {
   target_weight_kg: number | null;
   diet_type: DietType | null;
   goals_updated_at: string | null;
+
+  // V4.1 — Freemium usage tracking
+  recipe_count_this_month: number;
+  recipe_count_reset_at: string;
+  is_premium: boolean;
+
+  // V4.3 — Referral program
+  referral_code: string | null;
+  referred_by: string | null;
+  referral_count: number;
 }
 
 export type ProfileUpdatePayload = Partial<Pick<Profile,

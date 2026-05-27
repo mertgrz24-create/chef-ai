@@ -61,7 +61,7 @@ export default async function DashboardPage() {
     supabase.from('pantry').select('expiry_date').eq('user_id', user!.id),
     supabase
       .from('profiles')
-      .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, daily_steps_goal, current_weight_kg, target_weight_kg, diet_type')
+      .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, daily_steps_goal, current_weight_kg, target_weight_kg, diet_type, is_premium, recipe_count_this_month')
       .eq('id', user!.id)
       .single(),
     supabase.from('recipes').select('*', { count: 'exact', head: true }).eq('user_id', user!.id),
@@ -218,6 +218,39 @@ export default async function DashboardPage() {
           </div>
         )}
       </div>
+
+      {/* Tarif Kullanımı (freemium) */}
+      {profile && (
+        <div className="mt-6">
+          {profile.is_premium ? (
+            <div className="flex items-center gap-2 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 px-5 py-3">
+              <span className="text-lg">✨</span>
+              <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">Premium üye</span>
+              <span className="ml-1 text-xs text-amber-600 dark:text-amber-500">— Sınırsız tarif</span>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] px-5 py-4 shadow-sm">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm text-[var(--text-secondary)]">
+                  Bu ay <span className="font-semibold text-[var(--text-primary)]">{profile.recipe_count_this_month ?? 0}/5</span> tarif kullandın
+                </span>
+                <Link href="/premium" className="text-xs font-medium text-amber-500 hover:underline">
+                  Premium&apos;a Geç →
+                </Link>
+              </div>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--border)]">
+                <div
+                  className="h-2 rounded-full transition-all"
+                  style={{
+                    width: `${Math.min(100, ((profile.recipe_count_this_month ?? 0) / 5) * 100)}%`,
+                    backgroundColor: (profile.recipe_count_this_month ?? 0) >= 5 ? '#ef4444' : '#ffa51f',
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Geçmiş Tariflerim */}
       {recentRecipes.length > 0 && (
