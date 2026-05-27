@@ -37,7 +37,8 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const urgentCount = items.filter((i) => getDaysUntil(i.expiry_date) <= 3).length
+  const expiredCount = items.filter((i) => getDaysUntil(i.expiry_date) < 0).length
+  const urgentCount  = items.filter((i) => { const d = getDaysUntil(i.expiry_date); return d >= 0 && d <= 3 }).length
 
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault()
@@ -97,6 +98,11 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
           <h1 className="text-2xl font-bold text-gray-900">Kilerim</h1>
           <p className="mt-0.5 text-sm text-gray-500">
             {items.length} malzeme
+            {expiredCount > 0 && (
+              <span className="ml-2 font-medium text-red-600">
+                · {expiredCount} tanesi süresi doldu 🗑️
+              </span>
+            )}
             {urgentCount > 0 && (
               <span className="ml-2 font-medium text-orange-600">
                 · {urgentCount} tanesi yakında bitiyor ⚠️
