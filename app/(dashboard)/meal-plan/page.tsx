@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CookingMode } from '@/components/cooking-mode'
 import { EatButton } from '@/components/eat-button'
@@ -31,6 +32,10 @@ export default function MealPlanPage() {
   const [error, setError] = useState<string | null>(null)
   const [cookingModal, setCookingModal] = useState<CookingModal | null>(null)
 
+  // Image cache: keyed by meal name — undefined = not fetched, null = no image, string = url
+  const imageCache = useRef<Map<string, string | null>>(new Map())
+  const [mealImages, setMealImages] = useState<Map<string, string | null>>(new Map())
+
   const fetchPlan = useCallback(async () => {
     setLoading(true)
     setError(null)
@@ -53,6 +58,36 @@ export default function MealPlanPage() {
   useEffect(() => {
     void fetchPlan()
   }, [fetchPlan])
+
+  useEffect(() => {
+    if (!plan) return
+    let cancelled = false
+
+    async function fetchImages() {
+      for (const dayKey of DAY_ORDER) {
+        if (cancelled) break
+        const dayData = plan!.meals.find((m) => m.day === dayKey)
+        if (!dayData) continue
+        for (const mealType of ['breakfast', 'dinner'] as const) {
+          if (cancelled) break
+          const name = (dayData[mealType] as MealItem).name
+          if (imageCache.current.has(name)) continue
+          try {
+            const res = await fetch(`/api/meal-image?name=${encodeURIComponent(name)}`)
+            const data = (await res.json()) as { url: string | null }
+            imageCache.current.set(name, data.url ?? null)
+            setMealImages((prev) => new Map(prev).set(name, data.url ?? null))
+          } catch {
+            imageCache.current.set(name, null)
+            setMealImages((prev) => new Map(prev).set(name, null))
+          }
+        }
+      }
+    }
+
+    void fetchImages()
+    return () => { cancelled = true }
+  }, [plan])
 
   async function generatePlan() {
     setGenerating(true)
@@ -219,6 +254,26 @@ export default function MealPlanPage() {
                       <div key={mealType}>
                         {/* Meal row */}
                         <div className="flex items-center gap-3 px-5 py-3.5">
+                          {/* Thumbnail */}
+                          <div className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-lg">
+                            {mealImages.get(mealItem.name) ? (
+                              <Image
+                                src={mealImages.get(mealItem.name)!}
+                                alt={mealItem.name}
+                                fill
+                                className="object-cover"
+                                sizes="60px"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20">
+                                {mealImages.has(mealItem.name) ? (
+                                  <span className="text-xl">🍽️</span>
+                                ) : (
+                                  <span className="h-3 w-3 animate-pulse rounded-full bg-amber-300" />
+                                )}
+                              </div>
+                            )}
+                          </div>
                           <span className="text-lg">{MEAL_ICONS[mealType]}</span>
                           <span className="w-16 flex-shrink-0 text-xs font-medium text-[var(--text-muted)]">
                             {MEAL_LABELS[mealType]}

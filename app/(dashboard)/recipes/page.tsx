@@ -1,15 +1,9 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { Recipe } from '@/types/recipe'
 
-type RecipeSummary = Pick<Recipe, 'id' | 'name' | 'macros' | 'image_url' | 'created_at'>
-
-function thumbUrl(url: string): string {
-  if (url.includes('w=')) return url.replace(/w=\d+/, 'w=160')
-  return url + (url.includes('?') ? '&' : '?') + 'w=160'
-}
+type RecipeSummary = Pick<Recipe, 'id' | 'name' | 'macros' | 'created_at'>
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('tr-TR', {
@@ -27,7 +21,7 @@ export default async function RecipesPage() {
 
   const { data } = await supabase
     .from('recipes')
-    .select('id, name, macros, image_url, created_at')
+    .select('id, name, macros, created_at')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .limit(20)
@@ -61,23 +55,6 @@ export default async function RecipesPage() {
               key={r.id}
               className="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3 shadow-sm"
             >
-              {/* Thumbnail */}
-              <div className="relative h-[80px] w-[80px] flex-shrink-0 overflow-hidden rounded-lg">
-                {r.image_url ? (
-                  <Image
-                    src={thumbUrl(r.image_url)}
-                    alt={r.name}
-                    fill
-                    className="object-cover"
-                    sizes="80px"
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20 text-2xl">
-                    🍽️
-                  </div>
-                )}
-              </div>
-
               {/* Info */}
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold text-[var(--text-primary)]">{r.name}</p>

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getRecipeImage } from '@/lib/pexels'
 import type { Recipe } from '@/types/recipe'
 
 export async function POST(request: NextRequest) {
@@ -36,7 +35,6 @@ export async function POST(request: NextRequest) {
   }
 
   const recipeName = body.name.trim()
-  const image_url = await getRecipeImage(recipeName)
 
   const { data, error } = await supabase
     .from('recipes')
@@ -47,7 +45,7 @@ export async function POST(request: NextRequest) {
       instructions: body.instructions.trim(),
       macros: body.macros ?? null,
       diet_context: typeof body.diet_context === 'string' ? body.diet_context : null,
-      image_url,
+      image_url: null,
       is_public: true,
     })
     .select()

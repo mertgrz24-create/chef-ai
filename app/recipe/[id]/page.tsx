@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { CookingModeButton } from '@/components/cooking-mode-button'
@@ -47,24 +46,6 @@ export default async function PublicRecipePage({ params }: { params: { id: strin
       {/* Content */}
       <main className="mx-auto max-w-2xl px-4 py-8">
         <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] shadow-sm">
-          {/* Hero image */}
-          {recipe.image_url ? (
-            <div className="relative h-56 w-full">
-              <Image
-                src={recipe.image_url}
-                alt={recipe.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 672px"
-                priority
-              />
-            </div>
-          ) : (
-            <div className="flex h-40 items-center justify-center bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20">
-              <span className="text-5xl">🍽️</span>
-            </div>
-          )}
-
           <div className="p-6">
             <h1 className="mb-1 text-2xl font-bold text-[var(--text-primary)]">{recipe.name}</h1>
             <p className="mb-6 text-xs text-[var(--text-muted)]">{formatDate(recipe.created_at)}</p>
