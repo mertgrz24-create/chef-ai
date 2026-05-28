@@ -4,10 +4,11 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** V4 — Freemium + Sağlık Export + Tavsiye Programı ✅ TAMAMLANDI 🎉  
-**Aktif Mikro-Adım:** V4.1 + V4.2 + V4.3 tamamlandı — Sonraki: Stripe entegrasyonu veya V5  
-**Son güncelleme:** 26 Mayıs 2026  
-**Canlı URL:** https://chef-ai-puce-zeta.vercel.app
+**Aktif Faz:** ABD Revizyonu — `us-market` branch'i açık  
+**Aktif Mikro-Adım:** Eksiklikleri fix et → main'e merge → production deploy  
+**Son güncelleme:** 28 Mayıs 2026  
+**Canlı URL:** https://chef-ai-puce-zeta.vercel.app  
+**Aktif Branch:** `us-market`
 
 ## 🗺️ Genel Yol Haritası
 
@@ -174,6 +175,29 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 > Chef-AI V3 projesindeyim. CLAUDE.md ve PROGRESS.md'yi oku, iki cümleyle özetle: nerede kaldık, sıradaki mikro-adım ne? Mikro-adım modunda kal, Türkçe konuş.
 
 ## 📝 Seans Notları
+
+### 28 Mayıs 2026 — V4 + ABD Revizyonu
+
+- **V4.1** — Freemium model: `FREE_MONTHLY_LIMIT = 10` tarif/ay, `is_premium` kolonu, kullanım sayacı, limit aşımında "Upgrade to Premium!" mesajı
+- **V4.2** — Apple Health / Google Fit JSON export: `GET /api/health-export` — son 30 günlük tüketimi güne göre gruplandırır, CSV/JSON indirir
+- **V4.3** — Tavsiye programı: referral kodu üretimi, paylaşım linki, davet edilen kullanıcı takibi
+- Pexels API entegrasyonu: `lib/pexels.ts` + `app/api/meal-image/route.ts` — Unsplash'ten geçiş (yemek planı görselleri için)
+- `us-market` branch'i açıldı — 37 dosya tamamen İngilizce'ye çevrildi (UI, API route'ları, hata mesajları, diet context)
+- Gemini prompt'larının tamamı ABD pazarı için sıfırdan revize edildi:
+  - Mutfak odağı: Modern American, Mediterranean, Asian-Fusion, Tex-Mex
+  - Yeni format önerileri: grain bowls, sheet-pan, one-pot, wraps, air-fryer
+  - Trader Joe's hazır ürünleri teşvik ediliyor
+  - Sadece imperial ölçüler (cups/oz/lbs/tbsp/tsp/°F)
+  - Yeni JSON alanları: `prep_time_min`, `cook_time_min`, `servings`, `chefs_note`, `fiber_g`, `net_carbs_g`
+  - Air Fryer / Instant Pot alternatifleri adımlar içinde inline
+  - `parseRecipeJson` güncellendi: ⏱ timing satırı + 💡 Chef's Note render ediyor
+  - `RecipeMacros` + `MealItem` tipleri yeni alanlarla genişletildi
+- Preview deploy `us-market` branch'ine push edildi ✅
+- typecheck: 0 hata · lint: 0 hata · build: 30/30 ✅
+
+**Sonraki adım:** Eksiklikleri fix et → main'e merge → production deploy
+
+---
 
 ### 25 Mayıs 2026 — V3.4 + V3.6 tamamlandı — V3 TAMAMLANDI 🎉
 - `app/api/shopping-list/route.ts`: haftalık plan ingredients birleştirme, pantry çıkarma (case-insensitive Set), alfabetik sort
