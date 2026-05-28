@@ -1,12 +1,18 @@
 export interface MealItem {
   name: string
+  prep_time_min?: number
+  cook_time_min?: number
+  servings?: number
   ingredients: string[]
   instructions: string
+  chefs_note?: string
   macros?: {
     calories: number
     protein_g: number
     carbs_g: number
     fat_g: number
+    fiber_g?: number
+    net_carbs_g?: number
   }
 }
 
