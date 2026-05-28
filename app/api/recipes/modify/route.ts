@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { modifyRecipe } from '@/lib/ai/gemini'
-import { getRecipeImage } from '@/lib/unsplash'
+import { getRecipeImage } from '@/lib/pexels'
 import type { Recipe } from '@/types/recipe'
 
 export async function POST(request: NextRequest) {

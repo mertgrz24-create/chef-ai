@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateRecipeWithGemini } from '@/lib/ai/gemini'
 
-const FREE_MONTHLY_LIMIT = 5
+const FREE_MONTHLY_LIMIT = 10
 
 type ProfileRow = {
   daily_calorie_goal: number | null
