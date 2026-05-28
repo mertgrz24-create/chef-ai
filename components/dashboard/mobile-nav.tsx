@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { LogoutButton } from './logout-button'
 
 const links = [
-  { href: '/dashboard',     label: 'Ana Sayfa',   icon: '🏠' },
-  { href: '/pantry',        label: 'Kilerim',     icon: '🥦' },
-  { href: '/recipes',       label: 'Tariflerim',  icon: '📋' },
-  { href: '/meal-plan',     label: 'Yemek Planı', icon: '🗓️' },
-  { href: '/shopping-list', label: 'Alışveriş',   icon: '🛒' },
-  { href: '/premium',       label: 'Premium',     icon: '⭐' },
-  { href: '/profile',       label: 'Profil',      icon: '👤' },
+  { href: '/dashboard',     label: 'Home',          icon: '🏠' },
+  { href: '/pantry',        label: 'My Pantry',     icon: '🥦' },
+  { href: '/recipes',       label: 'My Recipes',    icon: '📋' },
+  { href: '/meal-plan',     label: 'Meal Plan',     icon: '🗓️' },
+  { href: '/shopping-list', label: 'Shopping List', icon: '🛒' },
+  { href: '/premium',       label: 'Premium',       icon: '⭐' },
+  { href: '/profile',       label: 'Profile',       icon: '👤' },
 ]
 
 export function MobileNav() {
@@ -32,7 +32,7 @@ export function MobileNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Menüyü aç/kapat"
+          aria-label="Toggle menu"
           className="flex items-center justify-center w-9 h-9 rounded-lg text-gray-600 transition hover:bg-gray-100 active:bg-gray-200 text-xl"
         >
           {open ? '✕' : '☰'}

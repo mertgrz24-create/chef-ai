@@ -19,9 +19,9 @@ const phoneVariant: Variants = {
 };
 
 const stats = [
-  { value: "12K+", label: "Aktif kullanıcı" },
-  { value: "%94", label: "İsraf azalması" },
-  { value: "50K+", label: "Tarif üretildi" },
+  { value: "12K+", label: "Active users" },
+  { value: "94%", label: "Less food waste" },
+  { value: "50K+", label: "Recipes generated" },
 ];
 
 function PhoneMockup() {
@@ -33,15 +33,15 @@ function PhoneMockup() {
       {/* Dark header */}
       <div className="bg-[#1a1a1a] px-4 pt-5 pb-4">
         <p className="text-xs mb-1" style={{ color: "#666" }}>
-          Merhaba 👋
+          Hello 👋
         </p>
         <div className="flex items-center justify-between">
-          <h3 className="text-white text-sm font-semibold">Ne pişirelim?</h3>
+          <h3 className="text-white text-sm font-semibold">What should I cook?</h3>
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
             style={{ backgroundColor: "#ffa51f" }}
           >
-            M
+            A
           </div>
         </div>
       </div>
@@ -52,33 +52,33 @@ function PhoneMockup() {
           className="text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-full"
           style={{ backgroundColor: "#ffa51f20", color: "#ffa51f" }}
         >
-          BUGÜNÜN ÖNERİSİ
+          TODAY&apos;S PICK
         </span>
         <h4 className="text-sm font-semibold mt-2 mb-0.5" style={{ color: "#1a1a1a" }}>
-          Tavuk Sote
+          Chicken Stir-Fry
         </h4>
         <p className="text-[10px] mb-2" style={{ color: "#aaa" }}>
-          tavuk, biber, soğan, sarımsak
+          chicken, bell pepper, onion, garlic
         </p>
         <div className="flex gap-1.5 mb-3">
           <span
             className="text-[9px] px-2 py-0.5 rounded-full"
             style={{ backgroundColor: "#f5f5f0", color: "#888" }}
           >
-            ⏱ 35 dk
+            ⏱ 35 min
           </span>
           <span
             className="text-[9px] px-2 py-0.5 rounded-full"
             style={{ backgroundColor: "#f5f5f0", color: "#888" }}
           >
-            ✓ Kolay
+            ✓ Easy
           </span>
         </div>
         <button
           className="w-full text-[10px] py-1.5 rounded-full font-semibold"
           style={{ backgroundColor: "#ffa51f", color: "#fff" }}
         >
-          Tarife Bak →
+          View Recipe →
         </button>
       </div>
 
@@ -86,10 +86,10 @@ function PhoneMockup() {
       <div className="mx-2.5 rounded-2xl p-2.5 mb-2.5" style={{ backgroundColor: "#f5f5f0" }}>
         <div className="grid grid-cols-2 gap-2">
           {[
-            { icon: "🥦", label: "Kiler" },
-            { icon: "📖", label: "Tarifler" },
-            { icon: "⚠️", label: "İsraf Uyarısı" },
-            { icon: "➕", label: "Ekle" },
+            { icon: "🥦", label: "Pantry" },
+            { icon: "📖", label: "Recipes" },
+            { icon: "⚠️", label: "Expiring" },
+            { icon: "➕", label: "Add" },
           ].map((card) => (
             <div
               key={card.label}
@@ -110,10 +110,10 @@ function PhoneMockup() {
         style={{ borderTop: "1px solid #ebebeb" }}
       >
         {[
-          { icon: "🏠", label: "Ana" },
-          { icon: "📦", label: "Kiler" },
-          { icon: "📋", label: "Tarifler" },
-          { icon: "👤", label: "Profil" },
+          { icon: "🏠", label: "Home" },
+          { icon: "📦", label: "Pantry" },
+          { icon: "📋", label: "Recipes" },
+          { icon: "👤", label: "Profile" },
         ].map((tab) => (
           <div key={tab.label} className="flex flex-col items-center gap-0.5">
             <span className="text-xs">{tab.icon}</span>
@@ -152,7 +152,7 @@ export function Hero() {
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ backgroundColor: "#ffa51f" }}
               />
-              AI Destekli Mutfak Asistanı
+              AI-Powered Kitchen Assistant
             </span>
           </motion.div>
 
@@ -163,21 +163,20 @@ export function Hero() {
             style={{ letterSpacing: "-0.5px" }}
           >
             <span className="text-white md:text-[#1a1a1a]">
-              Bugün ne<br />pişirsem?
+              Your AI-Powered<br />Personal Chef
             </span>
             <br />
-            <span style={{ color: "#ffa51f" }}>Şefin biliyor.</span>
+            <span style={{ color: "#ffa51f" }}>Always ready.</span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             variants={item}
-            className="text-sm md:text-base max-w-[380px]"
+            className="text-sm md:text-base max-w-[420px]"
             style={{ color: "#888", lineHeight: 1.8 }}
           >
-            Buzdolabındaki malzemeleri tara, yapay zeka saniyeler içinde
-            kişiselleştirilmiş tarifler oluştursun. Gıda israfını azalt,
-            mutfakta ilham bul.
+            Snap your fridge, get personalized recipes in seconds. Reduce
+            grocery waste, save money, and never wonder &ldquo;what&apos;s for dinner?&rdquo; again.
           </motion.p>
 
           {/* Buttons */}
@@ -187,14 +186,14 @@ export function Hero() {
               className="text-center px-7 py-3 rounded-full text-sm font-medium transition-opacity hover:opacity-85"
               style={{ backgroundColor: "#ffa51f", color: "#ffffff" }}
             >
-              Ücretsiz Başla →
+              Get Started Free →
             </Link>
             <a
-              href="#nasil-calisir"
+              href="#how-it-works"
               className="text-center px-7 py-3 rounded-full text-sm font-medium transition-colors text-white md:text-[#1a1a1a] hover:bg-white/5 md:hover:bg-black/5"
               style={{ border: "1.5px solid #ddd" }}
             >
-              Nasıl çalışır?
+              How it works
             </a>
           </motion.div>
 

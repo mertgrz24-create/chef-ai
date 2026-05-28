@@ -10,13 +10,13 @@ export async function DELETE(
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const { id } = params
 
   if (!id) {
-    return NextResponse.json({ error: 'id parametresi gerekli.' }, { status: 400 })
+    return NextResponse.json({ error: 'id parameter is required.' }, { status: 400 })
   }
 
   const { error } = await supabase
@@ -27,7 +27,7 @@ export async function DELETE(
 
   if (error) {
     console.error('[DELETE /api/pantry/[id]]', error)
-    return NextResponse.json({ error: 'Malzeme silinemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not delete ingredient.' }, { status: 500 })
   }
 
   return new NextResponse(null, { status: 204 })

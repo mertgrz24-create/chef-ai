@@ -45,7 +45,7 @@ export function EatButton({ recipeName, macros, source = 'manual' }: EatButtonPr
   if (status === 'done') {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/40 px-4 py-2 text-xs font-semibold text-green-700 dark:text-green-400">
-        ✓ Kaydedildi
+        ✓ Saved
       </span>
     )
   }
@@ -60,10 +60,10 @@ export function EatButton({ recipeName, macros, source = 'manual' }: EatButtonPr
       {status === 'loading' ? (
         <>
           <span className="inline-block h-3 w-3 animate-spin rounded-full border-2 border-gray-300 border-t-transparent" />
-          Kaydediliyor...
+          Saving...
         </>
       ) : (
-        <>✓ Yedim</>
+        <>✓ I Ate This</>
       )}
     </button>
   )

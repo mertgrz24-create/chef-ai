@@ -17,7 +17,7 @@ export async function GET() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const { data, error } = await supabase
@@ -29,7 +29,7 @@ export async function GET() {
 
   if (error) {
     console.error('[GET /api/meals-eaten]', error)
-    return NextResponse.json({ error: 'Kayıtlar getirilemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not fetch records.' }, { status: 500 })
   }
 
   const meals = (data ?? []) as MealEaten[]
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   let recipe_name: string
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (typeof body.recipe_name !== 'string' || body.recipe_name.trim() === '') {
-      return NextResponse.json({ error: 'recipe_name alanı zorunlu.' }, { status: 400 })
+      return NextResponse.json({ error: 'recipe_name field is required.' }, { status: 400 })
     }
 
     recipe_name = body.recipe_name.trim()
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     fat_g = typeof body.fat_g === 'number' ? Math.round(body.fat_g) : undefined
     source = typeof body.source === 'string' ? body.source : 'manual'
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   const { data, error } = await supabase
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     console.error('[POST /api/meals-eaten]', error)
-    return NextResponse.json({ error: 'Kayıt eklenemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not log meal.' }, { status: 500 })
   }
 
   return NextResponse.json({ meal: data as MealEaten }, { status: 201 })

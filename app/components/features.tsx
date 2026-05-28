@@ -15,27 +15,27 @@ const cardVariant: Variants = {
 const cards = [
   {
     icon: "📷",
-    title: "Görsel Kiler",
-    description: "Buzdolabının fotoğrafını çek, malzemeler otomatik tanınsın.",
+    title: "Visual Pantry",
+    description: "Snap your fridge and let AI automatically identify every ingredient.",
     featured: false,
   },
   {
     icon: "✨",
-    title: "Akıllı Tarif",
-    description: "Elindekilerle en lezzetli tarifi saniyeler içinde üret.",
+    title: "Smart Recipes",
+    description: "Get delicious, personalized recipes from what you already have in seconds.",
     featured: true,
   },
   {
     icon: "⏰",
-    title: "İsraf Uyarısı",
-    description: "Son kullanma tarihi yaklaşan ürünler için akıllı bildirimler.",
+    title: "Zero Waste",
+    description: "Smart alerts for expiring items — cook before you toss, save money.",
     featured: false,
   },
 ];
 
 export function Features() {
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
+    <section id="features" className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -49,13 +49,13 @@ export function Features() {
             className="text-xs font-semibold uppercase tracking-widest mb-3"
             style={{ color: "#888" }}
           >
-            Neden Chef-AI?
+            Why Chef-AI?
           </p>
           <h2
             className="text-3xl md:text-4xl font-medium"
             style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
           >
-            Mutfağını zekice yönet.
+            Your kitchen, smarter.
           </h2>
         </motion.div>
 
@@ -98,20 +98,20 @@ export function Features() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: card.featured ? "#888" : "#888" }}
+                  style={{ color: "#888" }}
                 >
                   {card.description}
                 </p>
               </div>
 
-              {/* "En popüler" badge — only on featured card */}
+              {/* Most popular badge — only on featured card */}
               {card.featured && (
                 <div>
                   <span
                     className="text-[11px] font-semibold px-3 py-1 rounded-full"
                     style={{ backgroundColor: "#ffa51f20", color: "#ffa51f" }}
                   >
-                    En popüler
+                    Most popular
                   </span>
                 </div>
               )}

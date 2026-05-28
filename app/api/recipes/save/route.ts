@@ -7,18 +7,18 @@ export async function POST(request: NextRequest) {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   let body: Record<string, unknown>
   try {
     body = await request.json() as Record<string, unknown>
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   if (typeof body.name !== 'string' || body.name.trim() === '') {
-    return NextResponse.json({ error: 'name alanı zorunlu.' }, { status: 400 })
+    return NextResponse.json({ error: 'name field is required.' }, { status: 400 })
   }
   if (
     !Array.isArray(body.ingredients) ||
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
     body.ingredients.some((i) => typeof i !== 'string')
   ) {
     return NextResponse.json(
-      { error: 'ingredients alanı dolu bir string dizisi olmalı.' },
+      { error: 'ingredients must be a non-empty array of strings.' },
       { status: 400 }
     )
   }
   if (typeof body.instructions !== 'string' || body.instructions.trim() === '') {
-    return NextResponse.json({ error: 'instructions alanı zorunlu.' }, { status: 400 })
+    return NextResponse.json({ error: 'instructions field is required.' }, { status: 400 })
   }
 
   const recipeName = body.name.trim()
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     console.error('[POST /api/recipes/save]', error)
-    return NextResponse.json({ error: 'Tarif kaydedilemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not save recipe.' }, { status: 500 })
   }
 
   return NextResponse.json({ recipe: data as Recipe }, { status: 201 })

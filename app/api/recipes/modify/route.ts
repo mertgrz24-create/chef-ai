@@ -9,21 +9,21 @@ export async function POST(request: NextRequest) {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   let body: Record<string, unknown>
   try {
     body = await request.json() as Record<string, unknown>
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   if (typeof body.recipeId !== 'string' || body.recipeId.trim() === '') {
-    return NextResponse.json({ error: 'recipeId alanı zorunlu.' }, { status: 400 })
+    return NextResponse.json({ error: 'recipeId field is required.' }, { status: 400 })
   }
   if (typeof body.instruction !== 'string' || body.instruction.trim() === '') {
-    return NextResponse.json({ error: 'instruction alanı zorunlu.' }, { status: 400 })
+    return NextResponse.json({ error: 'instruction field is required.' }, { status: 400 })
   }
 
   // Fetch the source recipe — user must own it
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     .single()
 
   if (fetchError || !sourceData) {
-    return NextResponse.json({ error: 'Tarif bulunamadı.' }, { status: 404 })
+    return NextResponse.json({ error: 'Recipe not found.' }, { status: 404 })
   }
 
   const source = sourceData as Recipe
@@ -50,8 +50,8 @@ export async function POST(request: NextRequest) {
       .single()
     if (profileData) {
       const parts: string[] = []
-      if (profileData.diet_type) parts.push(`Diyet tipi: ${profileData.diet_type}`)
-      if (profileData.daily_calorie_goal) parts.push(`Günlük kalori hedefi: ${profileData.daily_calorie_goal} kcal`)
+      if (profileData.diet_type) parts.push(`Diet type: ${profileData.diet_type}`)
+      if (profileData.daily_calorie_goal) parts.push(`Daily calorie goal: ${profileData.daily_calorie_goal} kcal`)
       if (parts.length) dietContext = parts.join(', ')
     }
   } catch {
@@ -70,8 +70,8 @@ export async function POST(request: NextRequest) {
       dietContext
     )
   } catch (err) {
-    console.error('[POST /api/recipes/modify] AI hatası:', err)
-    return NextResponse.json({ error: 'Tarif güncellenemedi. Lütfen tekrar deneyin.' }, { status: 500 })
+    console.error('[POST /api/recipes/modify] AI error:', err)
+    return NextResponse.json({ error: 'Could not update recipe. Please try again.' }, { status: 500 })
   }
 
   const image_url = await getRecipeImage(modified.name)
@@ -91,8 +91,8 @@ export async function POST(request: NextRequest) {
     .single()
 
   if (insertError) {
-    console.error('[POST /api/recipes/modify] DB insert hatası:', insertError)
-    return NextResponse.json({ error: 'Tarif kaydedilemedi.' }, { status: 500 })
+    console.error('[POST /api/recipes/modify] DB insert error:', insertError)
+    return NextResponse.json({ error: 'Could not save recipe.' }, { status: 500 })
   }
 
   return NextResponse.json({ recipe: inserted as Recipe }, { status: 201 })

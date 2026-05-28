@@ -24,7 +24,7 @@ export default function ShoppingListPage() {
     try {
       const res = await fetch('/api/shopping-list')
       if (!res.ok) {
-        setError('Liste yüklenirken hata oluştu.')
+        setError('Failed to load list.')
         return
       }
       const data = (await res.json()) as ShoppingListResponse
@@ -32,7 +32,7 @@ export default function ShoppingListPage() {
       setFromPlan(data.fromPlan)
       setChecked(new Set())
     } catch {
-      setError('Liste yüklenirken hata oluştu.')
+      setError('Failed to load list.')
     } finally {
       setLoading(false)
     }
@@ -71,7 +71,7 @@ export default function ShoppingListPage() {
       <div className="flex items-center justify-center py-24">
         <div className="text-center">
           <div className="mb-3 text-4xl">🛒</div>
-          <p className="text-sm text-[var(--text-muted)]">Liste hazırlanıyor...</p>
+          <p className="text-sm text-[var(--text-muted)]">Preparing list...</p>
         </div>
       </div>
     )
@@ -84,10 +84,10 @@ export default function ShoppingListPage() {
       {/* Header */}
       <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-[var(--text-primary)]">🛒 Alışveriş Listesi</h1>
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">🛒 Shopping List</h1>
           {fromPlan && items.length > 0 && (
             <p className="mt-1 text-sm text-[var(--text-muted)]">
-              Bu haftanın planına göre, kilerdekiler çıkarıldı
+              Based on this week&apos;s plan, pantry items excluded
             </p>
           )}
         </div>
@@ -98,7 +98,7 @@ export default function ShoppingListPage() {
             onClick={() => { void copyList() }}
             className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
           >
-            {copied ? '✓ Kopyalandı' : '📋 Listeyi Kopyala'}
+            {copied ? '✓ Copied' : '📋 Copy List'}
           </button>
         )}
       </div>
@@ -114,17 +114,17 @@ export default function ShoppingListPage() {
         <div className="rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card)] p-12 text-center">
           <div className="mb-4 text-5xl">🗓️</div>
           <h2 className="mb-2 text-lg font-semibold text-[var(--text-secondary)]">
-            Haftalık plan bulunamadı
+            No weekly meal plan found
           </h2>
           <p className="mb-6 text-sm text-[var(--text-muted)]">
-            Alışveriş listesi oluşturmak için önce bu haftanın yemek planı gerekiyor.
+            A shopping list requires a meal plan for the week.
           </p>
           <Link
             href="/meal-plan"
             className="inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
             style={{ backgroundColor: '#ffa51f' }}
           >
-            🗓️ Önce haftalık plan oluştur →
+            🗓️ Create a meal plan first →
           </Link>
         </div>
       )}
@@ -134,10 +134,10 @@ export default function ShoppingListPage() {
         <div className="rounded-2xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/30 p-10 text-center">
           <div className="mb-3 text-5xl">✅</div>
           <h2 className="mb-1 text-lg font-semibold text-green-700 dark:text-green-400">
-            Tüm malzemeler kilerde!
+            All ingredients are in your pantry!
           </h2>
           <p className="text-sm text-green-600 dark:text-green-500">
-            Bu haftanın planı için gereken her şey zaten mevcut.
+            You already have everything needed for this week&apos;s plan.
           </p>
         </div>
       )}
@@ -148,7 +148,7 @@ export default function ShoppingListPage() {
           {/* Summary bar */}
           <div className="flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg)] px-5 py-3">
             <span className="text-xs font-medium text-[var(--text-muted)]">
-              {uncheckedCount} / {items.length} malzeme
+              {uncheckedCount} / {items.length} items
             </span>
             {checked.size > 0 && (
               <button
@@ -156,7 +156,7 @@ export default function ShoppingListPage() {
                 onClick={() => setChecked(new Set())}
                 className="text-xs text-amber-500 transition hover:underline"
               >
-                Seçimi Temizle
+                Clear Selection
               </button>
             )}
           </div>
@@ -180,7 +180,7 @@ export default function ShoppingListPage() {
                           ? 'border-amber-400 bg-amber-400 text-white'
                           : 'border-[var(--border)] bg-transparent'
                       }`}
-                      aria-label={isChecked ? `${item} işareti kaldır` : `${item} işaretle`}
+                      aria-label={isChecked ? `Uncheck ${item}` : `Check ${item}`}
                     >
                       {isChecked && (
                         <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
@@ -205,7 +205,7 @@ export default function ShoppingListPage() {
 
           {checked.size === items.length && items.length > 0 && (
             <div className="border-t border-[var(--border-subtle)] bg-[var(--bg)] px-5 py-4 text-center text-sm text-[var(--text-muted)]">
-              Tüm malzemeleri aldın! 🎉
+              All done! 🎉
             </div>
           )}
         </div>

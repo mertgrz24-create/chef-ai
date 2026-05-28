@@ -22,14 +22,14 @@ type ProfileRow = {
 function buildDietContext(profile: ProfileRow | null): string | undefined {
   if (!profile) return undefined
   const parts: string[] = []
-  if (profile.daily_calorie_goal) parts.push(`günlük kalori ${profile.daily_calorie_goal} kcal`)
+  if (profile.daily_calorie_goal) parts.push(`daily calories ${profile.daily_calorie_goal} kcal`)
   if (profile.protein_goal_g) parts.push(`protein ${profile.protein_goal_g}g`)
-  if (profile.carbs_goal_g) parts.push(`karbonhidrat ${profile.carbs_goal_g}g`)
-  if (profile.fat_goal_g) parts.push(`yağ ${profile.fat_goal_g}g`)
-  if (profile.water_goal_l) parts.push(`su ${profile.water_goal_l} litre`)
-  if (profile.diet_type) parts.push(`diyet tipi: ${profile.diet_type}`)
+  if (profile.carbs_goal_g) parts.push(`carbs ${profile.carbs_goal_g}g`)
+  if (profile.fat_goal_g) parts.push(`fat ${profile.fat_goal_g}g`)
+  if (profile.water_goal_l) parts.push(`water ${profile.water_goal_l} L`)
+  if (profile.diet_type) parts.push(`diet type: ${profile.diet_type}`)
   if (parts.length === 0) return undefined
-  return `Diyet hedeflerim: ${parts.join(', ')}. Bu hedeflere uygun tarif öner.`
+  return `My diet goals: ${parts.join(', ')}. Please suggest a recipe that fits these goals.`
 }
 
 function getWeekStartDate(): string {
@@ -50,20 +50,20 @@ export async function PATCH(request: NextRequest) {
     const body = (await request.json()) as { day?: unknown; meal?: unknown }
     if (typeof body.day !== 'string' || !(VALID_DAYS as readonly string[]).includes(body.day)) {
       return NextResponse.json(
-        { error: `Geçersiz gün. Beklenen: ${VALID_DAYS.join(' | ')}` },
+        { error: `Invalid day. Expected: ${VALID_DAYS.join(' | ')}` },
         { status: 400 }
       )
     }
     if (body.meal !== 'breakfast' && body.meal !== 'dinner') {
       return NextResponse.json(
-        { error: 'meal alanı "breakfast" veya "dinner" olmalı.' },
+        { error: 'meal must be "breakfast" or "dinner".' },
         { status: 400 }
       )
     }
     day = body.day as ValidDay
     meal = body.meal
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   // 2. Auth check
@@ -74,7 +74,7 @@ export async function PATCH(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   // 3. Fetch current week's plan
@@ -87,7 +87,7 @@ export async function PATCH(request: NextRequest) {
     .single()
 
   if (fetchError || !currentPlan) {
-    return NextResponse.json({ error: 'Bu hafta için plan bulunamadı.' }, { status: 404 })
+    return NextResponse.json({ error: 'No plan found for this week.' }, { status: 404 })
   }
 
   // 4. Fetch diet context (non-fatal)
@@ -118,15 +118,15 @@ export async function PATCH(request: NextRequest) {
       .single()
 
     if (updateError || !updatedPlan) {
-      console.error('[/api/meal-plan/regenerate-day] Güncelleme hatası:', updateError)
-      return NextResponse.json({ error: 'Plan güncellenemedi.' }, { status: 500 })
+      console.error('[/api/meal-plan/regenerate-day] Update error:', updateError)
+      return NextResponse.json({ error: 'Could not update plan.' }, { status: 500 })
     }
 
     return NextResponse.json({ plan: updatedPlan })
   } catch (err) {
-    console.error('[/api/meal-plan/regenerate-day] Öğün üretme hatası:', err)
+    console.error('[/api/meal-plan/regenerate-day] Meal generation error:', err)
     return NextResponse.json(
-      { error: 'Öğün üretilemedi. Lütfen tekrar deneyin.' },
+      { error: 'Could not generate meal. Please try again.' },
       { status: 500 }
     )
   }

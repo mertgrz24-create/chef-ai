@@ -25,32 +25,32 @@ export function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           <a
-            href="#ozellikler"
+            href="#features"
             className="text-sm transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Özellikler
+            Features
           </a>
           <a
-            href="#fiyatlar"
+            href="#pricing"
             className="text-sm transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Fiyatlar
+            Pricing
           </a>
           <Link
             href="/login"
             className="text-sm transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Giriş Yap
+            Sign In
           </Link>
           <Link
             href="/signup"
             className="text-sm px-5 py-2 rounded-full transition-opacity hover:opacity-80"
             style={{ backgroundColor: "#1a1a1a", color: "#ffffff" }}
           >
-            Ücretsiz Başla
+            Get Started Free
           </Link>
         </nav>
 
@@ -58,7 +58,7 @@ export function Navbar() {
         <button
           className="md:hidden flex flex-col justify-center gap-1.5 p-2"
           onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Menüyü aç/kapat"
+          aria-label="Toggle menu"
         >
           <span className="block w-6 h-0.5" style={{ backgroundColor: "#1a1a1a" }} />
           <span className="block w-6 h-0.5" style={{ backgroundColor: "#1a1a1a" }} />
@@ -76,32 +76,32 @@ export function Navbar() {
           style={{ backgroundColor: "#ffffff", borderTop: "1px solid #ebebeb" }}
         >
           <a
-            href="#ozellikler"
+            href="#features"
             className="text-sm py-2 transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Özellikler
+            Features
           </a>
           <a
-            href="#fiyatlar"
+            href="#pricing"
             className="text-sm py-2 transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Fiyatlar
+            Pricing
           </a>
           <Link
             href="/login"
             className="text-sm py-2 transition-colors hover:text-[#1a1a1a]"
             style={{ color: "#888888" }}
           >
-            Giriş Yap
+            Sign In
           </Link>
           <Link
             href="/signup"
             className="text-sm mt-1 px-5 py-2.5 rounded-full text-center transition-opacity hover:opacity-80"
             style={{ backgroundColor: "#1a1a1a", color: "#ffffff" }}
           >
-            Ücretsiz Başla
+            Get Started Free
           </Link>
         </motion.div>
       )}

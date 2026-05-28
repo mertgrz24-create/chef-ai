@@ -7,7 +7,7 @@ export async function GET() {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const { data, error } = await supabase
@@ -18,7 +18,7 @@ export async function GET() {
 
   if (error) {
     console.error('[GET /api/pantry]', error)
-    return NextResponse.json({ error: 'Malzemeler getirilemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not fetch ingredients.' }, { status: 500 })
   }
 
   return NextResponse.json({ items: data })
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   let name: string
@@ -41,17 +41,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json() as { name?: unknown; expiry_date?: unknown; quantity?: unknown }
 
     if (typeof body.name !== 'string' || body.name.trim() === '') {
-      return NextResponse.json({ error: 'name alanı zorunlu.' }, { status: 400 })
+      return NextResponse.json({ error: 'name field is required.' }, { status: 400 })
     }
     if (typeof body.expiry_date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(body.expiry_date)) {
-      return NextResponse.json({ error: 'expiry_date YYYY-MM-DD formatında olmalı.' }, { status: 400 })
+      return NextResponse.json({ error: 'expiry_date must be in YYYY-MM-DD format.' }, { status: 400 })
     }
 
     name = body.name.trim()
     expiry_date = body.expiry_date
     quantity = typeof body.quantity === 'string' && body.quantity.trim() ? body.quantity.trim() : undefined
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   const { data, error } = await supabase
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     console.error('[POST /api/pantry]', error)
-    return NextResponse.json({ error: 'Malzeme eklenemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not add ingredient.' }, { status: 500 })
   }
 
   return NextResponse.json({ item: data }, { status: 201 })

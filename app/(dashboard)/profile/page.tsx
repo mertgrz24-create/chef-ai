@@ -11,12 +11,12 @@ const sectionCls = 'rounded-2xl border border-[var(--border)] bg-[var(--bg-card)
 const headingCls = 'mb-5 flex items-center gap-2 text-base font-semibold text-[var(--text-primary)]'
 
 const DIET_OPTIONS = [
-  { label: 'Normal', value: 'omnivore' },
+  { label: 'Balanced', value: 'omnivore' },
   { label: 'Vegan', value: 'vegan' },
-  { label: 'Vejetaryen', value: 'vegetarian' },
+  { label: 'Vegetarian', value: 'vegetarian' },
   { label: 'Keto', value: 'keto' },
-  { label: 'Glutensiz', value: 'gluten_free' },
-  { label: 'Diğer', value: 'other' },
+  { label: 'Gluten-Free', value: 'gluten_free' },
+  { label: 'Other', value: 'other' },
 ]
 
 const PRESET_DIET_VALUES = new Set(['omnivore', 'vegan', 'vegetarian', 'keto', 'gluten_free'])
@@ -143,14 +143,14 @@ export default function ProfilePage() {
         const res = await fetch('/api/profile')
         const data = (await res.json()) as { profile?: Profile; error?: string }
         if (!res.ok) {
-          setFetchError(data.error ?? 'Profil yüklenemedi.')
+          setFetchError(data.error ?? 'Could not load profile.')
         } else if (data.profile) {
           setForm(profileToForm(data.profile))
           setProfile(data.profile)
           void applyReferral(data.profile)
         }
       } catch {
-        setFetchError('Sunucuya ulaşılamadı.')
+        setFetchError('Could not reach server.')
       } finally {
         setLoading(false)
       }
@@ -193,16 +193,16 @@ export default function ProfilePage() {
       const data = (await res.json()) as { profile?: Profile; error?: string }
 
       if (!res.ok) {
-        setMessage({ ok: false, text: data.error ?? 'Kaydetme başarısız.' })
+        setMessage({ ok: false, text: data.error ?? 'Save failed.' })
       } else {
-        setMessage({ ok: true, text: 'Hedefler kaydedildi ✓' })
+        setMessage({ ok: true, text: 'Goals saved ✓' })
         if (data.profile) {
           setForm(profileToForm(data.profile))
           setProfile(data.profile)
         }
       }
     } catch {
-      setMessage({ ok: false, text: 'Sunucuya ulaşılamadı. Lütfen tekrar deneyin.' })
+      setMessage({ ok: false, text: 'Could not reach server. Please try again.' })
     } finally {
       setSaving(false)
     }
@@ -243,10 +243,10 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div>
-        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
-        <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
+        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profile</h1>
+        <p className="mb-8 text-sm text-[var(--text-muted)]">Your diet goals and account settings.</p>
         <div className="flex items-center justify-center py-20">
-          <p className="text-sm text-[var(--text-muted)]">Yükleniyor…</p>
+          <p className="text-sm text-[var(--text-muted)]">Loading…</p>
         </div>
       </div>
     )
@@ -255,8 +255,8 @@ export default function ProfilePage() {
   if (fetchError) {
     return (
       <div>
-        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
-        <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
+        <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profile</h1>
+        <p className="mb-8 text-sm text-[var(--text-muted)]">Your diet goals and account settings.</p>
         <div className="rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-600 dark:text-red-400">
           {fetchError}
         </div>
@@ -266,11 +266,11 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profil</h1>
-      <p className="mb-8 text-sm text-[var(--text-muted)]">Diyet hedeflerin ve hesap ayarların.</p>
+      <h1 className="mb-2 text-2xl font-bold text-[var(--text-primary)]">Profile</h1>
+      <p className="mb-8 text-sm text-[var(--text-muted)]">Your diet goals and account settings.</p>
 
       <form onSubmit={handleSubmit} className="flex max-w-2xl flex-col gap-6">
-        {/* Section 1 — Beslenme Hedefleri */}
+        {/* Section 1 — Nutrition Goals */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -278,11 +278,11 @@ export default function ProfilePage() {
           className={sectionCls}
         >
           <h2 className={headingCls}>
-            <span>🎯</span> Beslenme Hedefleri
+            <span>🎯</span> Nutrition Goals
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className={labelCls}>Günlük Kalori</label>
+              <label className={labelCls}>Daily Calories</label>
               <NumberInput
                 value={form.daily_calorie_goal}
                 onChange={(v) => set('daily_calorie_goal', v)}
@@ -300,7 +300,7 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <label className={labelCls}>Karbonhidrat</label>
+              <label className={labelCls}>Carbohydrates</label>
               <NumberInput
                 value={form.carbs_goal_g}
                 onChange={(v) => set('carbs_goal_g', v)}
@@ -320,7 +320,7 @@ export default function ProfilePage() {
           </div>
         </motion.div>
 
-        {/* Section 2 — Aktivite */}
+        {/* Section 2 — Activity */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -328,32 +328,32 @@ export default function ProfilePage() {
           className={sectionCls}
         >
           <h2 className={headingCls}>
-            <span>💧</span> Aktivite
+            <span>💧</span> Activity
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className={labelCls}>Günlük Su</label>
+              <label className={labelCls}>Daily Water</label>
               <NumberInput
                 value={form.water_goal_l}
                 onChange={(v) => set('water_goal_l', v)}
-                suffix="litre"
+                suffix="L"
                 step="0.5"
                 disabled={saving}
               />
             </div>
             <div>
-              <label className={labelCls}>Günlük Adım</label>
+              <label className={labelCls}>Daily Steps</label>
               <NumberInput
                 value={form.daily_steps_goal}
                 onChange={(v) => set('daily_steps_goal', v)}
-                suffix="adım"
+                suffix="steps"
                 disabled={saving}
               />
             </div>
           </div>
         </motion.div>
 
-        {/* Section 3 — Kilo Takibi */}
+        {/* Section 3 — Weight Tracking */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -361,11 +361,11 @@ export default function ProfilePage() {
           className={sectionCls}
         >
           <h2 className={headingCls}>
-            <span>⚖️</span> Kilo Takibi
+            <span>⚖️</span> Weight Tracking
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className={labelCls}>Mevcut Kilo</label>
+              <label className={labelCls}>Current Weight</label>
               <NumberInput
                 value={form.current_weight_kg}
                 onChange={(v) => set('current_weight_kg', v)}
@@ -375,7 +375,7 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <label className={labelCls}>Hedef Kilo</label>
+              <label className={labelCls}>Target Weight</label>
               <NumberInput
                 value={form.target_weight_kg}
                 onChange={(v) => set('target_weight_kg', v)}
@@ -387,7 +387,7 @@ export default function ProfilePage() {
           </div>
         </motion.div>
 
-        {/* Section 4 — Diyet Tercihi */}
+        {/* Section 4 — Diet Preference */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -395,29 +395,29 @@ export default function ProfilePage() {
           className={sectionCls}
         >
           <h2 className={headingCls}>
-            <span>🥗</span> Diyet Tercihi
+            <span>🥗</span> Diet Preference
           </h2>
           <div className="flex flex-col gap-4">
             <div>
-              <label className={labelCls}>Görünen Ad</label>
+              <label className={labelCls}>Display Name</label>
               <input
                 type="text"
                 value={form.full_name}
                 onChange={(e) => set('full_name', e.target.value)}
-                placeholder="Adınız"
+                placeholder="Your name"
                 disabled={saving}
                 className={inputCls}
               />
             </div>
             <div>
-              <label className={labelCls}>Diyet Tipi</label>
+              <label className={labelCls}>Diet Type</label>
               <select
                 value={form.diet_type_preset}
                 onChange={(e) => set('diet_type_preset', e.target.value)}
                 disabled={saving}
                 className={inputCls}
               >
-                <option value="">Seçiniz</option>
+                <option value="">Select…</option>
                 {DIET_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
@@ -427,12 +427,12 @@ export default function ProfilePage() {
             </div>
             {form.diet_type_preset === 'other' && (
               <div>
-                <label className={labelCls}>Diyet Tipinizi Yazın</label>
+                <label className={labelCls}>Enter Your Diet Type</label>
                 <input
                   type="text"
                   value={form.diet_type_custom}
                   onChange={(e) => set('diet_type_custom', e.target.value)}
-                  placeholder="ör. Akdeniz diyeti"
+                  placeholder="e.g. Mediterranean diet"
                   disabled={saving}
                   className={inputCls}
                 />
@@ -461,7 +461,7 @@ export default function ProfilePage() {
           className="w-full rounded-xl py-3 text-sm font-semibold text-white transition active:scale-95 disabled:opacity-60"
           style={{ backgroundColor: '#ffa51f' }}
         >
-          {saving ? 'Kaydediliyor…' : 'Hedefleri Kaydet'}
+          {saving ? 'Saving…' : 'Save Goals'}
         </button>
       </form>
 
@@ -473,10 +473,10 @@ export default function ProfilePage() {
         className={`mt-6 max-w-2xl ${sectionCls}`}
       >
         <h2 className={headingCls}>
-          <span>📱</span> Sağlık Uygulaması Export
+          <span>📱</span> Health App Export
         </h2>
         <p className="mb-4 text-sm text-[var(--text-muted)]">
-          Son 30 günün tüketim verisini Apple Health / Google Fit&apos;e aktarabilirsin.
+          Export the last 30 days of consumption data to Apple Health / Google Fit.
         </p>
         <button
           type="button"
@@ -484,10 +484,10 @@ export default function ProfilePage() {
           disabled={exporting}
           className="rounded-xl border border-[var(--border)] px-5 py-2.5 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400 disabled:opacity-50"
         >
-          {exporting ? 'İndiriliyor…' : '📥 Apple Health / Google Fit\'e Aktar'}
+          {exporting ? 'Downloading…' : '📥 Export to Apple Health / Google Fit'}
         </button>
         <p className="mt-3 text-xs text-[var(--text-muted)]">
-          İndirilen JSON dosyasını sağlık uygulamanıza aktarabilirsiniz.
+          You can import the downloaded JSON file into your health app.
         </p>
       </motion.div>
 
@@ -500,7 +500,7 @@ export default function ProfilePage() {
           className={`mt-6 max-w-2xl ${sectionCls}`}
         >
           <h2 className={headingCls}>
-            <span>🎁</span> Arkadaşını Davet Et
+            <span>🎁</span> Invite Friends
           </h2>
 
           {/* Code display */}
@@ -513,12 +513,12 @@ export default function ProfilePage() {
               onClick={() => { void handleCopyCode() }}
               className="rounded-xl border border-[var(--border)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
             >
-              {copied ? '✓ Kopyalandı' : '📋 Kodu Kopyala'}
+              {copied ? '✓ Copied' : '📋 Copy Code'}
             </button>
           </div>
 
           <p className="mb-2 text-sm text-[var(--text-muted)]">
-            Paylaşım linki:{' '}
+            Share link:{' '}
             <span className="font-mono text-xs text-[var(--text-secondary)]">
               chef-ai-puce-zeta.vercel.app/signup?ref={profile.referral_code}
             </span>
@@ -527,13 +527,13 @@ export default function ProfilePage() {
           <div className="mt-4 flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3">
             <span className="text-lg">👥</span>
             <span className="text-sm text-[var(--text-secondary)]">
-              Davet ettiğin kişi sayısı:{' '}
-              <span className="font-bold text-[var(--text-primary)]">{profile.referral_count ?? 0} kişi</span>
+              People you&apos;ve referred:{' '}
+              <span className="font-bold text-[var(--text-primary)]">{profile.referral_count ?? 0}</span>
             </span>
           </div>
 
           <p className="mt-3 text-xs text-[var(--text-muted)]">
-            Davet ettiğin her 3 kişi için 1 ay Premium kazan! <span className="italic">(yakında)</span>
+            Earn 1 month of Premium for every 3 friends you refer! <span className="italic">(coming soon)</span>
           </p>
         </motion.div>
       )}

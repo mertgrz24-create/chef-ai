@@ -4,16 +4,16 @@ import { motion } from "framer-motion";
 
 const linkGroups = [
   {
-    title: "Ürün",
-    links: ["Özellikler", "Fiyatlar", "Blog"],
+    title: "Product",
+    links: ["Features", "Pricing", "Blog"],
   },
   {
-    title: "Şirket",
-    links: ["Hakkında", "İletişim"],
+    title: "Company",
+    links: ["About", "Contact"],
   },
   {
-    title: "Yasal",
-    links: ["Gizlilik", "Kullanım Şartları"],
+    title: "Legal",
+    links: ["Privacy", "Terms of Service"],
   },
 ];
 
@@ -36,7 +36,7 @@ export function Footer() {
               <span style={{ color: "#ffa51f" }}>AI</span>
             </span>
             <p className="text-sm" style={{ color: "#888" }}>
-              Kişisel AI şefin, cebinde.
+              Your personal AI chef, in your pocket.
             </p>
           </div>
 
@@ -68,10 +68,10 @@ export function Footer() {
           style={{ borderTop: "1px solid #333" }}
         >
           <p className="text-xs" style={{ color: "#555" }}>
-            © 2025 Chef-AI. Tüm hakları saklıdır.
+            © 2025 Chef-AI. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: "#555" }}>
-            🤖 Claude + Gemini ile güçlendirildi
+            🤖 Powered by Claude + Gemini
           </p>
         </div>
       </div>

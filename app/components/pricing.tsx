@@ -13,18 +13,18 @@ const cardVariant: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-const freeItems = ["Manuel malzeme girişi", "Günlük 3 tarif hakkı", "Temel özellikler"];
+const freeItems = ["Manual ingredient entry", "10 recipes per month", "Core features"];
 
 const premiumItems = [
-  "Sınırsız fotoğraf analizi",
-  "Kalori takibi",
-  "Haftalık öğün planlama",
-  "Reklamsız deneyim",
+  "Unlimited photo analysis",
+  "Calorie & macro tracking",
+  "Weekly meal planning",
+  "Ad-free experience",
 ];
 
 export function Pricing() {
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
+    <section id="pricing" className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -38,13 +38,13 @@ export function Pricing() {
             className="text-xs font-semibold uppercase tracking-widest mb-3"
             style={{ color: "#888" }}
           >
-            Fiyatlandırma
+            Pricing
           </p>
           <h2
             className="text-3xl md:text-4xl font-medium"
             style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
           >
-            Başlamak ücretsiz.
+            Free to get started.
           </h2>
         </motion.div>
 
@@ -67,14 +67,14 @@ export function Pricing() {
                 className="text-base font-semibold mb-4"
                 style={{ color: "#1a1a1a" }}
               >
-                Ücretsiz
+                Free
               </h3>
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold" style={{ color: "#1a1a1a" }}>
                   $0
                 </span>
                 <span className="text-sm" style={{ color: "#888" }}>
-                  / ay
+                  / month
                 </span>
               </div>
             </div>
@@ -95,7 +95,7 @@ export function Pricing() {
               className="text-center py-3 rounded-full text-sm font-medium transition-colors hover:bg-[#f5f5f0]"
               style={{ border: "1.5px solid #1a1a1a", color: "#1a1a1a" }}
             >
-              Hemen Başla
+              Get Started
             </Link>
           </motion.div>
 
@@ -105,13 +105,13 @@ export function Pricing() {
             className="rounded-2xl p-8 flex flex-col gap-6 relative"
             style={{ backgroundColor: "#1a1a1a" }}
           >
-            {/* EN POPÜLER badge */}
+            {/* MOST POPULAR badge */}
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
               <span
                 className="text-[11px] font-bold tracking-wider px-4 py-1 rounded-full whitespace-nowrap"
                 style={{ backgroundColor: "#ffa51f", color: "#1a1a1a" }}
               >
-                EN POPÜLER
+                MOST POPULAR
               </span>
             </div>
 
@@ -122,7 +122,7 @@ export function Pricing() {
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold text-white">$9.99</span>
                 <span className="text-sm" style={{ color: "#888" }}>
-                  / ay
+                  / month
                 </span>
               </div>
             </div>
@@ -143,7 +143,7 @@ export function Pricing() {
               className="text-center py-3 rounded-full text-sm font-medium transition-opacity hover:opacity-85"
               style={{ backgroundColor: "#ffa51f", color: "#1a1a1a" }}
             >
-              Premium{"'"}a Geç →
+              Go Premium →
             </Link>
           </motion.div>
         </motion.div>

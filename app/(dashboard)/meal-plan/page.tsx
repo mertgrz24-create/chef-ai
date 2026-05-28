@@ -8,18 +8,18 @@ import { EatButton } from '@/components/eat-button'
 import type { MealPlan, MealItem } from '@/types/meal-plan'
 
 const DAY_LABELS: Record<string, string> = {
-  monday: 'Pazartesi',
-  tuesday: 'Salı',
-  wednesday: 'Çarşamba',
-  thursday: 'Perşembe',
-  friday: 'Cuma',
-  saturday: 'Cumartesi',
-  sunday: 'Pazar',
+  monday: 'Monday',
+  tuesday: 'Tuesday',
+  wednesday: 'Wednesday',
+  thursday: 'Thursday',
+  friday: 'Friday',
+  saturday: 'Saturday',
+  sunday: 'Sunday',
 }
 
 const DAY_ORDER = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 const MEAL_ICONS = { breakfast: '🌅', dinner: '🌙' } as const
-const MEAL_LABELS = { breakfast: 'Kahvaltı', dinner: 'Akşam' } as const
+const MEAL_LABELS = { breakfast: 'Breakfast', dinner: 'Dinner' } as const
 
 type CookingModal = { recipeName: string; instructions: string }
 
@@ -47,10 +47,10 @@ export default function MealPlanPage() {
       } else if (res.status === 404) {
         setPlan(null)
       } else {
-        setError('Plan yüklenirken hata oluştu.')
+        setError('Failed to load plan.')
       }
     } catch {
-      setError('Plan yüklenirken hata oluştu.')
+      setError('Failed to load plan.')
     }
     setLoading(false)
   }, [])
@@ -98,10 +98,10 @@ export default function MealPlanPage() {
         const data = (await res.json()) as { plan: MealPlan }
         setPlan(data.plan)
       } else {
-        setError('Plan oluşturulamadı. Lütfen tekrar deneyin.')
+        setError('Could not generate plan. Please try again.')
       }
     } catch {
-      setError('Plan oluşturulamadı. Lütfen tekrar deneyin.')
+      setError('Could not generate plan. Please try again.')
     }
     setGenerating(false)
   }
@@ -118,15 +118,15 @@ export default function MealPlanPage() {
       })
 
       const data = (await res.json()) as { plan?: MealPlan; error?: string; detail?: string }
-      console.log('[regenMeal] yanıt:', res.status, data)
+      console.log('[regenMeal] response:', res.status, data)
 
       if (!res.ok) {
-        setError(data.error ?? 'Öğün yenilenemedi. Lütfen tekrar deneyin.')
+        setError(data.error ?? 'Could not refresh meal. Please try again.')
         return
       }
 
       if (!data.plan) {
-        setError('Öğün yenilenemedi: API boş yanıt döndürdü.')
+        setError('Could not refresh meal: API returned empty response.')
         return
       }
 
@@ -146,8 +146,8 @@ export default function MealPlanPage() {
         setPlan(data.plan ?? null)
       }
     } catch (err) {
-      console.error('[regenMeal] fetch hatası:', err)
-      setError('Öğün yenilenemedi. Lütfen tekrar deneyin.')
+      console.error('[regenMeal] fetch error:', err)
+      setError('Could not refresh meal. Please try again.')
     } finally {
       setRegenKey(null)
     }
@@ -162,7 +162,7 @@ export default function MealPlanPage() {
       <div className="flex items-center justify-center py-24">
         <div className="text-center">
           <div className="mb-3 text-4xl">⏳</div>
-          <p className="text-sm text-[var(--text-muted)]">Yükleniyor...</p>
+          <p className="text-sm text-[var(--text-muted)]">Loading...</p>
         </div>
       </div>
     )
@@ -176,13 +176,13 @@ export default function MealPlanPage() {
     <div>
       {/* Page header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-[var(--text-primary)]">🗓️ Haftalık Yemek Planım</h1>
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">🗓️ Weekly Meal Plan</h1>
         {plan && !generating && (
           <button
             onClick={() => { void generatePlan() }}
             className="rounded-xl border border-[var(--accent-border)] bg-[var(--accent-light)] px-4 py-2 text-sm font-medium text-amber-600 dark:text-amber-400 transition hover:opacity-80"
           >
-            🔄 Tüm Planı Yenile
+            🔄 Regenerate Plan
           </button>
         )}
       </div>
@@ -200,7 +200,7 @@ export default function MealPlanPage() {
             <span className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-amber-300 border-t-transparent" />
           </div>
           <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
-            Planın hazırlanıyor... Bu biraz sürebilir.
+            Generating your plan... This may take a moment.
           </p>
         </div>
       )}
@@ -210,17 +210,17 @@ export default function MealPlanPage() {
         <div className="rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card)] p-12 text-center">
           <div className="mb-4 text-5xl">🗓️</div>
           <h2 className="mb-2 text-lg font-semibold text-[var(--text-secondary)]">
-            Bu hafta için plan oluşturulmadı
+            No plan for this week yet
           </h2>
           <p className="mb-6 text-sm text-[var(--text-muted)]">
-            Yapay zeka, diyet hedeflerine göre 7 günlük kişisel planını oluşturur.
+            AI generates a personalized 7-day plan based on your diet goals.
           </p>
           <button
             onClick={() => { void generatePlan() }}
             className="inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 text-sm font-semibold text-white transition hover:opacity-90"
             style={{ backgroundColor: '#ffa51f' }}
           >
-            🗓️ Haftalık Planımı Oluştur
+            🗓️ Generate My Weekly Plan
           </button>
         </div>
       )}
@@ -286,7 +286,7 @@ export default function MealPlanPage() {
                             {isRegening ? (
                               <span className="flex items-center gap-2 text-[var(--text-muted)]">
                                 <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-gray-300 border-t-transparent" />
-                                Yenileniyor...
+                                Refreshing...
                               </span>
                             ) : (
                               <span className="flex items-center gap-1.5">
@@ -301,7 +301,7 @@ export default function MealPlanPage() {
                             type="button"
                             onClick={() => { void regenMeal(dayData.day, mealType) }}
                             disabled={isRegening || regenKey !== null}
-                            title="Bu öğünü yenile"
+                            title="Refresh this meal"
                             className="flex-shrink-0 rounded-lg p-1.5 text-sm text-[var(--text-muted)] transition hover:bg-[var(--accent-light)] hover:text-amber-500 disabled:opacity-30"
                           >
                             🔄
@@ -323,7 +323,7 @@ export default function MealPlanPage() {
                                 {mealItem.ingredients.length > 0 && (
                                   <div>
                                     <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                                      Malzemeler
+                                      Ingredients
                                     </p>
                                     <ul className="space-y-0.5">
                                       {mealItem.ingredients.map((ing, i) => (
@@ -337,7 +337,7 @@ export default function MealPlanPage() {
                                 {mealItem.instructions && (
                                   <div>
                                     <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                                      Hazırlık
+                                      Instructions
                                     </p>
                                     <p className="whitespace-pre-line text-sm text-[var(--text-secondary)]">
                                       {mealItem.instructions}
@@ -348,8 +348,8 @@ export default function MealPlanPage() {
                                   <div className="flex flex-wrap gap-2 pt-1">
                                     <MacroBadge icon="🔥" value={`${mealItem.macros.calories} kcal`} />
                                     <MacroBadge icon="💪" value={`${mealItem.macros.protein_g}g protein`} />
-                                    <MacroBadge icon="🍚" value={`${mealItem.macros.carbs_g}g karb`} />
-                                    <MacroBadge icon="🧈" value={`${mealItem.macros.fat_g}g yağ`} />
+                                    <MacroBadge icon="🍚" value={`${mealItem.macros.carbs_g}g carbs`} />
+                                    <MacroBadge icon="🧈" value={`${mealItem.macros.fat_g}g fat`} />
                                   </div>
                                 )}
                                 <div className="mt-1 flex flex-wrap gap-2">
@@ -359,7 +359,7 @@ export default function MealPlanPage() {
                                       onClick={() => setCookingModal({ recipeName: mealItem.name, instructions: mealItem.instructions })}
                                       className="flex items-center gap-1.5 rounded-xl border border-[var(--border)] px-4 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
                                     >
-                                      👨‍🍳 Pişir
+                                      👨‍🍳 Cook
                                     </button>
                                   )}
                                   <EatButton

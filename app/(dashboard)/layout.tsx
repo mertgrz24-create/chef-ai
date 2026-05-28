@@ -28,13 +28,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
           </div>
 
           <nav className="flex flex-1 flex-col gap-1">
-            <NavLink href="/dashboard">Ana Sayfa</NavLink>
-            <NavLink href="/pantry">Kilerim</NavLink>
-            <NavLink href="/recipes">Tariflerim</NavLink>
-            <NavLink href="/meal-plan">🗓️ Yemek Planı</NavLink>
-            <NavLink href="/shopping-list">🛒 Alışveriş</NavLink>
+            <NavLink href="/dashboard">Home</NavLink>
+            <NavLink href="/pantry">My Pantry</NavLink>
+            <NavLink href="/recipes">My Recipes</NavLink>
+            <NavLink href="/meal-plan">🗓️ Meal Plan</NavLink>
+            <NavLink href="/shopping-list">🛒 Shopping List</NavLink>
             <NavLink href="/premium">⭐ Premium</NavLink>
-            <NavLink href="/profile">Profil</NavLink>
+            <NavLink href="/profile">Profile</NavLink>
           </nav>
 
           <div className="mt-auto pt-4 border-t border-[var(--border)]">

@@ -17,26 +17,26 @@ const steps = [
   {
     number: "01",
     icon: "📸",
-    title: "Fotoğraf Çek",
-    description: "Buzdolabını veya malzemelerini fotoğrafla. AI anında tanır.",
+    title: "Snap a Photo",
+    description: "Take a picture of your fridge or ingredients. AI identifies everything instantly.",
   },
   {
     number: "02",
     icon: "🤖",
-    title: "AI Analiz Eder",
-    description: "Gemini görüntüyü işler, Claude en iyi tarifi seçer.",
+    title: "AI Analyzes",
+    description: "Gemini processes the image, Claude selects the best recipe for you.",
   },
   {
     number: "03",
     icon: "🍳",
-    title: "Pişir ve Ye",
-    description: "Kişiselleştirilmiş tarifinle mutfağa gir.",
+    title: "Cook & Enjoy",
+    description: "Follow your personalized recipe and enjoy a home-cooked meal.",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: "#f5f5f0" }}>
+    <section id="how-it-works" className="py-20 md:py-28" style={{ backgroundColor: "#f5f5f0" }}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -50,13 +50,13 @@ export function HowItWorks() {
             className="text-xs font-semibold uppercase tracking-widest mb-3"
             style={{ color: "#888" }}
           >
-            Nasıl Çalışır?
+            How It Works
           </p>
           <h2
             className="text-3xl md:text-4xl font-medium"
             style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
           >
-            3 adımda hazır.
+            Ready in 3 steps.
           </h2>
         </motion.div>
 

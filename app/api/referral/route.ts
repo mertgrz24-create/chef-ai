@@ -10,18 +10,18 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   let code: string
   try {
     const body = await request.json() as { code?: unknown }
     if (typeof body.code !== 'string' || body.code.trim() === '') {
-      return NextResponse.json({ error: 'code alanı zorunlu.' }, { status: 400 })
+      return NextResponse.json({ error: 'code field is required.' }, { status: 400 })
     }
     code = body.code.trim().toUpperCase()
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   // Check current user hasn't already been referred
@@ -32,12 +32,12 @@ export async function POST(request: NextRequest) {
     .single()
 
   if (myProfile?.referred_by) {
-    return NextResponse.json({ error: 'Zaten bir referans kodu kullandın.' }, { status: 409 })
+    return NextResponse.json({ error: 'You have already used a referral code.' }, { status: 409 })
   }
 
   // Prevent self-referral
   if (myProfile?.referral_code === code) {
-    return NextResponse.json({ error: 'Kendi kodunu kullanamazsın.' }, { status: 400 })
+    return NextResponse.json({ error: 'You cannot use your own referral code.' }, { status: 400 })
   }
 
   // Find the referrer
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     .single()
 
   if (!referrer) {
-    return NextResponse.json({ error: 'Geçersiz referans kodu.' }, { status: 404 })
+    return NextResponse.json({ error: 'Invalid referral code.' }, { status: 404 })
   }
 
   // Apply referral atomically (best-effort)

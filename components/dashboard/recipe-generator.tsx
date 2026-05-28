@@ -96,7 +96,7 @@ export function RecipeGenerator() {
       if (res.status === 403 && data.error === 'limit_reached') {
         setLimitReached(true)
       } else if (!res.ok) {
-        setError(data.error ?? 'Bir hata oluştu.')
+        setError(data.error ?? 'Something went wrong.')
       } else {
         const text = data.recipe ?? null
         setRecipe(text)
@@ -107,8 +107,8 @@ export function RecipeGenerator() {
           setParsedRecipe(
             parsed ?? {
               name: ingredients[0]
-                ? `${ingredients[0].charAt(0).toUpperCase()}${ingredients[0].slice(1)} tarifi`
-                : 'Chef-AI Tarifi',
+                ? `${ingredients[0].charAt(0).toUpperCase()}${ingredients[0].slice(1)} recipe`
+                : 'Chef-AI Recipe',
               ingredients,
               instructions: text,
             }
@@ -116,7 +116,7 @@ export function RecipeGenerator() {
         }
       }
     } catch {
-      setError('Sunucuya ulaşılamadı. Lütfen tekrar deneyin.')
+      setError('Could not reach server. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -142,7 +142,7 @@ export function RecipeGenerator() {
       })
       const data = await res.json() as { recipe?: Recipe; error?: string }
       if (!res.ok || !data.recipe?.id) {
-        setSaveError(data.error ?? 'Kaydetme başarısız.')
+        setSaveError(data.error ?? 'Save failed.')
         return null
       }
       setSavedRecipeId(data.recipe.id)
@@ -150,7 +150,7 @@ export function RecipeGenerator() {
       router.refresh()
       return data.recipe.id
     } catch {
-      setSaveError('Sunucuya ulaşılamadı.')
+      setSaveError('Could not reach server.')
       return null
     } finally {
       setSaving(false)
@@ -172,8 +172,8 @@ export function RecipeGenerator() {
   async function triggerShare(id: string) {
     const url = `${window.location.origin}/recipe/${id}`
     const shareData = {
-      title: parsedRecipe?.name ?? 'Chef-AI Tarifi',
-      text: 'Chef-AI ile ürettiğim tarife bak!',
+      title: parsedRecipe?.name ?? 'Chef-AI Recipe',
+      text: 'Check out this recipe I made with Chef-AI!',
       url,
     }
 
@@ -188,10 +188,10 @@ export function RecipeGenerator() {
 
     try {
       await navigator.clipboard.writeText(url)
-      setShareMessage('Link kopyalandı ✓')
+      setShareMessage('Link copied ✓')
       setTimeout(() => setShareMessage(null), 3000)
     } catch {
-      setSaveError(`Panoya kopyalanamadı — link: ${url}`)
+      setSaveError(`Could not copy to clipboard — link: ${url}`)
     }
   }
 
@@ -222,10 +222,10 @@ export function RecipeGenerator() {
       if (res.ok && data.recipe?.id) {
         router.push(`/recipe/${data.recipe.id}`)
       } else {
-        setModifyError(data.error ?? 'Tarif değiştirilemedi.')
+        setModifyError(data.error ?? 'Could not modify recipe.')
       }
     } catch {
-      setModifyError('Sunucuya ulaşılamadı.')
+      setModifyError('Could not reach server.')
     } finally {
       setModifying(false)
     }
@@ -247,14 +247,14 @@ export function RecipeGenerator() {
 
   return (
     <div className="mt-8">
-      <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">Tarif Üret</h2>
+      <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">Generate Recipe</h2>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Malzemeleri virgülle ayır: tavuk, soğan, sarımsak…"
+          placeholder="Separate ingredients with commas: chicken, onion, garlic…"
           disabled={loading}
           className="rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3 text-sm text-[var(--text-primary)] outline-none transition placeholder:text-[var(--text-muted)] focus:border-amber-400 focus:ring-2 focus:ring-amber-100 dark:focus:ring-amber-900/30 disabled:opacity-60"
         />
@@ -264,7 +264,7 @@ export function RecipeGenerator() {
           className="w-full sm:self-start sm:w-auto rounded-xl px-6 py-3 sm:py-2.5 text-sm font-semibold text-white transition hover:opacity-85 active:scale-[0.98] disabled:opacity-50"
           style={{ backgroundColor: '#ffa51f' }}
         >
-          {loading ? 'Tarif üretiliyor…' : 'Tarif Üret →'}
+          {loading ? 'Generating recipe…' : 'Generate Recipe →'}
         </button>
       </form>
 
@@ -279,17 +279,17 @@ export function RecipeGenerator() {
             className="mt-4 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 p-5"
           >
             <p className="mb-3 text-sm font-semibold text-amber-800 dark:text-amber-300">
-              Bu ay 5 ücretsiz tarifini kullandın 🎉
+              You&apos;ve used all 10 free recipes this month 🎉
             </p>
             <p className="mb-4 text-xs text-amber-700 dark:text-amber-400">
-              Sınırsız tarif, yemek planı ve daha fazlası için Premium&apos;a geçebilirsin.
+              Upgrade to Premium for unlimited recipes, meal plans, and more.
             </p>
             <a
               href="/premium"
               className="inline-block rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
               style={{ backgroundColor: '#ffa51f' }}
             >
-              Premium&apos;a Geç →
+              Go Premium →
             </a>
           </motion.div>
         )}
@@ -323,7 +323,7 @@ export function RecipeGenerator() {
               <div className="relative h-48 w-full">
                 <Image
                   src={imageUrl}
-                  alt={parsedRecipe?.name ?? 'Tarif görseli'}
+                  alt={parsedRecipe?.name ?? 'Recipe image'}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 600px"
@@ -337,7 +337,7 @@ export function RecipeGenerator() {
 
             <div className="p-6">
               <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-[var(--text-secondary)]">Tarifiniz hazır</span>
+                <span className="text-sm font-semibold text-[var(--text-secondary)]">Your recipe is ready</span>
               </div>
 
               <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]">
@@ -348,8 +348,8 @@ export function RecipeGenerator() {
                 <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)]">
                   <span>🔥 <span className="font-semibold text-[var(--text-primary)]">{macros.calories} kcal</span></span>
                   <span>💪 <span className="font-semibold text-[var(--text-primary)]">{macros.protein_g}g</span> protein</span>
-                  <span>🍚 <span className="font-semibold text-[var(--text-primary)]">{macros.carbs_g}g</span> karb</span>
-                  <span>🧈 <span className="font-semibold text-[var(--text-primary)]">{macros.fat_g}g</span> yağ</span>
+                  <span>🍚 <span className="font-semibold text-[var(--text-primary)]">{macros.carbs_g}g</span> carbs</span>
+                  <span>🧈 <span className="font-semibold text-[var(--text-primary)]">{macros.fat_g}g</span> fat</span>
                 </div>
               )}
 
@@ -365,8 +365,8 @@ export function RecipeGenerator() {
                   {saving
                     ? 'Kaydediliyor…'
                     : savedRecipeId
-                    ? '🔗 Tekrar Paylaş'
-                    : '🔗 Kaydet & Paylaş'}
+                    ? '🔗 Share Again'
+                    : '🔗 Save & Share'}
                 </button>
 
                 {shareMessage && (
@@ -382,7 +382,7 @@ export function RecipeGenerator() {
                 onClick={resetRecipe}
                 className="mt-4 text-xs text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
               >
-                Yeni tarif üret
+                Generate new recipe
               </button>
             </div>
           </motion.div>
@@ -400,16 +400,16 @@ export function RecipeGenerator() {
             transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
             className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 shadow-sm"
           >
-            <h3 className="mb-1 text-sm font-semibold text-[var(--text-primary)]">✨ Bu Tarifi Değiştir</h3>
+            <h3 className="mb-1 text-sm font-semibold text-[var(--text-primary)]">✨ Modify This Recipe</h3>
             <p className="mb-3 text-xs text-[var(--text-muted)]">
-              Daha az kalorili, vejetaryen, farklı porsiyon… istediğin değişikliği yaz.
+              Lower calorie, vegetarian, different serving size… describe what you&apos;d like.
             </p>
             <form onSubmit={handleModify} className="flex flex-col gap-2">
               <input
                 type="text"
                 value={modifyInput}
                 onChange={(e) => setModifyInput(e.target.value)}
-                placeholder="ör: daha az yağlı yap, 4 kişilik yap, vejetaryen versiyonu…"
+                placeholder="e.g. make it lower fat, serve 4 people, vegetarian version…"
                 disabled={modifying || saving}
                 className="rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none transition placeholder:text-[var(--text-muted)] focus:border-amber-400 focus:ring-2 focus:ring-amber-100 dark:focus:ring-amber-900/30 disabled:opacity-60"
               />
@@ -419,7 +419,7 @@ export function RecipeGenerator() {
                 className="self-start rounded-xl px-5 py-2 text-sm font-semibold text-white transition hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
                 style={{ backgroundColor: '#ffa51f' }}
               >
-                {modifying ? 'Tarif güncelleniyor...' : 'Uygula →'}
+                {modifying ? 'Updating recipe...' : 'Apply →'}
               </button>
             </form>
             {modifyError && (

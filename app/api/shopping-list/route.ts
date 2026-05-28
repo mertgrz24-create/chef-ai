@@ -19,7 +19,7 @@ export async function GET() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const week_start_date = getWeekStartDate()
@@ -72,8 +72,7 @@ export async function GET() {
   // Filter: remove exact case-insensitive matches
   const filtered = unique.filter((ing) => !pantryNames.has(ing.toLowerCase().trim()))
 
-  // Sort alphabetically (Turkish locale)
-  const sorted = filtered.sort((a, b) => a.localeCompare(b, 'tr'))
+  const sorted = filtered.sort((a, b) => a.localeCompare(b, 'en'))
 
   return NextResponse.json({
     items: sorted,

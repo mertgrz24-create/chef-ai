@@ -14,14 +14,14 @@ type ProfileRow = {
 function buildDietContext(profile: ProfileRow | null): string | undefined {
   if (!profile) return undefined
   const parts: string[] = []
-  if (profile.daily_calorie_goal) parts.push(`günlük kalori ${profile.daily_calorie_goal} kcal`)
+  if (profile.daily_calorie_goal) parts.push(`daily calories ${profile.daily_calorie_goal} kcal`)
   if (profile.protein_goal_g) parts.push(`protein ${profile.protein_goal_g}g`)
-  if (profile.carbs_goal_g) parts.push(`karbonhidrat ${profile.carbs_goal_g}g`)
-  if (profile.fat_goal_g) parts.push(`yağ ${profile.fat_goal_g}g`)
-  if (profile.water_goal_l) parts.push(`su ${profile.water_goal_l} litre`)
-  if (profile.diet_type) parts.push(`diyet tipi: ${profile.diet_type}`)
+  if (profile.carbs_goal_g) parts.push(`carbs ${profile.carbs_goal_g}g`)
+  if (profile.fat_goal_g) parts.push(`fat ${profile.fat_goal_g}g`)
+  if (profile.water_goal_l) parts.push(`water ${profile.water_goal_l} L`)
+  if (profile.diet_type) parts.push(`diet type: ${profile.diet_type}`)
   if (parts.length === 0) return undefined
-  return `Diyet hedeflerim: ${parts.join(', ')}. Bu hedeflere uygun tarifler öner.`
+  return `My diet goals: ${parts.join(', ')}. Please suggest recipes that fit these goals.`
 }
 
 function getWeekStartDate(): string {
@@ -41,7 +41,7 @@ export async function POST() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const { data: profileData } = await supabase
@@ -71,9 +71,9 @@ export async function POST() {
       .single()
 
     if (dbError) {
-      console.error('[/api/meal-plan/generate] DB hatası:', dbError)
+      console.error('[/api/meal-plan/generate] DB error:', dbError)
       return NextResponse.json(
-        { error: 'Plan kaydedilemedi.', detail: dbError.message },
+        { error: 'Could not save plan.', detail: dbError.message },
         { status: 500 }
       )
     }
@@ -81,9 +81,9 @@ export async function POST() {
     return NextResponse.json({ plan: data }, { status: 201 })
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
-    console.error('[/api/meal-plan/generate] Haftalık plan üretme hatası:', message)
+    console.error('[/api/meal-plan/generate] Weekly plan generation error:', message)
     return NextResponse.json(
-      { error: 'Yemek planı üretilemedi. Lütfen tekrar deneyin.', detail: message },
+      { error: 'Could not generate meal plan. Please try again.', detail: message },
       { status: 500 }
     )
   }

@@ -27,8 +27,8 @@ function parseSteps(raw: string): string[] {
 
 function extractMinutes(text: string): number | null {
   let total = 0
-  const hourMatch = text.match(/(\d+)\s*saat/)
-  const minMatch = text.match(/(\d+)\s*dakika/)
+  const hourMatch = text.match(/(\d+)\s*hours?/)
+  const minMatch = text.match(/(\d+)\s*minutes?/)
   if (hourMatch) total += parseInt(hourMatch[1]) * 60
   if (minMatch) total += parseInt(minMatch[1])
   return total > 0 ? total : null
@@ -135,14 +135,14 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
           onClick={onClose}
           className="flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium text-white/60 transition hover:bg-white/10 hover:text-white"
         >
-          ✕ Kapat
+          ✕ Close
         </button>
       </div>
 
       {/* Step counter */}
       <div className="px-5 pt-6 pb-2 text-center">
         <span className="text-xs font-semibold tracking-widest text-white/40 uppercase">
-          Adım {step + 1} / {steps.length}
+          Step {step + 1} / {steps.length}
         </span>
         {/* Progress bar */}
         <div className="mt-2 mx-auto max-w-xs h-1 rounded-full bg-white/10 overflow-hidden">
@@ -192,7 +192,7 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
             className="text-4xl font-bold tabular-nums"
             style={{ color: timerSeconds === 0 ? '#22c55e' : '#ffa51f' }}
           >
-            {timerSeconds === 0 ? '✓ Tamam!' : fmtTime(timerSeconds)}
+            {timerSeconds === 0 ? '✓ Done!' : fmtTime(timerSeconds)}
           </span>
           <div className="flex gap-2">
             <button
@@ -202,14 +202,14 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
               className="rounded-xl px-4 py-2 text-sm font-semibold text-white transition disabled:opacity-40"
               style={{ backgroundColor: '#ffa51f' }}
             >
-              {timerRunning ? '⏸ Duraklat' : '▶ Başlat'}
+              {timerRunning ? '⏸ Pause' : '▶ Start'}
             </button>
             <button
               type="button"
               onClick={() => { setTimerSeconds(timerInitial); setTimerRunning(false) }}
               className="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
             >
-              🔄 Sıfırla
+              🔄 Reset
             </button>
           </div>
         </div>
@@ -223,7 +223,7 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
           disabled={isFirst}
           className="flex-1 rounded-2xl border border-white/20 py-4 text-sm font-semibold text-white transition hover:bg-white/10 disabled:opacity-30"
         >
-          ← Önceki
+          ← Previous
         </button>
 
         {isLast ? (
@@ -233,7 +233,7 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
             className="flex-1 rounded-2xl py-4 text-sm font-semibold text-white transition hover:opacity-90"
             style={{ backgroundColor: '#ffa51f' }}
           >
-            🎉 Afiyet Olsun!
+            🎉 Bon Appétit!
           </button>
         ) : (
           <button
@@ -242,7 +242,7 @@ export function CookingMode({ recipeName, instructions, open, onClose }: Cooking
             className="flex-1 rounded-2xl py-4 text-sm font-semibold text-white transition hover:opacity-90"
             style={{ backgroundColor: '#ffa51f' }}
           >
-            Sonraki →
+            Next →
           </button>
         )}
       </div>

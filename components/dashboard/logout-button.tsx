@@ -17,7 +17,7 @@ export function LogoutButton() {
       onClick={handleLogout}
       className="w-full rounded-xl px-3 py-2.5 text-left text-sm font-medium text-gray-500 transition hover:bg-red-50 hover:text-red-500"
     >
-      Çıkış Yap
+      Sign Out
     </button>
   )
 }

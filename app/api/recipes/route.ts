@@ -19,14 +19,14 @@ type ProfileRow = {
 function buildDietContext(profile: ProfileRow | null): string | undefined {
   if (!profile) return undefined
   const parts: string[] = []
-  if (profile.daily_calorie_goal) parts.push(`günlük kalori ${profile.daily_calorie_goal} kcal`)
+  if (profile.daily_calorie_goal) parts.push(`daily calories ${profile.daily_calorie_goal} kcal`)
   if (profile.protein_goal_g) parts.push(`protein ${profile.protein_goal_g}g`)
-  if (profile.carbs_goal_g) parts.push(`karbonhidrat ${profile.carbs_goal_g}g`)
-  if (profile.fat_goal_g) parts.push(`yağ ${profile.fat_goal_g}g`)
-  if (profile.water_goal_l) parts.push(`su ${profile.water_goal_l} litre`)
-  if (profile.diet_type) parts.push(`diyet tipi: ${profile.diet_type}`)
+  if (profile.carbs_goal_g) parts.push(`carbs ${profile.carbs_goal_g}g`)
+  if (profile.fat_goal_g) parts.push(`fat ${profile.fat_goal_g}g`)
+  if (profile.water_goal_l) parts.push(`water ${profile.water_goal_l} L`)
+  if (profile.diet_type) parts.push(`diet type: ${profile.diet_type}`)
   if (parts.length === 0) return undefined
-  return `Diyet hedeflerim: ${parts.join(', ')}. Bu hedeflere uygun tarif öner.`
+  return `My diet goals: ${parts.join(', ')}. Please suggest a recipe that fits these goals.`
 }
 
 function getMonthStart(): string {
@@ -45,13 +45,13 @@ export async function POST(request: NextRequest) {
       body.ingredients.some((i) => typeof i !== 'string')
     ) {
       return NextResponse.json(
-        { error: 'ingredients alanı dolu bir string dizisi olmalı.' },
+        { error: 'ingredients must be a non-empty array of strings.' },
         { status: 400 }
       )
     }
     ingredients = body.ingredients as string[]
   } catch {
-    return NextResponse.json({ error: 'Geçersiz istek gövdesi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
   // 2. Auth check
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   // 3. Fetch profile (diet context + usage data)
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'limit_reached',
-        message: `Bu ay ${FREE_MONTHLY_LIMIT} ücretsiz tarifini kullandın. Premium'a geç!`,
+        message: `You've used all ${FREE_MONTHLY_LIMIT} free recipes this month. Upgrade to Premium!`,
       },
       { status: 403 }
     )
@@ -101,9 +101,9 @@ export async function POST(request: NextRequest) {
   try {
     result = await generateRecipeWithGemini(ingredients, dietContext)
   } catch (err) {
-    console.error('[/api/recipes] Tarif üretme hatası:', err)
+    console.error('[/api/recipes] Recipe generation error:', err)
     return NextResponse.json(
-      { error: 'Tarif üretilemedi. Lütfen tekrar deneyin.' },
+      { error: 'Could not generate recipe. Please try again.' },
       { status: 500 }
     )
   }

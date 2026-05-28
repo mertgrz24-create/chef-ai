@@ -18,7 +18,7 @@ export async function GET() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const week_start_date = getWeekStartDate()
@@ -31,7 +31,7 @@ export async function GET() {
     .single()
 
   if (error || !data) {
-    return NextResponse.json({ error: 'Bu hafta için plan bulunamadı.' }, { status: 404 })
+    return NextResponse.json({ error: 'No plan found for this week.' }, { status: 404 })
   }
 
   return NextResponse.json({ plan: data })

@@ -20,11 +20,11 @@ function getDaysUntil(dateStr: string): number {
 }
 
 function expiryStyle(days: number) {
-  if (days < 0)  return { dot: 'bg-red-500',    badge: 'bg-red-50 text-red-600',      label: 'Süresi doldu' }
-  if (days === 0) return { dot: 'bg-red-500',   badge: 'bg-red-50 text-red-600',      label: 'Bugün son!' }
-  if (days <= 3)  return { dot: 'bg-orange-400', badge: 'bg-orange-50 text-orange-600', label: `${days} gün kaldı` }
-  if (days <= 7)  return { dot: 'bg-amber-400',  badge: 'bg-amber-50 text-amber-600',  label: `${days} gün kaldı` }
-  return          { dot: 'bg-green-500',  badge: 'bg-green-50 text-green-700',  label: `${days} gün kaldı` }
+  if (days < 0)  return { dot: 'bg-red-500',    badge: 'bg-red-50 text-red-600',      label: 'Expired' }
+  if (days === 0) return { dot: 'bg-red-500',   badge: 'bg-red-50 text-red-600',      label: 'Expires today!' }
+  if (days <= 3)  return { dot: 'bg-orange-400', badge: 'bg-orange-50 text-orange-600', label: `${days}d left` }
+  if (days <= 7)  return { dot: 'bg-amber-400',  badge: 'bg-amber-50 text-amber-600',  label: `${days}d left` }
+  return          { dot: 'bg-green-500',  badge: 'bg-green-50 text-green-700',  label: `${days}d left` }
 }
 
 export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
@@ -56,7 +56,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
       const data = await res.json() as { item?: PantryItem; error?: string }
 
       if (!res.ok) {
-        setError(data.error ?? 'Eklenemedi.')
+        setError(data.error ?? 'Could not add item.')
         return
       }
 
@@ -72,7 +72,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
       setQuantity('')
       setFormOpen(false)
     } catch {
-      setError('Sunucuya ulaşılamadı.')
+      setError('Could not reach server.')
     } finally {
       setSubmitting(false)
     }
@@ -95,17 +95,17 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
       {/* Header */}
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Kilerim</h1>
+          <h1 className="text-2xl font-bold text-gray-900">My Pantry</h1>
           <p className="mt-0.5 text-sm text-gray-500">
-            {items.length} malzeme
+            {items.length} item{items.length !== 1 ? 's' : ''}
             {expiredCount > 0 && (
               <span className="ml-2 font-medium text-red-600">
-                · {expiredCount} tanesi süresi doldu 🗑️
+                · {expiredCount} expired 🗑️
               </span>
             )}
             {urgentCount > 0 && (
               <span className="ml-2 font-medium text-orange-600">
-                · {urgentCount} tanesi yakında bitiyor ⚠️
+                · {urgentCount} expiring soon ⚠️
               </span>
             )}
           </p>
@@ -116,7 +116,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
           className="shrink-0 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-85 active:scale-[0.98]"
           style={{ backgroundColor: '#ffa51f' }}
         >
-          {formOpen ? 'İptal' : '+ Malzeme Ekle'}
+          {formOpen ? 'Cancel' : '+ Add Ingredient'}
         </button>
       </div>
 
@@ -132,18 +132,18 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
             onSubmit={handleAdd}
             className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
           >
-            <h2 className="mb-4 text-sm font-semibold text-gray-700">Yeni Malzeme</h2>
+            <h2 className="mb-4 text-sm font-semibold text-gray-700">New Ingredient</h2>
 
             <div className="grid gap-3 sm:grid-cols-3">
               <div className="sm:col-span-1">
                 <label className="mb-1 block text-xs font-medium text-gray-500">
-                  Malzeme adı *
+                  Ingredient name *
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="domates, süt, yumurta…"
+                  placeholder="tomatoes, milk, eggs…"
                   required
                   className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
                 />
@@ -151,7 +151,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
 
               <div>
                 <label className="mb-1 block text-xs font-medium text-gray-500">
-                  Son kullanma tarihi *
+                  Expiry date *
                 </label>
                 <input
                   type="date"
@@ -164,13 +164,13 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
 
               <div>
                 <label className="mb-1 block text-xs font-medium text-gray-500">
-                  Miktar (opsiyonel)
+                  Quantity (optional)
                 </label>
                 <input
                   type="text"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  placeholder="1 adet, 500g…"
+                  placeholder="1 piece, 500g…"
                   className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
                 />
               </div>
@@ -184,7 +184,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
               className="mt-4 w-full sm:w-auto rounded-xl px-6 py-2.5 text-sm font-semibold text-white transition hover:opacity-85 disabled:opacity-50"
               style={{ backgroundColor: '#ffa51f' }}
             >
-              {submitting ? 'Ekleniyor…' : 'Kilere Ekle'}
+              {submitting ? 'Adding…' : 'Add to Pantry'}
             </button>
           </motion.form>
         )}
@@ -194,8 +194,8 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white py-16 text-center">
           <span className="mb-3 text-4xl">🥦</span>
-          <p className="text-sm font-medium text-gray-500">Kiler boş</p>
-          <p className="mt-1 text-xs text-gray-400">Malzeme eklemek için yukarıdaki butona tıkla.</p>
+          <p className="text-sm font-medium text-gray-500">Pantry is empty</p>
+          <p className="mt-1 text-xs text-gray-400">Click the button above to add ingredients.</p>
         </div>
       ) : (
         <ul className="flex flex-col gap-2">
@@ -235,7 +235,7 @@ export function PantryClient({ initialItems }: { initialItems: PantryItem[] }) {
                     type="button"
                     onClick={() => handleDelete(item.id)}
                     disabled={deletingId === item.id}
-                    aria-label="Malzemeyi sil"
+                    aria-label="Delete ingredient"
                     className="shrink-0 rounded-lg p-1.5 text-gray-300 transition hover:bg-red-50 hover:text-red-400 disabled:opacity-40"
                   >
                     {deletingId === item.id ? '…' : '✕'}

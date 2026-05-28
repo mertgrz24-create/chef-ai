@@ -3,16 +3,16 @@ import type { MealItem, MealPlanDay } from '@/types/meal-plan'
 
 const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 
-const VISION_PROMPT = `Bu fotoğrafta gördüğün yiyecek ve içecek malzemelerini tanımla.
+const VISION_PROMPT = `Identify all food and drink ingredients visible in this photo.
 
-Kurallar:
-- Sadece yemekte kullanılabilecek malzemeleri listele (sebze, meyve, et, süt ürünleri, baharat vb.)
-- Ambalajlı ürünleri de tanı (süt kutusu, yoğurt kabı vb.)
-- Türkçe isimlerle yaz, küçük harfle
-- Yanıtı SADECE virgülle ayrılmış malzeme listesi olarak ver, başka hiçbir şey yazma
-- Eğer fotoğrafta yiyecek göremiyorsan boş yanıt ver
+Rules:
+- Only list ingredients usable in cooking (vegetables, fruits, meat, dairy, spices, etc.)
+- Include packaged goods (milk carton, yogurt container, etc.)
+- Write ingredient names in English, lowercase
+- Return ONLY a comma-separated list of ingredients, nothing else
+- If no food is visible, return an empty response
 
-Örnek yanıt: tavuk göğsü, soğan, domates, sarımsak, yeşil biber, yoğurt`
+Example response: chicken breast, onion, tomato, garlic, green bell pepper, yogurt`
 
 export interface VisionResult {
   ingredients: string[]
@@ -34,21 +34,22 @@ export interface RecipeResult {
   outputTokens: number
 }
 
-const RECIPE_SYSTEM_PROMPT = `Sen Chef-AI'nin tarif asistanısın. Kullanıcının elindeki malzemelere göre yaratıcı, lezzetli ve yapılabilir tarifler üretirsin.
+const RECIPE_SYSTEM_PROMPT = `You are Chef-AI's recipe assistant. You create creative, delicious, and achievable recipes based on the ingredients the user has on hand.
 
-Kurallar:
-- Her zaman Türkçe yanıt ver.
-- SADECE geçerli bir JSON nesnesi döndür; markdown, açıklama veya başka metin ekleme.
-- Sadece kullanıcının verdiği malzemeleri kullan; ekstra malzeme varsa instructions içinde isteğe bağlı olarak belirt.
-- Adımlar numaralı ve kısa olsun; instructions içinde \\n ile ayır.
-- Samimi, teşvik edici bir ton kullan.
-- macros değerleri tahmini olabilir; makul ve gerçekçi sayılar ver.
+Rules:
+- Always respond in English.
+- Return ONLY a valid JSON object; no markdown, explanations, or extra text.
+- Use only the ingredients provided; if additional ingredients help, mention them as optional in instructions.
+- Use imperial measurements: cups, oz, lbs, tbsp, tsp, °F (not metric).
+- Steps should be numbered and concise; separate them with \\n inside instructions.
+- Use a friendly, encouraging tone.
+- Macros are estimates; provide reasonable, realistic values.
 
-Çıktı formatı (sadece bu JSON, başka hiçbir şey):
+Output format (this JSON only, nothing else):
 {
-  "name": "Tarif Adı",
-  "ingredients": ["malzeme 1 (miktar)", "malzeme 2 (miktar)"],
-  "instructions": "1. İlk adım.\\n2. İkinci adım.\\n3. Üçüncü adım.",
+  "name": "Recipe Name",
+  "ingredients": ["1 lb chicken breast", "1/2 cup diced onion"],
+  "instructions": "1. First step.\\n2. Second step.\\n3. Third step.",
   "macros": {
     "calories": 450,
     "protein_g": 32,
@@ -74,11 +75,11 @@ function parseRecipeJson(raw: string): { text: string; macros: RecipeMacros | nu
   const lines: string[] = []
   if (parsed.name) lines.push(`🍽️ ${parsed.name}`)
   if (parsed.ingredients?.length) {
-    lines.push('\n📝 Malzemeler')
+    lines.push('\n📝 Ingredients')
     parsed.ingredients.forEach((i) => lines.push(`• ${i}`))
   }
   if (parsed.instructions) {
-    lines.push('\n👨‍🍳 Hazırlık')
+    lines.push('\n👨‍🍳 Instructions')
     lines.push(parsed.instructions)
   }
 
@@ -104,9 +105,9 @@ export async function generateRecipeWithGemini(
     systemInstruction: RECIPE_SYSTEM_PROMPT,
   })
 
-  const userMessage = `Elimde şu malzemeler var: ${ingredients.join(', ')}.${
+  const userMessage = `I have these ingredients: ${ingredients.join(', ')}.${
     dietContext ? `\n${dietContext}` : ''
-  }\nBana bir tarif önerir misin?`
+  }\nCan you suggest a recipe?`
 
   const result = await model.generateContent(userMessage)
   const rawText = result.response.text().trim()
@@ -119,7 +120,6 @@ export async function generateRecipeWithGemini(
     text = parsed.text
     macros = parsed.macros
   } catch {
-    // Graceful fallback: display raw response if JSON parsing fails
     text = rawText
   }
 
@@ -133,47 +133,49 @@ export async function generateRecipeWithGemini(
 
 // ─── Weekly meal plan ─────────────────────────────────────────────────────────
 
-const MEAL_PLAN_SYSTEM_PROMPT = `Sen Chef-AI'nin haftalık yemek planı asistanısın. Kullanıcının diyet hedeflerine uygun, çeşitli ve dengeli bir haftalık plan oluşturursun.
+const MEAL_PLAN_SYSTEM_PROMPT = `You are Chef-AI's weekly meal plan assistant. You create varied, balanced 7-day meal plans tailored to the user's dietary goals.
 
-Kurallar:
-- Her zaman Türkçe tarif adı ve talimatlar yaz.
-- SADECE geçerli bir JSON dizisi döndür; markdown, açıklama veya başka metin ekleme.
-- 7 günlük plan üret. day alanları sırasıyla: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
-- Her gün sabah (breakfast) ve akşam (dinner) öğünü olsun.
-- Çeşitlilik sağla; aynı tarifi iki güne koyma.
-- macros değerleri tahmini olabilir; makul ve gerçekçi sayılar ver.
+Rules:
+- Always write recipe names and instructions in English.
+- Return ONLY a valid JSON array; no markdown, explanations, or extra text.
+- Generate a 7-day plan. Day values in order: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+- Each day has a breakfast and a dinner meal.
+- Use imperial measurements: cups, oz, lbs, tbsp, tsp, °F (not metric).
+- Ensure variety; don't repeat the same recipe on two different days.
+- Macros are estimates; provide reasonable, realistic values.
 
-Çıktı formatı (sadece bu JSON dizisi, başka hiçbir şey):
+Output format (this JSON array only, nothing else):
 [
   {
     "day": "monday",
     "breakfast": {
-      "name": "Tarif Adı",
-      "ingredients": ["malzeme 1", "malzeme 2"],
-      "instructions": "1. İlk adım.\\n2. İkinci adım.",
+      "name": "Recipe Name",
+      "ingredients": ["1 cup rolled oats", "1/2 cup milk"],
+      "instructions": "1. First step.\\n2. Second step.",
       "macros": { "calories": 350, "protein_g": 15, "carbs_g": 45, "fat_g": 10 }
     },
     "dinner": {
-      "name": "Tarif Adı",
-      "ingredients": ["malzeme 1", "malzeme 2"],
-      "instructions": "1. İlk adım.\\n2. İkinci adım.",
+      "name": "Recipe Name",
+      "ingredients": ["1 lb chicken breast", "2 tbsp olive oil"],
+      "instructions": "1. First step.\\n2. Second step.",
       "macros": { "calories": 550, "protein_g": 35, "carbs_g": 40, "fat_g": 18 }
     }
   }
 ]`
 
-const SINGLE_MEAL_SYSTEM_PROMPT = `Sen Chef-AI'nin yemek asistanısın. Tek bir öğün için özgün tarif önerirsin.
+const SINGLE_MEAL_SYSTEM_PROMPT = `You are Chef-AI's meal assistant. You suggest original recipes for a single meal.
 
-Kurallar:
-- Her zaman Türkçe yanıt ver.
-- SADECE geçerli bir JSON nesnesi döndür; markdown, açıklama veya başka metin ekleme.
-- macros değerleri tahmini olabilir; makul ve gerçekçi sayılar ver.
+Rules:
+- Always respond in English.
+- Return ONLY a valid JSON object; no markdown, explanations, or extra text.
+- Use imperial measurements: cups, oz, lbs, tbsp, tsp, °F (not metric).
+- Macros are estimates; provide reasonable, realistic values.
 
-Çıktı formatı (sadece bu JSON nesnesi, başka hiçbir şey):
+Output format (this JSON object only, nothing else):
 {
-  "name": "Tarif Adı",
-  "ingredients": ["malzeme 1", "malzeme 2"],
-  "instructions": "1. İlk adım.\\n2. İkinci adım.",
+  "name": "Recipe Name",
+  "ingredients": ["1 lb ground beef", "1/2 cup breadcrumbs"],
+  "instructions": "1. First step.\\n2. Second step.",
   "macros": { "calories": 450, "protein_g": 30, "carbs_g": 35, "fat_g": 15 }
 }`
 
@@ -201,20 +203,20 @@ export async function generateWeeklyMealPlan(dietContext?: string): Promise<Meal
     systemInstruction: MEAL_PLAN_SYSTEM_PROMPT,
   })
 
-  const userMessage = `Bana 7 günlük haftalık yemek planı oluştur.${
+  const userMessage = `Create a 7-day weekly meal plan for me.${
     dietContext ? `\n${dietContext}` : ''
   }`
 
-  console.log('[gemini] generateWeeklyMealPlan başlatılıyor...')
+  console.log('[gemini] generateWeeklyMealPlan starting...')
   const result = await model.generateContent(userMessage)
   const rawText = result.response.text().trim()
-  console.log('[gemini] generateWeeklyMealPlan ham yanıt (ilk 300 char):', rawText.slice(0, 300))
+  console.log('[gemini] generateWeeklyMealPlan raw response (first 300 chars):', rawText.slice(0, 300))
 
   try {
     return parseMealPlanJson(rawText)
   } catch (parseErr) {
-    console.error('[gemini] generateWeeklyMealPlan JSON parse hatası:', parseErr)
-    console.error('[gemini] Ham yanıt (tam):', rawText)
+    console.error('[gemini] generateWeeklyMealPlan JSON parse error:', parseErr)
+    console.error('[gemini] Full raw response:', rawText)
     throw parseErr
   }
 }
@@ -229,8 +231,8 @@ export async function generateSingleMeal(
     systemInstruction: SINGLE_MEAL_SYSTEM_PROMPT,
   })
 
-  const mealLabel = mealType === 'breakfast' ? 'kahvaltı' : 'akşam yemeği'
-  const userMessage = `${day} günü için ${mealLabel} tarifi öner.${
+  const mealLabel = mealType === 'breakfast' ? 'breakfast' : 'dinner'
+  const userMessage = `Suggest a ${mealLabel} recipe for ${day}.${
     dietContext ? `\n${dietContext}` : ''
   }`
 
@@ -241,20 +243,21 @@ export async function generateSingleMeal(
 
 // ─── Recipe modification ──────────────────────────────────────────────────────
 
-const MODIFY_RECIPE_SYSTEM_PROMPT = `Sen Chef-AI'nin tarif düzenleme asistanısın. Kullanıcının verdiği mevcut tarifi, isteğine göre değiştirirsin.
+const MODIFY_RECIPE_SYSTEM_PROMPT = `You are Chef-AI's recipe editing assistant. You modify existing recipes based on the user's request.
 
-Kurallar:
-- Her zaman Türkçe yanıt ver.
-- SADECE geçerli bir JSON nesnesi döndür; markdown, açıklama veya başka metin ekleme.
-- Mevcut tarifi kullanıcının talebine göre düzenle (kalori azalt, vejetaryen yap, porsiyon değiştir vb.).
-- Tarif adını gerektiğinde güncelle; instructions içindeki adımları \\n ile ayır.
-- macros değerleri tahmini olabilir; değişikliği yansıt.
+Rules:
+- Always respond in English.
+- Return ONLY a valid JSON object; no markdown, explanations, or extra text.
+- Edit the existing recipe according to the user's request (reduce calories, make vegetarian, change servings, etc.).
+- Use imperial measurements: cups, oz, lbs, tbsp, tsp, °F (not metric).
+- Update the recipe name if needed; separate instruction steps with \\n.
+- Macros are estimates; reflect the changes made.
 
-Çıktı formatı (sadece bu JSON, başka hiçbir şey):
+Output format (this JSON only, nothing else):
 {
-  "name": "Güncellenmiş Tarif Adı",
-  "ingredients": ["malzeme 1 (miktar)", "malzeme 2 (miktar)"],
-  "instructions": "1. İlk adım.\\n2. İkinci adım.\\n3. Üçüncü adım.",
+  "name": "Updated Recipe Name",
+  "ingredients": ["2 cups flour", "1/2 tsp salt"],
+  "instructions": "1. First step.\\n2. Second step.\\n3. Third step.",
   "macros": {
     "calories": 350,
     "protein_g": 25,
@@ -286,14 +289,14 @@ export async function modifyRecipe(
     systemInstruction: MODIFY_RECIPE_SYSTEM_PROMPT,
   })
 
-  const userMessage = `Mevcut tarif:
-Ad: ${recipe.name}
-Malzemeler: ${recipe.ingredients.join(', ')}
-Hazırlık: ${recipe.instructions}
+  const userMessage = `Current recipe:
+Name: ${recipe.name}
+Ingredients: ${recipe.ingredients.join(', ')}
+Instructions: ${recipe.instructions}
 
-Kullanıcının isteği: ${instruction}${dietContext ? `\nDiyet hedefleri: ${dietContext}` : ''}
+User request: ${instruction}${dietContext ? `\nDiet goals: ${dietContext}` : ''}
 
-Bu tarifi kullanıcının isteğine göre düzenle.`
+Please modify this recipe according to the user's request.`
 
   const result = await model.generateContent(userMessage)
   const rawText = result.response.text().trim()

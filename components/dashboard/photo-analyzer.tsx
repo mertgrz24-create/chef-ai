@@ -47,7 +47,7 @@ export function PhotoAnalyzer() {
       const data = await res.json() as { ingredients?: string[]; error?: string }
 
       if (!res.ok) {
-        setError(data.error ?? 'Analiz başarısız.')
+        setError(data.error ?? 'Analysis failed.')
         setStep('previewing')
         return
       }
@@ -55,7 +55,7 @@ export function PhotoAnalyzer() {
       setIngredients(data.ingredients ?? [])
       setStep('ingredients')
     } catch {
-      setError('Sunucuya ulaşılamadı.')
+      setError('Could not reach server.')
       setStep('previewing')
     }
   }
@@ -75,7 +75,7 @@ export function PhotoAnalyzer() {
       const data = await res.json() as { recipe?: string; error?: string }
 
       if (!res.ok) {
-        setError(data.error ?? 'Tarif üretilemedi.')
+        setError(data.error ?? 'Could not generate recipe.')
         setStep('ingredients')
         return
       }
@@ -83,7 +83,7 @@ export function PhotoAnalyzer() {
       setRecipe(data.recipe ?? null)
       setStep('recipe')
     } catch {
-      setError('Sunucuya ulaşılamadı.')
+      setError('Could not reach server.')
       setStep('ingredients')
     }
   }
@@ -100,7 +100,7 @@ export function PhotoAnalyzer() {
 
   return (
     <div className="mt-8">
-      <h2 className="mb-4 text-lg font-semibold text-gray-800">Fotoğrafla Analiz Et</h2>
+      <h2 className="mb-4 text-lg font-semibold text-gray-800">Analyze Photo</h2>
 
       {/* Hidden file input — label triggers it natively on all browsers/mobile */}
       <input
@@ -123,16 +123,16 @@ export function PhotoAnalyzer() {
         {preview ? (
           <img
             src={preview}
-            alt="Yüklenen fotoğraf"
+            alt="Uploaded photo"
             className="mx-auto max-h-52 rounded-xl object-contain"
           />
         ) : (
           <div className="flex flex-col items-center gap-3 py-2">
             <span className="text-5xl">📷</span>
             <p className="text-sm font-medium text-gray-500">
-              Fotoğraf seç veya kameradan çek
+              Choose a photo or take one with your camera
             </p>
-            <p className="text-xs text-gray-400">JPEG · PNG · WebP · Maks 10 MB</p>
+            <p className="text-xs text-gray-400">JPEG · PNG · WebP · Max 10 MB</p>
           </div>
         )}
       </label>
@@ -146,14 +146,14 @@ export function PhotoAnalyzer() {
             className="w-full sm:w-auto rounded-xl px-6 py-3 sm:py-2.5 text-sm font-semibold text-white transition hover:opacity-85 active:scale-[0.98]"
             style={{ backgroundColor: '#ffa51f' }}
           >
-            Malzemeleri Tanı →
+            Identify Ingredients →
           </button>
           <button
             type="button"
             onClick={reset}
             className="w-full sm:w-auto rounded-xl px-4 py-3 sm:py-2.5 text-sm text-gray-400 transition hover:text-gray-600"
           >
-            İptal
+            Cancel
           </button>
         </div>
       )}
@@ -161,7 +161,7 @@ export function PhotoAnalyzer() {
       {/* Analyzing state */}
       {step === 'analyzing' && (
         <p className="mt-3 text-sm text-amber-500 font-medium animate-pulse">
-          Fotoğraf analiz ediliyor…
+          Analyzing photo…
         </p>
       )}
 
@@ -196,8 +196,8 @@ export function PhotoAnalyzer() {
               <span className="text-xl">🥦</span>
               <span className="text-sm font-semibold text-gray-700">
                 {ingredients.length > 0
-                  ? `${ingredients.length} malzeme tespit edildi`
-                  : 'Malzeme tespit edilemedi'}
+                  ? `${ingredients.length} ingredient${ingredients.length !== 1 ? 's' : ''} detected`
+                  : 'No ingredients detected'}
               </span>
             </div>
 
@@ -222,27 +222,27 @@ export function PhotoAnalyzer() {
                     className="w-full sm:w-auto rounded-xl px-6 py-3 sm:py-2.5 text-sm font-semibold text-white transition hover:opacity-85 active:scale-[0.98]"
                     style={{ backgroundColor: '#ffa51f' }}
                   >
-                    Bu malzemelerle tarif üret →
+                    Generate recipe with these ingredients →
                   </button>
                 )}
 
                 {step === 'generating' && (
                   <p className="text-sm text-amber-500 font-medium animate-pulse">
-                    Tarif üretiliyor…
+                    Generating recipe…
                   </p>
                 )}
               </>
             ) : (
               <div>
                 <p className="mb-3 text-sm text-gray-400">
-                  Fotoğrafta yiyecek tespit edilemedi. Farklı bir fotoğraf dene.
+                  No food detected in the photo. Try a different image.
                 </p>
                 <button
                   type="button"
                   onClick={reset}
                   className="text-xs text-gray-400 underline hover:text-gray-600"
                 >
-                  Yeni fotoğraf yükle
+                  Upload new photo
                 </button>
               </div>
             )}
@@ -263,7 +263,7 @@ export function PhotoAnalyzer() {
           >
             <div className="mb-3 flex items-center gap-2">
               <span className="text-xl">🍽️</span>
-              <span className="text-sm font-semibold text-gray-700">Tarifiniz hazır</span>
+              <span className="text-sm font-semibold text-gray-700">Your recipe is ready</span>
             </div>
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">
               {recipe}
@@ -273,7 +273,7 @@ export function PhotoAnalyzer() {
               onClick={reset}
               className="mt-5 text-xs text-gray-400 underline hover:text-gray-600"
             >
-              Yeni fotoğraf analiz et
+              Analyze new photo
             </button>
           </motion.div>
         )}

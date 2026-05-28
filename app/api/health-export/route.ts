@@ -18,7 +18,7 @@ export async function GET() {
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const since = new Date()
@@ -33,7 +33,7 @@ export async function GET() {
 
   if (error) {
     console.error('[GET /api/health-export]', error)
-    return NextResponse.json({ error: 'Veriler getirilemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not fetch data.' }, { status: 500 })
   }
 
   const meals = (data ?? []) as Pick<MealEaten, 'calories' | 'protein_g' | 'carbs_g' | 'fat_g' | 'eaten_at'>[]
