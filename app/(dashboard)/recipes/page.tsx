@@ -6,6 +6,11 @@ import type { Recipe } from '@/types/recipe'
 
 type RecipeSummary = Pick<Recipe, 'id' | 'name' | 'macros' | 'image_url' | 'created_at'>
 
+function thumbUrl(url: string): string {
+  if (url.includes('w=')) return url.replace(/w=\d+/, 'w=160')
+  return url + (url.includes('?') ? '&' : '?') + 'w=160'
+}
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('tr-TR', {
     timeZone: 'Europe/Istanbul',
@@ -57,14 +62,14 @@ export default async function RecipesPage() {
               className="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3 shadow-sm"
             >
               {/* Thumbnail */}
-              <div className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-xl">
+              <div className="relative h-[80px] w-[80px] flex-shrink-0 overflow-hidden rounded-lg">
                 {r.image_url ? (
                   <Image
-                    src={r.image_url}
+                    src={thumbUrl(r.image_url)}
                     alt={r.name}
                     fill
                     className="object-cover"
-                    sizes="60px"
+                    sizes="80px"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20 text-2xl">
