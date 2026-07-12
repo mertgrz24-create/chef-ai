@@ -5,8 +5,8 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** ABD Revizyonu — `us-market` branch'i açık  
-**Aktif Mikro-Adım:** Eksiklikleri fix et → main'e merge → production deploy  
-**Son güncelleme:** 28 Mayıs 2026  
+**Aktif Mikro-Adım:** Supabase migration'ı manuel çalıştır → main'e merge → production deploy  
+**Son güncelleme:** 3 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app  
 **Aktif Branch:** `us-market`
 
@@ -175,6 +175,95 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 > Chef-AI V3 projesindeyim. CLAUDE.md ve PROGRESS.md'yi oku, iki cümleyle özetle: nerede kaldık, sıradaki mikro-adım ne? Mikro-adım modunda kal, Türkçe konuş.
 
 ## 📝 Seans Notları
+
+### 12–13 Temmuz 2026 — İki kalan güvenlik açığının ele alınması
+
+**photo-analyzer.tsx — client input validation + XSS false-positive:**
+- `handleFileChange`'e `/api/vision` ile aynı guard'lar eklendi: `ALLOWED_TYPES` (MIME) + `MAX_SIZE_BYTES` (10 MB). Geçersiz/oversized dosya, belleğe okunmadan ve upload edilmeden reddediliyor (defense-in-depth; server ancak 10 MB'da reddediyordu, o ana kadar sekme belleği + bant genişliği boşa gidiyordu).
+- Preview mekanizması `FileReader.readAsDataURL` (base64 `data:` URL) yerine **`URL.createObjectURL`** (`blob:` URL) ile değiştirildi: dosya belleğe kopyalanmıyor + `<img src>`'ye giden değer artık browser-managed referans, ham string değil. `previewUrlRef` + `URL.revokeObjectURL` (replace/reset/unmount) ile blob leak yok. Bu, SAST'in DOM-XSS taint akışını da kaynağında ortadan kaldıran daha temiz çözüm.
+- Not: Snyk Code'un DOM-XSS kuralı sink'i yine de işaretlerse residual false positive'dir (blob URL güvenli). Snyk inline `deepcode ignore` bu kurulumda işe yaramadı (Consistent Ignores / hesap gerektiriyor) → gerekirse `.snyk` policy veya platform ignore. Kullanıcı ikinci bir tarayıcıyla kontrol edecek.
+
+**package.json / npm audit — kısmi fix (5 → 1) + kalan Next 16'ya ertelendi:**
+- `overrides` eklendi: `"postcss": "$postcss"` ($-referans EOVERRIDE'ı çözdü; next'in nested 8.4.31'i → 8.5.x, devDep `^8.5.10`'a sabitlendi) + `"@next/eslint-plugin-next": { "glob": "10.5.0" }` (glob@7.2.3'ü bozmamak için scoped). **npm audit 5 → 1'e düştü.** İkisi de zaten erişilemezdi (postcss build-time/own-CSS, glob dev-only CLI) ama sayaç temizlendi ve gerçek sinyal (Next) yalın kaldı.
+- Kalan **1 high = `next`** (14 framework advisory'si tek pakette; çoğu self-hosted → Vercel mitige). Sadece **Next 16** (breaking) kapatır → ayrı, test edilebilir migration fazı olarak ertelendi (kullanıcı kararı). 14.2.35 son 14.x yaması, 14 içinde fix yok.
+- typecheck 0 · lint 0 (1 eski `<img>` warning) · production build ✅ (postcss CSS pipeline + glob eslint sağlam).
+
+**Sonraki adım:** (değişmedi) Migration'ı çalıştır → main'e merge → production deploy. Ayrı iş: Next 16 migration.
+
+---
+
+### 3 Temmuz 2026 (3. oturum) — 5 yöntemli güvenlik/bug denetimi
+
+**Kullanılan yöntemler:** (1) `npm audit` bağımlılık taraması, (2) statik desen analizi (grep: secret/XSS/eval/auth-eksik), (3) dinamik endpoint testi (Node harness, 37 kontrol — auth-suz/malformed/oversized/injection payload), (4) yetkilendirme+IDOR kod incelemesi, (5) iş mantığı istismar analizi.
+
+**Dinamik test sonucu:** 37/37 kontrol geçti. Tüm 18 endpoint auth-suz istekte 401, malformed body'de temiz 400 (500 yok), SQL-injection şekilli input reddedildi, güvenlik header'ları doğrulandı, yanlış HTTP method 405. Not: Sandbox Supabase'e ağ erişemedi (`ENOTFOUND`), bu yüzden auth'lu yollar kod incelemesiyle denetlendi — önemli olumlu sonuç: backend ulaşılamazken tüm endpoint'ler **fail-closed** davrandı, client'a stack trace sızmadı.
+
+**Bulunan + düzeltilen:**
+- 🟠 **F1 (orta, DoS/maliyet):** `/api/recipes` POST — ingredients dizisi sınırsızdı; pahalı Gemini çağrısı burada, 10k öğe/2MB string ile maliyet/DoS mümkündü → ≤50 öğe, ≤200 char/öğe cap + boş filtreleme eklendi
+- 🟡 **F2 (düşük):** `/api/recipes/[id]` — geçersiz UUID formatı Postgres 22P02 → 500 (gürültülü) → UUID regex guard (DB'ye gitmeden 404) + 22P02 handling; **dinamik doğrulandı** (5 kötü id → hepsi 404)
+- 🟡 **F3 (düşük):** `/api/recipes/modify` — instruction sınırsızdı → ≤500 char cap
+- 🟡 **F5 (düşük, veri sızıntısı):** public `/api/recipes/[id]` `select('*')` ile sahibin `user_id` + `diet_context`'ini döndürüyordu → yalnızca public-güvenli kolonlar seçiliyor (in-app tüketicisi yoktu, defense-in-depth)
+- 🔒 **npm audit:** `ws@8.20.0` yüksek-önem açığı (Supabase realtime → ama bu app realtime kullanmıyor, erişilemez kod) `npm audit fix` ile `ws@8.21.0`'a çözüldü (8→5 açık)
+
+**Raporlanan — ürün kararı gerektiriyor (fix uygulanmadı):**
+- 🟠 **F4 (orta, gelir sızıntısı):** Freemium 10 tarif/ay limiti YALNIZCA `/api/recipes`'te zorlanıyor. Gemini çağıran diğer 3 endpoint (`/api/recipes/modify`, `/api/meal-plan/generate`, `/api/meal-plan/regenerate-day`) limit kontrolü içermiyor → limitini dolduran ücretsiz kullanıcı bu yollarla sınırsız AI içeriği üretebilir. `consume_recipe_credit` RPC'si hazır, karar verilince modify/meal-plan'e de eklenebilir.
+
+**Kalan npm audit açıkları (fix edilmedi — bilinçli):** 4 Next.js advisory (DoS/SSRF/cache-poisoning) + 1 postcss — hepsi yalnızca `next@16`'ya (breaking) yükseltmeyle kapanıyor; proje CLAUDE.md kararıyla Next 14'te. Next 14.2.35 zaten 14.2.x'in son patch'i. Deploy öncesi Next 15/16 geçiş değerlendirmesi ayrı bir iş olarak not edildi.
+
+- typecheck: 0 · lint: 0 · build: 30/30 ✅
+
+---
+
+### 3 Temmuz 2026 (2. oturum) — UI/UX Hızlı Kazanımlar
+
+- **Yapılandırılmış tarif kartı** — `components/recipe-card.tsx` (yeni): tarif adı + 🔪⏱🍴 badge'leri, tik atılabilir malzeme checklist'i, numaralı adım kartları, 💡 Chef's Note callout, makro satırı (fiber dahil)
+  - `lib/ai/gemini.ts`: `parseRecipeJson` artık `structured: StructuredRecipe | null` da döndürüyor; `types/recipe.ts`'e `StructuredRecipe` tipi eklendi
+  - `POST /api/recipes` response'una `structured` alanı eklendi (geriye uyumlu — `recipe` text hâlâ dönüyor)
+  - `RecipeGenerator` + `PhotoAnalyzer`: structured varsa RecipeCard, yoksa eski text bloğu (fallback); kaydetme artık emoji-parse yerine structured veriden
+- **Skeleton loading** — `components/recipe-skeleton.tsx` (yeni): 4 sn'de bir dönen aşama mesajları ("Analyzing… → Crafting… → Estimating macros… → Finishing touches…") + shimmer iskelet; her iki generator'da da spinner yerine bu
+- **Open Graph metadata** — `app/recipe/[id]/page.tsx`: `generateMetadata` eklendi (tarif adı, ilk 5 malzeme + kcal description, og:image varsa image_url, twitter card); React `cache()` ile metadata + sayfa tek DB sorgusu
+- **Toast sistemi** — `components/toast.tsx` (yeni): `ToastProvider` + `useToast()`, framer-motion animasyonlu, 3.5 sn auto-dismiss, success/error/info varyantları; `providers.tsx`'e eklendi
+  - `RecipeGenerator`: "Link copied" ve kayıt hataları toast; clipboard fallback URL'i inline kaldı (bilinçli)
+  - `EatButton`: başarı + hata toast'ları — hata durumu önceden tamamen sessizdi (bug)
+- Doğrulama: typecheck 0 · lint 0 · build 30/30 ✅ · RecipeCard + Skeleton SSR çıktısı geçici test sayfasıyla doğrulandı (sayfa silindi)
+
+**Sonraki adım:** Migration'ı çalıştır → main'e merge → production deploy
+
+---
+
+### 3 Temmuz 2026 — Güvenlik denetimi + ABD revizyonu eksik fix'leri
+
+**Çeviri eksikleri giderildi (us-market'te atlanmış 12 dosya):**
+- `app/layout.tsx` — metadata title/description İngilizce, `lang="tr"` → `lang="en"` (SEO)
+- `app/manifest.ts` — PWA description İngilizce
+- `app/recipe/[id]/page.tsx` — public paylaşım sayfası tamamen İngilizce (Ingredients/Instructions/carbs/fat/"Try it yourself"), tarih `en-US` + `America/New_York`
+- `components/recipe-modifier.tsx` — tüm UI İngilizce; kırılgan `error.includes('giriş')` kontrolü `needsLogin` state'ine çevrildi
+- `components/cooking-mode-button.tsx` — "Start Cooking"; `theme-toggle` aria-label'ları; profile "Fat" etiketi; recipe-generator "Saving…"
+- API hata mesajları İngilizce: `/api/vision`, `/api/recipes/[id]`, `/api/recipes/history`
+
+**Güvenlik fix'leri:**
+- 🔴 `/api/referral` RLS altında hiç çalışamıyordu (başkasının profil satırını okuma/güncelleme own-row RLS'e takılıyor) → `apply_referral` SECURITY DEFINER RPC'si yazıldı, route RPC kullanıyor
+- 🔴 Freemium sayaç yarış durumu (read-modify-write, eşzamanlı isteklerle limit aşılabiliyordu) → `consume_recipe_credit` + `refund_recipe_credit` atomik RPC'leri; migration çalıştırılana kadar legacy fallback devrede
+- 🟠 `/api/meal-image` auth'suzdu (Pexels kota yakma) → auth eklendi, name 100 char cap
+- 🟠 `/api/meal-plan/generate` iç hata detayını (`detail`) client'a sızdırıyordu → kaldırıldı
+- 🟠 Security header'ları eklendi (`next.config.mjs`): X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy
+- 🟡 `/api/meals-eaten` POST: makro validasyonu (negatif/NaN/aşırı değer reddi), `source` allowlist, isim 200 char cap
+- 🟡 `/api/recipes/save`: `macros` jsonb sanitizasyonu (sadece bilinen 6 sayısal alan), ingredients ≤100 öğe, instructions ≤20k char
+- 🟡 `PUT /api/profile`: string alanlara 120 char sınırı + trim
+- 🟡 `nanoid` package.json'a eklendi (phantom dependency idi — sadece transitive geliyordu)
+- `.env.example`: `PEXELS_API_KEY` eklendi, kullanılmayan `UNSPLASH_ACCESS_KEY` kaldırıldı
+
+**Bug fix'leri:**
+- `dashboard/page.tsx` + `pantry/page.tsx`: `user!.id` non-null assertion'ları — layout redirect etse de page paralel render'da TypeError fırlatıyordu → `if (!user) redirect('/login')` guard'ları eklendi
+- "Bugünkü Tüketim" gün sınırı UTC yerine ET (`America/New_York`) — hem `/api/meals-eaten` hem dashboard sorgusu (akşam 8'den sonra yenen öğünler yanlış güne düşüyordu)
+
+- ⚠️ **MANUEL ADIM:** `supabase/migrations/20260703_referral_and_usage_rpc.sql` Supabase SQL Editor'da çalıştırılmalı (referral bu olmadan çalışmaz; tarif limiti legacy yolla çalışmaya devam eder)
+- typecheck: 0 hata · lint: 0 hata (1 eski img warning) · build: 30/30 ✅
+- Smoke test: landing 200, meal-image auth'suz 401, security header'lar doğrulandı, dashboard → /login redirect ✅
+
+**Sonraki adım:** Migration'ı çalıştır → main'e merge → production deploy
+
+---
 
 ### 28 Mayıs 2026 — V4 + ABD Revizyonu
 

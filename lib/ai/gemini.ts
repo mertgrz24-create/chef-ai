@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import type { MealItem, MealPlanDay } from '@/types/meal-plan'
+import type { StructuredRecipe } from '@/types/recipe'
 
 const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 
@@ -33,6 +34,7 @@ export interface RecipeMacros {
 export interface RecipeResult {
   text: string
   macros: RecipeMacros | null
+  structured: StructuredRecipe | null
   inputTokens: number
   outputTokens: number
 }
@@ -74,7 +76,11 @@ Output format (this JSON only, nothing else):
   }
 }`
 
-function parseRecipeJson(raw: string): { text: string; macros: RecipeMacros | null } {
+function parseRecipeJson(raw: string): {
+  text: string
+  macros: RecipeMacros | null
+  structured: StructuredRecipe | null
+} {
   // Strip markdown code fence in case the model wraps the JSON
   let jsonStr = raw.trim()
   if (jsonStr.startsWith('```')) {
@@ -131,7 +137,26 @@ function parseRecipeJson(raw: string): { text: string; macros: RecipeMacros | nu
         }
       : null
 
-  return { text: lines.join('\n'), macros }
+  const structured: StructuredRecipe | null =
+    typeof parsed.name === 'string' &&
+    parsed.name.trim() !== '' &&
+    Array.isArray(parsed.ingredients) &&
+    parsed.ingredients.length > 0 &&
+    parsed.ingredients.every((i) => typeof i === 'string') &&
+    typeof parsed.instructions === 'string' &&
+    parsed.instructions.trim() !== ''
+      ? {
+          name: parsed.name.trim(),
+          ingredients: parsed.ingredients,
+          instructions: parsed.instructions,
+          ...(typeof parsed.prep_time_min === 'number' && { prep_time_min: parsed.prep_time_min }),
+          ...(typeof parsed.cook_time_min === 'number' && { cook_time_min: parsed.cook_time_min }),
+          ...(typeof parsed.servings === 'number' && { servings: parsed.servings }),
+          ...(typeof parsed.chefs_note === 'string' && { chefs_note: parsed.chefs_note }),
+        }
+      : null
+
+  return { text: lines.join('\n'), macros, structured }
 }
 
 export async function generateRecipeWithGemini(
@@ -152,11 +177,13 @@ export async function generateRecipeWithGemini(
 
   let text: string
   let macros: RecipeMacros | null = null
+  let structured: StructuredRecipe | null = null
 
   try {
     const parsed = parseRecipeJson(rawText)
     text = parsed.text
     macros = parsed.macros
+    structured = parsed.structured
   } catch {
     text = rawText
   }
@@ -164,6 +191,7 @@ export async function generateRecipeWithGemini(
   return {
     text,
     macros,
+    structured,
     inputTokens: result.response.usageMetadata?.promptTokenCount ?? 0,
     outputTokens: result.response.usageMetadata?.candidatesTokenCount ?? 0,
   }

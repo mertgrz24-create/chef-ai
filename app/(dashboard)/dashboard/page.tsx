@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { PhotoAnalyzer } from '@/components/dashboard/photo-analyzer'
 import { RecipeGenerator } from '@/components/dashboard/recipe-generator'
@@ -47,9 +48,24 @@ function getTodayDayKey(): string {
     .toLowerCase()
 }
 
+// UTC instant of today's midnight in ET — matches /api/meals-eaten
+function getTodayStart(): string {
+  const now = new Date()
+  const wallClock = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }))
+  const msSinceMidnight =
+    wallClock.getHours() * 3600_000 +
+    wallClock.getMinutes() * 60_000 +
+    wallClock.getSeconds() * 1000
+  return new Date(now.getTime() - msSinceMidnight).toISOString()
+}
+
 export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+
+  // Layout also guards, but pages render in parallel with layouts —
+  // without this, an unauthenticated request throws on user.id below
+  if (!user) redirect('/login')
 
   const [
     { data: pantryItems },
@@ -58,23 +74,23 @@ export default async function DashboardPage() {
     { data: recentData },
     { data: mealPlanData },
   ] = await Promise.all([
-    supabase.from('pantry').select('expiry_date').eq('user_id', user!.id),
+    supabase.from('pantry').select('expiry_date').eq('user_id', user.id),
     supabase
       .from('profiles')
       .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, daily_steps_goal, current_weight_kg, target_weight_kg, diet_type, is_premium, recipe_count_this_month')
-      .eq('id', user!.id)
+      .eq('id', user.id)
       .single(),
-    supabase.from('recipes').select('*', { count: 'exact', head: true }).eq('user_id', user!.id),
+    supabase.from('recipes').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
     supabase
       .from('recipes')
       .select('id, name, created_at')
-      .eq('user_id', user!.id)
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .limit(5),
     supabase
       .from('meal_plans')
       .select('meals')
-      .eq('user_id', user!.id)
+      .eq('user_id', user.id)
       .eq('week_start_date', getWeekStartDate())
       .single(),
   ])
@@ -87,8 +103,8 @@ export default async function DashboardPage() {
   const { data: todayMealsRaw } = await supabase
     .from('meals_eaten')
     .select('calories, protein_g, carbs_g, fat_g')
-    .eq('user_id', user!.id)
-    .gte('eaten_at', new Date().toISOString().split('T')[0])
+    .eq('user_id', user.id)
+    .gte('eaten_at', getTodayStart())
   todayMeals = (todayMealsRaw ?? []) as MealEatenRow[]
 
   const todayTotals = todayMeals.reduce<DailyTotals>(

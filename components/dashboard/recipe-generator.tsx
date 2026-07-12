@@ -4,7 +4,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { Recipe, RecipeMacros } from '@/types/recipe'
+import { RecipeCard } from '@/components/recipe-card'
+import { RecipeSkeleton } from '@/components/recipe-skeleton'
+import { useToast } from '@/components/toast'
+import type { Recipe, RecipeMacros, StructuredRecipe } from '@/types/recipe'
 
 type ParsedRecipe = {
   name: string
@@ -34,9 +37,11 @@ function parseFormattedRecipe(text: string): ParsedRecipe | null {
 
 export function RecipeGenerator() {
   const router = useRouter()
+  const { toast } = useToast()
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [recipe, setRecipe] = useState<string | null>(null)
+  const [structured, setStructured] = useState<StructuredRecipe | null>(null)
   const [macros, setMacros] = useState<RecipeMacros | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
@@ -44,10 +49,8 @@ export function RecipeGenerator() {
   const [parsedRecipe, setParsedRecipe] = useState<ParsedRecipe | null>(null)
   const [savedRecipeId, setSavedRecipeId] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
-  const [shareMessage, setShareMessage] = useState<string | null>(null)
   const [saveError, setSaveError] = useState<string | null>(null)
 
-  // Modify state
   // Modify state
   const [modifyInput, setModifyInput] = useState('')
   const [modifying, setModifying] = useState(false)
@@ -68,11 +71,11 @@ export function RecipeGenerator() {
 
     setLoading(true)
     setRecipe(null)
+    setStructured(null)
     setMacros(null)
     setError(null)
     setImageUrl(null)
     setSavedRecipeId(null)
-    setShareMessage(null)
     setSaveError(null)
     setParsedRecipe(null)
     setModifyInput('')
@@ -88,6 +91,7 @@ export function RecipeGenerator() {
 
       const data = await res.json() as {
         recipe?: string
+        structured?: StructuredRecipe | null
         macros?: RecipeMacros | null
         error?: string
         message?: string
@@ -100,9 +104,17 @@ export function RecipeGenerator() {
       } else {
         const text = data.recipe ?? null
         setRecipe(text)
+        setStructured(data.structured ?? null)
         setMacros(data.macros ?? null)
 
-        if (text) {
+        if (data.structured) {
+          // Structured payload is the source of truth for saving
+          setParsedRecipe({
+            name: data.structured.name,
+            ingredients: data.structured.ingredients,
+            instructions: data.structured.instructions,
+          })
+        } else if (text) {
           const parsed = parseFormattedRecipe(text)
           setParsedRecipe(
             parsed ?? {
@@ -143,6 +155,7 @@ export function RecipeGenerator() {
       const data = await res.json() as { recipe?: Recipe; error?: string }
       if (!res.ok || !data.recipe?.id) {
         setSaveError(data.error ?? 'Save failed.')
+        toast(data.error ?? 'Could not save recipe.', 'error')
         return null
       }
       setSavedRecipeId(data.recipe.id)
@@ -188,9 +201,9 @@ export function RecipeGenerator() {
 
     try {
       await navigator.clipboard.writeText(url)
-      setShareMessage('Link copied ✓')
-      setTimeout(() => setShareMessage(null), 3000)
+      toast('Link copied to clipboard', 'success')
     } catch {
+      // Keep this inline and persistent — the user needs to copy the URL manually
       setSaveError(`Could not copy to clipboard — link: ${url}`)
     }
   }
@@ -233,11 +246,11 @@ export function RecipeGenerator() {
 
   function resetRecipe() {
     setRecipe(null)
+    setStructured(null)
     setMacros(null)
     setInput('')
     setImageUrl(null)
     setSavedRecipeId(null)
-    setShareMessage(null)
     setSaveError(null)
     setParsedRecipe(null)
     setModifyInput('')
@@ -296,6 +309,8 @@ export function RecipeGenerator() {
       </AnimatePresence>
 
       <AnimatePresence>
+        {loading && <RecipeSkeleton key="skeleton" />}
+
         {error && (
           <motion.p
             key="error"
@@ -316,75 +331,78 @@ export function RecipeGenerator() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="mt-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] shadow-sm"
+            className="mt-6"
           >
-            {/* Recipe image */}
-            {imageUrl ? (
-              <div className="relative h-48 w-full">
-                <Image
-                  src={imageUrl}
-                  alt={parsedRecipe?.name ?? 'Recipe image'}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 600px"
-                />
-              </div>
+            {structured ? (
+              <RecipeCard recipe={structured} macros={macros} imageUrl={imageUrl} />
             ) : (
-              <div className="h-32 w-full bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20 flex items-center justify-center">
-                <span className="text-4xl">🍽️</span>
+              /* Fallback: AI returned unstructured text */
+              <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] shadow-sm">
+                {imageUrl ? (
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={imageUrl}
+                      alt={parsedRecipe?.name ?? 'Recipe image'}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 600px"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-32 w-full bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-900/30 dark:to-orange-900/20 flex items-center justify-center">
+                    <span className="text-4xl">🍽️</span>
+                  </div>
+                )}
+
+                <div className="p-6">
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="text-sm font-semibold text-[var(--text-secondary)]">Your recipe is ready</span>
+                  </div>
+
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {recipe}
+                  </p>
+
+                  {macros && (
+                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)]">
+                      <span>🔥 <span className="font-semibold text-[var(--text-primary)]">{macros.calories} kcal</span></span>
+                      <span>💪 <span className="font-semibold text-[var(--text-primary)]">{macros.protein_g}g</span> protein</span>
+                      <span>🍚 <span className="font-semibold text-[var(--text-primary)]">{macros.carbs_g}g</span> carbs</span>
+                      <span>🧈 <span className="font-semibold text-[var(--text-primary)]">{macros.fat_g}g</span> fat</span>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
-            <div className="p-6">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-[var(--text-secondary)]">Your recipe is ready</span>
-              </div>
-
-              <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-secondary)]">
-                {recipe}
-              </p>
-
-              {macros && (
-                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-[var(--border-subtle)] pt-4 text-xs text-[var(--text-muted)]">
-                  <span>🔥 <span className="font-semibold text-[var(--text-primary)]">{macros.calories} kcal</span></span>
-                  <span>💪 <span className="font-semibold text-[var(--text-primary)]">{macros.protein_g}g</span> protein</span>
-                  <span>🍚 <span className="font-semibold text-[var(--text-primary)]">{macros.carbs_g}g</span> carbs</span>
-                  <span>🧈 <span className="font-semibold text-[var(--text-primary)]">{macros.fat_g}g</span> fat</span>
-                </div>
-              )}
-
-              {/* Save & Share */}
-              <div className="mt-4 border-t border-[var(--border-subtle)] pt-4">
-                <button
-                  type="button"
-                  onClick={handleSave}
-                  disabled={saving}
-                  className="rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
-                  style={{ backgroundColor: '#ffa51f' }}
-                >
-                  {saving
-                    ? 'Kaydediliyor…'
-                    : savedRecipeId
-                    ? '🔗 Share Again'
-                    : '🔗 Save & Share'}
-                </button>
-
-                {shareMessage && (
-                  <p className="mt-2 text-xs font-medium text-green-600">{shareMessage}</p>
-                )}
-                {saveError && (
-                  <p className="mt-2 text-xs text-red-500">{saveError}</p>
-                )}
-              </div>
+            {/* Actions — below the card */}
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={saving}
+                className="rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
+                style={{ backgroundColor: '#ffa51f' }}
+              >
+                {saving
+                  ? 'Saving…'
+                  : savedRecipeId
+                  ? '🔗 Share Again'
+                  : '🔗 Save & Share'}
+              </button>
 
               <button
                 type="button"
                 onClick={resetRecipe}
-                className="mt-4 text-xs text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
+                className="text-xs text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
               >
                 Generate new recipe
               </button>
             </div>
+
+            {saveError && (
+              <p className="mt-2 text-xs text-red-500">{saveError}</p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

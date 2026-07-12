@@ -25,6 +25,9 @@ export async function POST(request: NextRequest) {
   if (typeof body.instruction !== 'string' || body.instruction.trim() === '') {
     return NextResponse.json({ error: 'instruction field is required.' }, { status: 400 })
   }
+  if (body.instruction.length > 500) {
+    return NextResponse.json({ error: 'instruction is too long (max 500 characters).' }, { status: 400 })
+  }
 
   // Fetch the source recipe — user must own it
   const { data: sourceData, error: fetchError } = await supabase

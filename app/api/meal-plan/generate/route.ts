@@ -73,7 +73,7 @@ export async function POST() {
     if (dbError) {
       console.error('[/api/meal-plan/generate] DB error:', dbError)
       return NextResponse.json(
-        { error: 'Could not save plan.', detail: dbError.message },
+        { error: 'Could not save plan.' },
         { status: 500 }
       )
     }
@@ -83,7 +83,7 @@ export async function POST() {
     const message = err instanceof Error ? err.message : String(err)
     console.error('[/api/meal-plan/generate] Weekly plan generation error:', message)
     return NextResponse.json(
-      { error: 'Could not generate meal plan. Please try again.', detail: message },
+      { error: 'Could not generate meal plan. Please try again.' },
       { status: 500 }
     )
   }

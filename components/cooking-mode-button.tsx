@@ -18,7 +18,7 @@ export function CookingModeButton({ recipeName, instructions }: CookingModeButto
         onClick={() => setOpen(true)}
         className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--bg)] py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400"
       >
-        👨‍🍳 Pişirmeye Başla
+        👨‍🍳 Start Cooking
       </button>
 
       <CookingMode

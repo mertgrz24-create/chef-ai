@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Chef-AI — Kişisel AI Şefin",
-  description: "Buzdolabını fotoğrafla, tarif gelsin.",
+  title: "Chef-AI — Your Personal AI Chef",
+  description: "Snap a photo of your fridge, get a recipe.",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable}`}>
         <Providers>
           {children}

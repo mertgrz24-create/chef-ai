@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   // 2. Parse multipart form data
@@ -24,26 +24,26 @@ export async function POST(request: NextRequest) {
 
     if (!(raw instanceof File)) {
       return NextResponse.json(
-        { error: 'image alanı gerekli ve bir dosya olmalı.' },
+        { error: 'The image field is required and must be a file.' },
         { status: 400 }
       )
     }
     file = raw
   } catch {
-    return NextResponse.json({ error: 'Geçersiz form verisi.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid form data.' }, { status: 400 })
   }
 
   // 3. Validate type and size
   if (!ALLOWED_TYPES.includes(file.type as AllowedMimeType)) {
     return NextResponse.json(
-      { error: 'Sadece JPEG, PNG veya WebP dosyaları kabul edilir.' },
+      { error: 'Only JPEG, PNG, or WebP files are accepted.' },
       { status: 415 }
     )
   }
 
   if (file.size > MAX_SIZE_BYTES) {
     return NextResponse.json(
-      { error: 'Dosya boyutu 10 MB sınırını aşıyor.' },
+      { error: 'File size exceeds the 10 MB limit.' },
       { status: 413 }
     )
   }
@@ -60,9 +60,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ingredients })
   } catch (err) {
-    console.error('[/api/vision] Görüntü analiz hatası:', err)
+    console.error('[/api/vision] Image analysis error:', err)
     return NextResponse.json(
-      { error: 'Fotoğraf analiz edilemedi. Lütfen tekrar deneyin.' },
+      { error: 'Could not analyze the photo. Please try again.' },
       { status: 500 }
     )
   }

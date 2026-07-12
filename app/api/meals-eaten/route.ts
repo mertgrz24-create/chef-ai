@@ -2,10 +2,27 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import type { MealEaten, DailyTotals } from '@/types/meals-eaten'
 
+const USER_TIMEZONE = 'America/New_York' // TODO: per-user timezone once profiles store it
+
+// UTC instant of today's midnight in the user's timezone
 function getTodayStart(): string {
   const now = new Date()
-  now.setUTCHours(0, 0, 0, 0)
-  return now.toISOString()
+  const wallClock = new Date(now.toLocaleString('en-US', { timeZone: USER_TIMEZONE }))
+  const msSinceMidnight =
+    wallClock.getHours() * 3600_000 +
+    wallClock.getMinutes() * 60_000 +
+    wallClock.getSeconds() * 1000
+  return new Date(now.getTime() - msSinceMidnight).toISOString()
+}
+
+const VALID_SOURCES = new Set(['manual', 'meal_plan', 'recipe'])
+
+// Accept only finite, non-negative, sane macro values
+function sanitizeMacro(value: unknown): number | undefined {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return undefined
+  const rounded = Math.round(value)
+  if (rounded < 0 || rounded > 100000) return undefined
+  return rounded
 }
 
 // GET /api/meals-eaten — today's records + totals
@@ -80,12 +97,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'recipe_name field is required.' }, { status: 400 })
     }
 
-    recipe_name = body.recipe_name.trim()
-    calories = typeof body.calories === 'number' ? Math.round(body.calories) : undefined
-    protein_g = typeof body.protein_g === 'number' ? Math.round(body.protein_g) : undefined
-    carbs_g = typeof body.carbs_g === 'number' ? Math.round(body.carbs_g) : undefined
-    fat_g = typeof body.fat_g === 'number' ? Math.round(body.fat_g) : undefined
-    source = typeof body.source === 'string' ? body.source : 'manual'
+    recipe_name = body.recipe_name.trim().slice(0, 200)
+    calories = sanitizeMacro(body.calories)
+    protein_g = sanitizeMacro(body.protein_g)
+    carbs_g = sanitizeMacro(body.carbs_g)
+    fat_g = sanitizeMacro(body.fat_g)
+    source =
+      typeof body.source === 'string' && VALID_SOURCES.has(body.source)
+        ? body.source
+        : 'manual'
   } catch {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }

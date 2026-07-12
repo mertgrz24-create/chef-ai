@@ -89,9 +89,15 @@ export async function PUT(request: NextRequest) {
           { status: 400 }
         )
       }
+      if (typeof value === 'string' && value.length > 120) {
+        return NextResponse.json(
+          { error: `${key} must be at most 120 characters.` },
+          { status: 400 }
+        )
+      }
     }
 
-    patch[key] = value
+    patch[key] = typeof value === 'string' ? value.trim() : value
   }
 
   const { data, error } = await supabase

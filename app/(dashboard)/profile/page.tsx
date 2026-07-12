@@ -309,7 +309,7 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <label className={labelCls}>Yağ</label>
+              <label className={labelCls}>Fat</label>
               <NumberInput
                 value={form.fat_goal_g}
                 onChange={(v) => set('fat_goal_g', v)}
@@ -441,7 +441,7 @@ export default function ProfilePage() {
           </div>
         </motion.div>
 
-        {/* Geri bildirim mesajı */}
+        {/* Feedback message */}
         {message && (
           <div
             className={`rounded-xl border px-4 py-3 text-sm font-medium ${

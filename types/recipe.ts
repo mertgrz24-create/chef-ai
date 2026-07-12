@@ -3,6 +3,19 @@ export interface RecipeMacros {
   protein_g: number
   carbs_g: number
   fat_g: number
+  fiber_g?: number
+  net_carbs_g?: number
+}
+
+// Structured recipe as returned by the AI (before DB persistence)
+export interface StructuredRecipe {
+  name: string
+  prep_time_min?: number
+  cook_time_min?: number
+  servings?: number
+  ingredients: string[]
+  instructions: string
+  chefs_note?: string
 }
 
 export interface Recipe {

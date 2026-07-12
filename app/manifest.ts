@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Chef-AI',
     short_name: 'ChefAI',
-    description: 'Elindekilerle ne yapacağını söyleyen sistem',
+    description: 'The system that tells you what to cook with what you have',
     start_url: '/dashboard',
     scope: '/',
     display: 'standalone',

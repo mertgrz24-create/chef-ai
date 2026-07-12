@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+const STATUS_RESPONSES: Record<string, { error: string; status: number }> = {
+  unauthenticated: { error: 'Authentication required.', status: 401 },
+  no_profile: { error: 'Profile not found.', status: 404 },
+  already_referred: { error: 'You have already used a referral code.', status: 409 },
+  self_referral: { error: 'You cannot use your own referral code.', status: 400 },
+  invalid_code: { error: 'Invalid referral code.', status: 404 },
+}
+
 // POST /api/referral — apply a referral code to the current user's profile
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
@@ -16,7 +24,7 @@ export async function POST(request: NextRequest) {
   let code: string
   try {
     const body = await request.json() as { code?: unknown }
-    if (typeof body.code !== 'string' || body.code.trim() === '') {
+    if (typeof body.code !== 'string' || body.code.trim() === '' || body.code.length > 20) {
       return NextResponse.json({ error: 'code field is required.' }, { status: 400 })
     }
     code = body.code.trim().toUpperCase()
@@ -24,38 +32,29 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
-  // Check current user hasn't already been referred
-  const { data: myProfile } = await supabase
-    .from('profiles')
-    .select('referred_by, referral_code')
-    .eq('id', user.id)
-    .single()
+  // Referral touches another user's row, which own-row RLS forbids for
+  // direct queries — the SECURITY DEFINER RPC does everything atomically.
+  const { data, error } = await supabase.rpc('apply_referral', { p_code: code })
 
-  if (myProfile?.referred_by) {
-    return NextResponse.json({ error: 'You have already used a referral code.' }, { status: 409 })
+  if (error) {
+    console.error('[POST /api/referral] RPC error (has the 20260703 migration been run?):', error)
+    return NextResponse.json(
+      { error: 'Referral could not be applied. Please try again later.' },
+      { status: 500 }
+    )
   }
 
-  // Prevent self-referral
-  if (myProfile?.referral_code === code) {
-    return NextResponse.json({ error: 'You cannot use your own referral code.' }, { status: 400 })
+  const status = (data as { status?: string } | null)?.status ?? 'unknown'
+
+  if (status === 'ok') {
+    return NextResponse.json({ success: true })
   }
 
-  // Find the referrer
-  const { data: referrer } = await supabase
-    .from('profiles')
-    .select('id, referral_count')
-    .eq('referral_code', code)
-    .single()
-
-  if (!referrer) {
-    return NextResponse.json({ error: 'Invalid referral code.' }, { status: 404 })
+  const mapped = STATUS_RESPONSES[status]
+  if (mapped) {
+    return NextResponse.json({ error: mapped.error }, { status: mapped.status })
   }
 
-  // Apply referral atomically (best-effort)
-  await Promise.all([
-    supabase.from('profiles').update({ referred_by: code }).eq('id', user.id),
-    supabase.from('profiles').update({ referral_count: (referrer.referral_count ?? 0) + 1 }).eq('id', referrer.id),
-  ])
-
-  return NextResponse.json({ success: true })
+  console.error('[POST /api/referral] Unexpected RPC status:', status)
+  return NextResponse.json({ error: 'Referral could not be applied.' }, { status: 500 })
 }

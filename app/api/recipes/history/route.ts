@@ -8,7 +8,7 @@ export async function GET() {
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return NextResponse.json({ error: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
   const { data, error } = await supabase
@@ -20,7 +20,7 @@ export async function GET() {
 
   if (error) {
     console.error('[GET /api/recipes/history]', error)
-    return NextResponse.json({ error: 'Tarih getirilemedi.' }, { status: 500 })
+    return NextResponse.json({ error: 'Could not fetch recipe history.' }, { status: 500 })
   }
 
   return NextResponse.json({ recipes: data as Recipe[] })

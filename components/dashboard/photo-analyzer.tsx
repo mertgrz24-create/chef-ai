@@ -1,9 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { RecipeCard } from '@/components/recipe-card'
+import { RecipeSkeleton } from '@/components/recipe-skeleton'
+import type { StructuredRecipe, RecipeMacros } from '@/types/recipe'
 
 type Step = 'idle' | 'previewing' | 'analyzing' | 'ingredients' | 'generating' | 'recipe'
+
+// Mirror the server-side guards in /api/vision so oversized/unsupported files are
+// rejected client-side before we build a preview or hit the network.
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+const MAX_SIZE_BYTES = 10 * 1024 * 1024 // 10 MB
 
 export function PhotoAnalyzer() {
   const [step, setStep] = useState<Step>('idle')
@@ -11,26 +19,58 @@ export function PhotoAnalyzer() {
   const [file, setFile] = useState<File | null>(null)
   const [ingredients, setIngredients] = useState<string[]>([])
   const [recipe, setRecipe] = useState<string | null>(null)
+  const [structured, setStructured] = useState<StructuredRecipe | null>(null)
+  const [macros, setMacros] = useState<RecipeMacros | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [inputKey, setInputKey] = useState(0)
 
   const busy = step === 'analyzing' || step === 'generating'
 
+  // Holds the current preview object URL so it can be revoked before being replaced.
+  const previewUrlRef = useRef<string | null>(null)
+
+  function updatePreview(url: string | null) {
+    if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current)
+    previewUrlRef.current = url
+    setPreview(url)
+  }
+
+  // Revoke any outstanding object URL when the component unmounts (no leaked blobs).
+  useEffect(() => () => {
+    if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current)
+  }, [])
+
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files?.[0]
     if (!selected) return
 
+    // Client-side validation (defense-in-depth): the `accept` attribute is only a
+    // hint and is trivially bypassable, so re-check type and size here before we read
+    // the file into memory. Reject early to avoid a large upload / tab memory blow-up.
+    if (!ALLOWED_TYPES.includes(selected.type)) {
+      setError('Only JPEG, PNG, or WebP files are accepted.')
+      setInputKey((k) => k + 1) // remount input so the same file can be re-picked
+      return
+    }
+    if (selected.size > MAX_SIZE_BYTES) {
+      setError('File size exceeds the 10 MB limit.')
+      setInputKey((k) => k + 1)
+      return
+    }
+
     setFile(selected)
     setIngredients([])
     setRecipe(null)
+    setStructured(null)
+    setMacros(null)
     setError(null)
 
-    const reader = new FileReader()
-    reader.onload = (ev) => {
-      setPreview(ev.target?.result as string)
-      setStep('previewing')
-    }
-    reader.readAsDataURL(selected)
+    // Preview via an object URL (blob:) rather than a base64 data URL: the browser
+    // keeps the file by reference, so it isn't copied into memory, and the value fed
+    // to <img src> is a browser-managed URL, not a raw string. File was already
+    // type/size-validated above.
+    updatePreview(URL.createObjectURL(selected))
+    setStep('previewing')
   }
 
   async function handleAnalyze() {
@@ -72,7 +112,12 @@ export function PhotoAnalyzer() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ingredients }),
       })
-      const data = await res.json() as { recipe?: string; error?: string }
+      const data = await res.json() as {
+        recipe?: string
+        structured?: StructuredRecipe | null
+        macros?: RecipeMacros | null
+        error?: string
+      }
 
       if (!res.ok) {
         setError(data.error ?? 'Could not generate recipe.')
@@ -81,6 +126,8 @@ export function PhotoAnalyzer() {
       }
 
       setRecipe(data.recipe ?? null)
+      setStructured(data.structured ?? null)
+      setMacros(data.macros ?? null)
       setStep('recipe')
     } catch {
       setError('Could not reach server.')
@@ -91,9 +138,11 @@ export function PhotoAnalyzer() {
   function reset() {
     setStep('idle')
     setFile(null)
-    setPreview(null)
+    updatePreview(null)
     setIngredients([])
     setRecipe(null)
+    setStructured(null)
+    setMacros(null)
     setError(null)
     setInputKey((k) => k + 1) // remount input to clear its value
   }
@@ -121,11 +170,7 @@ export function PhotoAnalyzer() {
         ].join(' ')}
       >
         {preview ? (
-          <img
-            src={preview}
-            alt="Uploaded photo"
-            className="mx-auto max-h-52 rounded-xl object-contain"
-          />
+          <img src={preview} alt="Uploaded photo" className="mx-auto max-h-52 rounded-xl object-contain" />
         ) : (
           <div className="flex flex-col items-center gap-3 py-2">
             <span className="text-5xl">📷</span>
@@ -226,11 +271,6 @@ export function PhotoAnalyzer() {
                   </button>
                 )}
 
-                {step === 'generating' && (
-                  <p className="text-sm text-amber-500 font-medium animate-pulse">
-                    Generating recipe…
-                  </p>
-                )}
               </>
             ) : (
               <div>
@@ -250,6 +290,11 @@ export function PhotoAnalyzer() {
         )}
       </AnimatePresence>
 
+      {/* Recipe skeleton while generating */}
+      <AnimatePresence>
+        {step === 'generating' && <RecipeSkeleton key="skeleton" />}
+      </AnimatePresence>
+
       {/* Recipe result */}
       <AnimatePresence>
         {step === 'recipe' && recipe && (
@@ -259,19 +304,26 @@ export function PhotoAnalyzer() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="mt-4 rounded-2xl border border-gray-100 bg-white p-4 md:p-6 shadow-sm"
+            className="mt-4"
           >
-            <div className="mb-3 flex items-center gap-2">
-              <span className="text-xl">🍽️</span>
-              <span className="text-sm font-semibold text-gray-700">Your recipe is ready</span>
-            </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">
-              {recipe}
-            </p>
+            {structured ? (
+              <RecipeCard recipe={structured} macros={macros} />
+            ) : (
+              /* Fallback: AI returned unstructured text */
+              <div className="rounded-2xl border border-gray-100 bg-white p-4 md:p-6 shadow-sm">
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="text-xl">🍽️</span>
+                  <span className="text-sm font-semibold text-gray-700">Your recipe is ready</span>
+                </div>
+                <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">
+                  {recipe}
+                </p>
+              </div>
+            )}
             <button
               type="button"
               onClick={reset}
-              className="mt-5 text-xs text-gray-400 underline hover:text-gray-600"
+              className="mt-4 text-xs text-gray-400 underline hover:text-gray-600"
             >
               Analyze new photo
             </button>

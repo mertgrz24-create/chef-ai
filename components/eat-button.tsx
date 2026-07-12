@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useToast } from '@/components/toast'
 import type { RecipeMacros } from '@/types/recipe'
 
 interface EatButtonProps {
@@ -10,6 +11,7 @@ interface EatButtonProps {
 }
 
 export function EatButton({ recipeName, macros, source = 'manual' }: EatButtonProps) {
+  const { toast } = useToast()
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
 
   async function handleClick() {
@@ -32,12 +34,15 @@ export function EatButton({ recipeName, macros, source = 'manual' }: EatButtonPr
 
       if (res.ok) {
         setStatus('done')
+        toast('Meal logged — nice!', 'success')
       } else {
         setStatus('error')
+        toast('Could not log meal. Please try again.', 'error')
         setTimeout(() => setStatus('idle'), 3000)
       }
     } catch {
       setStatus('error')
+      toast('Could not reach server. Please try again.', 'error')
       setTimeout(() => setStatus('idle'), 3000)
     }
   }

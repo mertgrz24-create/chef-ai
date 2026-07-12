@@ -42,14 +42,22 @@ export async function POST(request: NextRequest) {
     if (
       !Array.isArray(body.ingredients) ||
       body.ingredients.length === 0 ||
-      body.ingredients.some((i) => typeof i !== 'string')
+      body.ingredients.length > 50 ||
+      body.ingredients.some((i) => typeof i !== 'string' || i.length > 200)
     ) {
       return NextResponse.json(
-        { error: 'ingredients must be a non-empty array of strings.' },
+        { error: 'ingredients must be a non-empty array of up to 50 strings (max 200 chars each).' },
         { status: 400 }
       )
     }
-    ingredients = body.ingredients as string[]
+    // Drop blanks; bound the AI prompt cost
+    ingredients = (body.ingredients as string[]).map((i) => i.trim()).filter(Boolean)
+    if (ingredients.length === 0) {
+      return NextResponse.json(
+        { error: 'ingredients must contain at least one non-empty value.' },
+        { status: 400 }
+      )
+    }
   } catch {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
@@ -71,27 +79,49 @@ export async function POST(request: NextRequest) {
 
   const profile = profileData as ProfileRow | null
 
-  // 4. Freemium limit check
-  const monthStart = getMonthStart()
-  let currentCount = profile?.recipe_count_this_month ?? 0
+  // 4. Freemium limit check — atomic RPC first; legacy read-modify-write
+  //    fallback until the 20260703 migration has been run manually
+  let usedAtomicCredit = false
+  let legacyCount = 0
 
-  // Reset counter if it's a new month
-  if (profile && profile.recipe_count_reset_at < monthStart) {
-    currentCount = 0
-    await supabase
-      .from('profiles')
-      .update({ recipe_count_this_month: 0, recipe_count_reset_at: new Date().toISOString() })
-      .eq('id', user.id)
-  }
+  const { data: credit, error: creditError } = await supabase.rpc('consume_recipe_credit', {
+    p_limit: FREE_MONTHLY_LIMIT,
+  })
 
-  if (!profile?.is_premium && currentCount >= FREE_MONTHLY_LIMIT) {
-    return NextResponse.json(
-      {
-        error: 'limit_reached',
-        message: `You've used all ${FREE_MONTHLY_LIMIT} free recipes this month. Upgrade to Premium!`,
-      },
-      { status: 403 }
-    )
+  if (!creditError && credit && typeof credit === 'object') {
+    usedAtomicCredit = true
+    if (!(credit as { allowed?: boolean }).allowed) {
+      return NextResponse.json(
+        {
+          error: 'limit_reached',
+          message: `You've used all ${FREE_MONTHLY_LIMIT} free recipes this month. Upgrade to Premium!`,
+        },
+        { status: 403 }
+      )
+    }
+  } else {
+    console.warn('[/api/recipes] consume_recipe_credit RPC unavailable, using legacy counter (run the 20260703 migration)')
+    const monthStart = getMonthStart()
+    legacyCount = profile?.recipe_count_this_month ?? 0
+
+    // Reset counter if it's a new month
+    if (profile && profile.recipe_count_reset_at < monthStart) {
+      legacyCount = 0
+      await supabase
+        .from('profiles')
+        .update({ recipe_count_this_month: 0, recipe_count_reset_at: new Date().toISOString() })
+        .eq('id', user.id)
+    }
+
+    if (!profile?.is_premium && legacyCount >= FREE_MONTHLY_LIMIT) {
+      return NextResponse.json(
+        {
+          error: 'limit_reached',
+          message: `You've used all ${FREE_MONTHLY_LIMIT} free recipes this month. Upgrade to Premium!`,
+        },
+        { status: 403 }
+      )
+    }
   }
 
   // 5. Generate recipe
@@ -102,17 +132,27 @@ export async function POST(request: NextRequest) {
     result = await generateRecipeWithGemini(ingredients, dietContext)
   } catch (err) {
     console.error('[/api/recipes] Recipe generation error:', err)
+    if (usedAtomicCredit) {
+      // Give the consumed credit back (best-effort)
+      await supabase.rpc('refund_recipe_credit')
+    }
     return NextResponse.json(
       { error: 'Could not generate recipe. Please try again.' },
       { status: 500 }
     )
   }
 
-  // 6. Increment usage counter (non-fatal)
-  await supabase
-    .from('profiles')
-    .update({ recipe_count_this_month: currentCount + 1 })
-    .eq('id', user.id)
+  // 6. Legacy path only: increment usage counter (non-fatal)
+  if (!usedAtomicCredit) {
+    await supabase
+      .from('profiles')
+      .update({ recipe_count_this_month: legacyCount + 1 })
+      .eq('id', user.id)
+  }
 
-  return NextResponse.json({ recipe: result.text, macros: result.macros })
+  return NextResponse.json({
+    recipe: result.text,
+    structured: result.structured,
+    macros: result.macros,
+  })
 }
