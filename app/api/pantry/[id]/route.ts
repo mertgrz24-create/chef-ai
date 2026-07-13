@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 // DELETE /api/pantry/[id] — remove a pantry item (RLS enforces ownership)
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await createClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -13,7 +13,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Authentication required.' }, { status: 401 })
   }
 
-  const { id } = params
+  const { id } = await params
 
   if (!id) {
     return NextResponse.json({ error: 'id parameter is required.' }, { status: 400 })

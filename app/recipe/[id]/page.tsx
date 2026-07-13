@@ -31,8 +31,9 @@ const getPublicRecipe = cache(async (id: string): Promise<Recipe | null> => {
   return recipe.is_public ? recipe : null
 })
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const recipe = await getPublicRecipe(params.id)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const recipe = await getPublicRecipe(id)
   if (!recipe) return { title: 'Recipe not found — Chef-AI' }
 
   const ingredientPreview = recipe.ingredients.slice(0, 5).join(', ')
@@ -58,8 +59,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function PublicRecipePage({ params }: { params: { id: string } }) {
-  const recipe = await getPublicRecipe(params.id)
+export default async function PublicRecipePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const recipe = await getPublicRecipe(id)
   if (!recipe) notFound()
 
   return (

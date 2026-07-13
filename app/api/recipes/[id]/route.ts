@@ -7,11 +7,13 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 // GET /api/recipes/[id] — public endpoint, returns recipe if is_public = true
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
+
   // Reject malformed ids before hitting the DB — a non-uuid otherwise
   // raises Postgres 22P02 and surfaces as a noisy 500
-  if (!UUID_RE.test(params.id)) {
+  if (!UUID_RE.test(id)) {
     return NextResponse.json({ error: 'Recipe not found.' }, { status: 404 })
   }
 
@@ -21,7 +23,7 @@ export async function GET(
   const { data, error } = await supabase
     .from('recipes')
     .select('id, name, ingredients, instructions, macros, image_url, is_public, created_at')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (error) {

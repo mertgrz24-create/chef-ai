@@ -176,6 +176,27 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 
 ## 📝 Seans Notları
 
+### 13 Temmuz 2026 — Next 16 + React 19 migration (`next16-upgrade` branch)
+
+**Neden:** npm audit'te kalan 14 advisory'nin hepsi `next` framework'ünde; 14 içinde yama yok, yalnızca Next 16 kapatıyor. Ayrı branch'te, launch'u bozmadan yapıldı.
+
+**Baseline:** us-market'teki 38 commit'siz dosya (us-market revizyonu + güvenlik fix'leri) tek commit'e alındı (`9fd4ab7`, local, push yok) → `next16-upgrade` branch'i açıldı.
+
+**Bağımlılıklar:** next 14.2.35→**16.2.10**, react/react-dom 18→**19.2.7**, eslint 8→**9**, eslint-config-next 14→**16.2.10**, framer-motion 10.18→**12.42** (React 19 peer'i destekliyor — eski kırılgan pin'den çıkış). `postcss: "$postcss"` override korundu (next@16 hâlâ nested 8.4.31 bundle'lıyor). **npm audit 5 → 0.** ✅
+
+**Kod değişiklikleri (beklenenden küçük):**
+- Async `params`: 3 dinamik route (`recipe/[id]/page`, `api/recipes/[id]`, `api/pantry/[id]`) → `params: Promise<{id}>` + `await params`.
+- `cookies()` zaten `await` ile yazılıydı (`lib/supabase/server.ts`) → değişiklik gerekmedi.
+- `next lint` Next 16'da kaldırıldı → `.eslintrc.json` silindi, `eslint.config.mjs` (flat config; eslint-config-next'in **native flat export**'ları) eklendi, lint script `eslint .`. FlatCompat ESLint 9'da circular-JSON bug'ı verdi → native export'larla çözüldü.
+- Yeni `react-hooks/set-state-in-effect` kuralı 5 mevcut mount-guard pattern'ini error'ladı → `warn`'a indirildi (perf önerisi, correctness değil; launch sonrası tek tek bakılacak).
+- `tsconfig.json` Next 16 tarafından otomatik güncellendi. middleware.ts / next.config.mjs / signup dokunulmadı (uyumlu).
+
+**Doğrulama:** typecheck 0 · lint 0 error / 6 warning · build 29/29 · **audit 0** · **runtime smoke test** (prod server): `/` `/login` `/signup` `/premium` → 200 + güvenlik header'ları, `/recipe/<bad-id>` → 404 (async params runtime'da çalışıyor).
+
+**Durum:** `next16-upgrade` branch'inde, **henüz commit'siz**. Merge kararı kullanıcıda. Önerilen: branch'i commit'le → push → Vercel preview'da gerçek auth/tarif akışlarını test et → sonra us-market'e merge.
+
+---
+
 ### 12–13 Temmuz 2026 — İki kalan güvenlik açığının ele alınması
 
 **photo-analyzer.tsx — client input validation + XSS false-positive:**
