@@ -4,12 +4,17 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** ABD Revizyonu + Next 16 migration — `next16-upgrade` preview'da, merge bekliyor  
-**Aktif Mikro-Adım:** (1) Supabase migration'ı çalıştır (2) Next 16 preview'ı test et → `next16-upgrade` → `us-market` → `main` → production deploy  
+**Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
+**Aktif Mikro-Adım:** M3 — mobil auth ekranları (login/signup) + navigasyon iskeleti  
 **Son güncelleme:** 14 Temmuz 2026  
-**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de (us-market işi canlıda DEĞİL)  
-**Preview URL:** https://chef-ai-git-next16-upgrade-mertgrz24s-projects.vercel.app — Next 16 + React 19, Vercel build `READY` ✅ (Turbopack)  
-**Aktif Branch:** `next16-upgrade`
+**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
+**Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
+
+### 🏗️ Mimari kararı (14 Tem 2026)
+**Landing = web, App = mobil.** Next.js landing page pazarlama yüzü olarak Vercel'de kalır; asıl uygulama **Expo/React Native** ile indirilebilir mobil app olur (App Store + Play Store). 17 API route + Supabase **ortak backend** olarak iki istemciye de hizmet eder.
+- **Next.js dashboard redesign'ı İPTAL** — app RN'e taşınıyor, o iş çöpe giderdi. Dashboard olduğu gibi duruyor (web fallback).
+- Neden webview/Capacitor değil: 8/8 dashboard sayfası Server Component + cookie auth → statik bundle'da çalışmaz, veri katmanı zaten baştan yazılmalıydı.
+- Expo'nun asıl kazancı: **push notification** (israf uyarılarının can damarı), native kamera, mağaza varlığı.
 
 ### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir)
 1. **Supabase SQL Editor** → `supabase/migrations/20260703_referral_and_usage_rpc.sql` çalıştır (idempotent). Bu olmadan **referral canlıda tamamen kırık** (RLS own-row, başkasının satırını güncelleyemiyor) ve freemium sayacı yarış durumuna açık. Doğrulama: `select proname from pg_proc where proname in ('apply_referral','consume_recipe_credit','refund_recipe_credit');` → 3 satır.
@@ -178,6 +183,42 @@
 Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 
 > Chef-AI V3 projesindeyim. CLAUDE.md ve PROGRESS.md'yi oku, iki cümleyle özetle: nerede kaldık, sıradaki mikro-adım ne? Mikro-adım modunda kal, Türkçe konuş.
+
+## 🚀 V5 — Mise en Place Redesign + Mobil App
+
+### V5.1 — Tasarım sistemi + Landing ✅ TAMAMLANDI (commit `81c810a`)
+- Anthropic **frontend-design** skill'iyle yapıldı. Eski krem(`#f5f5f0`)+turuncu(`#ffa51f`)+Inter kombinasyonu, skill'in "AI default" dediği #1 kalıptı — ondan çıkıldı.
+- **Palet:** pantry green `#1E3A2F` + electric lime `#CDF23E` (tek accent) + ink `#17180F` + chalk `#F5F6F1`
+- **Tipografi:** Bricolage Grotesque (display) · Instrument Sans (body) · Space Mono (fiş/etiket dokusu)
+- **İmza öğe:** malzeme (girdi) → basılan mutfak fişi (tarif çıktısı). Hero'daki vanity istatistikler (12K+/94%/50K+) kaldırıldı.
+- `globals.css` token'ları eski değişken adları korunarak yenilendi (dashboard kırılmadı), light+dark ikisi de
+- navbar/hero/features/how-it-works/pricing/footer yeni dile taşındı
+
+### V5.2 — M1: Backend mobil-hazır ✅ TAMAMLANDI (commit `4f40c45`)
+- **Blocker'dı:** 17 API route cookie-auth'du, RN cookie taşıyamaz → hepsi mobil'e 401 dönerdi
+- `lib/supabase/api.ts` → `createApiClient()`: önce `Authorization: Bearer`, yoksa cookie'ye düşer. Header `next/headers` ile okunuyor → parametresiz `GET()` handler'larının imzası değişmedi
+- Bearer token PostgREST'e olduğu gibi iletilir → **RLS hâlâ çağıranın kendi JWT'sine göre** çalışır; mobil, tarayıcıdan fazla yetki almaz
+- Doğrulama: auth-suz 401 · geçersiz Bearer 401 (fail-closed) · geçerli Bearer 200 + dönen profil token'ın sahibine ait
+
+### V5.3 — M2: Expo iskeleti + tasarım sistemi ✅ TAMAMLANDI (commit `f41104d`)
+- `mobile/` — Expo SDK 57 + expo-router + RN 0.86 + React 19, kendi `package.json`'ı. Root tsconfig/eslint `mobile/`'ı hariç tutuyor
+- Tasarım sistemi RN'e taşındı (NativeWind): aynı palet, aynı 3 font, "recipe ticket" bileşeni native olarak yeniden yazıldı
+- NativeWind v4 için `babel.config.js` + `metro.config.js` eklendi — **Expo 57 template'i bunları içermiyor**
+- `src/lib/supabase.ts` — session **expo-secure-store**'da (Keychain/Keystore), AsyncStorage'da değil (token hassas veri)
+- `src/lib/api.ts` — Next API'lerini Bearer ile çağırır. **AI anahtarları cihaza hiç inmiyor**, sunucuda kalıyor
+- 🔒 `mobile/.gitignore`'a `.env` eklendi — template sadece `.env*.local` yoksayıyordu, **anon key commit'lenecekti**
+- Doğrulama: typecheck 0 · Metro bundle temiz (933 modül) · web hedefinde render doğrulandı (3 font yüklendi) · console hatasız
+
+### ⏭️ Sırada — M3+
+- **M3:** Mobil auth ekranları (login/signup) + navigasyon (tab bar)
+- **M4:** Ekranlar — pantry, kamera/vision, tarif üretme, yemek planı
+- **M5:** Push notification (israf uyarıları)
+- **M6:** EAS Build → App Store / Play Store
+
+### ⚠️ Bilinen açık — mobile npm audit
+11 moderate, hepsi `uuid` kaynaklı ve Expo'nun **CLI/build toolchain**'inde (@expo/cli, metro-config, prebuild-config…). **App bundle'ına girmiyor.** `--force` gerektiriyor (Expo 57'yi kırar) → bilinçli bırakıldı, Expo upstream'de yamalayacak. Web tarafı audit **0**.
+
+---
 
 ## 📝 Seans Notları
 
