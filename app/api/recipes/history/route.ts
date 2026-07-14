@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import type { Recipe } from '@/types/recipe'
 
 // GET /api/recipes/history — last 20 saved recipes for the current user
 export async function GET() {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

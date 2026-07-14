@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 
 const STATUS_RESPONSES: Record<string, { error: string; status: number }> = {
   unauthenticated: { error: 'Authentication required.', status: 401 },
@@ -11,7 +11,7 @@ const STATUS_RESPONSES: Record<string, { error: string; status: number }> = {
 
 // POST /api/referral — apply a referral code to the current user's profile
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { analyzeIngredients } from '@/lib/ai/gemini'
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
@@ -9,7 +9,7 @@ const MAX_SIZE_BYTES = 10 * 1024 * 1024 // 10 MB
 
 export async function POST(request: NextRequest) {
   // 1. Auth check
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

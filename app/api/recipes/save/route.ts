@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import type { Recipe } from '@/types/recipe'
 
 const MACRO_FIELDS = ['calories', 'protein_g', 'carbs_g', 'fat_g', 'fiber_g', 'net_carbs_g'] as const
@@ -18,7 +18,7 @@ function sanitizeMacros(input: unknown): Record<string, number> | null {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

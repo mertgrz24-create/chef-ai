@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { generateSingleMeal } from '@/lib/ai/gemini'
 import type { MealPlanDay } from '@/types/meal-plan'
 
@@ -67,7 +67,7 @@ export async function PATCH(request: NextRequest) {
   }
 
   // 2. Auth check
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,

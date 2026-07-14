@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import type { Recipe } from '@/types/recipe'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -17,7 +17,7 @@ export async function GET(
     return NextResponse.json({ error: 'Recipe not found.' }, { status: 404 })
   }
 
-  const supabase = await createClient()
+  const supabase = await createApiClient()
 
   // Explicit public columns only — never expose owner user_id or diet_context
   const { data, error } = await supabase

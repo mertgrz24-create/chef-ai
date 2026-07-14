@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import type { MealEaten, DailyTotals } from '@/types/meals-eaten'
 
 const USER_TIMEZONE = 'America/New_York' // TODO: per-user timezone once profiles store it
@@ -27,7 +27,7 @@ function sanitizeMacro(value: unknown): number | undefined {
 
 // GET /api/meals-eaten — today's records + totals
 export async function GET() {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,
@@ -66,7 +66,7 @@ export async function GET() {
 
 // POST /api/meals-eaten — log a new meal
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,

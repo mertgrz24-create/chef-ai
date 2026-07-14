@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { modifyRecipe } from '@/lib/ai/gemini'
 import { getRecipeImage } from '@/lib/pexels'
 import type { Recipe } from '@/types/recipe'
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { getRecipeImage } from '@/lib/pexels'
 
 export async function GET(req: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

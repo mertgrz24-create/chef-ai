@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { generateRecipeWithGemini } from '@/lib/ai/gemini'
 
 const FREE_MONTHLY_LIMIT = 10
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
   }
 
   // 2. Auth check
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

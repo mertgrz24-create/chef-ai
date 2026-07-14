@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import type { MealPlanDay } from '@/types/meal-plan'
 
 function getWeekStartDate(): string {
@@ -12,7 +12,7 @@ function getWeekStartDate(): string {
 }
 
 export async function GET() {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,

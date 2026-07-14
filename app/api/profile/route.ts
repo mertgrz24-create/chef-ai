@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { customAlphabet } from 'nanoid'
 import type { Profile } from '@/types/profile'
 
@@ -15,7 +15,7 @@ const ALLOWED_FIELDS = new Set<string>([...NUMERIC_FIELD_LIST, 'full_name', 'die
 
 // GET /api/profile — fetch current user's profile
 export async function GET() {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
@@ -55,7 +55,7 @@ export async function GET() {
 
 // PUT /api/profile — update current user's profile
 export async function PUT(request: NextRequest) {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {

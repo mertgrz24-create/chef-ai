@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createApiClient } from '@/lib/supabase/api'
 import { generateWeeklyMealPlan } from '@/lib/ai/gemini'
 
 type ProfileRow = {
@@ -34,7 +34,7 @@ function getWeekStartDate(): string {
 }
 
 export async function POST() {
-  const supabase = await createClient()
+  const supabase = await createApiClient()
   const {
     data: { user },
     error: authError,
