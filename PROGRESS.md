@@ -4,11 +4,16 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** ABD Revizyonu — `us-market` branch'i açık  
-**Aktif Mikro-Adım:** Supabase migration'ı manuel çalıştır → main'e merge → production deploy  
-**Son güncelleme:** 3 Temmuz 2026  
-**Canlı URL:** https://chef-ai-puce-zeta.vercel.app  
-**Aktif Branch:** `us-market`
+**Aktif Faz:** ABD Revizyonu + Next 16 migration — `next16-upgrade` preview'da, merge bekliyor  
+**Aktif Mikro-Adım:** (1) Supabase migration'ı çalıştır (2) Next 16 preview'ı test et → `next16-upgrade` → `us-market` → `main` → production deploy  
+**Son güncelleme:** 14 Temmuz 2026  
+**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de (us-market işi canlıda DEĞİL)  
+**Preview URL:** https://chef-ai-git-next16-upgrade-mertgrz24s-projects.vercel.app — Next 16 + React 19, Vercel build `READY` ✅ (Turbopack)  
+**Aktif Branch:** `next16-upgrade`
+
+### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir)
+1. **Supabase SQL Editor** → `supabase/migrations/20260703_referral_and_usage_rpc.sql` çalıştır (idempotent). Bu olmadan **referral canlıda tamamen kırık** (RLS own-row, başkasının satırını güncelleyemiyor) ve freemium sayacı yarış durumuna açık. Doğrulama: `select proname from pg_proc where proname in ('apply_referral','consume_recipe_credit','refund_recipe_credit');` → 3 satır.
+2. **Preview QA** → yukarıdaki preview URL'de auth'lu akışlar: login, tarif üretme, fotoğraf analizi, yemek planı, dark mode, animasyonlar (React 19 + framer-motion 12'nin gerçek testi).
 
 ## 🗺️ Genel Yol Haritası
 
@@ -176,6 +181,32 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 
 ## 📝 Seans Notları
 
+### 14 Temmuz 2026 — Görsel kaynağı sadeleştirildi (Unsplash kalıntısı temizliği)
+
+- **Bağlam:** AI görsel üretimi denemesi araştırıldı → repoda böyle bir fonksiyon **hiç yok** (git temiz, `generateImage`/`dall-e`/`imagen` vb. hiçbir yerde geçmiyor). Deneme bu projede iz bırakmamış.
+- **Gerçek kalıntı:** Unsplash → Pexels geçişinden (28 Mayıs) kalan ölü config. Görsel kaynağı tek pakete indirildi:
+  - `next.config.mjs`: `images.unsplash.com` remote pattern kaldırıldı, sadece `images.pexels.com` kaldı.
+  - Supabase `recipes`: Unsplash URL'i taşıyan 1 bayat test satırı (`Limon Ferahlığında Ton Balığı Salatası`, ABD revizyonu öncesi Türkçe kayıt) → `image_url = NULL`. Kalan unsplash satırı: 0.
+- **Not:** `lib/unsplash.ts` zaten daha önce silinmişti; aktif görsel yolu `lib/pexels.ts` (meal-image + recipes/modify) — dokunulmadı.
+- typecheck 0 · build ✅ · repoda kalan unsplash referansı 0.
+
+---
+
+### 13 Temmuz 2026 — Seans sonu özeti
+
+**Bugün ne yapıldı (kronolojik):**
+1. photo-analyzer.tsx client-side validation + FileReader → `URL.createObjectURL` (blob URL) refactor'ı
+2. npm audit: `overrides` ile 5 → 1 (postcss + glob yamalandı)
+3. Next 16 + React 19 migration (`next16-upgrade` branch, detay aşağıda) → **npm audit 1 → 0**
+4. Snyk: bağımlılık açıkları 16 → 0; kalan `photo-analyzer.tsx` DOM-XSS bulgusu doğrulanmış false positive → Snyk hesabına giriş yapılıp **"Ignored"** olarak gerekçeli işaretlendi
+5. Vercel preview deploy doğrulandı: `next16-upgrade` build'i **READY** (Turbopack ile Vercel altyapısında da temiz derlendi)
+
+**Yarın buradan devam:** Yukarıdaki "📍 Şu an neredeyiz?" bölümündeki **2 bekleyen manuel adım** hâlâ açık (Supabase migration çalıştırılmadı, preview QA yapılmadı — preview Vercel Deployment Protection arkasında, bypass linki bu seansta üretildi ama süresi 14 Temmuz 13:53'te doldu, yeniden üretilebilir). İkisi tamamlanınca sıradaki iş: `next16-upgrade` → `us-market` → `main` merge zinciri + production deploy.
+
+**Git durumu:** `next16-upgrade` branch'inde, commit `59432de`'ye kadar push edilmiş. `us-market` ve `main` dokunulmadı, production hâlâ eski koddaki `main`'de.
+
+---
+
 ### 13 Temmuz 2026 — Next 16 + React 19 migration (`next16-upgrade` branch)
 
 **Neden:** npm audit'te kalan 14 advisory'nin hepsi `next` framework'ünde; 14 içinde yama yok, yalnızca Next 16 kapatıyor. Ayrı branch'te, launch'u bozmadan yapıldı.
@@ -193,7 +224,9 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 
 **Doğrulama:** typecheck 0 · lint 0 error / 6 warning · build 29/29 · **audit 0** · **runtime smoke test** (prod server): `/` `/login` `/signup` `/premium` → 200 + güvenlik header'ları, `/recipe/<bad-id>` → 404 (async params runtime'da çalışıyor).
 
-**Durum:** `next16-upgrade` branch'inde, **henüz commit'siz**. Merge kararı kullanıcıda. Önerilen: branch'i commit'le → push → Vercel preview'da gerçek auth/tarif akışlarını test et → sonra us-market'e merge.
+**Durum:** commit `59432de` → push edildi. **Vercel preview build'i `READY` ✅** (Turbopack ile, Vercel altyapısında da temiz derlendi) — `chef-ai-git-next16-upgrade-...vercel.app`. Preview'lar Vercel Deployment Protection (SSO) arkasında, o yüzden auth'lu QA kullanıcıda. Merge zinciri: `next16-upgrade` → `us-market` (fast-forward) → `main` → production.
+
+**Snyk durumu (kapandı):** Bağımlılık açıkları **16 → 0** (Next 16 migration'ı sayesinde). Kalan tek `photo-analyzer.tsx` DOM-XSS bulgusu **doğrulanmış false positive** (blob URL, lokal dosya, `<img>` script çalıştırmaz) → Snyk'e giriş yapılıp **"Ignored"** olarak gerekçeli işaretlendi. Not: Snyk ignore'ları hesaba bağlıdır; giriş yapmadan inline `deepcode ignore` / quick-fix / `.snyk` çalışmaz — takıldığımız buydu.
 
 ---
 
