@@ -24,7 +24,7 @@ const premiumItems = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
+    <section id="pricing" className="py-20 md:py-28 bg-[var(--bg-card)]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -34,16 +34,10 @@ export function Pricing() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-14"
         >
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "#888" }}
-          >
-            Pricing
+          <p className="font-mono-ticket text-[11px] tracking-[0.2em] text-[var(--brand)] mb-3">
+            PRICING
           </p>
-          <h2
-            className="text-3xl md:text-4xl font-medium"
-            style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
-          >
+          <h2 className="font-display text-3xl md:text-[42px] font-semibold text-[var(--text-primary)]">
             Free to get started.
           </h2>
         </motion.div>
@@ -60,40 +54,26 @@ export function Pricing() {
           <motion.div
             variants={cardVariant}
             className="rounded-2xl p-8 flex flex-col gap-6"
-            style={{ backgroundColor: "#ffffff", border: "1px solid #ebebeb" }}
+            style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border)" }}
           >
             <div>
-              <h3
-                className="text-base font-semibold mb-4"
-                style={{ color: "#1a1a1a" }}
-              >
-                Free
-              </h3>
+              <h3 className="text-base font-semibold mb-4 text-[var(--text-primary)]">Free</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold" style={{ color: "#1a1a1a" }}>
-                  $0
-                </span>
-                <span className="text-sm" style={{ color: "#888" }}>
-                  / month
-                </span>
+                <span className="font-display text-4xl font-bold text-[var(--text-primary)]">$0</span>
+                <span className="text-sm text-[var(--text-muted)]">/ month</span>
               </div>
             </div>
             <ul className="flex flex-col gap-3 flex-1">
               {freeItems.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-2 text-sm"
-                  style={{ color: "#888" }}
-                >
-                  <span style={{ color: "#ffa51f" }}>✓</span>
+                <li key={item} className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                  <span className="text-[var(--brand)]">✓</span>
                   {item}
                 </li>
               ))}
             </ul>
             <Link
               href="/signup"
-              className="text-center py-3 rounded-full text-sm font-medium transition-colors hover:bg-[#f5f5f0]"
-              style={{ border: "1.5px solid #1a1a1a", color: "#1a1a1a" }}
+              className="text-center py-3 rounded-full text-sm font-semibold transition-colors hover:bg-[var(--surface-2)] border border-[var(--text-primary)] text-[var(--text-primary)]"
             >
               Get Started
             </Link>
@@ -103,45 +83,33 @@ export function Pricing() {
           <motion.div
             variants={cardVariant}
             className="rounded-2xl p-8 flex flex-col gap-6 relative"
-            style={{ backgroundColor: "#1a1a1a" }}
+            style={{ backgroundColor: "var(--brand)" }}
           >
             {/* MOST POPULAR badge */}
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span
-                className="text-[11px] font-bold tracking-wider px-4 py-1 rounded-full whitespace-nowrap"
-                style={{ backgroundColor: "#ffa51f", color: "#1a1a1a" }}
-              >
+              <span className="font-mono-ticket text-[10px] font-bold tracking-wider px-4 py-1 rounded-full whitespace-nowrap bg-[#cdf23e] text-[#17180f]">
                 MOST POPULAR
               </span>
             </div>
 
             <div>
-              <h3 className="text-base font-semibold mb-4 text-white">
-                Premium
-              </h3>
+              <h3 className="text-base font-semibold mb-4 text-[#f5f6f1]">Premium</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-white">$9.99</span>
-                <span className="text-sm" style={{ color: "#888" }}>
-                  / month
-                </span>
+                <span className="font-display text-4xl font-bold text-[#f5f6f1]">$9.99</span>
+                <span className="text-sm text-[#a5b0a0]">/ month</span>
               </div>
             </div>
             <ul className="flex flex-col gap-3 flex-1">
               {premiumItems.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-2 text-sm"
-                  style={{ color: "#888" }}
-                >
-                  <span style={{ color: "#ffa51f" }}>✓</span>
+                <li key={item} className="flex items-center gap-2 text-sm text-[#c3c8ba]">
+                  <span className="text-[#cdf23e]">✓</span>
                   {item}
                 </li>
               ))}
             </ul>
             <Link
               href="/signup"
-              className="text-center py-3 rounded-full text-sm font-medium transition-opacity hover:opacity-85"
-              style={{ backgroundColor: "#ffa51f", color: "#1a1a1a" }}
+              className="text-center py-3 rounded-full text-sm font-bold transition-transform hover:-translate-y-0.5 bg-[#cdf23e] text-[#17180f]"
             >
               Go Premium →
             </Link>

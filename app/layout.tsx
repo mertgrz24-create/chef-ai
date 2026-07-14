@@ -1,12 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, Space_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { PwaRegister } from "@/components/pwa-register";
 import "./globals.css";
 
-const inter = Inter({
+// Display — characterful, food-editorial. Used with restraint on headings.
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-display",
+  display: "swap",
+});
+
+// Body — clean workhorse, deliberately not Inter.
+const body = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+// Mono — the "kitchen ticket / label" texture: timings, quantities, tags.
+const mono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffa51f",
+  themeColor: "#1E3A2F",
 };
 
 export default function RootLayout({
@@ -31,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable}`}>
+      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
         <Providers>
           {children}
           <PwaRegister />

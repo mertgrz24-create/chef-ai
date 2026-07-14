@@ -24,19 +24,19 @@ export function Footer() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ backgroundColor: "#1a1a1a" }}
+      style={{ backgroundColor: "#17180f" }}
     >
       <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0 pb-10">
           {/* Logo + tagline */}
           <div className="flex flex-col gap-2">
-            <span className="text-lg font-semibold tracking-tight">
-              <span className="text-white">Chef</span>
-              <span style={{ color: "#ffa51f" }}>AI</span>
+            <span className="font-display text-lg font-bold tracking-tight">
+              <span className="text-[#f5f6f1]">Chef</span>
+              <span style={{ color: "#cdf23e" }}>AI</span>
             </span>
-            <p className="text-sm" style={{ color: "#888" }}>
-              Your personal AI chef, in your pocket.
+            <p className="text-sm" style={{ color: "#8fa093" }}>
+              Cook what you already have.
             </p>
           </div>
 
@@ -67,8 +67,8 @@ export function Footer() {
           className="flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 pt-6"
           style={{ borderTop: "1px solid #333" }}
         >
-          <p className="text-xs" style={{ color: "#555" }}>
-            © 2025 Chef-AI. All rights reserved.
+          <p className="text-xs" style={{ color: "#6e7263" }}>
+            © 2026 Chef-AI. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: "#555" }}>
             🤖 Powered by Claude + Gemini

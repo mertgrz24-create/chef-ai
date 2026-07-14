@@ -5,123 +5,85 @@ import Link from "next/link";
 
 const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-const phoneVariant: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+// The ticket "prints" in — one orchestrated moment, kept restrained.
+const ticketVariant: Variants = {
+  hidden: { opacity: 0, y: 28, rotate: -1.5 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotate: -1.5,
+    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.2 },
+  },
 };
 
-const stats = [
-  { value: "12K+", label: "Active users" },
-  { value: "94%", label: "Less food waste" },
-  { value: "50K+", label: "Recipes generated" },
+// What you have — the raw input. Mono labels, like pantry tags.
+const pantry = ["spinach", "chicken", "garlic", "rice", "lemon"];
+
+// What you get — the fired ticket.
+const ticketIngredients = [
+  "2 chicken breasts",
+  "3 cups spinach",
+  "4 garlic cloves",
+  "1 cup jasmine rice",
 ];
 
-function PhoneMockup() {
+function RecipeTicket() {
   return (
-    <div
-      className="w-[255px] rounded-[36px] overflow-hidden shadow-2xl"
-      style={{ border: "7px solid #1a1a1a", backgroundColor: "#1a1a1a" }}
-    >
-      {/* Dark header */}
-      <div className="bg-[#1a1a1a] px-4 pt-5 pb-4">
-        <p className="text-xs mb-1" style={{ color: "#666" }}>
-          Hello 👋
-        </p>
-        <div className="flex items-center justify-between">
-          <h3 className="text-white text-sm font-semibold">What should I cook?</h3>
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-            style={{ backgroundColor: "#ffa51f" }}
-          >
-            A
-          </div>
-        </div>
-      </div>
-
-      {/* Recipe card */}
-      <div className="bg-white mx-2.5 rounded-2xl p-3.5 mb-2.5">
-        <span
-          className="text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-full"
-          style={{ backgroundColor: "#ffa51f20", color: "#ffa51f" }}
-        >
-          TODAY&apos;S PICK
-        </span>
-        <h4 className="text-sm font-semibold mt-2 mb-0.5" style={{ color: "#1a1a1a" }}>
-          Chicken Stir-Fry
-        </h4>
-        <p className="text-[10px] mb-2" style={{ color: "#aaa" }}>
-          chicken, bell pepper, onion, garlic
-        </p>
-        <div className="flex gap-1.5 mb-3">
-          <span
-            className="text-[9px] px-2 py-0.5 rounded-full"
-            style={{ backgroundColor: "#f5f5f0", color: "#888" }}
-          >
-            ⏱ 35 min
-          </span>
-          <span
-            className="text-[9px] px-2 py-0.5 rounded-full"
-            style={{ backgroundColor: "#f5f5f0", color: "#888" }}
-          >
-            ✓ Easy
-          </span>
-        </div>
-        <button
-          className="w-full text-[10px] py-1.5 rounded-full font-semibold"
-          style={{ backgroundColor: "#ffa51f", color: "#fff" }}
-        >
-          View Recipe →
-        </button>
-      </div>
-
-      {/* Cream section — mini cards */}
-      <div className="mx-2.5 rounded-2xl p-2.5 mb-2.5" style={{ backgroundColor: "#f5f5f0" }}>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { icon: "🥦", label: "Pantry" },
-            { icon: "📖", label: "Recipes" },
-            { icon: "⚠️", label: "Expiring" },
-            { icon: "➕", label: "Add" },
-          ].map((card) => (
-            <div
-              key={card.label}
-              className="bg-white rounded-xl py-2 flex flex-col items-center gap-0.5"
-            >
-              <span className="text-sm">{card.icon}</span>
-              <span className="text-[8px]" style={{ color: "#888" }}>
-                {card.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Tab bar */}
+    <div className="relative w-full max-w-[340px] font-mono-ticket">
+      {/* subtle stacked paper behind, for depth */}
       <div
-        className="bg-white px-3 py-2 flex justify-around items-center"
-        style={{ borderTop: "1px solid #ebebeb" }}
-      >
-        {[
-          { icon: "🏠", label: "Home" },
-          { icon: "📦", label: "Pantry" },
-          { icon: "📋", label: "Recipes" },
-          { icon: "👤", label: "Profile" },
-        ].map((tab) => (
-          <div key={tab.label} className="flex flex-col items-center gap-0.5">
-            <span className="text-xs">{tab.icon}</span>
-            <span className="text-[7px]" style={{ color: "#aaa" }}>
-              {tab.label}
-            </span>
+        className="absolute inset-0 translate-x-2 translate-y-2 rounded-[14px] bg-black/20"
+        aria-hidden
+      />
+      <div className="relative rounded-[14px] bg-white text-[#17180f] shadow-2xl overflow-hidden">
+        {/* Ticket header — ink bar */}
+        <div className="bg-[#17180f] text-[#f5f6f1] px-4 py-2.5 flex items-center justify-between text-[11px] tracking-widest">
+          <span>ORDER #0428</span>
+          <span className="text-[#cdf23e]">⏱ 35 MIN</span>
+        </div>
+
+        <div className="px-5 pt-4 pb-5">
+          <span className="text-[10px] tracking-[0.2em] text-[#1e3a2f] font-bold">
+            TONIGHT&apos;S PICK
+          </span>
+          <h3 className="font-display text-[26px] leading-[1.05] mt-1.5 mb-3">
+            Garlic Chicken
+            <br />& Spinach Rice
+          </h3>
+
+          {/* ingredient checklist */}
+          <ul className="flex flex-col gap-1.5 text-[12px] text-[#4a4e42]">
+            {ticketIngredients.map((line) => (
+              <li key={line} className="flex items-center gap-2">
+                <span className="text-[#1e3a2f]">▪</span>
+                {line}
+              </li>
+            ))}
+          </ul>
+
+          {/* perforated divider */}
+          <div className="my-4 border-t border-dashed border-[#cbcdc2]" />
+
+          {/* macros — mono data row */}
+          <div className="flex justify-between text-[11px] text-[#8a8e80] mb-4">
+            <span>520 KCAL</span>
+            <span>42 P</span>
+            <span>48 C</span>
+            <span>14 F</span>
           </div>
-        ))}
+
+          <div className="bg-[#cdf23e] text-[#17180f] text-center text-[12px] font-bold tracking-wide py-2.5 rounded-md">
+            VIEW RECIPE →
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -129,104 +91,88 @@ function PhoneMockup() {
 
 export function Hero() {
   return (
-    <section className="bg-[#1a1a1a] md:bg-transparent">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-28 grid md:grid-cols-2 md:gap-16 items-center">
-        {/* Left: text content */}
+    <section className="bg-[#1e3a2f] text-[#f5f6f1]">
+      <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-[1.1fr_0.9fr] md:gap-14 items-center">
+        {/* Left — the thesis */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
           className="flex flex-col gap-6"
         >
-          {/* Badge */}
+          {/* eyebrow — honest category label, in mono */}
           <motion.div variants={item}>
-            <span
-              className="inline-flex items-center gap-2 px-4 py-1.5 text-xs rounded-full"
-              style={{
-                backgroundColor: "#ffa51f18",
-                border: "1px solid #ffa51f40",
-                color: "#ffa51f",
-              }}
-            >
-              <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: "#ffa51f" }}
-              />
-              AI-Powered Kitchen Assistant
+            <span className="font-mono-ticket text-[11px] tracking-[0.2em] text-[#cdf23e]">
+              AI KITCHEN DECISION ENGINE
             </span>
           </motion.div>
 
-          {/* Title */}
+          {/* headline — the thesis, display face */}
           <motion.h1
             variants={item}
-            className="text-4xl md:text-5xl lg:text-[56px] font-medium leading-tight"
-            style={{ letterSpacing: "-0.5px" }}
+            className="font-display text-[38px] md:text-[52px] leading-[1.02] font-semibold"
           >
-            <span className="text-white md:text-[#1a1a1a]">
-              Your AI-Powered<br />Personal Chef
-            </span>
+            Tonight&apos;s dinner is
             <br />
-            <span style={{ color: "#ffa51f" }}>Always ready.</span>
+            already in your{" "}
+            <span className="text-[#cdf23e]">fridge.</span>
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* subtitle — plain, from the user's side */}
           <motion.p
             variants={item}
-            className="text-sm md:text-base max-w-[420px]"
-            style={{ color: "#888", lineHeight: 1.8 }}
+            className="text-[15px] md:text-base max-w-[440px] text-[#c3c8ba] leading-relaxed"
           >
-            Snap your fridge, get personalized recipes in seconds. Reduce
-            grocery waste, save money, and never wonder &ldquo;what&apos;s for dinner?&rdquo; again.
+            Snap what you&apos;ve got. Chef-AI reads your ingredients and fires
+            back a recipe you can actually make — no shopping trip, no wasted
+            food.
           </motion.p>
 
-          {/* Buttons */}
-          <motion.div variants={item} className="flex flex-col sm:flex-row gap-3">
+          {/* CTAs */}
+          <motion.div variants={item} className="flex flex-col sm:flex-row gap-3 mt-1">
             <Link
               href="/signup"
-              className="text-center px-7 py-3 rounded-full text-sm font-medium transition-opacity hover:opacity-85"
-              style={{ backgroundColor: "#ffa51f", color: "#ffffff" }}
+              className="text-center px-7 py-3 rounded-full text-sm font-bold bg-[#cdf23e] text-[#17180f] transition-transform hover:-translate-y-0.5"
             >
-              Get Started Free →
+              Get cooking — free →
             </Link>
             <a
               href="#how-it-works"
-              className="text-center px-7 py-3 rounded-full text-sm font-medium transition-colors text-white md:text-[#1a1a1a] hover:bg-white/5 md:hover:bg-black/5"
-              style={{ border: "1.5px solid #ddd" }}
+              className="text-center px-7 py-3 rounded-full text-sm font-medium border border-[#f5f6f1]/25 text-[#f5f6f1] transition-colors hover:bg-white/5"
             >
-              How it works
+              See how it works
             </a>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div variants={item} className="flex items-center mt-2">
-            {stats.map((stat, i) => (
-              <div key={stat.value} className="flex items-center">
-                {i > 0 && (
-                  <div
-                    className="w-px h-8 mx-4 md:mx-6 bg-white/20 md:bg-[#ebebeb]"
-                  />
-                )}
-                <div className="flex flex-col">
-                  <span className="text-base font-bold text-white md:text-[#1a1a1a]">
-                    {stat.value}
-                  </span>
-                  <span className="text-[11px]" style={{ color: "#aaa" }}>
-                    {stat.label}
-                  </span>
-                </div>
-              </div>
-            ))}
+          {/* the raw input — pantry tags */}
+          <motion.div variants={item} className="mt-3">
+            <p className="font-mono-ticket text-[10px] tracking-[0.18em] text-[#8fa093] mb-2.5">
+              IN YOUR PANTRY
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {pantry.map((ing) => (
+                <span
+                  key={ing}
+                  className="font-mono-ticket text-[12px] px-3 py-1 rounded-full border border-[#f5f6f1]/20 text-[#e4e8dd]"
+                >
+                  {ing}
+                </span>
+              ))}
+              <span className="font-mono-ticket text-[12px] px-3 py-1 rounded-full bg-[#f5f6f1]/10 text-[#cdf23e]">
+                +6
+              </span>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* Right: phone mockup — hidden on mobile */}
+        {/* Right — the fired ticket */}
         <motion.div
-          variants={phoneVariant}
+          variants={ticketVariant}
           initial="hidden"
           animate="visible"
           className="hidden md:flex justify-center items-center"
         >
-          <PhoneMockup />
+          <RecipeTicket />
         </motion.div>
       </div>
     </section>

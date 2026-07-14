@@ -16,26 +16,26 @@ const cards = [
   {
     icon: "📷",
     title: "Visual Pantry",
-    description: "Snap your fridge and let AI automatically identify every ingredient.",
+    description: "Snap your fridge and let AI identify every ingredient — no typing.",
     featured: false,
   },
   {
     icon: "✨",
     title: "Smart Recipes",
-    description: "Get delicious, personalized recipes from what you already have in seconds.",
+    description: "Get personalized recipes from what you already have, in seconds.",
     featured: true,
   },
   {
     icon: "⏰",
     title: "Zero Waste",
-    description: "Smart alerts for expiring items — cook before you toss, save money.",
+    description: "Alerts for expiring items — cook before you toss, save money.",
     featured: false,
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-20 md:py-28" style={{ backgroundColor: "#ffffff" }}>
+    <section id="features" className="py-20 md:py-28 bg-[var(--bg-card)]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -43,18 +43,12 @@ export function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-center mb-14"
+          className="mb-14"
         >
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "#888" }}
-          >
-            Why Chef-AI?
+          <p className="font-mono-ticket text-[11px] tracking-[0.2em] text-[var(--brand)] mb-3">
+            WHY CHEF-AI
           </p>
-          <h2
-            className="text-3xl md:text-4xl font-medium"
-            style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
-          >
+          <h2 className="font-display text-3xl md:text-[42px] font-semibold text-[var(--text-primary)]">
             Your kitchen, smarter.
           </h2>
         </motion.div>
@@ -74,15 +68,18 @@ export function Features() {
               className="rounded-2xl p-7 flex flex-col gap-5"
               style={
                 card.featured
-                  ? { backgroundColor: "#1a1a1a" }
-                  : { backgroundColor: "#ffffff", border: "1px solid #ebebeb" }
+                  ? { backgroundColor: "var(--brand)" }
+                  : {
+                      backgroundColor: "var(--bg-card)",
+                      border: "1px solid var(--border)",
+                    }
               }
             >
               {/* Icon box */}
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center text-xl"
                 style={{
-                  backgroundColor: card.featured ? "#ffa51f33" : "#ffa51f15",
+                  backgroundColor: card.featured ? "#ffffff1a" : "var(--accent-light)",
                 }}
               >
                 {card.icon}
@@ -92,13 +89,13 @@ export function Features() {
               <div className="flex flex-col gap-2 flex-1">
                 <h3
                   className="text-base font-semibold"
-                  style={{ color: card.featured ? "#ffffff" : "#1a1a1a" }}
+                  style={{ color: card.featured ? "#f5f6f1" : "var(--text-primary)" }}
                 >
                   {card.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#888" }}
+                  style={{ color: card.featured ? "#c3c8ba" : "var(--text-secondary)" }}
                 >
                   {card.description}
                 </p>
@@ -107,11 +104,8 @@ export function Features() {
               {/* Most popular badge — only on featured card */}
               {card.featured && (
                 <div>
-                  <span
-                    className="text-[11px] font-semibold px-3 py-1 rounded-full"
-                    style={{ backgroundColor: "#ffa51f20", color: "#ffa51f" }}
-                  >
-                    Most popular
+                  <span className="font-mono-ticket text-[10px] tracking-wider px-3 py-1 rounded-full bg-[#cdf23e] text-[#17180f]">
+                    MOST POPULAR
                   </span>
                 </div>
               )}

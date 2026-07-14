@@ -18,25 +18,25 @@ const steps = [
     number: "01",
     icon: "📸",
     title: "Snap a Photo",
-    description: "Take a picture of your fridge or ingredients. AI identifies everything instantly.",
+    description: "Take a picture of your fridge. AI identifies every ingredient instantly.",
   },
   {
     number: "02",
     icon: "🤖",
-    title: "AI Analyzes",
-    description: "Gemini processes the image, Claude selects the best recipe for you.",
+    title: "AI Fires a Ticket",
+    description: "Gemini reads the image and fires back a recipe built around what you have.",
   },
   {
     number: "03",
     icon: "🍳",
     title: "Cook & Enjoy",
-    description: "Follow your personalized recipe and enjoy a home-cooked meal.",
+    description: "Follow the step-by-step recipe and enjoy a home-cooked meal.",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 md:py-28" style={{ backgroundColor: "#f5f5f0" }}>
+    <section id="how-it-works" className="py-20 md:py-28 bg-[var(--bg)]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -44,18 +44,12 @@ export function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "#888" }}
-          >
-            How It Works
+          <p className="font-mono-ticket text-[11px] tracking-[0.2em] text-[var(--brand)] mb-3">
+            HOW IT WORKS
           </p>
-          <h2
-            className="text-3xl md:text-4xl font-medium"
-            style={{ color: "#1a1a1a", letterSpacing: "-0.3px" }}
-          >
+          <h2 className="font-display text-3xl md:text-[42px] font-semibold text-[var(--text-primary)]">
             Ready in 3 steps.
           </h2>
         </motion.div>
@@ -70,39 +64,27 @@ export function HowItWorks() {
         >
           {steps.map((step, i) => (
             <Fragment key={step.number}>
-              <motion.div
-                variants={stepVariant}
-                className="flex-1 flex flex-col gap-4"
-              >
-                <span
-                  className="text-4xl font-bold"
-                  style={{ color: "#ffa51f" }}
-                >
-                  {step.number}
-                </span>
+              <motion.div variants={stepVariant} className="flex-1 flex flex-col gap-4">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono-ticket text-5xl font-bold text-[var(--text-primary)]">
+                    {step.number}
+                  </span>
+                  <span className="h-px flex-1 bg-[var(--border)] mb-2" />
+                </div>
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{step.icon}</span>
-                  <h3
-                    className="text-base font-semibold"
-                    style={{ color: "#1a1a1a" }}
-                  >
+                  <h3 className="text-base font-semibold text-[var(--text-primary)]">
                     {step.title}
                   </h3>
                 </div>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "#888" }}
-                >
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                   {step.description}
                 </p>
               </motion.div>
 
               {/* Arrow — desktop only, between steps */}
               {i < steps.length - 1 && (
-                <div
-                  className="hidden md:flex items-center justify-center w-12 shrink-0 mt-10 text-xl"
-                  style={{ color: "#ddd" }}
-                >
+                <div className="hidden md:flex items-center justify-center w-12 shrink-0 mt-6 text-xl text-[var(--text-muted)]">
                   →
                 </div>
               )}
