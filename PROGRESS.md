@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M4 — app ekranları (pantry, kamera/vision, tarif, plan) + tab bar  
+**Aktif Mikro-Adım:** M4 devam — kamera/vision ekranı + meal-plan (pantry+cook+tabs ✅)  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -218,10 +218,25 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - Doğrulama (web hedefi): typecheck 0 · **tam döngü test edildi** — guard oturumsuz login gösteriyor, geçici test kullanıcısıyla giriş → home ("Signed in as…"), sign out → login. Console hatasız. Test kullanıcısı silindi
 - ⚠️ Açık: mobile eslint (eslint-config-expo) henüz kurulmadı — ayrı tooling işi (chip açıldı)
 
-### ⏭️ Sırada — M4+
-- **M4:** App ekranları — pantry, kamera/vision, tarif üretme, yemek planı + tab bar (`(app)/_layout.tsx` Stack → Tabs)
+### V5.5 — M4: Tab bar + Pantry + Cook ✅ ÇEKİRDEK TAMAMLANDI (commit `d207708`)
+- `(app)/_layout.tsx` → Stack yerine **Tabs** (Today / Pantry / Cook / Profile), `@expo/vector-icons` Ionicons, pantry-green bar + lime aktif
+- **Pantry** (`pantry.tsx`): tam CRUD, expiry ASC liste, optimistic add/delete, **expiry hızlı-seçim çipleri** (3d/1w/2w/1mo → YYYY-MM-DD; date-picker bağımlılığı yok), renk kodlu aciliyet (`lib/expiry.ts`)
+- **Cook** (`cook.tsx`): pantry çip seçimi + elle ekleme → POST /api/recipes → yapılandırılmış tarifi "fiş" dilinde gösterir; 403 → Premium yükselt
+- **Profile**: email + sign out. **Today**: gerçek pantry sayacı + expiring-soon
+- Doğrulama: Node testi (mobil apiFetch'in aynısı) → pantry GET/POST/DELETE + expiry hesabı + sıralama **hepsi doğru**. 4 ekran da render (get_page_text). typecheck 0
+- 🔴 **Cook için GEMINI kredisi bitmiş** (429 billing) — kod değil, hesap sorunu. Hata yolu doğru çalıştı (kredi iadesi + temiz 500). **Kullanıcı Gemini kredisi yüklemeli**, sonra Cook çalışır
+- ⚠️ expo web'de API çağrıları cross-origin **CORS**'a takılıyor ("Failed to fetch") — sadece web-preview artifact'i, native'de yok
+
+### ⏭️ Sırada — M4 devamı + M5/M6
+- **M4b:** Kamera/vision ekranı (`expo-image-picker` kurulu) → POST /api/vision → malzeme çıkar → pantry'e/cook'a besle
+- **M4c:** Meal-plan ekranı (haftalık plan görünümü + tek öğün yenile)
 - **M5:** Push notification (israf uyarıları)
 - **M6:** EAS Build → App Store / Play Store
+
+### 🔧 Bilinen açık işler (mobil)
+- **Gemini kredisi** yüklenmeli (Cook + vision + meal-plan hepsi Gemini'ye bağlı)
+- `mobile/.env` → `EXPO_PUBLIC_API_URL=http://localhost:3000` (default). Gerçek cihaz/simülatör testinde LAN IP veya deployed API'ye çevrilmeli. **Not:** deployed API henüz M1 Bearer'ı içermiyor (main'e merge edilmedi) → mobil şu an sadece **lokal** Next server'a bağlanabilir
+- mobile eslint kurulmadı (chip açık)
 
 ### ⚠️ Bilinen açık — mobile npm audit
 11 moderate, hepsi `uuid` kaynaklı ve Expo'nun **CLI/build toolchain**'inde (@expo/cli, metro-config, prebuild-config…). **App bundle'ına girmiyor.** `--force` gerektiriyor (Expo 57'yi kırar) → bilinçli bırakıldı, Expo upstream'de yamalayacak. Web tarafı audit **0**.
