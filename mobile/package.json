@@ -7,6 +7,7 @@
     "@expo-google-fonts/instrument-sans": "^0.4.2",
     "@expo-google-fonts/space-mono": "^0.4.2",
     "@expo/ui": "~57.0.4",
+    "@expo/vector-icons": "^15.0.2",
     "@supabase/supabase-js": "^2.110.5",
     "expo": "~57.0.4",
     "expo-constants": "~57.0.3",

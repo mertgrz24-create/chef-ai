@@ -1,111 +1,85 @@
-import { Pressable, ScrollView, Text, View } from 'react-native'
+import { useCallback, useState } from 'react'
+import { ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useFocusEffect } from 'expo-router'
 import { useAuth } from '@/lib/auth'
+import { apiFetch } from '@/lib/api'
+import type { PantryItem } from '@/lib/types'
+import { urgencyColor, urgencyOf } from '@/lib/expiry'
 
-// What you have — the raw input, as pantry tags.
-const pantry = ['spinach', 'chicken', 'garlic', 'rice', 'lemon']
-
-// What you get — the fired ticket.
-const ticketIngredients = [
-  '2 chicken breasts',
-  '3 cups spinach',
-  '4 garlic cloves',
-  '1 cup jasmine rice',
-]
-
-/**
- * The signature element, ported from the web hero: ingredients (input) become a
- * printed kitchen ticket (output). Same tokens and type roles as the web app.
- */
-function RecipeTicket() {
-  return (
-    <View className="overflow-hidden rounded-2xl bg-surface">
-      {/* ink header bar */}
-      <View className="flex-row items-center justify-between bg-ink px-4 py-2.5">
-        <Text className="font-mono text-[11px] tracking-widest text-chalk">ORDER #0428</Text>
-        <Text className="font-mono text-[11px] tracking-widest text-zest">35 MIN</Text>
-      </View>
-
-      <View className="px-5 pb-5 pt-4">
-        <Text className="font-mono-bold text-[10px] tracking-[2px] text-pantry">
-          TONIGHT&apos;S PICK
-        </Text>
-        <Text className="mb-3 mt-1.5 font-display text-[26px] leading-[30px] text-ink">
-          Garlic Chicken{'\n'}& Spinach Rice
-        </Text>
-
-        {ticketIngredients.map((line) => (
-          <View key={line} className="mb-1.5 flex-row items-center gap-2">
-            <Text className="text-pantry">▪</Text>
-            <Text className="font-mono text-[12px] text-ink-2">{line}</Text>
-          </View>
-        ))}
-
-        {/* perforated divider */}
-        <View className="my-4 border-t border-dashed border-border" />
-
-        <View className="mb-4 flex-row justify-between">
-          {['520 KCAL', '42 P', '48 C', '14 F'].map((macro) => (
-            <Text key={macro} className="font-mono text-[11px] text-ink-muted">
-              {macro}
-            </Text>
-          ))}
-        </View>
-
-        <View className="rounded-md bg-zest py-3">
-          <Text className="text-center font-mono-bold text-[12px] tracking-wide text-ink">
-            VIEW RECIPE →
-          </Text>
-        </View>
-      </View>
-    </View>
-  )
-}
-
-export default function Home() {
-  const { session, signOut } = useAuth()
+export default function Today() {
+  const { session } = useAuth()
   const firstName = session?.user.email?.split('@')[0] ?? 'chef'
+
+  const [pantry, setPantry] = useState<PantryItem[] | null>(null)
+
+  useFocusEffect(
+    useCallback(() => {
+      apiFetch<{ items: PantryItem[] }>('/api/pantry')
+        .then(({ items }) => setPantry(items))
+        .catch(() => setPantry([]))
+    }, [])
+  )
+
+  const expiringSoon = (pantry ?? []).filter((i) => {
+    const u = urgencyOf(i.expiry_date)
+    return u === 'expired' || u === 'urgent'
+  })
 
   return (
     <View className="flex-1 bg-pantry">
       <SafeAreaView className="flex-1" edges={['top']}>
-        <ScrollView contentContainerClassName="px-6 pb-12" showsVerticalScrollIndicator={false}>
-          <View className="mt-6 flex-row items-center justify-between">
-            <Text className="font-mono text-[11px] tracking-[2px] text-zest">
-              AI KITCHEN DECISION ENGINE
-            </Text>
-            <Pressable onPress={() => signOut()} hitSlop={8}>
-              <Text className="font-mono text-[11px] tracking-wide text-[#8fa093]">SIGN OUT</Text>
-            </Pressable>
-          </View>
+        <ScrollView contentContainerClassName="px-6 pb-28 pt-6" showsVerticalScrollIndicator={false}>
+          <Text className="font-mono text-[11px] tracking-[2px] text-zest">AI KITCHEN DECISION ENGINE</Text>
+          <Text className="mt-1.5 font-sans text-[13px] text-[#8fa093]">Hello, {firstName}</Text>
 
-          <Text className="mt-4 font-sans text-[13px] text-[#8fa093]">
-            Signed in as {firstName}
-          </Text>
-
-          <Text className="mt-4 font-display text-[34px] leading-[38px] text-chalk">
+          <Text className="mt-4 font-display text-[32px] leading-[36px] text-chalk">
             Tonight&apos;s dinner is already in your <Text className="text-zest">fridge.</Text>
           </Text>
 
-          <Text className="mt-4 font-sans text-[15px] leading-[23px] text-[#c3c8ba]">
-            Snap what you&apos;ve got. Chef-AI reads your ingredients and fires back a recipe you
-            can actually make.
-          </Text>
-
-          {/* the raw input */}
-          <Text className="mb-2.5 mt-8 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-            IN YOUR PANTRY
-          </Text>
-          <View className="mb-8 flex-row flex-wrap gap-2">
-            {pantry.map((ingredient) => (
-              <View key={ingredient} className="rounded-full border border-chalk/20 px-3 py-1">
-                <Text className="font-mono text-[12px] text-[#e4e8dd]">{ingredient}</Text>
-              </View>
-            ))}
+          {/* pantry count */}
+          <View className="mt-8 flex-row gap-3">
+            <View className="flex-1 rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4">
+              <Text className="font-display text-[32px] text-chalk">{pantry?.length ?? '—'}</Text>
+              <Text className="mt-0.5 font-mono text-[10px] tracking-[1.5px] text-[#8fa093]">
+                IN PANTRY
+              </Text>
+            </View>
+            <View className="flex-1 rounded-2xl border p-4" style={{ borderColor: expiringSoon.length ? '#E8623D55' : '#f5f6f11a' }}>
+              <Text
+                className="font-display text-[32px]"
+                style={{ color: expiringSoon.length ? '#F0913D' : '#F5F6F1' }}
+              >
+                {pantry ? expiringSoon.length : '—'}
+              </Text>
+              <Text className="mt-0.5 font-mono text-[10px] tracking-[1.5px] text-[#8fa093]">
+                EXPIRING SOON
+              </Text>
+            </View>
           </View>
 
-          {/* the fired output */}
-          <RecipeTicket />
+          {/* expiring list */}
+          {expiringSoon.length > 0 ? (
+            <>
+              <Text className="mb-2.5 mt-8 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
+                COOK THESE BEFORE THEY GO
+              </Text>
+              <View className="flex-row flex-wrap gap-2">
+                {expiringSoon.map((item) => (
+                  <View
+                    key={item.id}
+                    className="flex-row items-center gap-2 rounded-full border border-chalk/20 px-3 py-1.5"
+                  >
+                    <View
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: urgencyColor(urgencyOf(item.expiry_date)) }}
+                    />
+                    <Text className="font-mono text-[12px] text-[#e4e8dd]">{item.name}</Text>
+                  </View>
+                ))}
+              </View>
+            </>
+          ) : null}
         </ScrollView>
       </SafeAreaView>
     </View>
