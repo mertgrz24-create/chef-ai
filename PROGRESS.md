@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M4c — meal-plan ekranı (pantry+cook+tabs+scan ✅)  
+**Aktif Mikro-Adım:** M5 — push notification (israf uyarıları). M4 ekranları TAMAM ✅  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -233,9 +233,15 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - `(app)/_layout.tsx`: **5. sekme "Scan"** (viewfinder ikonu) — markanın "snap your fridge" özü
 - Doğrulama: Node testi (apiUpload'ın aynısı: gerçek token + multipart PNG) → geçerli PNG+Bearer **500** (auth+multipart+validasyon GEÇTİ, Gemini billing'de durdu), auth yok **401**, dosya yok **400** → upload plumbing sağlam. Görsel: Scan render + 5-sekme. typecheck 0
 
-### ⏭️ Sırada — M4c + M5/M6
-- **M4c:** Meal-plan ekranı (haftalık plan görünümü + tek öğün yenile)
-- **M5:** Push notification (israf uyarıları)
+### V5.7 — M4c: Meal-plan ekranı ✅ TAMAMLANDI (commit `03b7640`) — M4 EKRANLARI TAMAM 🎉
+- `meal-plan.tsx`: GET (404 → boş durum + generate), plan varsa 7 gün × (kahvaltı+akşam), accordion detay (LayoutAnimation), tek öğün yenile (PATCH, sadece o satır spinner), tüm hafta yenile (POST)
+- `_layout.tsx`: meal-plan **tab bar'dan gizli** (`href:null`) — 6. sekme yerine Today'den erişiliyor
+- `index.tsx`: Today'e "This week's meal plan" giriş kartı (router.navigate)
+- Doğrulama: boş durum + Today kartı + navigasyon render doğru, tab bar 5 sekme. typecheck 0
+- **Mobil app'in tüm ekranları hazır:** Today · Pantry · Scan · Cook · Meal-plan · Profile
+
+### ⏭️ Sırada — M5/M6
+- **M5:** Push notification (israf uyarıları — PWA'nın veremediği asıl kazanç). `expo-notifications` + Supabase'e token kaydı + expiry cron/edge function
 - **M6:** EAS Build → App Store / Play Store
 
 ### 🔧 Bilinen açık işler (mobil)
