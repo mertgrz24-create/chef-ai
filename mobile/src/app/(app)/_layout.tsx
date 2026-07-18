@@ -37,6 +37,13 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
+        name="scan"
+        options={{
+          title: 'Scan',
+          tabBarIcon: ({ color, size }) => <Ionicons name="scan" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="cook"
         options={{
           title: 'Cook',

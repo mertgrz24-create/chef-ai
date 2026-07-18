@@ -42,6 +42,35 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
     },
   })
 
+  return handleResponse<T>(response)
+}
+
+/**
+ * Uploads a local file (e.g. a picked photo) as multipart/form-data.
+ *
+ * Content-Type is deliberately NOT set: React Native's fetch computes the
+ * multipart boundary itself, and forcing application/json here (as apiFetch
+ * does) would corrupt the request.
+ */
+export async function apiUpload<T>(path: string, formData: FormData): Promise<T> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) {
+    throw new ApiError('Not signed in.', 401)
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    body: formData,
+    headers: { Authorization: `Bearer ${session.access_token}` },
+  })
+
+  return handleResponse<T>(response)
+}
+
+async function handleResponse<T>(response: Response): Promise<T> {
   const text = await response.text()
   const body: unknown = text ? JSON.parse(text) : {}
 
