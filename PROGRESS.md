@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M6 — EAS Build → store. M5 push kod tarafı TAMAM ✅  
+**Aktif Mikro-Adım:** Kod tamam (M1–M6 hazırlık). Kalan işler operasyonel — bkz. `mobile/EAS_BUILD.md` + açık işler  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -247,8 +247,12 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - Doğrulama: endpoint guard'ları canlı test (register 401; cron 401/401/**200 {sent:0}** = uçtan uca akış) · web+mobil typecheck 0 · expo-notifications web'de kırmadı
 - ⚠️ Test edilemeyen (beklenen): register happy-path (**push_tokens migration** manuel) + gerçek token/teslimat (**cihaz + EAS projectId = M6**)
 
-### ⏭️ Sırada — M6 (son adım)
-- **M6:** EAS Build → gerçek `.ipa`/`.apk` → App Store / Play Store. EAS project oluşturunca `app.json`'a `extra.eas.projectId` gelir → push token alımı da aktifleşir
+### V5.9 — M6: EAS Build hazırlığı ✅ HAZIRLIK TAMAM (commit `fd443a0`)
+- `mobile/eas.json`: development/preview/production profilleri, `appVersionSource:remote` + autoIncrement, preview APK, production store, submit iskeleti (placeholder)
+- `mobile/app.json`: `ITSAppUsesNonExemptEncryption=false` (store prompt'unu önler)
+- **`mobile/EAS_BUILD.md`**: adım adım rehber (eas init → projectId → push aktif, env, build, submit, store) + yayın öncesi kontrol listesi
+- **Kalan M6 işi tamamen operasyonel/senin hesaplarınla:** `eas init`, Apple/Google hesapları, gerçek build + store gönderimi. Rehberi takip et
+- 🔑 `eas init` → `projectId` → **push token alımı otomatik aktifleşir** (kod bekliyor)
 
 ### 🔧 Bilinen açık işler (güncel)
 - **Gemini kredisi** yükle (Cook + Scan + Meal-plan)
