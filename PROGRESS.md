@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M5 — push notification (israf uyarıları). M4 ekranları TAMAM ✅  
+**Aktif Mikro-Adım:** M6 — EAS Build → store. M5 push kod tarafı TAMAM ✅  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -240,9 +240,22 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - Doğrulama: boş durum + Today kartı + navigasyon render doğru, tab bar 5 sekme. typecheck 0
 - **Mobil app'in tüm ekranları hazır:** Today · Pantry · Scan · Cook · Meal-plan · Profile
 
-### ⏭️ Sırada — M5/M6
-- **M5:** Push notification (israf uyarıları — PWA'nın veremediği asıl kazanç). `expo-notifications` + Supabase'e token kaydı + expiry cron/edge function
-- **M6:** EAS Build → App Store / Play Store
+### V5.8 — M5: Push notification altyapısı ✅ KOD TARAFI TAMAM (commit `642db9e`)
+- **Mimari:** mobil token alır → `/api/push/register` → `push_tokens` tablosu → günlük **Vercel Cron** `/api/push/send-expiry-alerts` → yarın bozulacak malzemeler → **Expo Push API**
+- Backend: `push_tokens` migration (RLS) · `lib/supabase/admin.ts` (service-role, cron için) · register endpoint (upsert) · send-expiry endpoint (CRON_SECRET korumalı, ET gün sınırı, 100'lük batch) · `vercel.json` cron (`0 13 * * *`) · `.env.example`'a CRON_SECRET
+- Mobil: `expo-notifications` · `src/lib/notifications.ts` (handler + izin + EAS projectId guard + register) · `(app)/_layout.tsx` mount'ta register · app.json plugin
+- Doğrulama: endpoint guard'ları canlı test (register 401; cron 401/401/**200 {sent:0}** = uçtan uca akış) · web+mobil typecheck 0 · expo-notifications web'de kırmadı
+- ⚠️ Test edilemeyen (beklenen): register happy-path (**push_tokens migration** manuel) + gerçek token/teslimat (**cihaz + EAS projectId = M6**)
+
+### ⏭️ Sırada — M6 (son adım)
+- **M6:** EAS Build → gerçek `.ipa`/`.apk` → App Store / Play Store. EAS project oluşturunca `app.json`'a `extra.eas.projectId` gelir → push token alımı da aktifleşir
+
+### 🔧 Bilinen açık işler (güncel)
+- **Gemini kredisi** yükle (Cook + Scan + Meal-plan)
+- **Manuel Supabase migration'ları:** `20260703_referral_and_usage_rpc.sql` (eski) + **`20260718_create_push_tokens.sql`** (yeni — push register bunsuz 500)
+- **Vercel'e `CRON_SECRET`** ekle (production'da cron'u korur; lokalde `.env.local`'da test değeri var)
+- `next16-upgrade → main` merge (deployed API mobil Bearer'ı içermiyor)
+- mobile eslint kurulumu (chip açık)
 
 ### 🔧 Bilinen açık işler (mobil)
 - **Gemini kredisi** yüklenmeli (Cook + vision + meal-plan hepsi Gemini'ye bağlı)
