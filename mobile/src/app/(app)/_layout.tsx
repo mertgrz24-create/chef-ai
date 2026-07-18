@@ -1,9 +1,15 @@
+import { useEffect } from 'react'
 import { Tabs } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { registerPushToken } from '@/lib/notifications'
 
-// The app's four surfaces. "Cook" is the center of gravity — turning what you
-// have into a recipe — so it sits in the middle.
+// The app's surfaces. Reaching this layout means the user is authenticated
+// (the root guard gates it), so it's the right place to register for push.
 export default function AppLayout() {
+  useEffect(() => {
+    registerPushToken()
+  }, [])
+
   return (
     <Tabs
       screenOptions={{

@@ -49,6 +49,12 @@
           "photosPermission": "Chef-AI reads photos you choose so it can identify your ingredients.",
           "cameraPermission": "Chef-AI uses your camera to identify ingredients from a photo of your fridge."
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#1E3A2F"
+        }
       ]
     ],
     "experiments": {
