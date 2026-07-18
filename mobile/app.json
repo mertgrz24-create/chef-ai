@@ -13,7 +13,8 @@
       "supportsTablet": false,
       "infoPlist": {
         "NSCameraUsageDescription": "Chef-AI uses your camera to identify ingredients from a photo of your fridge.",
-        "NSPhotoLibraryUsageDescription": "Chef-AI reads photos you choose so it can identify your ingredients."
+        "NSPhotoLibraryUsageDescription": "Chef-AI reads photos you choose so it can identify your ingredients.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
