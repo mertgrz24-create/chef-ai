@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M4 devam — kamera/vision ekranı + meal-plan (pantry+cook+tabs ✅)  
+**Aktif Mikro-Adım:** M4c — meal-plan ekranı (pantry+cook+tabs+scan ✅)  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -227,8 +227,13 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - 🔴 **Cook için GEMINI kredisi bitmiş** (429 billing) — kod değil, hesap sorunu. Hata yolu doğru çalıştı (kredi iadesi + temiz 500). **Kullanıcı Gemini kredisi yüklemeli**, sonra Cook çalışır
 - ⚠️ expo web'de API çağrıları cross-origin **CORS**'a takılıyor ("Failed to fetch") — sadece web-preview artifact'i, native'de yok
 
-### ⏭️ Sırada — M4 devamı + M5/M6
-- **M4b:** Kamera/vision ekranı (`expo-image-picker` kurulu) → POST /api/vision → malzeme çıkar → pantry'e/cook'a besle
+### V5.6 — M4b: Kamera/Vision ekranı (Scan) ✅ TAMAMLANDI (commit `200c09a`)
+- `scan.tsx`: `expo-image-picker` (SDK 57 API `mediaTypes:['images']`) ile foto çek/seç → multipart upload → POST /api/vision → tespit edilen malzemeler çip (tap-to-deselect) → seçilenleri pantry'e ekle (7g default) → /pantry
+- `lib/api.ts` → **`apiUpload()`**: multipart/form-data için, Content-Type **elle set edilmiyor** (RN boundary'yi kendi hesaplar; apiFetch'in json content-type'ı multipart'ı bozardı)
+- `(app)/_layout.tsx`: **5. sekme "Scan"** (viewfinder ikonu) — markanın "snap your fridge" özü
+- Doğrulama: Node testi (apiUpload'ın aynısı: gerçek token + multipart PNG) → geçerli PNG+Bearer **500** (auth+multipart+validasyon GEÇTİ, Gemini billing'de durdu), auth yok **401**, dosya yok **400** → upload plumbing sağlam. Görsel: Scan render + 5-sekme. typecheck 0
+
+### ⏭️ Sırada — M4c + M5/M6
 - **M4c:** Meal-plan ekranı (haftalık plan görünümü + tek öğün yenile)
 - **M5:** Push notification (israf uyarıları)
 - **M6:** EAS Build → App Store / Play Store
