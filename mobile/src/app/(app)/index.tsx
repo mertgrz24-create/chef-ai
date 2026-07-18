@@ -1,5 +1,6 @@
-import { ScrollView, Text, View } from 'react-native'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useAuth } from '@/lib/auth'
 
 // What you have — the raw input, as pantry tags.
 const pantry = ['spinach', 'chicken', 'garlic', 'rice', 'lemon']
@@ -62,12 +63,24 @@ function RecipeTicket() {
 }
 
 export default function Home() {
+  const { session, signOut } = useAuth()
+  const firstName = session?.user.email?.split('@')[0] ?? 'chef'
+
   return (
     <View className="flex-1 bg-pantry">
       <SafeAreaView className="flex-1" edges={['top']}>
         <ScrollView contentContainerClassName="px-6 pb-12" showsVerticalScrollIndicator={false}>
-          <Text className="mt-6 font-mono text-[11px] tracking-[2px] text-zest">
-            AI KITCHEN DECISION ENGINE
+          <View className="mt-6 flex-row items-center justify-between">
+            <Text className="font-mono text-[11px] tracking-[2px] text-zest">
+              AI KITCHEN DECISION ENGINE
+            </Text>
+            <Pressable onPress={() => signOut()} hitSlop={8}>
+              <Text className="font-mono text-[11px] tracking-wide text-[#8fa093]">SIGN OUT</Text>
+            </Pressable>
+          </View>
+
+          <Text className="mt-4 font-sans text-[13px] text-[#8fa093]">
+            Signed in as {firstName}
           </Text>
 
           <Text className="mt-4 font-display text-[34px] leading-[38px] text-chalk">

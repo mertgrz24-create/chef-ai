@@ -14,11 +14,35 @@ import {
 } from '@expo-google-fonts/instrument-sans'
 import { SpaceMono_400Regular, SpaceMono_700Bold } from '@expo-google-fonts/space-mono'
 import { useFonts } from 'expo-font'
+import { AuthProvider, useAuth } from '@/lib/auth'
 
 SplashScreen.preventAutoHideAsync()
 
+function RootNavigator({ fontsReady }: { fontsReady: boolean }) {
+  const { session, initializing } = useAuth()
+  const ready = fontsReady && !initializing
+
+  useEffect(() => {
+    if (ready) SplashScreen.hideAsync()
+  }, [ready])
+
+  if (!ready) return null
+
+  return (
+    <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#1E3A2F' } }}>
+      {/* Signed in → the app. Signed out → auth. Router swaps automatically
+          when the session changes, so sign-in/out needs no manual navigation. */}
+      <Stack.Protected guard={!!session}>
+        <Stack.Screen name="(app)" />
+      </Stack.Protected>
+      <Stack.Protected guard={!session}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+    </Stack>
+  )
+}
+
 export default function RootLayout() {
-  // The "Mise en Place" type system: display / body / kitchen-ticket mono.
   const [fontsLoaded, fontError] = useFonts({
     BricolageGrotesque_600SemiBold,
     BricolageGrotesque_700Bold,
@@ -28,22 +52,10 @@ export default function RootLayout() {
     SpaceMono_700Bold,
   })
 
-  useEffect(() => {
-    // Hide the splash on failure too — a missing font should degrade to a
-    // system face, not trap the user on a splash screen forever.
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync()
-    }
-  }, [fontsLoaded, fontError])
-
-  if (!fontsLoaded && !fontError) {
-    return null
-  }
-
   return (
-    <>
+    <AuthProvider>
       <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false }} />
-    </>
+      <RootNavigator fontsReady={fontsLoaded || !!fontError} />
+    </AuthProvider>
   )
 }
