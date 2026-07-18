@@ -5,10 +5,10 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** Kod tamam (M1–M6 hazırlık). Kalan işler operasyonel — bkz. `mobile/EAS_BUILD.md` + açık işler  
-**Son güncelleme:** 14 Temmuz 2026  
-**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
-**Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
+**Aktif Mikro-Adım:** Kod tamam + **production'a deploy edildi** ✅. Kalan işler operasyonel — bkz. `mobile/EAS_BUILD.md` + açık işler  
+**Son güncelleme:** 18 Temmuz 2026  
+**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ✅ **YENİ redesign + Next16 + M1 Bearer CANLI** (main = `d0d0df9`, deploy doğrulandı)  
+**Aktif Branch:** `main` (ui-redesign → main fast-forward merge + push edildi; ui-redesign de aynı commit'te)
 
 ### 🏗️ Mimari kararı (14 Tem 2026)
 **Landing = web, App = mobil.** Next.js landing page pazarlama yüzü olarak Vercel'de kalır; asıl uygulama **Expo/React Native** ile indirilebilir mobil app olur (App Store + Play Store). 17 API route + Supabase **ortak backend** olarak iki istemciye de hizmet eder.
@@ -16,9 +16,13 @@
 - Neden webview/Capacitor değil: 8/8 dashboard sayfası Server Component + cookie auth → statik bundle'da çalışmaz, veri katmanı zaten baştan yazılmalıydı.
 - Expo'nun asıl kazancı: **push notification** (israf uyarılarının can damarı), native kamera, mağaza varlığı.
 
-### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir)
-1. **Supabase SQL Editor** → `supabase/migrations/20260703_referral_and_usage_rpc.sql` çalıştır (idempotent). Bu olmadan **referral canlıda tamamen kırık** (RLS own-row, başkasının satırını güncelleyemiyor) ve freemium sayacı yarış durumuna açık. Doğrulama: `select proname from pg_proc where proname in ('apply_referral','consume_recipe_credit','refund_recipe_credit');` → 3 satır.
-2. **Preview QA** → yukarıdaki preview URL'de auth'lu akışlar: login, tarif üretme, fotoğraf analizi, yemek planı, dark mode, animasyonlar (React 19 + framer-motion 12'nin gerçek testi).
+### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir) — deploy sonrası GÜNCEL
+1. 🆕 **Vercel'e `CRON_SECRET` env ekle (Production)** — 18 Tem deploy'uyla `vercel.json` cron'u (`/api/push/send-expiry-alerts`) **canlıya girdi**; günde bir tetiklenir. Secret set değilken 500 döner (zararsız — kimseye push gitmez, sadece log). Set edilince korunur.
+2. **Supabase SQL Editor** → 2 migration çalıştır:
+   - `supabase/migrations/20260703_referral_and_usage_rpc.sql` — bu olmadan **referral canlıda kırık** + freemium sayacı yarış durumuna açık. Doğrulama: `select proname from pg_proc where proname in ('apply_referral','consume_recipe_credit','refund_recipe_credit');` → 3 satır.
+   - 🆕 `supabase/migrations/20260718_create_push_tokens.sql` — mobil `/api/push/register` bunsuz 500.
+3. **Gemini API kredisi** yükle ([AI Studio](https://ai.studio/projects)) — Cook/Scan/Meal-plan (web+mobil) hepsi `429 credits depleted` alıyor.
+4. **Prod QA** → canlı auth'lu akışlar: login, tarif üretme (Gemini kredisi sonrası), redesign'ın dashboard'da kontrastı, dark mode.
 
 ## 🗺️ Genel Yol Haritası
 
