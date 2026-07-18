@@ -57,6 +57,8 @@ export default function AppLayout() {
           tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
         }}
       />
+      {/* Reached from the Today screen, not the tab bar. */}
+      <Tabs.Screen name="meal-plan" options={{ href: null }} />
     </Tabs>
   )
 }

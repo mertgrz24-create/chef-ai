@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useFocusEffect } from 'expo-router'
+import { router, useFocusEffect } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@/lib/auth'
 import { apiFetch } from '@/lib/api'
 import type { PantryItem } from '@/lib/types'
@@ -80,6 +81,21 @@ export default function Today() {
               </View>
             </>
           ) : null}
+
+          {/* meal plan entry — lives here, not in the tab bar */}
+          <Pressable
+            onPress={() => router.navigate('/meal-plan')}
+            className="mt-8 flex-row items-center rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
+          >
+            <View className="mr-3 h-10 w-10 items-center justify-center rounded-xl bg-zest">
+              <Ionicons name="calendar" size={20} color="#17180F" />
+            </View>
+            <View className="flex-1">
+              <Text className="font-sans text-[15px] text-chalk">This week&apos;s meal plan</Text>
+              <Text className="font-mono text-[11px] text-[#8fa093]">7 days, planned for you</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="#8fa093" />
+          </Pressable>
         </ScrollView>
       </SafeAreaView>
     </View>
