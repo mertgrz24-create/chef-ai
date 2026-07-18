@@ -5,7 +5,7 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** M3 — mobil auth ekranları (login/signup) + navigasyon iskeleti  
+**Aktif Mikro-Adım:** M4 — app ekranları (pantry, kamera/vision, tarif, plan) + tab bar  
 **Son güncelleme:** 14 Temmuz 2026  
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ⚠️ production hâlâ eski `main`'de  
 **Aktif Branch:** `ui-redesign` (`next16-upgrade` üzerinden dallandı)
@@ -209,9 +209,17 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - 🔒 `mobile/.gitignore`'a `.env` eklendi — template sadece `.env*.local` yoksayıyordu, **anon key commit'lenecekti**
 - Doğrulama: typecheck 0 · Metro bundle temiz (933 modül) · web hedefinde render doğrulandı (3 font yüklendi) · console hatasız
 
-### ⏭️ Sırada — M3+
-- **M3:** Mobil auth ekranları (login/signup) + navigasyon (tab bar)
-- **M4:** Ekranlar — pantry, kamera/vision, tarif üretme, yemek planı
+### V5.4 — M3: Auth ekranları + korumalı navigasyon ✅ TAMAMLANDI (commit `53b9d14`)
+- Expo Router **protected-routes** pattern (SDK 57 `Stack.Protected guard={...}`)
+- `src/lib/auth.tsx` — `AuthProvider` + `useAuth`: `getSession` ile persisted oturumu geri yükler, `onAuthStateChange` ile senkron. signIn/signUp/signOut
+- `_layout.tsx` — session varsa `(app)`, yoksa `(auth)` render edilir; giriş/çıkışta router **otomatik** geçer (manuel navigasyon yok)
+- `(auth)/login.tsx` + `signup.tsx` — tasarım sistemi ekranları; `src/components/ui.tsx` (Field/Button/Screen/ErrorText primitifleri)
+- Rotalar `(auth)`/`(app)` gruplarına bölündü, home `(app)/index.tsx`'e taşındı
+- Doğrulama (web hedefi): typecheck 0 · **tam döngü test edildi** — guard oturumsuz login gösteriyor, geçici test kullanıcısıyla giriş → home ("Signed in as…"), sign out → login. Console hatasız. Test kullanıcısı silindi
+- ⚠️ Açık: mobile eslint (eslint-config-expo) henüz kurulmadı — ayrı tooling işi (chip açıldı)
+
+### ⏭️ Sırada — M4+
+- **M4:** App ekranları — pantry, kamera/vision, tarif üretme, yemek planı + tab bar (`(app)/_layout.tsx` Stack → Tabs)
 - **M5:** Push notification (israf uyarıları)
 - **M6:** EAS Build → App Store / Play Store
 
