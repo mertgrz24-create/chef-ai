@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createApiClient } from '@/lib/supabase/api'
+import { getWeekStartDate } from '@/lib/date'
 import { generateWeeklyMealPlan } from '@/lib/ai/gemini'
 
 type ProfileRow = {
@@ -22,15 +23,6 @@ function buildDietContext(profile: ProfileRow | null): string | undefined {
   if (profile.diet_type) parts.push(`diet type: ${profile.diet_type}`)
   if (parts.length === 0) return undefined
   return `My diet goals: ${parts.join(', ')}. Please suggest recipes that fit these goals.`
-}
-
-function getWeekStartDate(): string {
-  const now = new Date()
-  const day = now.getDay() // 0=Sun, 1=Mon
-  const diff = day === 0 ? -6 : 1 - day
-  const monday = new Date(now)
-  monday.setDate(now.getDate() + diff)
-  return monday.toISOString().split('T')[0]
 }
 
 export async function POST() {

@@ -1,14 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createApiClient } from '@/lib/supabase/api'
-
-function getWeekStartDate(): string {
-  const now = new Date()
-  const day = now.getDay()
-  const diff = day === 0 ? -6 : 1 - day
-  const monday = new Date(now)
-  monday.setDate(now.getDate() + diff)
-  return monday.toISOString().split('T')[0]
-}
+import { getWeekStartDate } from '@/lib/date'
 
 export async function GET() {
   const supabase = await createApiClient()

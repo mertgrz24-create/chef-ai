@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getWeekStartDate } from '@/lib/date'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { PhotoAnalyzer } from '@/components/dashboard/photo-analyzer'
@@ -31,15 +32,6 @@ const DIET_LABELS: Record<string, string> = {
 
 function dietLabel(dt: string): string {
   return DIET_LABELS[dt] ?? dt
-}
-
-function getWeekStartDate(): string {
-  const now = new Date()
-  const day = now.getDay()
-  const diff = day === 0 ? -6 : 1 - day
-  const monday = new Date(now)
-  monday.setDate(now.getDate() + diff)
-  return monday.toISOString().split('T')[0]
 }
 
 function getTodayDayKey(): string {

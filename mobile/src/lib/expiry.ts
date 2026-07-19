@@ -11,6 +11,13 @@ const URGENCY_COLOR: Record<Urgency, string> = {
   fresh: '#CDF23E', // zest
 }
 
+/** Today + `days`, as YYYY-MM-DD — the shape the pantry API expects. */
+export function isoInDays(days: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + days)
+  return d.toISOString().slice(0, 10)
+}
+
 export function daysUntil(expiry: string | null): number | null {
   if (!expiry) return null
   const today = new Date()

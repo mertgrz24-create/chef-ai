@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createApiClient } from '@/lib/supabase/api'
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
 // DELETE /api/pantry/[id] — remove a pantry item (RLS enforces ownership)
 export async function DELETE(
   _request: NextRequest,
@@ -15,8 +17,10 @@ export async function DELETE(
 
   const { id } = await params
 
-  if (!id) {
-    return NextResponse.json({ error: 'id parameter is required.' }, { status: 400 })
+  // Reject malformed ids before hitting the DB — a non-uuid otherwise raises a
+  // Postgres 22P02 and leaks out as a noisy 500.
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ error: 'Ingredient not found.' }, { status: 404 })
   }
 
   const { error } = await supabase

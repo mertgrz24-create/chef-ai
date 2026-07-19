@@ -7,14 +7,9 @@ import * as ImagePicker from 'expo-image-picker'
 import { Ionicons } from '@expo/vector-icons'
 import { ApiError, apiFetch, apiUpload } from '@/lib/api'
 import type { PantryItem } from '@/lib/types'
+import { isoInDays } from '@/lib/expiry'
 
 type Phase = 'idle' | 'analyzing' | 'results'
-
-function isoInDays(days: number): string {
-  const d = new Date()
-  d.setDate(d.getDate() + days)
-  return d.toISOString().slice(0, 10)
-}
 
 export default function Scan() {
   const [phase, setPhase] = useState<Phase>('idle')

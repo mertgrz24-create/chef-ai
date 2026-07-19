@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createApiClient } from '@/lib/supabase/api'
+import { getWeekStartDate } from '@/lib/date'
 import type { MealPlanDay } from '@/types/meal-plan'
-
-function getWeekStartDate(): string {
-  const now = new Date()
-  const day = now.getDay()
-  const diff = day === 0 ? -6 : 1 - day
-  const monday = new Date(now)
-  monday.setDate(now.getDate() + diff)
-  return monday.toISOString().split('T')[0]
-}
 
 export async function GET() {
   const supabase = await createApiClient()

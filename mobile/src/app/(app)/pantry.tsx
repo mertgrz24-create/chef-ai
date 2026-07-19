@@ -12,7 +12,7 @@ import { useFocusEffect } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { apiFetch } from '@/lib/api'
 import type { PantryItem } from '@/lib/types'
-import { expiryLabel, urgencyColor, urgencyOf } from '@/lib/expiry'
+import { expiryLabel, isoInDays, urgencyColor, urgencyOf } from '@/lib/expiry'
 
 const EXPIRY_PRESETS = [
   { label: '3d', days: 3 },
@@ -20,12 +20,6 @@ const EXPIRY_PRESETS = [
   { label: '2w', days: 14 },
   { label: '1mo', days: 30 },
 ]
-
-function isoInDays(days: number): string {
-  const d = new Date()
-  d.setDate(d.getDate() + days)
-  return d.toISOString().slice(0, 10)
-}
 
 export default function Pantry() {
   const [items, setItems] = useState<PantryItem[]>([])
