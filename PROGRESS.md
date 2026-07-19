@@ -16,13 +16,14 @@
 - Neden webview/Capacitor değil: 8/8 dashboard sayfası Server Component + cookie auth → statik bundle'da çalışmaz, veri katmanı zaten baştan yazılmalıydı.
 - Expo'nun asıl kazancı: **push notification** (israf uyarılarının can damarı), native kamera, mağaza varlığı.
 
-### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir) — deploy sonrası GÜNCEL
-1. 🆕 **Vercel'e `CRON_SECRET` env ekle (Production)** — 18 Tem deploy'uyla `vercel.json` cron'u (`/api/push/send-expiry-alerts`) **canlıya girdi**; günde bir tetiklenir. Secret set değilken 500 döner (zararsız — kimseye push gitmez, sadece log). Set edilince korunur.
-2. **Supabase SQL Editor** → 2 migration çalıştır:
-   - `supabase/migrations/20260703_referral_and_usage_rpc.sql` — bu olmadan **referral canlıda kırık** + freemium sayacı yarış durumuna açık. Doğrulama: `select proname from pg_proc where proname in ('apply_referral','consume_recipe_credit','refund_recipe_credit');` → 3 satır.
-   - 🆕 `supabase/migrations/20260718_create_push_tokens.sql` — mobil `/api/push/register` bunsuz 500.
-3. **Gemini API kredisi** yükle ([AI Studio](https://ai.studio/projects)) — Cook/Scan/Meal-plan (web+mobil) hepsi `429 credits depleted` alıyor.
-4. **Prod QA** → canlı auth'lu akışlar: login, tarif üretme (Gemini kredisi sonrası), redesign'ın dashboard'da kontrastı, dark mode.
+### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir) — 18 Tem GÜNCEL
+1. ✅ **Supabase migration'ları çalıştırıldı ve doğrulandı (18 Tem):**
+   - `20260703_referral_and_usage_rpc.sql` → 3 RPC canlı (referral + atomik freemium artık çalışıyor, legacy fallback devre dışı)
+   - `20260718_create_push_tokens.sql` → tablo + RLS canlı; `/api/push/register` uçtan uca **201** (gerçek kullanıcıyla test edildi, cascade delete çalışıyor)
+2. ⏳ **Vercel'e `CRON_SECRET` env ekle (Production)** — `vercel.json` cron'u (`/api/push/send-expiry-alerts`) canlı; secret set değilken günde bir 500 döner (zararsız ama). Set edilince korunur.
+3. ⏳ **Gemini API kredisi** yükle ([AI Studio](https://ai.studio/projects)) — Cook/Scan/Meal-plan (web+mobil) hepsi `429 credits depleted`.
+4. ⏳ **EAS build** (`mobile/EAS_BUILD.md`) — deployed API artık Bearer içeriyor, teknik engel kalktı.
+5. ⏳ **Prod QA** → canlı auth'lu akışlar (Gemini kredisi sonrası).
 
 ## 🗺️ Genel Yol Haritası
 
