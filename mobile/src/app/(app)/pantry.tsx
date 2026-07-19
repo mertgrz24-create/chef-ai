@@ -164,9 +164,15 @@ export default function Pantry() {
             keyExtractor={(i) => i.id}
             contentContainerClassName="px-6 pb-28 pt-4"
             ListEmptyComponent={
-              <Text className="mt-10 text-center font-sans text-[14px] text-[#8fa093]">
-                {error ?? 'Your pantry is empty. Add what you have above.'}
-              </Text>
+              <View className="mt-16 items-center px-6">
+                <View className="h-16 w-16 items-center justify-center rounded-full border border-dashed border-chalk/20">
+                  <Ionicons name="file-tray-outline" size={28} color="#5f7267" />
+                </View>
+                <Text className="mt-4 font-display text-[18px] text-chalk">Your pantry is empty</Text>
+                <Text className="mt-1.5 text-center font-sans text-[14px] leading-[21px] text-[#8fa093]">
+                  {error ?? 'Add what you have above, or scan your fridge to fill it fast.'}
+                </Text>
+              </View>
             }
             renderItem={({ item }) => {
               const urgency = urgencyOf(item.expiry_date)

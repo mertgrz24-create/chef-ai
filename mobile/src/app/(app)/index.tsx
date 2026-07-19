@@ -1,12 +1,55 @@
 import { useCallback, useState } from 'react'
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router, useFocusEffect } from 'expo-router'
+import { type Href, router, useFocusEffect } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@/lib/auth'
 import { apiFetch } from '@/lib/api'
 import type { PantryItem } from '@/lib/types'
 import { urgencyColor, urgencyOf } from '@/lib/expiry'
+
+// Static, on-brand cooking wisdom — one per day, no API. Fills the screen with
+// warmth without adding a feature.
+const TIPS = [
+  'A squeeze of acid — lemon or vinegar — at the end wakes up almost any dish.',
+  'Pat proteins dry before searing. Moisture is the enemy of a good crust.',
+  'Salt pasta water like the sea. It is your only shot at seasoning the pasta itself.',
+  'Rest meat after cooking so the juices settle back in instead of running out.',
+  'Store herbs like flowers: stems in water, a bag over the top. They last twice as long.',
+  'Freeze leftover herbs in olive oil in an ice tray — instant flavor cubes.',
+  'Taste as you go. The recipe is a map, not the territory.',
+]
+
+function tipOfDay(): string {
+  const start = Date.UTC(new Date().getUTCFullYear(), 0, 0)
+  const day = Math.floor((Date.now() - start) / 86_400_000)
+  return TIPS[day % TIPS.length]
+}
+
+function QuickAction({
+  icon,
+  title,
+  subtitle,
+  href,
+}: {
+  icon: keyof typeof Ionicons.glyphMap
+  title: string
+  subtitle: string
+  href: Href
+}) {
+  return (
+    <Pressable
+      onPress={() => router.navigate(href)}
+      className="flex-1 rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
+    >
+      <View className="mb-6 h-11 w-11 items-center justify-center rounded-xl bg-zest">
+        <Ionicons name={icon} size={22} color="#17180F" />
+      </View>
+      <Text className="font-sans text-[15px] text-chalk">{title}</Text>
+      <Text className="mt-0.5 font-mono text-[11px] text-[#8fa093]">{subtitle}</Text>
+    </Pressable>
+  )
+}
 
 export default function Today() {
   const { session } = useAuth()
@@ -82,12 +125,21 @@ export default function Today() {
             </>
           ) : null}
 
+          {/* quick actions */}
+          <Text className="mb-2.5 mt-8 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
+            QUICK ACTIONS
+          </Text>
+          <View className="flex-row gap-3">
+            <QuickAction icon="scan" title="Scan your fridge" subtitle="PHOTO → ITEMS" href="/scan" />
+            <QuickAction icon="flame" title="Cook something" subtitle="ITEMS → RECIPE" href="/cook" />
+          </View>
+
           {/* meal plan entry — lives here, not in the tab bar */}
           <Pressable
             onPress={() => router.navigate('/meal-plan')}
-            className="mt-8 flex-row items-center rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
+            className="mt-3 flex-row items-center rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
           >
-            <View className="mr-3 h-10 w-10 items-center justify-center rounded-xl bg-zest">
+            <View className="mr-3 h-11 w-11 items-center justify-center rounded-xl bg-zest">
               <Ionicons name="calendar" size={20} color="#17180F" />
             </View>
             <View className="flex-1">
@@ -96,6 +148,17 @@ export default function Today() {
             </View>
             <Ionicons name="chevron-forward" size={18} color="#8fa093" />
           </Pressable>
+
+          {/* kitchen tip — a ticket, for warmth */}
+          <View className="mt-8 overflow-hidden rounded-2xl bg-surface">
+            <View className="flex-row items-center justify-between bg-ink px-4 py-2.5">
+              <Text className="font-mono text-[11px] tracking-widest text-chalk">KITCHEN TIP</Text>
+              <Ionicons name="bulb" size={13} color="#CDF23E" />
+            </View>
+            <Text className="px-5 py-4 font-sans text-[14px] leading-[21px] text-ink-2">
+              {tipOfDay()}
+            </Text>
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>
