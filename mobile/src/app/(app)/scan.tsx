@@ -215,6 +215,25 @@ export default function Scan() {
                   CHOOSE FROM LIBRARY
                 </Text>
               </Pressable>
+
+              {/* for-best-results tips — fills the idle space, improves accuracy */}
+              <View className="mt-8">
+                <Text className="mb-3 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
+                  FOR BEST RESULTS
+                </Text>
+                {[
+                  'Good light — open the fridge door and shoot straight on',
+                  'Spread items out so labels and shapes are visible',
+                  'One clear photo beats a blurry close-up',
+                ].map((tip) => (
+                  <View key={tip} className="mb-2.5 flex-row items-start gap-2.5">
+                    <Ionicons name="checkmark-circle" size={16} color="#CDF23E" style={{ marginTop: 1 }} />
+                    <Text className="flex-1 font-sans text-[13px] leading-[19px] text-[#c3c8ba]">
+                      {tip}
+                    </Text>
+                  </View>
+                ))}
+              </View>
             </View>
           ) : null}
         </ScrollView>

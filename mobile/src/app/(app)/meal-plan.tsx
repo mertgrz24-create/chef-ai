@@ -205,7 +205,25 @@ export default function MealPlanScreen() {
                 <Text className="mt-3 text-center font-sans text-[13px] text-[#8fa093]">
                   Planning seven days of meals — this takes a moment…
                 </Text>
-              ) : null}
+              ) : (
+                <View className="mt-10 w-full">
+                  <Text className="mb-4 text-center font-mono text-[10px] tracking-[2px] text-[#8fa093]">
+                    WHAT YOU&apos;LL GET
+                  </Text>
+                  {[
+                    { icon: 'sunny-outline' as const, t: 'Breakfast & dinner for all 7 days' },
+                    { icon: 'nutrition-outline' as const, t: 'Calories & macros on every meal' },
+                    { icon: 'refresh-outline' as const, t: 'Swap any single meal you don’t like' },
+                  ].map((row) => (
+                    <View key={row.t} className="mb-3 flex-row items-center gap-3">
+                      <View className="h-9 w-9 items-center justify-center rounded-xl bg-chalk/[0.06]">
+                        <Ionicons name={row.icon} size={17} color="#CDF23E" />
+                      </View>
+                      <Text className="flex-1 font-sans text-[14px] text-[#c3c8ba]">{row.t}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           )}
         </ScrollView>

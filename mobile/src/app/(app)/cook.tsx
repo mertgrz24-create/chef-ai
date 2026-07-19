@@ -173,6 +173,27 @@ export default function Cook() {
 
           {error ? <Text className="mt-4 font-sans text-[13px] text-clay">{error}</Text> : null}
 
+          {/* idle guidance — fills the space before a recipe is fired */}
+          {!loading && !result && !limitReached ? (
+            <View className="mt-10">
+              <Text className="mb-4 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
+                HOW IT WORKS
+              </Text>
+              {[
+                { n: '01', t: 'Pick from your pantry, or scan your fridge' },
+                { n: '02', t: 'Fire the recipe — AI builds it around what you have' },
+                { n: '03', t: 'Cook something good, waste nothing' },
+              ].map((step) => (
+                <View key={step.n} className="mb-4 flex-row items-center gap-3">
+                  <Text className="font-mono-bold text-[18px] text-zest">{step.n}</Text>
+                  <Text className="flex-1 font-sans text-[14px] leading-[20px] text-[#c3c8ba]">
+                    {step.t}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
+
           {limitReached ? (
             <View className="mt-5 rounded-xl border border-zest/40 bg-zest/10 p-4">
               <Text className="font-display text-[16px] text-chalk">You&apos;ve used your 10 free recipes</Text>
