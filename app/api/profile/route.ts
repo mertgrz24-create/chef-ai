@@ -7,11 +7,11 @@ const genCode = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6)
 
 const NUMERIC_FIELD_LIST = [
   'daily_calorie_goal', 'protein_goal_g', 'carbs_goal_g', 'fat_goal_g',
-  'water_goal_l', 'daily_steps_goal', 'current_weight_kg', 'target_weight_kg',
+  'water_goal_l',
 ]
 
 const NUMERIC_FIELDS = new Set<string>(NUMERIC_FIELD_LIST)
-const ALLOWED_FIELDS = new Set<string>([...NUMERIC_FIELD_LIST, 'full_name', 'diet_type'])
+const ALLOWED_FIELDS = new Set<string>([...NUMERIC_FIELD_LIST, 'diet_type'])
 
 // GET /api/profile — fetch current user's profile
 export async function GET() {

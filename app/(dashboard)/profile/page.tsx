@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import type { Profile } from '@/types/profile'
 
 const inputCls =
@@ -22,29 +24,21 @@ const DIET_OPTIONS = [
 const PRESET_DIET_VALUES = new Set(['omnivore', 'vegan', 'vegetarian', 'keto', 'gluten_free'])
 
 type FormState = {
-  full_name: string
   daily_calorie_goal: string
   protein_goal_g: string
   carbs_goal_g: string
   fat_goal_g: string
   water_goal_l: string
-  daily_steps_goal: string
-  current_weight_kg: string
-  target_weight_kg: string
   diet_type_preset: string
   diet_type_custom: string
 }
 
 const EMPTY_FORM: FormState = {
-  full_name: '',
   daily_calorie_goal: '',
   protein_goal_g: '',
   carbs_goal_g: '',
   fat_goal_g: '',
   water_goal_l: '',
-  daily_steps_goal: '',
-  current_weight_kg: '',
-  target_weight_kg: '',
   diet_type_preset: '',
   diet_type_custom: '',
 }
@@ -52,15 +46,11 @@ const EMPTY_FORM: FormState = {
 function profileToForm(profile: Profile): FormState {
   const dt = profile.diet_type ?? ''
   return {
-    full_name: profile.full_name ?? '',
     daily_calorie_goal: profile.daily_calorie_goal?.toString() ?? '',
     protein_goal_g: profile.protein_goal_g?.toString() ?? '',
     carbs_goal_g: profile.carbs_goal_g?.toString() ?? '',
     fat_goal_g: profile.fat_goal_g?.toString() ?? '',
     water_goal_l: profile.water_goal_l?.toString() ?? '',
-    daily_steps_goal: profile.daily_steps_goal?.toString() ?? '',
-    current_weight_kg: profile.current_weight_kg?.toString() ?? '',
-    target_weight_kg: profile.target_weight_kg?.toString() ?? '',
     diet_type_preset: dt === '' ? '' : PRESET_DIET_VALUES.has(dt) ? dt : 'other',
     diet_type_custom: PRESET_DIET_VALUES.has(dt) ? '' : dt,
   }
@@ -121,6 +111,27 @@ export default function ProfilePage() {
   // Referral copy
   const [copied, setCopied] = useState(false)
 
+  // Account deletion
+  const router = useRouter()
+  const [confirmingDelete, setConfirmingDelete] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
+
+  async function handleDeleteAccount() {
+    setDeleting(true)
+    setDeleteError(null)
+    try {
+      const res = await fetch('/api/account', { method: 'DELETE' })
+      if (!res.ok) throw new Error()
+      // Account and all data are gone; clear the local session and leave.
+      await createClient().auth.signOut()
+      router.replace('/')
+    } catch {
+      setDeleting(false)
+      setDeleteError('Could not delete account. Please try again.')
+    }
+  }
+
   const applyReferral = useCallback(async (p: Profile) => {
     if (p.referred_by) return
     const ref = localStorage.getItem('chef_ref')
@@ -172,15 +183,11 @@ export default function ProfilePage() {
         : form.diet_type_preset || null
 
     const payload = {
-      full_name: form.full_name.trim() || null,
       daily_calorie_goal: parseNum(form.daily_calorie_goal),
       protein_goal_g: parseNum(form.protein_goal_g),
       carbs_goal_g: parseNum(form.carbs_goal_g),
       fat_goal_g: parseNum(form.fat_goal_g),
       water_goal_l: parseNum(form.water_goal_l),
-      daily_steps_goal: parseNum(form.daily_steps_goal),
-      current_weight_kg: parseNum(form.current_weight_kg),
-      target_weight_kg: parseNum(form.target_weight_kg),
       diet_type,
     }
 
@@ -341,53 +348,10 @@ export default function ProfilePage() {
                 disabled={saving}
               />
             </div>
-            <div>
-              <label className={labelCls}>Daily Steps</label>
-              <NumberInput
-                value={form.daily_steps_goal}
-                onChange={(v) => set('daily_steps_goal', v)}
-                suffix="steps"
-                disabled={saving}
-              />
-            </div>
           </div>
         </motion.div>
 
-        {/* Section 3 — Weight Tracking */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: 'easeOut', delay: 0.1 }}
-          className={sectionCls}
-        >
-          <h2 className={headingCls}>
-            <span>⚖️</span> Weight Tracking
-          </h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label className={labelCls}>Current Weight</label>
-              <NumberInput
-                value={form.current_weight_kg}
-                onChange={(v) => set('current_weight_kg', v)}
-                suffix="kg"
-                step="0.1"
-                disabled={saving}
-              />
-            </div>
-            <div>
-              <label className={labelCls}>Target Weight</label>
-              <NumberInput
-                value={form.target_weight_kg}
-                onChange={(v) => set('target_weight_kg', v)}
-                suffix="kg"
-                step="0.1"
-                disabled={saving}
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Section 4 — Diet Preference */}
+        {/* Section 3 — Diet Preference */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -398,17 +362,6 @@ export default function ProfilePage() {
             <span>🥗</span> Diet Preference
           </h2>
           <div className="flex flex-col gap-4">
-            <div>
-              <label className={labelCls}>Display Name</label>
-              <input
-                type="text"
-                value={form.full_name}
-                onChange={(e) => set('full_name', e.target.value)}
-                placeholder="Your name"
-                disabled={saving}
-                className={inputCls}
-              />
-            </div>
             <div>
               <label className={labelCls}>Diet Type</label>
               <select
@@ -537,6 +490,60 @@ export default function ProfilePage() {
           </p>
         </motion.div>
       )}
+
+      {/* Danger zone — delete account */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: 'easeOut', delay: 0.3 }}
+        className="mt-6 max-w-2xl rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/20 p-6"
+      >
+        <h2 className="mb-2 flex items-center gap-2 text-base font-semibold text-red-700 dark:text-red-400">
+          <span>⚠️</span> Delete account
+        </h2>
+        <p className="mb-4 text-sm text-[var(--text-secondary)]">
+          Permanently delete your account and all your data — profile, pantry, recipes and meal
+          plans. This cannot be undone.
+        </p>
+
+        {deleteError && (
+          <p className="mb-3 text-sm font-medium text-red-600 dark:text-red-400">{deleteError}</p>
+        )}
+
+        {!confirmingDelete ? (
+          <button
+            type="button"
+            onClick={() => setConfirmingDelete(true)}
+            className="rounded-xl border border-red-300 dark:border-red-800 px-5 py-2.5 text-sm font-semibold text-red-600 dark:text-red-400 transition hover:bg-red-100 dark:hover:bg-red-950/40"
+          >
+            Delete my account
+          </button>
+        ) : (
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <span className="text-sm font-medium text-red-700 dark:text-red-400">
+              Are you sure? This is permanent.
+            </span>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => { void handleDeleteAccount() }}
+                disabled={deleting}
+                className="rounded-xl bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 active:scale-95 disabled:opacity-60"
+              >
+                {deleting ? 'Deleting…' : 'Yes, delete everything'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmingDelete(false)}
+                disabled={deleting}
+                className="rounded-xl border border-[var(--border)] px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition hover:bg-[var(--surface-2)] disabled:opacity-60"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </motion.div>
     </div>
   )
 }

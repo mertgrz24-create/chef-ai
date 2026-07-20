@@ -1,7 +1,9 @@
-import { Text, View } from 'react-native'
+import { useState } from 'react'
+import { ActivityIndicator, Alert, Pressable, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Constants from 'expo-constants'
 import { Button } from '@/components/ui'
+import { apiFetch } from '@/lib/api'
 import { useAuth } from '@/lib/auth'
 
 function memberSince(iso?: string): string {
@@ -22,6 +24,30 @@ export default function Profile() {
   const { session, signOut } = useAuth()
   const email = session?.user.email ?? ''
   const version = Constants.expoConfig?.version ?? '1.0.0'
+  const [deleting, setDeleting] = useState(false)
+
+  async function deleteAccount() {
+    setDeleting(true)
+    try {
+      await apiFetch('/api/account', { method: 'DELETE' })
+      // Account (and all data) is gone; drop the local session too.
+      await signOut()
+    } catch {
+      setDeleting(false)
+      Alert.alert('Could not delete account', 'Something went wrong. Please try again.')
+    }
+  }
+
+  function confirmDelete() {
+    Alert.alert(
+      'Delete account?',
+      'This permanently deletes your account and all your data — pantry, recipes, meal plans. This cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete everything', style: 'destructive', onPress: deleteAccount },
+      ]
+    )
+  }
 
   return (
     <View className="flex-1 bg-pantry">
@@ -52,8 +78,19 @@ export default function Profile() {
             </View>
           </View>
 
-          <View className="mt-auto mb-6">
+          <View className="mt-auto mb-6 gap-3">
             <Button label="SIGN OUT" variant="ghost" onPress={() => signOut()} />
+            <Pressable
+              onPress={confirmDelete}
+              disabled={deleting}
+              className="h-12 flex-row items-center justify-center gap-2"
+            >
+              {deleting ? (
+                <ActivityIndicator size="small" color="#E8623D" />
+              ) : (
+                <Text className="font-mono text-[12px] tracking-wide text-clay">DELETE ACCOUNT</Text>
+              )}
+            </Pressable>
           </View>
         </View>
       </SafeAreaView>

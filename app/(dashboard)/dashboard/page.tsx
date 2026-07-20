@@ -69,7 +69,7 @@ export default async function DashboardPage() {
     supabase.from('pantry').select('expiry_date').eq('user_id', user.id),
     supabase
       .from('profiles')
-      .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, daily_steps_goal, current_weight_kg, target_weight_kg, diet_type, is_premium, recipe_count_this_month')
+      .select('daily_calorie_goal, protein_goal_g, carbs_goal_g, fat_goal_g, water_goal_l, diet_type, is_premium, recipe_count_this_month')
       .eq('id', user.id)
       .single(),
     supabase.from('recipes').select('*', { count: 'exact', head: true }).eq('user_id', user.id),
@@ -153,15 +153,6 @@ export default async function DashboardPage() {
           : null,
         profile.water_goal_l !== null
           ? { icon: '🌊', label: 'Water', value: `${profile.water_goal_l} L` }
-          : null,
-        profile.daily_steps_goal !== null
-          ? { icon: '👟', label: 'Steps', value: `${profile.daily_steps_goal.toLocaleString('en-US')} steps` }
-          : null,
-        profile.current_weight_kg !== null
-          ? { icon: '⚖️', label: 'Current Weight', value: `${profile.current_weight_kg} kg` }
-          : null,
-        profile.target_weight_kg !== null
-          ? { icon: '🎯', label: 'Target Weight', value: `${profile.target_weight_kg} kg` }
           : null,
         profile.diet_type !== null
           ? { icon: '🥗', label: 'Diet', value: dietLabel(profile.diet_type!) }
