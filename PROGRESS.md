@@ -16,6 +16,14 @@
 - Neden webview/Capacitor değil: 8/8 dashboard sayfası Server Component + cookie auth → statik bundle'da çalışmaz, veri katmanı zaten baştan yazılmalıydı.
 - Expo'nun asıl kazancı: **push notification** (israf uyarılarının can damarı), native kamera, mağaza varlığı.
 
+### 🔐 V5.10 — Veri güvenliği & minimizasyon ✅ CANLIDA (commit `a1f74dc`)
+- **Hesap kapatma:** `DELETE /api/account` — token'dan **kendi** user id'si, service-role ile `auth.users`'tan siler → profiles/pantry/recipes/meal_plans/meals_eaten/push_tokens **cascade** ile temizlenir. id client'tan asla alınmaz. Web'de "Danger zone" (2 adımlı onay), mobilde destructive Alert.
+- **Minimizasyon:** `full_name`, `current_weight_kg`, `target_weight_kg`, `daily_steps_goal` artık **toplanmıyor** — hiçbir özellik kullanmıyordu (tarif/plan motoru yalnızca kalori+makro+su+diet_type okuyor). Form + API allowlist + tipler + dashboard'dan çıkarıldı; **allowlist sunucuda zorluyor** (client gönderse bile yazılmaz).
+- Denetimde çıkan iyi haberler: buzdolabı fotoğrafları **hiç saklanmıyor** (base64→Gemini→atılıyor, Storage yok); signup yalnızca **email+parola**.
+- Doğrulama: lokal 7/7 fonksiyonel test + **production'da canlı teyit** (401/200, gerçek hesap silme + cascade, allowlist).
+- ⏳ **Kalan:** `20260719_drop_unused_profile_fields.sql` migration'ı SQL Editor'da çalıştır (kod deploy edildi, sıra artık güvenli).
+- 🔎 Follow-up: `profiles.email` de mükerrer ama signup trigger'ı yazıyor → önce trigger düzenlenmeli.
+
 ### ⏳ Bekleyen manuel adımlar (sadece kullanıcı yapabilir) — 18 Tem GÜNCEL
 1. ✅ **Supabase migration'ları çalıştırıldı ve doğrulandı (18 Tem):**
    - `20260703_referral_and_usage_rpc.sql` → 3 RPC canlı (referral + atomik freemium artık çalışıyor, legacy fallback devre dışı)
