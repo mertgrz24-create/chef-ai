@@ -2,13 +2,6 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "chef-ai-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000,
-      "autoPort": true
-    },
-    {
       "name": "chef-ai-mobile-web",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "mobile", "run", "web"],

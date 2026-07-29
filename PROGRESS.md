@@ -5,16 +5,36 @@
 ## 📍 Şu an neredeyiz?
 
 **Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** Kod tamam + **production'a deploy edildi** ✅. Kalan işler operasyonel — bkz. `mobile/EAS_BUILD.md` + açık işler  
-**Son güncelleme:** 18 Temmuz 2026  
-**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — ✅ **YENİ redesign + Next16 + M1 Bearer CANLI** (main = `d0d0df9`, deploy doğrulandı)  
-**Aktif Branch:** `main` (ui-redesign → main fast-forward merge + push edildi; ui-redesign de aynı commit'te)
+**Aktif Mikro-Adım:** ✅ **Repo ikiye bölündü** — bu repo (`chef-ai`) artık sadece mobil app'i içeriyor, web sitesi + API [chef-ai-web](https://github.com/mertgrz24/chef-ai-web) repo'sunda ve Vercel oradan deploy ediyor. Sıradaki: EAS build + store yayını (`mobile/EAS_BUILD.md`)  
+**Son güncelleme:** 30 Temmuz 2026  
+**Canlı URL:** https://chef-ai-puce-zeta.vercel.app — artık `chef-ai-web` repo'sunun `main`'inden deploy oluyor  
+**Bu repo'nun kapsamı:** sadece `mobile/` (+ bu proje günlüğü). Next.js kodu (`app/`, `components/`, `lib/`, `types/`, `public/`, `supabase/`) bu repo'dan tamamen silindi — geçmişi hâlâ `git log`'da duruyor, güncel hali `chef-ai-web`'de.
 
 ### 🏗️ Mimari kararı (14 Tem 2026)
 **Landing = web, App = mobil.** Next.js landing page pazarlama yüzü olarak Vercel'de kalır; asıl uygulama **Expo/React Native** ile indirilebilir mobil app olur (App Store + Play Store). 17 API route + Supabase **ortak backend** olarak iki istemciye de hizmet eder.
 - **Next.js dashboard redesign'ı İPTAL** — app RN'e taşınıyor, o iş çöpe giderdi. Dashboard olduğu gibi duruyor (web fallback).
 - Neden webview/Capacitor değil: 8/8 dashboard sayfası Server Component + cookie auth → statik bundle'da çalışmaz, veri katmanı zaten baştan yazılmalıydı.
 - Expo'nun asıl kazancı: **push notification** (israf uyarılarının can damarı), native kamera, mağaza varlığı.
+
+### ✂️ V5.11 — Web'i pazarlama yüzüne indirgeme + ayrı repo'ya taşıma ✅ TAMAMLANDI
+14 Temmuz'daki "landing = web, app = mobil" mimari kararı hem koda hem repo yapısına işlendi. İki aşamada yapıldı:
+
+**1) Marketing-only teardown** (`marketing-only-web` branch, commit `0d39cb4` — bu branch artık tarihi referans, kodu `chef-ai-web`'e taşındı):
+- **PWA kurulumu söküldü** — asıl sorun buydu: `manifest.ts` (`display:standalone` + `start_url:/dashboard`) sayesinde kullanıcı siteden kayıt olup telefonuna "app" olarak kuruyordu, native app'e hiç ihtiyaç duymuyordu. `/manifest.webmanifest` artık 404.
+- `public/sw.js` **silinmedi, "tombstone"a çevrildi** — eski SW sayfaları cache'liyordu, dosyayı silmek kurulu istemcilerde eski dashboard'u sonsuza dek servis etmeye devam ettirirdi. Yeni sürüm tüm cache'leri silip `unregister()` ediyor. ~6 ay sonra silinebilir.
+- `app/(auth)/`, `app/(dashboard)/` (7 sayfa), dashboard component'leri, `middleware.ts`, `next-themes` kaldırıldı.
+- Landing CTA'ları → `components/marketing/store-badges.tsx` (env-gated `NEXT_PUBLIC_IOS_APP_URL`/`NEXT_PUBLIC_ANDROID_APP_URL`, boşken "Coming soon").
+- `/recipe/[id]` kaldı (viral mekanizma + SEO): auth isteyen Yedim/Değiştir butonları çıktı → store CTA'sı, auth istemeyen "Pişirmeye Başla" korundu.
+- Referral web'den mobile taşındı: `/signup?ref=KOD` yerine `/invite/[code]` (statik, auth yok) + mobilde kod girme alanı → `POST /api/referral` (backend değişikliği gerekmedi, route zaten Bearer kabul ediyordu).
+
+**2) Repo ayrımı** (30 Temmuz 2026):
+- Web kodu **yeni, ayrı bir git repo'suna** taşındı: [chef-ai-web](https://github.com/mertgrz24/chef-ai-web) (private). Geçmiş taşınmadı (tek "initial import" commit) — sebep: bu repo'daki (`chef-ai`) tüm web geçmişi zaten kalıcı olarak duruyor, `git-filter-repo` kurulu değildi, tek kişilik proje için efor/fayda düşük.
+- Vercel projesi (`chef-ai-puce-zeta`) **aynı kaldı**, sadece Git bağlantısı `chef-ai-web`'e çevrildi (Settings → Git → Disconnect + reconnect, dashboard üzerinden — bu adım otomatize edilemedi). Environment variable'lar projeye bağlı olduğu için repo değişince kaybolmadı.
+- **Doğrulama:** reconnect tek başına build tetiklemedi, `chef-ai-web`'e boş bir commit push edilerek webhook tetiklendi. Sonrasında canlı URL dışarıdan `curl` ile doğrulandı: `/dashboard` `/login` `/signup` `/manifest.webmanifest` → 404, `/invite/CHEF-XXXX` → 200, `/sw.js` tombstone sürümü serve ediyor.
+- Bu repo'dan (`chef-ai`) web'e ait **97 dosya** silindi (`app/`, `components/`, `lib/`, `types/`, `public/`, `supabase/`, tüm Next.js config'leri). Kalan tek içerik: `mobile/` + proje günlüğü. Root `README.md`/`CLAUDE.md` mobil-app-only diline göre yeniden yazıldı.
+- **Teknik not (gerekçe kaydı):** Bu ayrım *zorunlu* değildi — `mobile/`'ın zaten kendi `node_modules`/`package-lock.json`'ı vardı, Metro bundler sadece `mobile/`'ı tarıyordu (`metro.config.js`'de özel `watchFolders` yok), yani web kodunun repo'da durması ne EAS build'in nihai `.ipa`/`.apk` boyutunu ne de store submission'ı etkiliyordu. Kullanıcı organizasyonel tercih olarak ayrı repo istedi.
+- ⚠️ **Kapsam dışı bırakılan:** `chef-ai-web`'deki `CLAUDE.md` bu repo'nunkinin birebir kopyası — hâlâ eski "hem web hem mobil" dilini taşıyor (Directory Structure, Phase-gated roadmap bölümleri artık yanlış). İki repo'da da elle güncellenmesi gerekiyor, mekanik taşımanın kapsamında değildi.
+- 🔴 **Viral döngü hâlâ üreticisiz:** mobilde tarif kaydet & paylaş yok → `/recipe/[id]`'yi (artık `chef-ai-web`'de) besleyen hiçbir şey yok. Store yayını öncesi mobile `POST /api/recipes/save` eklenmeli.
 
 ### 🔐 V5.10 — Veri güvenliği & minimizasyon ✅ CANLIDA (commit `a1f74dc`)
 - **Hesap kapatma:** `DELETE /api/account` — token'dan **kendi** user id'si, service-role ile `auth.users`'tan siler → profiles/pantry/recipes/meal_plans/meals_eaten/push_tokens **cascade** ile temizlenir. id client'tan asla alınmaz. Web'de "Danger zone" (2 adımlı onay), mobilde destructive Alert.
