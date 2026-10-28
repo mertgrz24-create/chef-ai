@@ -1,0 +1,1367 @@
+[
+  {
+    "path": "BUILD_ID",
+    "bytes": 21,
+    "sha256": "4963cd6c7f9beb1608e5cd94601cdf2fae8c01f5a1e8a80f4e273df0a77bee43"
+  },
+  {
+    "path": "app-path-routes-manifest.json",
+    "bytes": 1710,
+    "sha256": "9e1ef9b8ac9542ef1d35ce55008cb22a3e0f56b50e847c6b172790fe255d469b"
+  },
+  {
+    "path": "build-manifest.json",
+    "bytes": 510,
+    "sha256": "9a20081f0c15485568a030f813824d2618ad252ee883f5dfad084310e7b4751b"
+  },
+  {
+    "path": "cache/.previewinfo",
+    "bytes": 262,
+    "sha256": "89e72bf66ca9f1c0ac19baeb67a00987138677d5f471f065316a03f22d460d6b"
+  },
+  {
+    "path": "cache/.rscinfo",
+    "bytes": 102,
+    "sha256": "741508e03fb9419d1697eb739b2becff9facd3f3d2f56e12096973b80f2fbedb"
+  },
+  {
+    "path": "cache/.tsbuildinfo",
+    "bytes": 142215,
+    "sha256": "4115c03acb28d5c20523429237b16071102e6ea208f4736d3718220b4b7364a2"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000001.sst",
+    "bytes": 1351080,
+    "sha256": "f9fc22baa7820cc06a3477495c33d95c63de78eca9e153eb6ec4c72a22a7a8d3"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000002.sst",
+    "bytes": 1292445,
+    "sha256": "4033c713a092c55d10a8c4bb56e1584f4dc5059237a0834c2512104239722ce3"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000003.sst",
+    "bytes": 1681647,
+    "sha256": "5a412c1ca0f6de2ecb02209c72e7ae126c2794a24a6ecbde8ea065b5e980f1b5"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000004.sst",
+    "bytes": 1409394,
+    "sha256": "de064e5fc1c02eb034de5e57613c53e09906fae6f96ba920502183cb1b82413a"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000005.sst",
+    "bytes": 1441331,
+    "sha256": "fee160e3b25bd3f04ac581c148c89d0759a1ed85fb9f1f5af1523aaaee181d82"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000006.sst",
+    "bytes": 1391866,
+    "sha256": "fdd46cd80c6c1d7697eb43c7baf9e8d1cb56f67d2586ce298949b245016c5f63"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000007.sst",
+    "bytes": 1630609,
+    "sha256": "84d903f70768ac34993214ce45a8f58ce4129c2f9eb4a8bb3c73abc913d024f6"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000008.sst",
+    "bytes": 1486418,
+    "sha256": "b7964808e1119bfe9861109985a533beb3a18ed4544c9052621cc03f71c369cd"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000009.sst",
+    "bytes": 1610316,
+    "sha256": "e27d9e0f2099d880ed07b5a1df34e91280afe9a5f76ae4f8895f89c6599b9f0d"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000010.sst",
+    "bytes": 1523964,
+    "sha256": "21f0c0ce7fa1445f04859338e3c536286e4e2e6887ea5246dab1be1b15900159"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000011.sst",
+    "bytes": 1696647,
+    "sha256": "db0e3d2293dc596c152fcaf4f607d98d4aa6ad0dad91cc79331fd160c7cd0fe0"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000012.sst",
+    "bytes": 1558591,
+    "sha256": "e791dc1441dddcc0a8da07ab9c5986aa423701bce143a1f228cf55c056b70688"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000013.sst",
+    "bytes": 1518545,
+    "sha256": "47a0fc092adca7b9e640c66108635e3ee27591713a7a6a4f96e1c37e60e9724c"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000014.sst",
+    "bytes": 38,
+    "sha256": "211a6e7977d088c0f0acc52309e14cc2886b63bbb3e300cfc8fde1e6e10b244b"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000015.meta",
+    "bytes": 150018,
+    "sha256": "1e918897748222f89ebd90d6ae20ed51a7088ccd52ecb72eed6db558a36f80de"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000016.meta",
+    "bytes": 394,
+    "sha256": "f30fda81f772c20de7454611ad5bd0cc5f08178175369389186e0ea3e1816de6"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000017.meta",
+    "bytes": 150262,
+    "sha256": "a32baa6024fcc8bc62f66a67708c4f3d397f3c60f03e1dcfbcf5fe1c7e4a692a"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/00000018.meta",
+    "bytes": 149829,
+    "sha256": "0a250271a9dc7f4fb62d48813389c667fe9ff675b99850d2d80b127c12e2314c"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/CURRENT",
+    "bytes": 71,
+    "sha256": "63761c6f7bcda302eda9414f556b1af6e3b6986c3320ba04a95a68a312b7c055"
+  },
+  {
+    "path": "cache/turbopack/v16.4.1-7217011a/LOG",
+    "bytes": 3342,
+    "sha256": "7dea4e68265226f98cf3b0025bd8310bc95fe9d2b6cf785b3af569cea62e7b0c"
+  },
+  {
+    "path": "cache/webpack/client-production/0.pack",
+    "bytes": 44017334,
+    "sha256": "f0c507fcb65f0215f1dff191c0f5aff290b8eaf3931e96bec802bccb4857216c"
+  },
+  {
+    "path": "cache/webpack/client-production/index.pack",
+    "bytes": 9344576,
+    "sha256": "241b285b1da9f335ad9a6dae4bb3ab6723087223fab19bf373595c206052fa9f"
+  },
+  {
+    "path": "cache/webpack/edge-server-production/0.pack",
+    "bytes": 276,
+    "sha256": "4cf621d6541d0b5f1971d04d8acd429b63ef068b3eaf45a684bd7bf9f121aadc"
+  },
+  {
+    "path": "cache/webpack/edge-server-production/index.pack",
+    "bytes": 2491,
+    "sha256": "69fe51ee57afb10b750a57808fdd38f3977891bdcdc069a3bd5320c878a4d5a9"
+  },
+  {
+    "path": "cache/webpack/server-production/0.pack",
+    "bytes": 71681249,
+    "sha256": "08d9d21830e6258a924e64b4215cc22bb8895618c3e765ee9e8245b375078f17"
+  },
+  {
+    "path": "cache/webpack/server-production/index.pack",
+    "bytes": 13406413,
+    "sha256": "ea68ceabb6735158c866ca2d7b54a416c9702eb75026c86558c0a08c60edc83b"
+  },
+  {
+    "path": "diagnostics/build-diagnostics.json",
+    "bytes": 93,
+    "sha256": "e4932338188cf0fbd08fb45f8b04421b523d0b2d9b90f197b5ad2e24fec94306"
+  },
+  {
+    "path": "diagnostics/framework.json",
+    "bytes": 37,
+    "sha256": "1a96af2b3fecc4851529b0c557d6489e6b41a95c5083300943006f17bd5ac693"
+  },
+  {
+    "path": "export-marker.json",
+    "bytes": 111,
+    "sha256": "82356527db218adb95bd1eca0ede6f3391165b38b22d667d064e62e6b539d974"
+  },
+  {
+    "path": "images-manifest.json",
+    "bytes": 1404,
+    "sha256": "7ecd8e2f5544623e955f0dca614e39b23c7c0907954b64cbbbec6d90433bb475"
+  },
+  {
+    "path": "next-minimal-server.js.nft.json",
+    "bytes": 7488,
+    "sha256": "e7a707f73b5b1d1afa55659296ef9cc2f329e9ce63cf17dc0ba7d7f422f83c6e"
+  },
+  {
+    "path": "next-server.js.nft.json",
+    "bytes": 46970,
+    "sha256": "3e05734b86c89a36cad33f73f6dee19e459e8d5ebe4f8a990889630c45660b72"
+  },
+  {
+    "path": "package.json",
+    "bytes": 20,
+    "sha256": "091a04fa67c7907b98e106fcff8b964e13129754fce72d24f3025b97c4887fa3"
+  },
+  {
+    "path": "prerender-manifest.json",
+    "bytes": 1837,
+    "sha256": "82b1b95be54f048cccc35a0d308d70fc602ef06a3181313d026ac8fbbecf22d9"
+  },
+  {
+    "path": "react-loadable-manifest.json",
+    "bytes": 2,
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+    "path": "required-server-files.js",
+    "bytes": 10822,
+    "sha256": "7313721bbd4a7d3ed98ea706f08f8a9bf865a15d3deffef9c7085226dfc2158f"
+  },
+  {
+    "path": "required-server-files.json",
+    "bytes": 10793,
+    "sha256": "bb7849f28ec41e5b22080a837f9fe0b5bbb79177264e4b7959ce4c4d23c93505"
+  },
+  {
+    "path": "routes-manifest.json",
+    "bytes": 7438,
+    "sha256": "76cfe7c3dd7f8fb82c123375b7e8eb92a6cd6549229f31468d79961e5193e80e"
+  },
+  {
+    "path": "server/app-paths-manifest.json",
+    "bytes": 2114,
+    "sha256": "e055a2e7c9404ac4e51dd39fcf40b0e77a95de7965c1ce8bef0870ccb2ad7ef5"
+  },
+  {
+    "path": "server/app/_global-error.html",
+    "bytes": 8936,
+    "sha256": "1c9d36bcfa76d354ec29e54a3e4a360f3ec1dc9f3b86ef686fd71e4329e0275b"
+  },
+  {
+    "path": "server/app/_global-error.meta",
+    "bytes": 784,
+    "sha256": "9b8d904a303eb2ab75de615148275f9eb4d444da08ca188729e723ce9d7083e9"
+  },
+  {
+    "path": "server/app/_global-error.rsc",
+    "bytes": 4866,
+    "sha256": "ae90d3ef7167b2d67ac515f913460a6fab845312de08e9bae59150721b0a0e8b"
+  },
+  {
+    "path": "server/app/_global-error.segments/_full.segment.rsc",
+    "bytes": 4866,
+    "sha256": "ae90d3ef7167b2d67ac515f913460a6fab845312de08e9bae59150721b0a0e8b"
+  },
+  {
+    "path": "server/app/_global-error.segments/_global-error/__PAGE__.segment.rsc",
+    "bytes": 4352,
+    "sha256": "9fdc390f08e11cf10231ece83ff6c1ef2d0fcceb595d4c39792b2ec78da5358d"
+  },
+  {
+    "path": "server/app/_global-error.segments/_tree.segment.rsc",
+    "bytes": 167,
+    "sha256": "4e9e23e1cc81ee2676af7736b0d7f9c9ccedcda09c82f80ae202a85b2c5116c0"
+  },
+  {
+    "path": "server/app/_global-error/page.js",
+    "bytes": 8091,
+    "sha256": "baa52721ccc8a57b898f550499d49f0d14d3bde0175ed5f8883315f123f3d936"
+  },
+  {
+    "path": "server/app/_global-error/page.js.nft.json",
+    "bytes": 8892,
+    "sha256": "ff0a1362181f51dce57404371e7d315b58b0951dd7b5002006e74b1038c28e54"
+  },
+  {
+    "path": "server/app/_global-error/page_client-reference-manifest.js",
+    "bytes": 5328,
+    "sha256": "de64f63efc511a7f94d40b426148283cfb5aab1231e33179175f0ec7f14e7d11"
+  },
+  {
+    "path": "server/app/_not-found.html",
+    "bytes": 5276,
+    "sha256": "cb21b92ee69467d5c435520880e4a5af835eb4a94acb720e2f7649fdf3b06035"
+  },
+  {
+    "path": "server/app/_not-found.meta",
+    "bytes": 766,
+    "sha256": "4b112114c74c5dc53232472280e8b7ed0c236907b5f245e47dd2967d0f2bdef2"
+  },
+  {
+    "path": "server/app/_not-found.rsc",
+    "bytes": 3018,
+    "sha256": "9952e07f7548985ab51a6d06b48e96a4580b1c42ad3f831fd8302464e1a55bf9"
+  },
+  {
+    "path": "server/app/_not-found.segments/_full.segment.rsc",
+    "bytes": 3018,
+    "sha256": "9952e07f7548985ab51a6d06b48e96a4580b1c42ad3f831fd8302464e1a55bf9"
+  },
+  {
+    "path": "server/app/_not-found.segments/_not-found/__PAGE__.segment.rsc",
+    "bytes": 2506,
+    "sha256": "2f0271fc55c072505290e6b74ebfe98f3f379d9d8707a11a2b630666e54fa27b"
+  },
+  {
+    "path": "server/app/_not-found.segments/_tree.segment.rsc",
+    "bytes": 163,
+    "sha256": "0bf07209bf48007d9f88d231fe43a95fe46517a8842405c074506306cc9424e3"
+  },
+  {
+    "path": "server/app/_not-found/page.js",
+    "bytes": 4326,
+    "sha256": "8d13aed91a5ec0953ae03b6622f325a27e0d41c1c9cca3507ab9591cfd987ebe"
+  },
+  {
+    "path": "server/app/_not-found/page.js.nft.json",
+    "bytes": 8892,
+    "sha256": "ff0a1362181f51dce57404371e7d315b58b0951dd7b5002006e74b1038c28e54"
+  },
+  {
+    "path": "server/app/_not-found/page_client-reference-manifest.js",
+    "bytes": 5322,
+    "sha256": "47017c5bc050bab96434513331768b83d9a569519ff56d9cc5b941aaf06b604b"
+  },
+  {
+    "path": "server/app/api/account/route.js",
+    "bytes": 9853,
+    "sha256": "99dc7f74c69eba55122d109cb6f02c16e461fb7542b0eb0da073c38dedda9fa6"
+  },
+  {
+    "path": "server/app/api/account/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/account/route_client-reference-manifest.js",
+    "bytes": 367,
+    "sha256": "7f81d0676b3e8d41bc98c0d4bc4c0ae59ee66ad43fb59cc555c170c1fbfc7de5"
+  },
+  {
+    "path": "server/app/api/billing/status/route.js",
+    "bytes": 16336,
+    "sha256": "5ff0ab5efd6d290f1dcfa5f4dd285a07968ad580111da45ce972f7c3e57643ab"
+  },
+  {
+    "path": "server/app/api/billing/status/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/billing/status/route_client-reference-manifest.js",
+    "bytes": 381,
+    "sha256": "8ac255acf899e5d3af5a6af5af519069c2ae8f34032351be6e02aef887c69999"
+  },
+  {
+    "path": "server/app/api/billing/webhook/route.js",
+    "bytes": 16460,
+    "sha256": "992157b94b136e57f468fc5fb6d3ed7b4abec72bb748034efbd1ff4f7d497510"
+  },
+  {
+    "path": "server/app/api/billing/webhook/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/billing/webhook/route_client-reference-manifest.js",
+    "bytes": 383,
+    "sha256": "9c538973f01478ef863a55612353033a0cca56fba6173329bcde2a1adbdf03db"
+  },
+  {
+    "path": "server/app/api/content-reports/route.js",
+    "bytes": 12531,
+    "sha256": "809d5409b1cd76751d8aefd96e5080a36e5672bb550ce358da17b6ec89e34398"
+  },
+  {
+    "path": "server/app/api/content-reports/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/content-reports/route_client-reference-manifest.js",
+    "bytes": 383,
+    "sha256": "6de9f93ae35b8937b8c3a7443c7cb29db14d178119a0aeb6a0fa998cbb43091e"
+  },
+  {
+    "path": "server/app/api/health-export/route.js",
+    "bytes": 9957,
+    "sha256": "b2262daca1c21f40dba5d3062847b48dfcfe995aae33cd599c31a774a3ffa1cb"
+  },
+  {
+    "path": "server/app/api/health-export/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/health-export/route_client-reference-manifest.js",
+    "bytes": 379,
+    "sha256": "4ef521607594c8d2b9a8b6f4c84398dd7e2abbafc4739d843ee67ad03e068767"
+  },
+  {
+    "path": "server/app/api/meal-image/route.js",
+    "bytes": 9563,
+    "sha256": "cac6ce91ffaba940875ef05aad22aa99f286d454a1c0fc0a8bf8c31458cf741d"
+  },
+  {
+    "path": "server/app/api/meal-image/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/meal-image/route_client-reference-manifest.js",
+    "bytes": 373,
+    "sha256": "1b9feeb52c20fefaf76dc3aec8a445965c0093e5d8324e127291234205622083"
+  },
+  {
+    "path": "server/app/api/meal-plan/generate/route.js",
+    "bytes": 9401,
+    "sha256": "e9cf0ea21a223e133508ea9b2ee8fae0fbd2c696e7a0b85ac1290f2462eaff69"
+  },
+  {
+    "path": "server/app/api/meal-plan/generate/route.js.nft.json",
+    "bytes": 9820,
+    "sha256": "60380c040341a34a55bc2cfbb9ea24519807d1f2690bf27f31002d46ae618f8c"
+  },
+  {
+    "path": "server/app/api/meal-plan/generate/route_client-reference-manifest.js",
+    "bytes": 389,
+    "sha256": "30506903a7cd75a6232a18cda88f8b17fcbac8e0e8c8ba85b7c3881a85c50a85"
+  },
+  {
+    "path": "server/app/api/meal-plan/regenerate-day/route.js",
+    "bytes": 10230,
+    "sha256": "a96b7dbc2cfe4cc530f3b80349027948e531ea9a42919c567e0a2148267cf7eb"
+  },
+  {
+    "path": "server/app/api/meal-plan/regenerate-day/route.js.nft.json",
+    "bytes": 9820,
+    "sha256": "60380c040341a34a55bc2cfbb9ea24519807d1f2690bf27f31002d46ae618f8c"
+  },
+  {
+    "path": "server/app/api/meal-plan/regenerate-day/route_client-reference-manifest.js",
+    "bytes": 401,
+    "sha256": "ccaf8ebac94203d748808166b33899b9c3b6956a14bdc55c38dff1efcea63cf5"
+  },
+  {
+    "path": "server/app/api/meal-plan/route.js",
+    "bytes": 9480,
+    "sha256": "e15e3bf6d658ed50abbda7ec358e9684e574b435eb475bb84f6caa33556f63c4"
+  },
+  {
+    "path": "server/app/api/meal-plan/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/meal-plan/route_client-reference-manifest.js",
+    "bytes": 371,
+    "sha256": "ab4271ffb677d099ae1c06ac598006bbfec26fe2c0fa6c4e6fff47856dc85d00"
+  },
+  {
+    "path": "server/app/api/meals-eaten/route.js",
+    "bytes": 12479,
+    "sha256": "6f01cbb3d34509882b331d7255f2cd39c85e482d8315c41359d9976e72bb5343"
+  },
+  {
+    "path": "server/app/api/meals-eaten/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/meals-eaten/route_client-reference-manifest.js",
+    "bytes": 375,
+    "sha256": "1b0e6a0536e6691a1b47d8220678fdc4405eed0926e72bb32d7a566b5dcf0178"
+  },
+  {
+    "path": "server/app/api/mobile/ai-status/route.js",
+    "bytes": 11528,
+    "sha256": "abc50af3dc01ef12b39d9b979616f54a1e69614c93fc7f4197e73201c50a3f4b"
+  },
+  {
+    "path": "server/app/api/mobile/ai-status/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/mobile/ai-status/route_client-reference-manifest.js",
+    "bytes": 385,
+    "sha256": "cd37a11276cbc27ead05b399458ae9c3c651ed643038740a8add6d72f71def3c"
+  },
+  {
+    "path": "server/app/api/mobile/analytics/route.js",
+    "bytes": 11926,
+    "sha256": "2b73ca96c66b3e8ec25045976f2e9a1d716a6f891a9fdb2acb44d8a292c3ee66"
+  },
+  {
+    "path": "server/app/api/mobile/analytics/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/mobile/analytics/route_client-reference-manifest.js",
+    "bytes": 385,
+    "sha256": "a67bbd24acadd8ae68f666857524a5c025e5fab7827d5ad9d4be320ece1091b9"
+  },
+  {
+    "path": "server/app/api/mobile/config/route.js",
+    "bytes": 15191,
+    "sha256": "9e9c29852b1ae5bd0888d5f9a9be5879d667ae6ab0dcb0e74cb346be802f3a74"
+  },
+  {
+    "path": "server/app/api/mobile/config/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/mobile/config/route_client-reference-manifest.js",
+    "bytes": 379,
+    "sha256": "4c9723e53c0e0b15bbc52d0647fb5b55e190c725c280443049d838a5579586f5"
+  },
+  {
+    "path": "server/app/api/mobile/maintenance/route.js",
+    "bytes": 11097,
+    "sha256": "c0449a27e3d56cc531cfd80fd86e5a9166765d1b4da1e841681f4f2c8e151511"
+  },
+  {
+    "path": "server/app/api/mobile/maintenance/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/mobile/maintenance/route_client-reference-manifest.js",
+    "bytes": 389,
+    "sha256": "cc06954ad5b1942ca499843d8d24c2f4774c73baac1d56e26a8ebb3e5372c2d7"
+  },
+  {
+    "path": "server/app/api/mobile/staging-info/route.js",
+    "bytes": 8781,
+    "sha256": "234530ea410cd8f46fe3fa0f7465bad275da7e206e70d81d1e2d5b31321a3c02"
+  },
+  {
+    "path": "server/app/api/mobile/staging-info/route.js.nft.json",
+    "bytes": 9680,
+    "sha256": "f8e44325031df8b3165b6a6351801545c047ec7211d2b4df33bcdecb82eabb70"
+  },
+  {
+    "path": "server/app/api/mobile/staging-info/route_client-reference-manifest.js",
+    "bytes": 391,
+    "sha256": "ec1786b6da8c8e21a6a84c63a4326ed6cec4f4a45b9ea95c29f1eea748915303"
+  },
+  {
+    "path": "server/app/api/pantry/[id]/route.js",
+    "bytes": 12827,
+    "sha256": "5a87c3734f06a96c34d8b37e0cb4d51cd1f28fbe6b9b3eedcafc1341f51da7c1"
+  },
+  {
+    "path": "server/app/api/pantry/[id]/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/pantry/[id]/route_client-reference-manifest.js",
+    "bytes": 375,
+    "sha256": "a3f0cacfa2c41d55b3de4dd8fb396fc437508844b4f330432fbf7b1a76b74c92"
+  },
+  {
+    "path": "server/app/api/pantry/route.js",
+    "bytes": 12336,
+    "sha256": "3438f68948f8d8f3c6b596b5a27e5d8a81d5ab70eadd47b19212afba95657d40"
+  },
+  {
+    "path": "server/app/api/pantry/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/pantry/route_client-reference-manifest.js",
+    "bytes": 365,
+    "sha256": "f883bfb1d28de41cc5560d764979094b97231974b8c5efc97661d675dac098bb"
+  },
+  {
+    "path": "server/app/api/privacy/consents/route.js",
+    "bytes": 11561,
+    "sha256": "86876ebd07f8c4e1b62c0012a353e29bbc68899a864080165bb41dff4c06a4b9"
+  },
+  {
+    "path": "server/app/api/privacy/consents/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/privacy/consents/route_client-reference-manifest.js",
+    "bytes": 385,
+    "sha256": "9afb2638f883db6e54a17d93e22c9cf05d76bfb4169a234b60d79e27d5aa43aa"
+  },
+  {
+    "path": "server/app/api/profile/route.js",
+    "bytes": 13001,
+    "sha256": "04e334c49c89e7eb518691b12ea8fb100aed7b425c81ac71cc0f59e074bbfa4e"
+  },
+  {
+    "path": "server/app/api/profile/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/profile/route_client-reference-manifest.js",
+    "bytes": 367,
+    "sha256": "8440d634eb99cbdcca3ae5f658bfd5d84516cd1a3c47210527761ec64f1d2f4e"
+  },
+  {
+    "path": "server/app/api/push/register/route.js",
+    "bytes": 12117,
+    "sha256": "28b609e21ad8c0a6e36d3c6a3b1a66b31674b8e3a054214bb6e50faccff4a583"
+  },
+  {
+    "path": "server/app/api/push/register/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/push/register/route_client-reference-manifest.js",
+    "bytes": 379,
+    "sha256": "fdd7648d56819552defede8811a9bb718e104584f4e72a44897c4e271c3b6258"
+  },
+  {
+    "path": "server/app/api/push/send-expiry-alerts/route.js",
+    "bytes": 14408,
+    "sha256": "50d75e2f60fde0847a69dda91f4b2a573e04ba54d203539d01b2a10fd7cead53"
+  },
+  {
+    "path": "server/app/api/push/send-expiry-alerts/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/push/send-expiry-alerts/route_client-reference-manifest.js",
+    "bytes": 399,
+    "sha256": "f516851d11d5049018317585a0eefd7fc35076f26a45213f7b280aafa5a2ee26"
+  },
+  {
+    "path": "server/app/api/push/unregister/route.js",
+    "bytes": 11075,
+    "sha256": "4df6c192d797b44c04e268db2d80a7726f0a557a13f8e6d86139121909c15651"
+  },
+  {
+    "path": "server/app/api/push/unregister/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/push/unregister/route_client-reference-manifest.js",
+    "bytes": 383,
+    "sha256": "b636a9b814afd2f9ff3d92b0a0a3e7da4f247ef98aae45ffc0e1f446384fb991"
+  },
+  {
+    "path": "server/app/api/recipes/[id]/route.js",
+    "bytes": 9739,
+    "sha256": "a42960e2735244da96a3a90c5996283bdf58b4e58380ccf1ab34849b5cd2928b"
+  },
+  {
+    "path": "server/app/api/recipes/[id]/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/recipes/[id]/route_client-reference-manifest.js",
+    "bytes": 377,
+    "sha256": "d83d991b621dfcd609b9652cc52f002b648e8194295c7a5cd128e161fbfc265b"
+  },
+  {
+    "path": "server/app/api/recipes/history/route.js",
+    "bytes": 9631,
+    "sha256": "969fd45f6717b4238636e21fc7bddc95ac9236170a1825bcd94375c0df2a87dc"
+  },
+  {
+    "path": "server/app/api/recipes/history/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/recipes/history/route_client-reference-manifest.js",
+    "bytes": 383,
+    "sha256": "398a5892eeb006ed3539b3d806fc2165a158c28c7c6d03cdcf71f7752cbd5e90"
+  },
+  {
+    "path": "server/app/api/recipes/modify/route.js",
+    "bytes": 10182,
+    "sha256": "816004f82be198e4d89a7ffb748da1288851a9a6f434614c1748c94455f86491"
+  },
+  {
+    "path": "server/app/api/recipes/modify/route.js.nft.json",
+    "bytes": 9820,
+    "sha256": "60380c040341a34a55bc2cfbb9ea24519807d1f2690bf27f31002d46ae618f8c"
+  },
+  {
+    "path": "server/app/api/recipes/modify/route_client-reference-manifest.js",
+    "bytes": 381,
+    "sha256": "8825b1d3469ffb467070ce68ae5301450154b0e73010cce4dfb15ff8f346b7c7"
+  },
+  {
+    "path": "server/app/api/recipes/route.js",
+    "bytes": 10558,
+    "sha256": "3688a9fb32a6adbfc7a1bf30a57905719c1f350b029c1bafac915beb067cfa3f"
+  },
+  {
+    "path": "server/app/api/recipes/route.js.nft.json",
+    "bytes": 9445,
+    "sha256": "29a1a527540d7f2a838446b6392cd7653fb29e3c6db84e2a2e8146446a08b860"
+  },
+  {
+    "path": "server/app/api/recipes/route_client-reference-manifest.js",
+    "bytes": 367,
+    "sha256": "ce3e6d9db9015016c8e2efc946cf178e371cb20c931d62af13ffbb87280090ef"
+  },
+  {
+    "path": "server/app/api/recipes/save/route.js",
+    "bytes": 12931,
+    "sha256": "4fddd42161e7e02d36dd381510a8b4644fc72f44f481de1c0ac63b0adb173c7c"
+  },
+  {
+    "path": "server/app/api/recipes/save/route.js.nft.json",
+    "bytes": 9764,
+    "sha256": "ce53211afdec754f88173aa643488494e5dcc5dca13f12e80f7915141f0a3cf9"
+  },
+  {
+    "path": "server/app/api/recipes/save/route_client-reference-manifest.js",
+    "bytes": 377,
+    "sha256": "e5a45ef67d75d2e8ad3b42cfde1e3edf9f55a58757dcf6025e726258c6650206"
+  },
+  {
+    "path": "server/app/api/referral/route.js",
+    "bytes": 11843,
+    "sha256": "b11a8185b317679dd7a6d19b3a442ea046b3d6e11dca6575178960912bd90079"
+  },
+  {
+    "path": "server/app/api/referral/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/referral/route_client-reference-manifest.js",
+    "bytes": 369,
+    "sha256": "7634664b3d7dd5aad041e898244086caa5c27af19fdab78e3b464d70b1d44a9e"
+  },
+  {
+    "path": "server/app/api/shopping-list/route.js",
+    "bytes": 9863,
+    "sha256": "3584887786dd73fb00928e4e3ef667c0faa473845a8ce289c337aed27e2416df"
+  },
+  {
+    "path": "server/app/api/shopping-list/route.js.nft.json",
+    "bytes": 9395,
+    "sha256": "42b6313e4c3e4217b5e26e0d56e8b279e1e271a5b6ae924b84c33a70985ea1a9"
+  },
+  {
+    "path": "server/app/api/shopping-list/route_client-reference-manifest.js",
+    "bytes": 379,
+    "sha256": "a8034c79c137eb455cc47509fda2320ffeb87191890ce4f574e0f3d86a60ce1f"
+  },
+  {
+    "path": "server/app/api/vision/route.js",
+    "bytes": 9179,
+    "sha256": "875c345f41e841e20a6e20e16bcb071b432d2a439af812a228a3fe635887990e"
+  },
+  {
+    "path": "server/app/api/vision/route.js.nft.json",
+    "bytes": 9445,
+    "sha256": "29a1a527540d7f2a838446b6392cd7653fb29e3c6db84e2a2e8146446a08b860"
+  },
+  {
+    "path": "server/app/api/vision/route_client-reference-manifest.js",
+    "bytes": 365,
+    "sha256": "674c962d363f53d747c7cb16d3ce0d2e9353f4dda850798fd5a4f52d0702cf4d"
+  },
+  {
+    "path": "server/app/recipe/[id]/page.js",
+    "bytes": 152393,
+    "sha256": "cfe2843dabb081b331e60c02f61fdb2fa8fb02503c48488b574ee42a5da359e1"
+  },
+  {
+    "path": "server/app/recipe/[id]/page.js.nft.json",
+    "bytes": 9307,
+    "sha256": "3d205ca8f08d1ac51fdd66479cb8298bdcd52ccadafd498e01a27a3d33bb64fb"
+  },
+  {
+    "path": "server/app/recipe/[id]/page_client-reference-manifest.js",
+    "bytes": 5862,
+    "sha256": "b967164c8df10ff02aabf85b84f6d25588a872c6a82dd2279cb538151da2f734"
+  },
+  {
+    "path": "server/app/route.js",
+    "bytes": 15942,
+    "sha256": "9f86f3a37e3e08b9bb2eeb004dea03a7cdff486860e1f05cf62362a8f8cb8b59"
+  },
+  {
+    "path": "server/app/route.js.nft.json",
+    "bytes": 8619,
+    "sha256": "661d3be9d224d4aeff0bdb6d6929ac3bf2f72ed552e7df6726975cd476c4a5e8"
+  },
+  {
+    "path": "server/app/route_client-reference-manifest.js",
+    "bytes": 343,
+    "sha256": "b68b3296bd0c461c20ff044f38f22a7c5bc53f3418fb95f3a263d2ecba8e930c"
+  },
+  {
+    "path": "server/chunks/190.js",
+    "bytes": 11576,
+    "sha256": "0f959708b17156ddacf7a89d67fcc2d55613f32fcbdfd88a15d5c2b4b1bd9e53"
+  },
+  {
+    "path": "server/chunks/413.js",
+    "bytes": 28155,
+    "sha256": "3f455e1f53fbe2a8903b254827e460bd269fbefd33444932854ea9d01cb18de2"
+  },
+  {
+    "path": "server/chunks/430.js",
+    "bytes": 484252,
+    "sha256": "915ba03000e1c5510643d79928a80b09889bcb873a52cc6ba2288c653f6fe0b1"
+  },
+  {
+    "path": "server/chunks/747.js",
+    "bytes": 18813,
+    "sha256": "b4525a2bab658b66cfcb4b942c43543c22c7611fc49edc1f5719d27dfb13397e"
+  },
+  {
+    "path": "server/chunks/813.js",
+    "bytes": 25064,
+    "sha256": "91ae5961e6f42375befa1d5429bc040fa1a3ecd801b25f956cc7b7ad7e8dd951"
+  },
+  {
+    "path": "server/chunks/894.js",
+    "bytes": 219824,
+    "sha256": "ceb5fa1e824d46a263130260510d5e23a5eb1cc0b9640ea4af506a5e7fd0a00d"
+  },
+  {
+    "path": "server/chunks/970.js",
+    "bytes": 200268,
+    "sha256": "f3422449f37c33d29ed7b01c61a4dcbd6b96fe4a81b664ab2d46bd3d9ebfd1d3"
+  },
+  {
+    "path": "server/functions-config-manifest.json",
+    "bytes": 473,
+    "sha256": "ab4c1fd866400843d2e03036b11e8986907d4328a73648c5f7a35e69a7377f34"
+  },
+  {
+    "path": "server/interception-route-rewrite-manifest.js",
+    "bytes": 48,
+    "sha256": "fc5133e40acf09e6517b073ddd7b5c0c218d09938848902210f2cc13f08e1c81"
+  },
+  {
+    "path": "server/middleware-build-manifest.js",
+    "bytes": 449,
+    "sha256": "bdd32f34f1fd64890ff1e84b0209f80c9ae471a9a87be41310ad6befa93f54b2"
+  },
+  {
+    "path": "server/middleware-manifest.json",
+    "bytes": 83,
+    "sha256": "0a8520bc7e076f7ae717c2d62713990c83e8a3d74626f327a3844bc0504e210c"
+  },
+  {
+    "path": "server/middleware-react-loadable-manifest.js",
+    "bytes": 36,
+    "sha256": "ad2e79ec91e2a5440840da3d8bd222c279b3b4c47e89a968327a66f6cb12eb82"
+  },
+  {
+    "path": "server/next-font-manifest.js",
+    "bytes": 106,
+    "sha256": "2c0f5bbb79d07dfea405146a62d7e15a7a9e890d29e38b7db2631fcf6e480da8"
+  },
+  {
+    "path": "server/next-font-manifest.json",
+    "bytes": 77,
+    "sha256": "926e772d34a53f2a4d9b16071dd6ea77b051b2b7acc49d9165723debe3fbbe0f"
+  },
+  {
+    "path": "server/pages-manifest.json",
+    "bytes": 58,
+    "sha256": "c354059caa217e72bdeb145e351b2038990972872c52df215cb1e4105c35097b"
+  },
+  {
+    "path": "server/pages/404.html",
+    "bytes": 5276,
+    "sha256": "cb21b92ee69467d5c435520880e4a5af835eb4a94acb720e2f7649fdf3b06035"
+  },
+  {
+    "path": "server/pages/500.html",
+    "bytes": 8936,
+    "sha256": "1c9d36bcfa76d354ec29e54a3e4a360f3ec1dc9f3b86ef686fd71e4329e0275b"
+  },
+  {
+    "path": "server/prefetch-hints.json",
+    "bytes": 461,
+    "sha256": "b2dc34c27a32712ab9f49a2916937caaef3084f2754331649b2ce5712a8ebbe5"
+  },
+  {
+    "path": "server/preview-props.json",
+    "bytes": 250,
+    "sha256": "c5e6b8a2984d7bca436248ab9162cbf5658ba34bfd6049d683fa264abf76c9f0"
+  },
+  {
+    "path": "server/server-reference-manifest.js",
+    "bytes": 123,
+    "sha256": "ce01006c00e1f63bcbfe41b3f7edd260d969b41d0a323b705c44e1ef9df13d8c"
+  },
+  {
+    "path": "server/server-reference-manifest.json",
+    "bytes": 84,
+    "sha256": "a6be7638105d00c44cca579377bc035f43cf4757d3af54bb56dd7901f8b31169"
+  },
+  {
+    "path": "server/webpack-runtime.js",
+    "bytes": 1438,
+    "sha256": "68835a826bab0ddef47e9a0008c6625f0916f56f3e2f71f7b1de64929b20757b"
+  },
+  {
+    "path": "static/4rMvm_GO_3GD1QpDCCm6E/_buildManifest.js",
+    "bytes": 1630,
+    "sha256": "9f740c57cff5eace2727edaf4162790132b750d37cefbee2fee0eef39890b024"
+  },
+  {
+    "path": "static/4rMvm_GO_3GD1QpDCCm6E/_ssgManifest.js",
+    "bytes": 80,
+    "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00"
+  },
+  {
+    "path": "static/chunks/4bd1b696-c7408084347438ae.js",
+    "bytes": 203721,
+    "sha256": "7d5ccf185a6f85ab38ce400a7f10aa0a3496eb4e9aee1e500a85e01c4222fcec"
+  },
+  {
+    "path": "static/chunks/794-9eba776736f7a528.js",
+    "bytes": 242566,
+    "sha256": "447f2f0d2c55237fa6f3d36a09e8f4d357586ab73d072201e90f8df45cb2cfb1"
+  },
+  {
+    "path": "static/chunks/845-346d9c0dc55fb02a.js",
+    "bytes": 131513,
+    "sha256": "4ca146207e7fdd4874cfd123212ec8df6f4d83d580263252b918f754e0bc91ef"
+  },
+  {
+    "path": "static/chunks/app/_global-error/page-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/_not-found/page-7f1f159ed84dee17.js",
+    "bytes": 2667,
+    "sha256": "a974286f0950028668908806a7014bcd08430a49daf971025e2e9c90d81f327a"
+  },
+  {
+    "path": "static/chunks/app/api/account/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/billing/status/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/billing/webhook/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/content-reports/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/health-export/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/meal-image/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/meal-plan/generate/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/meal-plan/regenerate-day/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/meal-plan/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/meals-eaten/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/mobile/ai-status/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/mobile/analytics/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/mobile/config/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/mobile/maintenance/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/mobile/staging-info/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/pantry/[id]/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/pantry/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/privacy/consents/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/profile/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/push/register/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/push/send-expiry-alerts/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/push/unregister/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/recipes/[id]/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/recipes/history/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/recipes/modify/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/recipes/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/recipes/save/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/referral/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/shopping-list/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/api/vision/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/app/recipe/[id]/page-06d0794d65a6c839.js",
+    "bytes": 6348,
+    "sha256": "9423518749a152e3907e3098f9f12c411a6c803c5bbcb1fe070b6e6a2aeeb710"
+  },
+  {
+    "path": "static/chunks/app/recipe/layout-e437ff5fe2e6a707.js",
+    "bytes": 195,
+    "sha256": "06e243b8d62ac80c737b236dabee238a10532c81829c7eecc2cf44a5b99c568d"
+  },
+  {
+    "path": "static/chunks/app/route-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/framework-73ddd8da05815aaa.js",
+    "bytes": 189664,
+    "sha256": "ea61bfe30865e89bec16452e2c6d9378eaea337ec631385a3fc04802854fb7c3"
+  },
+  {
+    "path": "static/chunks/main-32dd0fe7edea7b0e.js",
+    "bytes": 137364,
+    "sha256": "f62cbe48ff9472f6ddad37760dda3da0aab4b76c7ecffebec9aa9291f1a2850b"
+  },
+  {
+    "path": "static/chunks/main-app-6c9094c657603dc5.js",
+    "bytes": 513,
+    "sha256": "6472c1b136450861aceb4a12cb439953a991fbc887d2641ba353231f27d77822"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/app-error-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/forbidden-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/global-error-59853647e91df0a5.js",
+    "bytes": 179,
+    "sha256": "a4051cd23893adaa2051650df2b84405d214559d9a508bb946fbbd560a0f7534"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/layout-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/not-found-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/next/dist/client/components/builtin/unauthorized-e4f42b2beb35b401.js",
+    "bytes": 273,
+    "sha256": "99e352659016b992da66a80269ce89e392496c75ce1e096a09e98cc10b28788d"
+  },
+  {
+    "path": "static/chunks/polyfills-42372ed130431b0a.js",
+    "bytes": 112594,
+    "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+  },
+  {
+    "path": "static/chunks/webpack-44d8aec3c26a0cdc.js",
+    "bytes": 3253,
+    "sha256": "d0a82fed8b37553509fe37aa7c8dfa791ba125f47b8a45899e0fd6a03936a339"
+  },
+  {
+    "path": "static/css/3ae62653186b571a.css",
+    "bytes": 20492,
+    "sha256": "c92e10131d1c6cd44f66b48fc8b33a251ef2b869bdba92514c3cd34b3de66d91"
+  },
+  {
+    "path": "trace",
+    "bytes": 739074,
+    "sha256": "743dbb935be0b5eb6d394c51c5aa2b3e7fd3fe64cf1a2285e693e44d9e78d6b2"
+  },
+  {
+    "path": "trace-build",
+    "bytes": 1207,
+    "sha256": "94b33fb9a145d60b8209dcefac2c92093df991e50b8eb76b2d298cf4f6fdbdcf"
+  },
+  {
+    "path": "types/app/api/account/route.ts",
+    "bytes": 9117,
+    "sha256": "ab142cbefd49df0b26d0ae61621afc4cf41f15d9919ce7c763e0be7ff6929d6f"
+  },
+  {
+    "path": "types/app/api/billing/status/route.ts",
+    "bytes": 9144,
+    "sha256": "33d8185a58bd59fa3f4d96038f6f166183f09f3c42ca08ad5fc31efe724a263e"
+  },
+  {
+    "path": "types/app/api/billing/webhook/route.ts",
+    "bytes": 9147,
+    "sha256": "b68108d4b85d8e8b3c68cad8cfd5d60775f390c59d69b72faacfbe244654eeb8"
+  },
+  {
+    "path": "types/app/api/content-reports/route.ts",
+    "bytes": 9141,
+    "sha256": "845dc5dd9a42c5654c4b3206f4910fd8632a7a5727e89850de0d02392e7e2f65"
+  },
+  {
+    "path": "types/app/api/health-export/route.ts",
+    "bytes": 9135,
+    "sha256": "ff37909c20b27a23d51c08afce0397549a797594be7c27258c2124f563862f62"
+  },
+  {
+    "path": "types/app/api/meal-image/route.ts",
+    "bytes": 9126,
+    "sha256": "259e4f29f47647ae1b851d73c5b4dcea3bd685903cd484e5b9dc74c491c82677"
+  },
+  {
+    "path": "types/app/api/meal-plan/generate/route.ts",
+    "bytes": 9156,
+    "sha256": "9b8732b12b6553ef1e18c5d009a0be8ed95f5c59679b16df091358a5a3a2c12e"
+  },
+  {
+    "path": "types/app/api/meal-plan/regenerate-day/route.ts",
+    "bytes": 9174,
+    "sha256": "283d9b9dc109baaaf8894d5c433d060159df91e83ed888f05fa00bcabd217aad"
+  },
+  {
+    "path": "types/app/api/meal-plan/route.ts",
+    "bytes": 9123,
+    "sha256": "1a846c18929e7c10c0905d7244d37e01985f5f5050747727397e4edb662646e4"
+  },
+  {
+    "path": "types/app/api/meals-eaten/route.ts",
+    "bytes": 9129,
+    "sha256": "2d8b0144376c43378cb052cdb300326ef4a197dcf6c0dfcf911fa0d92b8e59a1"
+  },
+  {
+    "path": "types/app/api/mobile/ai-status/route.ts",
+    "bytes": 9150,
+    "sha256": "f6cb332ba65c0fafe7064511463a451e5e37845d62184abf2b8e4cc92c076876"
+  },
+  {
+    "path": "types/app/api/mobile/analytics/route.ts",
+    "bytes": 9150,
+    "sha256": "d6a27ce9bd2b748d517c111d2d7e04f9b1b3c75d7eb57396cab5ab15cd93fd2e"
+  },
+  {
+    "path": "types/app/api/mobile/config/route.ts",
+    "bytes": 9141,
+    "sha256": "30e368a7f9de5793c5040bfb408893f3f7d2c90f759c43dae553d0c864a726bc"
+  },
+  {
+    "path": "types/app/api/mobile/maintenance/route.ts",
+    "bytes": 9156,
+    "sha256": "4b4ad0199319df522c0920f8b92d482dce58c4cea8da1a835ee5ea6b1dd81431"
+  },
+  {
+    "path": "types/app/api/mobile/staging-info/route.ts",
+    "bytes": 9159,
+    "sha256": "c0eb4d94cd9ce7f6702148078c1cf418ddcf2a517dd26a4933106af44d215672"
+  },
+  {
+    "path": "types/app/api/pantry/[id]/route.ts",
+    "bytes": 9135,
+    "sha256": "3d24fe9fadf7a2fd48a1b1dc29bd1558eb1dde379eeb810b59dfc74e8e21c0eb"
+  },
+  {
+    "path": "types/app/api/pantry/route.ts",
+    "bytes": 9114,
+    "sha256": "347d7c05b15d4f5e5ef0b2649c1baff50f93156ec4ae967a94d3e527d00bb290"
+  },
+  {
+    "path": "types/app/api/privacy/consents/route.ts",
+    "bytes": 9150,
+    "sha256": "b25974de45b93c74fbff2865e8b18fb3151dfde0710baa352ce49d5ea321cc60"
+  },
+  {
+    "path": "types/app/api/profile/route.ts",
+    "bytes": 9117,
+    "sha256": "c3f09f658f4b6bc914d54c1795b542b1d88fbc9c02999c8389d4f209b44999e7"
+  },
+  {
+    "path": "types/app/api/push/register/route.ts",
+    "bytes": 9141,
+    "sha256": "cee1d440b0dac5522f6c1a1a08ce5eccba8859d38a3c7119b3ed2a62b88ee758"
+  },
+  {
+    "path": "types/app/api/push/send-expiry-alerts/route.ts",
+    "bytes": 9171,
+    "sha256": "90cc06d102409936217d82aae12ca2442a6dbfb7f6a42b4898c6d42b1c54313a"
+  },
+  {
+    "path": "types/app/api/push/unregister/route.ts",
+    "bytes": 9147,
+    "sha256": "2a7f2d4c203a6a30e8ba537eaf3f12af692f92b6185f79446cf720dd95759984"
+  },
+  {
+    "path": "types/app/api/recipes/[id]/route.ts",
+    "bytes": 9138,
+    "sha256": "af8b036244a4e72dcaf7d7811117b8282186cf6923a4fe99fd9e4a5cf3d74fb6"
+  },
+  {
+    "path": "types/app/api/recipes/history/route.ts",
+    "bytes": 9147,
+    "sha256": "f49624753f32a1c07d79384a674afdb6749b942a13c55693372b604ff3685de8"
+  },
+  {
+    "path": "types/app/api/recipes/modify/route.ts",
+    "bytes": 9144,
+    "sha256": "02790cac9b7a5de95fb251af4c3a1b98ed7528972069b19529c26c84ac9fa5bf"
+  },
+  {
+    "path": "types/app/api/recipes/route.ts",
+    "bytes": 9117,
+    "sha256": "72fd0eb1710ee16a7159debcfc2e176b2e45e7ee864060b595ca01d8c9dced09"
+  },
+  {
+    "path": "types/app/api/recipes/save/route.ts",
+    "bytes": 9138,
+    "sha256": "1c6711cf8b8176725e08b83524a2e269d41ac46e4a05289ba6253d716f98515a"
+  },
+  {
+    "path": "types/app/api/referral/route.ts",
+    "bytes": 9120,
+    "sha256": "078d9b31af72bafb0af6c7171d0275c865c1da5692b8c445219366b212bb787f"
+  },
+  {
+    "path": "types/app/api/shopping-list/route.ts",
+    "bytes": 9135,
+    "sha256": "eab72fe5aaeab1fb252390ba4a81b56328e35663ab27c60691a51f87f290c42a"
+  },
+  {
+    "path": "types/app/api/vision/route.ts",
+    "bytes": 9114,
+    "sha256": "cec8f404a9d81dd10ce4bd7af29da448aa14fdcbe340ae14266c810f5d44b9ce"
+  },
+  {
+    "path": "types/app/recipe/[id]/page.ts",
+    "bytes": 4169,
+    "sha256": "10dab0f1f7d7a3732df7f8e773fb03590e58adce6876ee51e7ded910bce35dbf"
+  },
+  {
+    "path": "types/app/recipe/layout.ts",
+    "bytes": 4160,
+    "sha256": "1dbe10562949c33171d0e3c8e76e7a65cf1851fdb5be051e8c4db4e258d8e582"
+  },
+  {
+    "path": "types/app/route.ts",
+    "bytes": 9069,
+    "sha256": "32d715c4946f909585041f52facc374cce70425345315966c49aaa159ebc6bf9"
+  },
+  {
+    "path": "types/cache-life.d.ts",
+    "bytes": 4597,
+    "sha256": "7ff7da91491bf851eda28e1269f737c3502b110a9393952ccbc660a896194c76"
+  },
+  {
+    "path": "types/package.json",
+    "bytes": 18,
+    "sha256": "e3d5a4a2d8551aa52c5a01d2a0efb2e06a2d9711b4f5c5f1d20de6e21807e2cd"
+  },
+  {
+    "path": "types/root-params.d.ts",
+    "bytes": 101,
+    "sha256": "f3387dd7800eec3c34273f7a8efad13e864598c7e8f788d321e407390989bb59"
+  },
+  {
+    "path": "types/routes.d.ts",
+    "bytes": 3511,
+    "sha256": "2e162ebb1b56b0aa93cabad3759eaae73118ed852cf5e21b56e535c9ce103b36"
+  },
+  {
+    "path": "types/validator.ts",
+    "bytes": 14448,
+    "sha256": "fc95c1264c1992f1493fa0b41d7afcf1d33b1954825417f3b7b4226f3f7a66cc"
+  }
+]

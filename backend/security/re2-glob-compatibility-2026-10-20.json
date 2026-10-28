@@ -1,0 +1,373 @@
+{
+  "candidate": "globrex@0.1.2 + re2js@2.8.8",
+  "productionChanged": false,
+  "candidateLoads": 6,
+  "comparisons": 55,
+  "equivalent": 40,
+  "mismatches": [
+    {
+      "key": "tinyglobby/negated-extglob",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      },
+      "candidate": {
+        "error": "error parsing regexp: invalid or unsupported Perl syntax: `(?!`"
+      }
+    },
+    {
+      "key": "tinyglobby/literal-star",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a*.ts"
+        ],
+        "async": [
+          "src/a*.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [],
+        "async": []
+      }
+    },
+    {
+      "key": "tinyglobby/nested-brace",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts",
+          "src/b.ts",
+          "test/c.ts"
+        ],
+        "async": [
+          "src/a.ts",
+          "src/b.ts",
+          "test/c.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [],
+        "async": []
+      }
+    },
+    {
+      "key": "tinyglobby/globstar-off",
+      "equal": false,
+      "baseline": {
+        "sync": [],
+        "async": []
+      },
+      "candidate": {
+        "error": "Trial adapter does not implement noglobstar"
+      }
+    },
+    {
+      "key": "tinyglobby/brace-off",
+      "equal": false,
+      "baseline": {
+        "sync": [],
+        "async": []
+      },
+      "candidate": {
+        "error": "Trial adapter does not implement nobrace"
+      }
+    },
+    {
+      "key": "tinyglobby/literal-parentheses",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts"
+        ],
+        "async": [
+          "src/a.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts"
+        ],
+        "async": [
+          "src/(a).ts"
+        ]
+      }
+    },
+    {
+      "key": "tinyglobby/dynamic:src/\\*.ts",
+      "equal": false,
+      "baseline": false,
+      "candidate": true
+    },
+    {
+      "key": "next-alias/negated-extglob",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      },
+      "candidate": {
+        "error": "error parsing regexp: invalid or unsupported Perl syntax: `(?!`"
+      }
+    },
+    {
+      "key": "next-alias/literal-star",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a*.ts"
+        ],
+        "async": [
+          "src/a*.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [],
+        "async": []
+      }
+    },
+    {
+      "key": "next-alias/nested-brace",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts",
+          "src/b.ts",
+          "test/c.ts"
+        ],
+        "async": [
+          "src/a.ts",
+          "src/b.ts",
+          "test/c.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [],
+        "async": []
+      }
+    },
+    {
+      "key": "next-alias/globstar-off",
+      "equal": false,
+      "baseline": {
+        "sync": [],
+        "async": []
+      },
+      "candidate": {
+        "error": "Trial adapter does not implement noglobstar"
+      }
+    },
+    {
+      "key": "next-alias/brace-off",
+      "equal": false,
+      "baseline": {
+        "sync": [],
+        "async": []
+      },
+      "candidate": {
+        "error": "Trial adapter does not implement nobrace"
+      }
+    },
+    {
+      "key": "next-alias/literal-parentheses",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts"
+        ],
+        "async": [
+          "src/a.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts"
+        ],
+        "async": [
+          "src/(a).ts"
+        ]
+      }
+    },
+    {
+      "key": "next-alias/dynamic:src/\\*.ts",
+      "equal": false,
+      "baseline": false,
+      "candidate": true
+    },
+    {
+      "key": "mobile-micromatch-api",
+      "equal": false,
+      "baseline": [
+        "src/screen.tsx"
+      ],
+      "candidate": {
+        "error": "Unsupported private Picomatch API: picomatch/lib/utils"
+      }
+    }
+  ],
+  "attacks": [
+    {
+      "pattern": "+(*)b",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "+(*a)",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "*(a*)b",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "+(a|aa)",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "+(ab|abab)",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "+(a*|b)",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "true"
+      }
+    },
+    {
+      "pattern": "+(+(a))b",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "+(a|[ab])",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      }
+    },
+    {
+      "pattern": "[[:unfinished",
+      "baseline": {
+        "completedWithinBudget": true,
+        "status": 0,
+        "outcome": "MATCH_COMPLETED",
+        "result": "false"
+      },
+      "candidate": {
+        "completedWithinBudget": true,
+        "status": 1,
+        "outcome": "REJECTED",
+        "result": "",
+        "rejection": "Error: Malformed POSIX class rejected before globrex"
+      }
+    }
+  ],
+  "verdict": "NOT_PROMOTED",
+  "limitations": "Strict non-backtracking matcher trial; unsupported syntax produces explicit errors. No native matcher fallback, no Picomatch code copied. Scan/dot/options/private APIs are not fully compatible."
+}

@@ -1,0 +1,2227 @@
+{
+  "createdAt": "2026-10-20T09:45:04.516248+00:00",
+  "head": "9edc2dc45c1b1f56f484f22a156fa27e38ffe88a",
+  "basis": "working-tree bytes including untracked files; HEAD is not the source identity",
+  "excludedPrivatePaths": [
+    ".claude/launch.json",
+    ".claude/settings.json",
+    ".vscode/settings.json"
+  ],
+  "files": [
+    {
+      "path": ".github/workflows/backend.yml",
+      "bytes": 2099,
+      "sha256": "bd7e2f4f82eb207f5e0b29df31a1f84757b37ffa285617ac73e6c2a19662f01c"
+    },
+    {
+      "path": ".github/workflows/mobile.yml",
+      "bytes": 1064,
+      "sha256": "740dc3efa0929c4b60b4becce058f0e67f8f2832fa1ecb5c51fc03c663b1976b"
+    },
+    {
+      "path": ".github/workflows/native-android.yml",
+      "bytes": 3372,
+      "sha256": "70dfbb50f73c19369750e4fbde24da7bfdaad0fc1c15825b95e18c492dc52078"
+    },
+    {
+      "path": ".github/workflows/secrets.yml",
+      "bytes": 1418,
+      "sha256": "1921dd7e8bfd2552645c3c9c86a04ee034e0f91c5c17743801511623c44eadb7"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 480,
+      "sha256": "dc59fa644e5fc45047d7d591b7422c2cea7733c0ee7f11694a5b61ed7784fc48"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 1557,
+      "sha256": "e0f95924e97679a581ac5fda2ea2c3fb636d9d4cceb88c0b8aac0471cb2dd784"
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 608,
+      "sha256": "dae882e67c9b5e33f5c33632f3fcf2c84dae3633719e0dc26c1c5d815fe3b606"
+    },
+    {
+      "path": "PROGRESS.md",
+      "bytes": 121106,
+      "sha256": "08526c0be74842bfe4ea2b0a56984b60aeffd8bdccc2dd258640d6e940f046fb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1874,
+      "sha256": "9a02cdff140a3ad8f47ced80892b4d4669812a4342efd15f62061939329f77d3"
+    },
+    {
+      "path": "backend/.env.example",
+      "bytes": 1817,
+      "sha256": "cef886628b04ece04f3bfc161a1a848dbc9642ab2d4322178373a671040ca5e2"
+    },
+    {
+      "path": "backend/.gitignore",
+      "bytes": 450,
+      "sha256": "ea8eae79ef2cb3b6e0888040b8eb44f44d7ba142a1816410ad59b7f3237cb655"
+    },
+    {
+      "path": "backend/AGENTS.md",
+      "bytes": 2219,
+      "sha256": "9079846a8b0dd9080ac5b5ef847c910a3d5f08fb856dd3f1908f787b58beb98f"
+    },
+    {
+      "path": "backend/PROGRESS.md",
+      "bytes": 1175,
+      "sha256": "c3c4c8a265f3fc2f10ab24711c51a9dd8944ea6ac8003ce45e617718fa0c7363"
+    },
+    {
+      "path": "backend/README.md",
+      "bytes": 2976,
+      "sha256": "9c370874683482cd76c5a1cd15acbd76a36a10310c8f713f1c2b4c2ac2c3a0ac"
+    },
+    {
+      "path": "backend/app/api/account/route.ts",
+      "bytes": 2328,
+      "sha256": "d9c1094c3b79c8db8fb4826ccd44f951909c6a9561b4c843e75684d9255ee4a8"
+    },
+    {
+      "path": "backend/app/api/billing/status/route.ts",
+      "bytes": 2212,
+      "sha256": "2cf0b579917d5204dcadf1ecb424769d96172d862ee4e2e8b175d4f7f96c09f4"
+    },
+    {
+      "path": "backend/app/api/billing/webhook/route.ts",
+      "bytes": 2299,
+      "sha256": "2ff504360323df18cce146940f17d6b837bd8206a00b65c0614aff602680fac4"
+    },
+    {
+      "path": "backend/app/api/content-reports/route.ts",
+      "bytes": 2626,
+      "sha256": "512fcc10993c676665806c1fb2bb34f70375dd2915dc7c9bfb9929eab445699e"
+    },
+    {
+      "path": "backend/app/api/health-export/route.ts",
+      "bytes": 1841,
+      "sha256": "32045989b0c79702964d225330b6d2f7d2236b3df02aebf4dfaa459197afbe4a"
+    },
+    {
+      "path": "backend/app/api/meal-image/route.ts",
+      "bytes": 663,
+      "sha256": "e626878b2fd3d8593fcf32d86be855f49dc7cc1563fe34f2c7715f47ddf0532e"
+    },
+    {
+      "path": "backend/app/api/meal-plan/generate/route.ts",
+      "bytes": 2544,
+      "sha256": "ed1abf5279e296b15153592cc8b334cb778c8df40fcd683b53c35c47efea0d8b"
+    },
+    {
+      "path": "backend/app/api/meal-plan/regenerate-day/route.ts",
+      "bytes": 4405,
+      "sha256": "8cc5ee429f3065f3c9281dc93072644adf0bbd06e6b73fb7c5e65906b3d56105"
+    },
+    {
+      "path": "backend/app/api/meal-plan/route.ts",
+      "bytes": 1040,
+      "sha256": "fd4aa296ddba4c8e55c74f219f27a833eb9f230b11942b9e3dcb5642bb60245c"
+    },
+    {
+      "path": "backend/app/api/meals-eaten/route.ts",
+      "bytes": 4090,
+      "sha256": "69a6c3a6ba16103d89e1a17b0899a72578b433cde86ffb066f23fe799211bb1b"
+    },
+    {
+      "path": "backend/app/api/mobile/ai-status/route.ts",
+      "bytes": 1148,
+      "sha256": "3b81accf88da05d2addb0830e676ae5b55974192d171f4d806224de5d94c0a4b"
+    },
+    {
+      "path": "backend/app/api/mobile/analytics/route.ts",
+      "bytes": 1661,
+      "sha256": "d61c4005c6c62ea4a08d6ecbaceec540496aa99b41191a8b04ca15951e8039f1"
+    },
+    {
+      "path": "backend/app/api/mobile/config/route.ts",
+      "bytes": 2939,
+      "sha256": "600afe2aa1c2bf78cfce9af2808589ae777c16e92330560f35a033dd15f04ad6"
+    },
+    {
+      "path": "backend/app/api/mobile/maintenance/route.ts",
+      "bytes": 2309,
+      "sha256": "8a36a7b6f56d7ac34f2bd375ffd46ccc17709a3df0b5075a3a03182da237348a"
+    },
+    {
+      "path": "backend/app/api/mobile/staging-info/route.ts",
+      "bytes": 3827,
+      "sha256": "c7b5112c2cc00a9438567e704426265c7c475fa0b1cbccd974a2704edacb8e67"
+    },
+    {
+      "path": "backend/app/api/pantry/[id]/route.ts",
+      "bytes": 3571,
+      "sha256": "b903ea764ee5575e3e4100ad7381f19b0eb8efecd2951e6a3bc0f3e139ae9a68"
+    },
+    {
+      "path": "backend/app/api/pantry/route.ts",
+      "bytes": 3089,
+      "sha256": "dd13fe39c978a58c6b67a8b2e21475b0bae79b8ec8dc088593ca34d5a2e80574"
+    },
+    {
+      "path": "backend/app/api/privacy/consents/route.ts",
+      "bytes": 1153,
+      "sha256": "fb0b869cd4e437a09aeb57e54ed4e3b2edb631d6a6b173e9c5fb8b0cfae97e04"
+    },
+    {
+      "path": "backend/app/api/profile/route.ts",
+      "bytes": 3857,
+      "sha256": "7c76bef6dfbc5c6fbd3577aa51bbfa6c4b8dad45e52ec80f7a16930833d52dcd"
+    },
+    {
+      "path": "backend/app/api/push/register/route.ts",
+      "bytes": 2114,
+      "sha256": "76864352c6f6601f9b97da831ee30f690c311c7b7973a0f07a41c85cb7bf90e9"
+    },
+    {
+      "path": "backend/app/api/push/send-expiry-alerts/route.ts",
+      "bytes": 6063,
+      "sha256": "c1aa2e1a67df2dc3672caad9cde09d2c0ea2be5121a2ce3e9362ea0c04ee04de"
+    },
+    {
+      "path": "backend/app/api/push/unregister/route.ts",
+      "bytes": 664,
+      "sha256": "955355261845d00e05ced7f799812ed3b4ad684c10614c425b50b96f048a1da8"
+    },
+    {
+      "path": "backend/app/api/recipes/[id]/route.ts",
+      "bytes": 1641,
+      "sha256": "4d4bc87635065fdd92121d72622d17e88b81d2dcdb928cc6da39ab68d2bf4842"
+    },
+    {
+      "path": "backend/app/api/recipes/history/route.ts",
+      "bytes": 1150,
+      "sha256": "812f7560baf413931db267cac5c44f1d9390125d4b938262092b9f9436e220df"
+    },
+    {
+      "path": "backend/app/api/recipes/modify/route.ts",
+      "bytes": 3607,
+      "sha256": "6d640ab17ba73017770f982d35c126823dbe1bcde6aa733a8f61296ae93b4cec"
+    },
+    {
+      "path": "backend/app/api/recipes/route.ts",
+      "bytes": 4138,
+      "sha256": "3a0b9fcd7182b996a4ea2598afa4e875ceba253240a73c496133f9c72b064b7d"
+    },
+    {
+      "path": "backend/app/api/recipes/save/route.ts",
+      "bytes": 4754,
+      "sha256": "d39cf505ce40991985a480617d6ba5f212f72b66c1bfb521e3576dcd61339484"
+    },
+    {
+      "path": "backend/app/api/referral/route.ts",
+      "bytes": 2409,
+      "sha256": "c1bdeb4b0ec41c9df97db147891c6d31fd38619b11e8f64c28c657979e51ca0e"
+    },
+    {
+      "path": "backend/app/api/shopping-list/route.ts",
+      "bytes": 1968,
+      "sha256": "4e37f76be1e040dd00daa66bbb8384cdf358947e361a699907433fcfd5925a4c"
+    },
+    {
+      "path": "backend/app/api/vision/route.ts",
+      "bytes": 2528,
+      "sha256": "38e0f1167c403d294c2bc939f85c6774803f8ef2c5276c38d31513438a99366c"
+    },
+    {
+      "path": "backend/app/globals.css",
+      "bytes": 5600,
+      "sha256": "cd93a04efff3219b3ef2f3c3471d5f386bc22fc87dacfca986d59c8a6404e1a8"
+    },
+    {
+      "path": "backend/app/recipe/[id]/page.tsx",
+      "bytes": 6512,
+      "sha256": "7b355b00193cb01d7d951c777126089cc03075829f5c6771cb3dba51b966e1e6"
+    },
+    {
+      "path": "backend/app/recipe/layout.tsx",
+      "bytes": 399,
+      "sha256": "93d4fe9437bc0540c6447e1682a5bc04c5d1254eb2ee073bf4c526866ccaaada"
+    },
+    {
+      "path": "backend/app/route.ts",
+      "bytes": 307,
+      "sha256": "352fa308036b982b8cb7f13beff1f50b7be57f3e516538094dc85b6f186398b3"
+    },
+    {
+      "path": "backend/components/cooking-mode-button.tsx",
+      "bytes": 1080,
+      "sha256": "0634a1f56f08ab8cbd596f275aae7fcc3352c769ca5b83ff562a9ac51d74cc91"
+    },
+    {
+      "path": "backend/components/cooking-mode.tsx",
+      "bytes": 8797,
+      "sha256": "94cc400baa6555e0720dffa3b9b6b13e17f2e0786ec24f1bd2bf98c5fa573602"
+    },
+    {
+      "path": "backend/components/marketing/icons.tsx",
+      "bytes": 3504,
+      "sha256": "095ec4b3f28b705fb8519f412d9a90e5dab9a995d176fd5c6dab574ede019b09"
+    },
+    {
+      "path": "backend/components/marketing/store-badges.tsx",
+      "bytes": 4575,
+      "sha256": "e4e37097400cc8de7d30e3f6eeed9b4dd8c29aa0a748d4bad7bf704ab9cf8cae"
+    },
+    {
+      "path": "backend/docs/MONOREPO.md",
+      "bytes": 4315,
+      "sha256": "958268200fcdea1125c73842f7a30caac2e1dcd318cde72950e73cace257abfb"
+    },
+    {
+      "path": "backend/docs/REPOSITORY_SPLIT.md",
+      "bytes": 4936,
+      "sha256": "da877942086eebed15e49ee0e3f49daa0c25fad983275d3ac2bda6ddc21487dc"
+    },
+    {
+      "path": "backend/docs/WEB_HISTORY_BEFORE_SPLIT.md",
+      "bytes": 7172,
+      "sha256": "f928cc4c2fab890dff915454e8955832dda16782d095dafc3b0a2dbdf0c287a6"
+    },
+    {
+      "path": "backend/docs/WEB_INSTRUCTIONS_BEFORE_SPLIT.md",
+      "bytes": 8341,
+      "sha256": "9011e27866567b0c21792eb7db0ee3529d2689265c6fac876350eea03f77f54a"
+    },
+    {
+      "path": "backend/docs/monorepo-transfer-2026-10-16.json",
+      "bytes": 16850,
+      "sha256": "a96aaf455d26d74adff387f114b039d8b787d08b1387f2846a4be09a38292219"
+    },
+    {
+      "path": "backend/docs/source-transfer-2026-10-16.json",
+      "bytes": 15389,
+      "sha256": "0364264d2a5e586e27359444cfa37f222ace0e471f65e6e1f0c2b6b26dc231cd"
+    },
+    {
+      "path": "backend/docs/split-integration-evidence-2026-10-16.json",
+      "bytes": 793,
+      "sha256": "e067e41e18873e2edf58d428adbaf112248021c37dab3814ffdebf9747847127"
+    },
+    {
+      "path": "backend/eslint.config.mjs",
+      "bytes": 1242,
+      "sha256": "b5d733e0de7cc1e8f61084e25a7cc874e3375faee7e9fb2ce358fa8a367b5376"
+    },
+    {
+      "path": "backend/lib/ai/claude.ts",
+      "bytes": 4691,
+      "sha256": "a9a89908aac92a490cb3a304be1c09f767160b153e5ac59b22c632d25096474a"
+    },
+    {
+      "path": "backend/lib/ai/gemini.ts",
+      "bytes": 19672,
+      "sha256": "dceed79021bdfbc87dc6fbac00c169a4a310c6e4e156f7d13c422b61bef43158"
+    },
+    {
+      "path": "backend/lib/ai/transient.ts",
+      "bytes": 1263,
+      "sha256": "66ea9c9727b98b09d1a695a1c13e3c3c376fd04cef7305b8baec9a8d303686e5"
+    },
+    {
+      "path": "backend/lib/date.ts",
+      "bytes": 480,
+      "sha256": "811b46ce35f61bf3eded50a12a51d06cd9ac1c32d70288e9f7eca06fa19196c8"
+    },
+    {
+      "path": "backend/lib/mobile/AI_OPERATIONS.md",
+      "bytes": 8937,
+      "sha256": "ff806f65736b4101f981ffef955dd8e78f1692d2203fdde8af0430e0089a2c3e"
+    },
+    {
+      "path": "backend/lib/mobile/ai-lifecycle-concurrency.test.cjs",
+      "bytes": 3369,
+      "sha256": "8d88b0add98ddd32b85622116d55f92fd388028ff8189efc438f1e35a134d1bd"
+    },
+    {
+      "path": "backend/lib/mobile/ai-lifecycle.test.sql",
+      "bytes": 9247,
+      "sha256": "72fccee07a9c5d901dce2c6014355c0e1d757481bd581a1c29d73dee71695761"
+    },
+    {
+      "path": "backend/lib/mobile/ai.ts",
+      "bytes": 6267,
+      "sha256": "00f90bb87248003f1f82a73b38be39e3fc1762808c677a5658449069c4e872ec"
+    },
+    {
+      "path": "backend/lib/mobile/apply-dependency-patches.cjs",
+      "bytes": 1603,
+      "sha256": "b0d1b12882c0930c174832dee9c1fad777e0996aebb80879b0ef0ad424be09bf"
+    },
+    {
+      "path": "backend/lib/mobile/audit-after.json",
+      "bytes": 3995,
+      "sha256": "bd68db153c8ce8c19d470644d3667f3bc193083ef1ba5fc7a75c3ceaa7714032"
+    },
+    {
+      "path": "backend/lib/mobile/audit-before.json",
+      "bytes": 29782,
+      "sha256": "34a39b3813971fdf6a4678350764be7ac9b921fe70c9e26fa094db8e3d7ef533"
+    },
+    {
+      "path": "backend/lib/mobile/cron.ts",
+      "bytes": 369,
+      "sha256": "a3c226ce5ff26a02cc9c6f59f72ca764fcfddec4a00bcba3c56c8016aa179226"
+    },
+    {
+      "path": "backend/lib/mobile/dast-surface.json",
+      "bytes": 4804,
+      "sha256": "60eceb8608242df9e397b146de08bd9cf22779989ced8a4124f37de2041e26e5"
+    },
+    {
+      "path": "backend/lib/mobile/database-concurrency.test.cjs",
+      "bytes": 2646,
+      "sha256": "9ab3466b90e5eb4ded7c5a448b6a142cb757f07c17ef47dbd20da295f193fd65"
+    },
+    {
+      "path": "backend/lib/mobile/database-security.sql",
+      "bytes": 7002,
+      "sha256": "fcc86d11161cbb55733dd391a13594ea89610d33c27eabca0a6eb6896a0133f3"
+    },
+    {
+      "path": "backend/lib/mobile/dependency-patches.json",
+      "bytes": 4147,
+      "sha256": "48df43b6f2b9232b5b3603b26d71d4346b1829a00bf47911672cb04b16193698"
+    },
+    {
+      "path": "backend/lib/mobile/diagnostics.ts",
+      "bytes": 1259,
+      "sha256": "92cffabd885ad7e19288c7d39852da34150894e668d33ac4fd84a50ad32ecc50"
+    },
+    {
+      "path": "backend/lib/mobile/durable-daily-cap.test.sql",
+      "bytes": 4800,
+      "sha256": "b8ed23f2aa49427cb4173da8ef4e300c93e95a994c5ce4015318e8ee67fb7e89"
+    },
+    {
+      "path": "backend/lib/mobile/local-environment.cjs",
+      "bytes": 1708,
+      "sha256": "2d3bbbac09b8f6d46857c962034ec0226eabb147e6d2cab30cd1f1cbe3d66c6b"
+    },
+    {
+      "path": "backend/lib/mobile/logging.ts",
+      "bytes": 367,
+      "sha256": "9ae4c563438b8a6296c3f1c179c8bd7793a18597d39b7b4c5bf239de48fed0db"
+    },
+    {
+      "path": "backend/lib/mobile/maintenance-schedule.example.json",
+      "bytes": 470,
+      "sha256": "3d2f18bc512e363b6f227dae74d85ffad7c0b2a79e3385b7373f4208e1ca5d0d"
+    },
+    {
+      "path": "backend/lib/mobile/membership.ts",
+      "bytes": 3340,
+      "sha256": "d708afce41b1841d0acd376eb9d3125956ce0f8596455b0fa478132b9586d5f1"
+    },
+    {
+      "path": "backend/lib/mobile/output.ts",
+      "bytes": 1977,
+      "sha256": "22dc373de5f013f3367a5fe6a19dd58e877e634a1cb3c194a61ca38bc4145799"
+    },
+    {
+      "path": "backend/lib/mobile/pantry-concurrency.test.cjs",
+      "bytes": 3426,
+      "sha256": "0a4a60e5c0d958be3515abf6d4c9adf546c73d4beaa1b2553eb2f7ea12c41b01"
+    },
+    {
+      "path": "backend/lib/mobile/pantry-revision.test.sql",
+      "bytes": 1393,
+      "sha256": "171a715ea9ad7e573e2ba5677353c3c6c4f868fc796303c464d045cdd083566e"
+    },
+    {
+      "path": "backend/lib/mobile/provider-error.ts",
+      "bytes": 1332,
+      "sha256": "2d92d4a7a13c51aa754889b065cf074e70ffc7780bcbb204ef647c7835798dfc"
+    },
+    {
+      "path": "backend/lib/mobile/provider-usage.ts",
+      "bytes": 4048,
+      "sha256": "3db60345ac906f424df52160cec69a98bd832cc8dc5d4633b94e0adb1a55b9c6"
+    },
+    {
+      "path": "backend/lib/mobile/release-notes.md",
+      "bytes": 27864,
+      "sha256": "1084b08714a688317f75c244769f4d4db2791d1ba05b2c6c6d543a0af4b7d70c"
+    },
+    {
+      "path": "backend/lib/mobile/revenuecat.ts",
+      "bytes": 3112,
+      "sha256": "590c1060202e62a76a1d5866960e09270d772121053d7245b9c4e4994eb7210f"
+    },
+    {
+      "path": "backend/lib/mobile/security.test.cjs",
+      "bytes": 61389,
+      "sha256": "a5794356110d448e3173187b202d1f75e303b34e842be08df948513ccc2a2e2a"
+    },
+    {
+      "path": "backend/lib/mobile/service.ts",
+      "bytes": 584,
+      "sha256": "dfb46b6dfe87283dab2579f1f3210fb146017e35d2ed8aad8f60a2020c024667"
+    },
+    {
+      "path": "backend/lib/mobile/staging-ai-acceptance.cjs",
+      "bytes": 7637,
+      "sha256": "cc861c735546be97301753e1dddbc8bf56e67829cf76e0ad7dbb7d1f55b24e04"
+    },
+    {
+      "path": "backend/lib/mobile/staging-ai-cleanup.sql",
+      "bytes": 628,
+      "sha256": "b9f57b46bb1e8f569ca820fe2a14abd6d76e284fb6924e1f6e61c921fbf357e1"
+    },
+    {
+      "path": "backend/lib/mobile/staging-baseline.sql",
+      "bytes": 9131,
+      "sha256": "cdd611b185256963b0181f15b10bb76c1384e967fb9e5ccf865d14df8ba621ee"
+    },
+    {
+      "path": "backend/lib/mobile/staging-environment.json",
+      "bytes": 1945,
+      "sha256": "8c6775d68de6594d10bb031c7e539f1547f7c22e2924fa8010594d748f9b3918"
+    },
+    {
+      "path": "backend/lib/mobile/staging-http-integration.cjs",
+      "bytes": 5258,
+      "sha256": "669804deed8992b0a543c5f3bbd40856edc28d3e01b1c3e4ec803378ed6fe897"
+    },
+    {
+      "path": "backend/lib/mobile/staging-lifecycle-acceptance.cjs",
+      "bytes": 12173,
+      "sha256": "8007df0784dd222dc49041676f5e80b40bc2db47854a7b82bb52d7cf61248c12"
+    },
+    {
+      "path": "backend/lib/mobile/staging-preview-deletion.cjs",
+      "bytes": 4476,
+      "sha256": "949c3b04975cb7d9dc3383ad6bb59fcc3461ea8d8db2b79d492f9439ab6ad2c9"
+    },
+    {
+      "path": "backend/lib/mobile/staging-preview-integration.cjs",
+      "bytes": 5890,
+      "sha256": "5b61f0ceaf1b5eefa85eb15e8f2e688ee977c842e49d6314992cd6efaa983854"
+    },
+    {
+      "path": "backend/lib/mobile/staging-security.sql",
+      "bytes": 7233,
+      "sha256": "f00f6adbc5b486b737e58f5d4f3c02932904adc590bdc84ce983ef399dbee910"
+    },
+    {
+      "path": "backend/lib/mobile/summarize-provider-usage.cjs",
+      "bytes": 2643,
+      "sha256": "6ee1170da6e6b619c4e23fa85ea328c080d2d678e672e560387b56278cee6a36"
+    },
+    {
+      "path": "backend/lib/mobile/test-schema.sql",
+      "bytes": 4299,
+      "sha256": "8b92747959eca4eb838cc495337702484a76e99d9bae0174ba40f8c456223ff5"
+    },
+    {
+      "path": "backend/lib/mobile/validation.ts",
+      "bytes": 2449,
+      "sha256": "adaef686a451bf9091201d47fa2e7fba49bf25c7f1ab243d95c3ca945e52b7df"
+    },
+    {
+      "path": "backend/lib/mobile/vercel.staging.json",
+      "bytes": 250,
+      "sha256": "6c7f2e40be989a192bd9b202d6938bcf76dd532c8e0cb961c9792a454a6bae75"
+    },
+    {
+      "path": "backend/lib/mobile/verify-database.cjs",
+      "bytes": 4986,
+      "sha256": "45d39422d27bdc71e941659b53ad81afcbd0433535e0a8e77b21ed6a57bc8fc2"
+    },
+    {
+      "path": "backend/lib/motion.ts",
+      "bytes": 2263,
+      "sha256": "fc4810d5f13685f280a7461a09917026d2343fc7647464f363e0de5891a17ba9"
+    },
+    {
+      "path": "backend/lib/pexels.ts",
+      "bytes": 606,
+      "sha256": "2c359c6c1984c46e252fe76fb8048f9ea61b6fbdb0f7206ffef3aaff882803a2"
+    },
+    {
+      "path": "backend/lib/supabase/admin.ts",
+      "bytes": 629,
+      "sha256": "8e4a3a6eb829bdf447d595c0647e921b00e95edb7a8f161aea369b121dd4bc8c"
+    },
+    {
+      "path": "backend/lib/supabase/api.ts",
+      "bytes": 1442,
+      "sha256": "b25b0498db9f8be1fd943671ca491a99298cdd37185778d8d9f81288e9492a11"
+    },
+    {
+      "path": "backend/lib/supabase/server.ts",
+      "bytes": 577,
+      "sha256": "a73c9ebd66342c62cb717302d3db4586af7e3074398db6a404c66248056962ba"
+    },
+    {
+      "path": "backend/next.config.mjs",
+      "bytes": 856,
+      "sha256": "02d67a4e6aac36ea483d90f6cc58d851c5a87f9cb601f554753e75d1e1f327a6"
+    },
+    {
+      "path": "backend/package-lock.json",
+      "bytes": 234067,
+      "sha256": "95b1b6303891d71b6022acf723006ac49863c051e53e37c46c213d1036550b1a"
+    },
+    {
+      "path": "backend/package.json",
+      "bytes": 1308,
+      "sha256": "7a6c8b7a528b26e051bd8b3a80c546fcf0edcf39ee48fa90824178f9a99fca0a"
+    },
+    {
+      "path": "backend/postcss.config.mjs",
+      "bytes": 146,
+      "sha256": "3aac0d047d7dd505eea362c918e2ddd0436428682c5de5cb18feda70d46aa5cb"
+    },
+    {
+      "path": "backend/security/PICOMATCH_COMPATIBILITY_TRIAL_2026-10-20.md",
+      "bytes": 5671,
+      "sha256": "8664678573df694417f6c4c2bea67764f6efc485edb9f7bff54c9b0419322b46"
+    },
+    {
+      "path": "backend/security/PICOMATCH_RE2_TRIAL_2026-10-20.md",
+      "bytes": 6415,
+      "sha256": "50ea4cae19e98f804f453cc7ac0734ccbf8be9ed717b6fafd80b188e2cfddf66"
+    },
+    {
+      "path": "backend/security/PICOMATCH_REACHABILITY_REVIEW_2026-10-20.md",
+      "bytes": 12459,
+      "sha256": "9868dbd7c81bc09463b11b3496d90acd48730e0f2fdc95a06f240fee218cace7"
+    },
+    {
+      "path": "backend/security/THREE_SNYK_FINDINGS_2026-10-20.md",
+      "bytes": 10028,
+      "sha256": "a127206e2e104e9d170144768d0a6cd0fca26edaa275571d8bf8ece18b50ea50"
+    },
+    {
+      "path": "backend/security/audit-dev-final-2026-10-16.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-picomatch-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-picomatch-review-backend-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-picomatch-review-mobile-2026-10-20.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "backend/security/audit-picomatch-trial-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-re2-trial-backend-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-re2-trial-mobile-2026-10-20.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "backend/security/audit-three-findings-backend-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/audit-three-findings-mobile-2026-10-20.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "backend/security/audit-ui-polish-2026-10-20.json",
+      "bytes": 364,
+      "sha256": "cababcc4bf8d0b9eea453b904d3047b1b7697c48d9604efa7652408772ce5ee5"
+    },
+    {
+      "path": "backend/security/picomatch-compatibility-trial-2026-10-20.json",
+      "bytes": 4018,
+      "sha256": "83bb9c6a95dd0cea0569d22a8bc1246fa10426b518d350b2dede6f8bd48f4764"
+    },
+    {
+      "path": "backend/security/picomatch-independent-verification-2026-10-20.json",
+      "bytes": 11097,
+      "sha256": "aa80d10e9bc3cbcf322f333f0ef38645681fd63e1d35c0a152cafad231c7804c"
+    },
+    {
+      "path": "backend/security/picomatch-integrity-review-2026-10-20.json",
+      "bytes": 206,
+      "sha256": "04efca49a88312048b690979d741588005121e8dff7d2a3c2a2a14004ea472c4"
+    },
+    {
+      "path": "backend/security/picomatch-reachability-2026-10-20.json",
+      "bytes": 9194,
+      "sha256": "ec40577556b58ffe0a71da373334889b1ae449e99cd6363876348e31a5144b65"
+    },
+    {
+      "path": "backend/security/picomatch-review-summary-2026-10-20.json",
+      "bytes": 2534,
+      "sha256": "62fef9b2d1b0c6812a7489599ccb68133a24e8b082a5cf20559bd84e74764357"
+    },
+    {
+      "path": "backend/security/picomatch-three-findings-2026-10-20.json",
+      "bytes": 11387,
+      "sha256": "29f458c3cb12a5f69f7589c7cf4adf2d10c7f7eb1c5a29ea90cb054c08b1e2d3"
+    },
+    {
+      "path": "backend/security/picomatch-trial-verification-2026-10-20.json",
+      "bytes": 2983,
+      "sha256": "f264c97ee5e2e13cf09e3fdb056dc8b6d50ded8f2f3ffbe0edd465d63660ace8"
+    },
+    {
+      "path": "backend/security/re2-glob-compatibility-2026-10-20.json",
+      "bytes": 8033,
+      "sha256": "f8eda2e63d43c78eeefef11a689a430ce94ebcaef882e8aeb4d4468dbdd58e93"
+    },
+    {
+      "path": "backend/security/re2-glob-verification-2026-10-20.json",
+      "bytes": 2980,
+      "sha256": "bcdd41a0c2fdc8901f81f591f35fab3b9274e5a5b4d0d798c4af1e97f201356c"
+    },
+    {
+      "path": "backend/security/snyk-dev-before-2026-10-16.json",
+      "bytes": 30461,
+      "sha256": "a66d224a0ca6c444ed48c0a936bd3b57caf8c5d563fc1b66f69330c2270d0bb4"
+    },
+    {
+      "path": "backend/security/snyk-dev-final-2026-10-16.json",
+      "bytes": 2743,
+      "sha256": "1bff9ec76f7e40e5110841c54c768bd459c82a3f24e97d78c666662757f334d8"
+    },
+    {
+      "path": "backend/security/snyk-minimatch-sandbox-2026-10-20.json",
+      "bytes": 2754,
+      "sha256": "e25744da14b104b5b56fd0be6e0c2853cc4dd94585afc7eacf1e189c6b94b675"
+    },
+    {
+      "path": "backend/security/snyk-picomatch-2026-10-20.json",
+      "bytes": 25657,
+      "sha256": "753b2c5eb15c2d3884f08071393ec019d6fc0d9fd279e138231aa13081200c84"
+    },
+    {
+      "path": "backend/security/snyk-picomatch-trial-2026-10-20.json",
+      "bytes": 25657,
+      "sha256": "753b2c5eb15c2d3884f08071393ec019d6fc0d9fd279e138231aa13081200c84"
+    },
+    {
+      "path": "backend/security/snyk-re2-trial-backend-2026-10-20.json",
+      "bytes": 25657,
+      "sha256": "753b2c5eb15c2d3884f08071393ec019d6fc0d9fd279e138231aa13081200c84"
+    },
+    {
+      "path": "backend/security/snyk-re2-trial-mobile-2026-10-20.json",
+      "bytes": 212320,
+      "sha256": "1cc3fa47602bb7c6ab22429879051773700a9e3535529cd4e705d52565c679e6"
+    },
+    {
+      "path": "backend/security/snyk-re2-trial-sandbox-2026-10-20.json",
+      "bytes": 2725,
+      "sha256": "c6b18ffcd1aa49263a0db7f52d5afc8b241c078c4ed7c30f5d430025203cce24"
+    },
+    {
+      "path": "backend/security/snyk-three-findings-backend-2026-10-20.json",
+      "bytes": 29047,
+      "sha256": "52b1d18d33b1d5edb67d35d295b605b9bcce7aeb25d22642956e4ce3b9e98b3e"
+    },
+    {
+      "path": "backend/security/snyk-three-findings-code-2026-10-20.json",
+      "bytes": 872,
+      "sha256": "4492d92dcbb29c46dc6bffdda47581ff77d2de0b1ddbf2cc8e5252134d1308b4"
+    },
+    {
+      "path": "backend/security/snyk-three-findings-mobile-2026-10-20.json",
+      "bytes": 243344,
+      "sha256": "436b026b71fef339f49cd12cbb950fea99ccdf4d815ccd2f88c306c31e190c1e"
+    },
+    {
+      "path": "backend/security/snyk-ui-polish-2026-10-20.json",
+      "bytes": 25657,
+      "sha256": "753b2c5eb15c2d3884f08071393ec019d6fc0d9fd279e138231aa13081200c84"
+    },
+    {
+      "path": "backend/security/three-snyk-findings-2026-10-20.json",
+      "bytes": 9697,
+      "sha256": "a80e448102906b0d4f8b4e68802e7b10d6a4266c22014ff563c4cd0d0fb6794a"
+    },
+    {
+      "path": "backend/supabase/email-templates/README.md",
+      "bytes": 2635,
+      "sha256": "2a0712d2e05253a0f77aaff48bd9994a44fa14812a8490806c58d15e7db6f2de"
+    },
+    {
+      "path": "backend/supabase/email-templates/confirmation.html",
+      "bytes": 1196,
+      "sha256": "6f4edff505ef07709d0a084b0021c7185be1383a3dd5ee2b3d1d50c648f20585"
+    },
+    {
+      "path": "backend/supabase/email-templates/recovery.html",
+      "bytes": 1214,
+      "sha256": "30798164478839f735b44152f46264a199ccaf2f8a53989230a3531a3914e19f"
+    },
+    {
+      "path": "backend/supabase/migrations/20260504_create_profiles_table.sql",
+      "bytes": 763,
+      "sha256": "92e6e485db8c51af9b70bf1d3529613458ab7db750fdf0777527b7ecebbd08b9"
+    },
+    {
+      "path": "backend/supabase/migrations/20260512_add_image_url_to_recipes.sql",
+      "bytes": 166,
+      "sha256": "e3b21d23735355cef7a8b1dc445d2c84ad0ba79e29435c2189ec2422673b0954"
+    },
+    {
+      "path": "backend/supabase/migrations/20260525_create_meals_eaten.sql",
+      "bytes": 838,
+      "sha256": "8ce420f2cd33137827eb10f8bac06a19bcc18118b1fc6772a112acf15e1fdcee"
+    },
+    {
+      "path": "backend/supabase/migrations/20260527_add_referral_to_profiles.sql",
+      "bytes": 217,
+      "sha256": "bca8774c40a810abb60876866487129ed438fee7d77d89934088fe049606c562"
+    },
+    {
+      "path": "backend/supabase/migrations/20260527_add_usage_to_profiles.sql",
+      "bytes": 289,
+      "sha256": "4b35b1491f5175f8f7857cfadc1b1fd82f8ad31eeff2d8d25fe63016f9792572"
+    },
+    {
+      "path": "backend/supabase/migrations/20260703_referral_and_usage_rpc.sql",
+      "bytes": 3758,
+      "sha256": "7dc2f1d1622f2d5eb6edaf6d6fbc7a9e89f4e8df0c3a6fb189256d519be90bc0"
+    },
+    {
+      "path": "backend/supabase/migrations/20260718_create_push_tokens.sql",
+      "bytes": 936,
+      "sha256": "40c7b947fcf5bf3a6be4dc3a5ef07be74b28cd0fb939b305519a3c08a3dc3594"
+    },
+    {
+      "path": "backend/supabase/migrations/20260719_drop_unused_profile_fields.sql",
+      "bytes": 830,
+      "sha256": "4db0e7cb329a93487687a2c488f25ac7cef06c09d16d12066e7296079fb40737"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000100_mobile_release_foundation.sql",
+      "bytes": 3791,
+      "sha256": "02e32d1973db3183b7ea27fe611758ca412230ca50daad7587c88a95b688cd39"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000200_mobile_ai_security.sql",
+      "bytes": 6400,
+      "sha256": "b29f40fbf597e4362f5205f523d4edc912337e471ecf547de17fff58431974ce"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000300_mobile_push_delivery.sql",
+      "bytes": 1724,
+      "sha256": "3db1b97239ac5773a3b35e55e792d86124d1dd8788d0bc5026c3c2883f2e433b"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000400_mobile_revenuecat.sql",
+      "bytes": 2727,
+      "sha256": "756612781a162d37cf750eb690d0352bdc0ebe77e54706046906151409ee59b1"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000500_mobile_analytics.sql",
+      "bytes": 1515,
+      "sha256": "fc807d08ff2175c325013ccba098905587bd4ce140cfd052830ae47031b28c66"
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000600_mobile_trigger_hardening.sql",
+      "bytes": 1099,
+      "sha256": "dbdff8a429062bfbc27d47e513f70af5ad291013b71eb38d3a4b17bbc25ab7d7"
+    },
+    {
+      "path": "backend/supabase/migrations/20261016000100_mobile_ai_durable_daily_cap.sql",
+      "bytes": 4370,
+      "sha256": "e40485ed6ae9314935348b550d8b80d594bc13a91e9c66372507e8159db9338c"
+    },
+    {
+      "path": "backend/supabase/migrations/20261017000100_pantry_revision.sql",
+      "bytes": 626,
+      "sha256": "33d8ee54179956f04a80dabb58c30b231ae4539cdc5cc1ff334730d2a72f003a"
+    },
+    {
+      "path": "backend/supabase/migrations/20261017000200_mobile_ai_lifecycle.sql",
+      "bytes": 16361,
+      "sha256": "3675bf687c0eaad8780a46e0fc5d1232530e6f0cac80fc65dba7a92baf8a9d86"
+    },
+    {
+      "path": "backend/tailwind.config.ts",
+      "bytes": 1174,
+      "sha256": "e34783b254408ac0add47fc541b3ae2f63c10904c0608c5f3e046ed9f64b45e3"
+    },
+    {
+      "path": "backend/tsconfig.json",
+      "bytes": 698,
+      "sha256": "b24da0d173a0cef45decc36feb63fa189fb87f31cbe5f96c7902ed4ec973396f"
+    },
+    {
+      "path": "backend/types/meal-plan.ts",
+      "bytes": 570,
+      "sha256": "d27ba0d2b408a2751d330c60dd68274bc5459723241bbb57f1e81edd25b88544"
+    },
+    {
+      "path": "backend/types/meals-eaten.ts",
+      "bytes": 335,
+      "sha256": "826e21132df7fd41752e4f601b11d4709d8240d32a45569979878c3900416bc4"
+    },
+    {
+      "path": "backend/types/profile.ts",
+      "bytes": 1065,
+      "sha256": "a7ce184b60b792314ba25fcd2626a73b0c178d19406fd55c3de185702e11cefd"
+    },
+    {
+      "path": "backend/types/recipe.ts",
+      "bytes": 649,
+      "sha256": "e62234b3dde85d9722075cb8d6b4c038596a75256ec026e35de9d3963b8ff803"
+    },
+    {
+      "path": "backend/vercel.json",
+      "bytes": 250,
+      "sha256": "6c7f2e40be989a192bd9b202d6938bcf76dd532c8e0cb961c9792a454a6bae75"
+    },
+    {
+      "path": "mobile/.claude/settings.json",
+      "bytes": 71,
+      "sha256": "1e7be1a32a758be623e4897bcd97715f42c1585f3d7389eaa996c230e8fe9834"
+    },
+    {
+      "path": "mobile/.env.example",
+      "bytes": 1002,
+      "sha256": "2d80f3188291a812e525941ddc9554e763cc47168739d1bab9dd3813fc46b9a6"
+    },
+    {
+      "path": "mobile/.gitignore",
+      "bytes": 629,
+      "sha256": "e25c8b646cd1c683f20aecadf408773af3444ee1a6ac6978c0360cdf28addd06"
+    },
+    {
+      "path": "mobile/.vscode/extensions.json",
+      "bytes": 50,
+      "sha256": "f54cd822dce0af53953015f71ce04f91d4fcec4ac02ecb28658d636004c4bbce"
+    },
+    {
+      "path": "mobile/.vscode/settings.json",
+      "bytes": 152,
+      "sha256": "c9d2a3300e5453b399d9a092a29aabb67adfc59623abd5b03b1143557386c39c"
+    },
+    {
+      "path": "mobile/AGENTS.md",
+      "bytes": 334,
+      "sha256": "1926a1a5ac3dd9de4497ecc2a143f95018257c31ef71daeec4e77770147a5950"
+    },
+    {
+      "path": "mobile/CLAUDE.md",
+      "bytes": 11,
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49"
+    },
+    {
+      "path": "mobile/EAS_BUILD.md",
+      "bytes": 3940,
+      "sha256": "1162ce093a0c5143fea771a6ebc898e816c1fc5f1c6f3ecf97a20af0729a27bc"
+    },
+    {
+      "path": "mobile/LICENSE",
+      "bytes": 1106,
+      "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+    },
+    {
+      "path": "mobile/README.md",
+      "bytes": 2183,
+      "sha256": "81a68c7166fe840f32019fb3bd12eada9cfc466a01fde5f14e073cc6d601a07f"
+    },
+    {
+      "path": "mobile/app.config.js",
+      "bytes": 861,
+      "sha256": "ee4681525723b4f2c2717332b461785907a137856c9a585a8f0e8ebb2e72743e"
+    },
+    {
+      "path": "mobile/app.json",
+      "bytes": 2772,
+      "sha256": "c283a2b01a794cbf6152fd67aac2a6fecdf15a776391af6589f026ee52644cd6"
+    },
+    {
+      "path": "mobile/assets/expo.icon/Assets/expo-symbol 2.svg",
+      "bytes": 608,
+      "sha256": "ad117d20fd819f4ec71876ce09c0e8b9275b1f20c5ec3c9d7d1914977ceffec6"
+    },
+    {
+      "path": "mobile/assets/expo.icon/Assets/grid.png",
+      "bytes": 53681,
+      "sha256": "8247d79a2b31328fe4e330a973e6fae16924ed9aebd72c64d464d6856ab18c72"
+    },
+    {
+      "path": "mobile/assets/expo.icon/icon.json",
+      "bytes": 780,
+      "sha256": "747c56e178222a6255c6dd61c5de011b286cdc935febe89f04d1b191c3d076fe"
+    },
+    {
+      "path": "mobile/assets/images/android-icon-background.png",
+      "bytes": 17549,
+      "sha256": "fb139c2dee362ebf2070e23b96da6fc0d43f8492de38b8af1fd7223e19b5861d"
+    },
+    {
+      "path": "mobile/assets/images/android-icon-foreground.png",
+      "bytes": 78796,
+      "sha256": "9e3d0315a33c6799de601dd34cd8bf8cc3a8d16f3bf75592baec2ceb7240b391"
+    },
+    {
+      "path": "mobile/assets/images/android-icon-monochrome.png",
+      "bytes": 4140,
+      "sha256": "6371fc2c12e33ad2215a86c281db3d682a81bebe7c957a842c13b8bf00cceb83"
+    },
+    {
+      "path": "mobile/assets/images/expo-badge-white.png",
+      "bytes": 4129,
+      "sha256": "d9ba28c5e93aea3c2dabd901ee96fea3bb296ad8e648f6f64706dae11a1a62bd"
+    },
+    {
+      "path": "mobile/assets/images/expo-badge.png",
+      "bytes": 4137,
+      "sha256": "ff353c7efadbd379903923cb604fca11c908cba0d4658cc2bd1f147d98317249"
+    },
+    {
+      "path": "mobile/assets/images/expo-logo.png",
+      "bytes": 3317,
+      "sha256": "27b060a757a29038c9618586baa0ba3894dbe60d084c6059df497ff429c2d92f"
+    },
+    {
+      "path": "mobile/assets/images/favicon.png",
+      "bytes": 1129,
+      "sha256": "a4e030697a7571b3e95d31860e4da55d2f98e5e861e2b55e414f45a8556828ba"
+    },
+    {
+      "path": "mobile/assets/images/icon.png",
+      "bytes": 799005,
+      "sha256": "7a667804bb80a6a424a5daf18a2599c4f32237cf06fe78fc0de45dbb09e0eccf"
+    },
+    {
+      "path": "mobile/assets/images/logo-glow.png",
+      "bytes": 331624,
+      "sha256": "bbd98a3f3c12d090f4df6065b7462fcdf6bc266209d002b4ef5fe554c245f66c"
+    },
+    {
+      "path": "mobile/assets/images/react-logo.png",
+      "bytes": 6341,
+      "sha256": "224b7636b15e672801579b5b418077cbc2ca42f0146389062364356b0ecb5c5c"
+    },
+    {
+      "path": "mobile/assets/images/react-logo@2x.png",
+      "bytes": 14225,
+      "sha256": "fa600be9ad2f869c7a8dbaffc78bb15af741123e1319c948f0be51753a153cde"
+    },
+    {
+      "path": "mobile/assets/images/react-logo@3x.png",
+      "bytes": 21252,
+      "sha256": "cd84e02a5d542a3e71b7fa10a685c1b9fb51db4aff92aca6c0da6461ce17be16"
+    },
+    {
+      "path": "mobile/assets/images/splash-icon.png",
+      "bytes": 3317,
+      "sha256": "27b060a757a29038c9618586baa0ba3894dbe60d084c6059df497ff429c2d92f"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/explore.png",
+      "bytes": 215,
+      "sha256": "e2dea1c2d20929d83e8eebd74818e808b1b72e376d3a1f3a03679fff0255d073"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/explore@2x.png",
+      "bytes": 347,
+      "sha256": "1b54913b3a0acc3e1fb72d3b9b79ad04814304b35bbb9d03a533e6130ad6c26a"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/explore@3x.png",
+      "bytes": 468,
+      "sha256": "2f3e43801df70ebe83273b90a7d170bacf5ca74a8a8dc5c154a020c2c8b06609"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/home.png",
+      "bytes": 253,
+      "sha256": "3829632ec7d495225395f5da3d0942935d7d055979b174613d1ade82fe420e76"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/home@2x.png",
+      "bytes": 343,
+      "sha256": "21c5a07df9017d97464a0a8256e265288f2fca0741ca651de05e12b32f32f5ab"
+    },
+    {
+      "path": "mobile/assets/images/tabIcons/home@3x.png",
+      "bytes": 479,
+      "sha256": "fe5b397975e7cb70ae7a122472d174ed12ec2ae106f7b49c968225ad37f8b3b8"
+    },
+    {
+      "path": "mobile/assets/images/tutorial-web.png",
+      "bytes": 58959,
+      "sha256": "e372ec23ad6262e2e0dc2799ce416b495a631a565bcd24f0615d4afc04dac3bd"
+    },
+    {
+      "path": "mobile/babel.config.js",
+      "bytes": 181,
+      "sha256": "65e868b330db466516df1e5dd2a0d41a164c739efbcff343ad4f44ea7048286e"
+    },
+    {
+      "path": "mobile/docs/AI_LIFECYCLE_2026-10-17.md",
+      "bytes": 10866,
+      "sha256": "6db59fc83e5c483828cc821edfda13edcd427d721b29f2f75e659bacc815fd90"
+    },
+    {
+      "path": "mobile/docs/AI_RECOVERY_2026-10-16.md",
+      "bytes": 6089,
+      "sha256": "173fffa215140a5b32cb3694269ad95846345d484f14318f53b8ed16cc0c2e0f"
+    },
+    {
+      "path": "mobile/docs/APP_REUSE_ROUND_2026-10-17.md",
+      "bytes": 9908,
+      "sha256": "2c904daf8db71d97ad5909724f2813b37d11be111746b94726624da17cbbb265"
+    },
+    {
+      "path": "mobile/docs/BACKEND_CONTRACTS.md",
+      "bytes": 12301,
+      "sha256": "2d93224d11cbf8bde19690f42d64a0d51a1bb300f8f629533e28ca8b2455895d"
+    },
+    {
+      "path": "mobile/docs/CAMERA_MENU_FIXES_2026-10-16.md",
+      "bytes": 6503,
+      "sha256": "3b682523869dd91b3dfb580fab732333b2b6d61ec4db11d1e326104cc5322f26"
+    },
+    {
+      "path": "mobile/docs/DEPENDENCY_REMEDIATION_2026-10-16.md",
+      "bytes": 6409,
+      "sha256": "709b4c25350b2a75af3060facdf12b66122b879850cfc0892711fab238033300"
+    },
+    {
+      "path": "mobile/docs/DEVICE_FEEDBACK_2026-10-16.md",
+      "bytes": 5211,
+      "sha256": "6e54a6d019d73ed8778a4d6cdf4599857f9b739713e9e749cf9f587aaee9555b"
+    },
+    {
+      "path": "mobile/docs/ENGINEERING_CLOSEOUT_2026-10-16.md",
+      "bytes": 8116,
+      "sha256": "6308bee9141e228148859eb58f1b2db7d55e506311f3d3be40314bf70f1608b7"
+    },
+    {
+      "path": "mobile/docs/LOCAL_DEVELOPMENT.md",
+      "bytes": 3449,
+      "sha256": "f79b0ade5633d3109e6d8240c3c8fc37ac978ba046d986861e2e1d4a42e42452"
+    },
+    {
+      "path": "mobile/docs/LOCAL_VERIFICATION.md",
+      "bytes": 6405,
+      "sha256": "8590ef0f770a056c4637f00dedf5ca7e8e88322a00a9da3f680d78d1e76bf73e"
+    },
+    {
+      "path": "mobile/docs/NATIVE_SDK_INVENTORY.json",
+      "bytes": 21031,
+      "sha256": "d93b7ef231ad4306f4486bf35013f0fa23a7722b817621b1003b7b95407da68e"
+    },
+    {
+      "path": "mobile/docs/NATIVE_SECURITY.md",
+      "bytes": 15108,
+      "sha256": "e30e7beb971e67ed281a241607515fd266fd55e6adf56f3e5e90308fc8b4a8c4"
+    },
+    {
+      "path": "mobile/docs/OWNER_ACTIONS.md",
+      "bytes": 4371,
+      "sha256": "eaa21f7ad334b14fa44aa7be9ce65e374068da9a1529092626346235c74eab05"
+    },
+    {
+      "path": "mobile/docs/RELEASE_BLOCKERS_2026-10-16.md",
+      "bytes": 11684,
+      "sha256": "d2927e5d26ad65d9b5eefcaececd7c9f10af47828a74aecc5ee50cb7a8f10e3c"
+    },
+    {
+      "path": "mobile/docs/RELEASE_BLOCKERS_2026-10-19.md",
+      "bytes": 7375,
+      "sha256": "3d4ef34da2e819a3427d3114b5fc178ba52068dc5ed059d659c29e10771be68e"
+    },
+    {
+      "path": "mobile/docs/RELEASE_READINESS.md",
+      "bytes": 14060,
+      "sha256": "849a11842fd5cf5aa6e2a965e9337007c3204d1fe564efaa59046e5e596b81c8"
+    },
+    {
+      "path": "mobile/docs/SECURITY_REVIEW.md",
+      "bytes": 12857,
+      "sha256": "1dadbd2949124f2af270544bdeb74f2e59625b21f8a9134709fb59a5ea74979b"
+    },
+    {
+      "path": "mobile/docs/STAGING_DEVICE_TEST.md",
+      "bytes": 5279,
+      "sha256": "c5cf4d780867b810fe2cf4744245ae99099384b785cb10d55bef266dc64421e4"
+    },
+    {
+      "path": "mobile/docs/STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md",
+      "bytes": 5911,
+      "sha256": "8889cb3c268c7b51fe444d69e6a526e5e59f4f84765ff6351a9478761152dee2"
+    },
+    {
+      "path": "mobile/docs/STORE_PACKET.md",
+      "bytes": 3846,
+      "sha256": "32112369e4af14cec78efeb50d15678ef734d5505a4ac8310f7950679b639196"
+    },
+    {
+      "path": "mobile/docs/SUPABASE_SCHEMA_REVIEW.json",
+      "bytes": 14865,
+      "sha256": "a0e387346ee11ac1f529576b9c16bff8860014f1e25152c09c611a008f2ec040"
+    },
+    {
+      "path": "mobile/docs/UI_POLISH_2026-10-20.md",
+      "bytes": 7583,
+      "sha256": "7b5eec1aac56aa27e86e0d640cd66284ce84190271f38f58d28cbf7aecd7571e"
+    },
+    {
+      "path": "mobile/docs/release-evidence.json",
+      "bytes": 18227,
+      "sha256": "d1ada9646e15c49dae8c120ff20c9b2fc867741bc57ead3d48323b8bca60f75f"
+    },
+    {
+      "path": "mobile/eas.json",
+      "bytes": 1304,
+      "sha256": "11590a08593e3e1be7960c06bddff61f3f1c61fd4a91dd5da76dd4203fb8740c"
+    },
+    {
+      "path": "mobile/eslint.config.js",
+      "bytes": 236,
+      "sha256": "6ea734f0e3f5b7c3c5720b3c467695516b14935724a78386b8534abc2959da12"
+    },
+    {
+      "path": "mobile/jest.config.cjs",
+      "bytes": 337,
+      "sha256": "3e950c9905ad6bb0f41a51f3606e11a042e875554179db7287771f8d200e503f"
+    },
+    {
+      "path": "mobile/locales/en.json",
+      "bytes": 213,
+      "sha256": "b8efedc0732679f9ad0b1b14508b6c8862f386873ca750c551a3dbbc122cd6fd"
+    },
+    {
+      "path": "mobile/locales/tr.json",
+      "bytes": 252,
+      "sha256": "c2e491a2f9666233a3c2d564d36f40003d70d3596ab93aa7735439adbab45930"
+    },
+    {
+      "path": "mobile/metro.config.js",
+      "bytes": 244,
+      "sha256": "d8e33cbab6bf24e60ad6827635c2c16d75873ec836400f442326b002457dd411"
+    },
+    {
+      "path": "mobile/nativewind-env.d.ts",
+      "bytes": 222,
+      "sha256": "0e19cfa7c409cc60ac38eecc8ce47aaab19850ec1eeee3133edba42f91ce8148"
+    },
+    {
+      "path": "mobile/package-lock.json",
+      "bytes": 778963,
+      "sha256": "08e9c2890ebe15d058f7ca066f84988e8196994cee1c5d7536dbe5eaf083c2c7"
+    },
+    {
+      "path": "mobile/package.json",
+      "bytes": 3336,
+      "sha256": "1fea30e7a30287a8e5c620581da9b1c7a48af92a1c8818d4a9bf1c54c9cb76d4"
+    },
+    {
+      "path": "mobile/plugins/with-android-compat.cjs",
+      "bytes": 2226,
+      "sha256": "ba2d60fe5dc89e57003a1edef14a42bf08cebbddbc728af6d185f6aaefca2795"
+    },
+    {
+      "path": "mobile/scripts/apply-security-patches.cjs",
+      "bytes": 1566,
+      "sha256": "4236a381650be9d2bb37aeb45595ded2139d5b702aa980811e9d9dafc276046b"
+    },
+    {
+      "path": "mobile/scripts/check-android-artifact.py",
+      "bytes": 4071,
+      "sha256": "efff76673e9275987909f3e0635edb560983ada18f3d0b44c83205c0d258b697"
+    },
+    {
+      "path": "mobile/scripts/check-ios-artifact.py",
+      "bytes": 4229,
+      "sha256": "f230c581e2b7f970a536c2f19fecff5dc85e0b5d9d2a38f490456fc1601e6395"
+    },
+    {
+      "path": "mobile/scripts/local-environment.cjs",
+      "bytes": 1965,
+      "sha256": "2b82c613c23353b123671bd414e145fcd1bc7aca087ea83d66899e90b393f071"
+    },
+    {
+      "path": "mobile/scripts/reset-project.js",
+      "bytes": 3710,
+      "sha256": "549922a40b983de34068b36d7879fcc8aed6c60b8d45b3c7b866267e766ae9fe"
+    },
+    {
+      "path": "mobile/scripts/scan-secrets.cjs",
+      "bytes": 3681,
+      "sha256": "034cd45c08af457691ba5ee144ba49ed7e6af570022455ca9031867c7fea0743"
+    },
+    {
+      "path": "mobile/scripts/validate-release.cjs",
+      "bytes": 4379,
+      "sha256": "481648aed10578e71fee19bcde2b5143fa42cad095c206efbd85cf44f214ff87"
+    },
+    {
+      "path": "mobile/security/FORGE_REMOVAL_2026-10-16.md",
+      "bytes": 5179,
+      "sha256": "32cedf155dda083f508276a2b3338314558bac23c4929cf0d2ef675f83c56d54"
+    },
+    {
+      "path": "mobile/security/PACKAGE_REPLACEMENTS_2026-10-16.md",
+      "bytes": 7494,
+      "sha256": "8b9b38cae273187e78e3bd41d2073acafd6da99d75473b0d1618aec41b6c58b3"
+    },
+    {
+      "path": "mobile/security/PICOMATCH_REMEDIATION_2026-10-20.md",
+      "bytes": 6993,
+      "sha256": "ad134bda669aac58f857c15bf39b5ae0c009d736aa658682dcf1a760b623dbbb"
+    },
+    {
+      "path": "mobile/security/PROJECT_REVIEW_2026-10-16.md",
+      "bytes": 5792,
+      "sha256": "81c3f8ae04a0232748c7d5ebd23298817d13f2b57e6046f32fe1dff8736dbd54"
+    },
+    {
+      "path": "mobile/security/README.md",
+      "bytes": 10841,
+      "sha256": "77008b7d2df226b9cf78ad4092238767d78bff03e16ffdf31370123f49ae9213"
+    },
+    {
+      "path": "mobile/security/SNYK_FINDINGS.md",
+      "bytes": 14550,
+      "sha256": "2e68828dc759d77a1ee89f5f400f6967a942fc4ba2afae0a9daba0813b0124ad"
+    },
+    {
+      "path": "mobile/security/ai-lifecycle-2026-10-17.json",
+      "bytes": 6038,
+      "sha256": "991f3fb51b448b54251884e6fc14601ce8c62f1b229266def7fa4ada77f36a75"
+    },
+    {
+      "path": "mobile/security/ai-recovery-api-secrets-2026-10-16.json",
+      "bytes": 366,
+      "sha256": "baa5cc0d9d95214f8e293605942dd8bfc0177699399a7e96ddc030689db8f3a8"
+    },
+    {
+      "path": "mobile/security/ai-recovery-mobile-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "5c91228b26d02acc3e7eda0e5dc8b81a27f42fa8fa8c2bb19e2e2ef2b5e446ed"
+    },
+    {
+      "path": "mobile/security/android-apk-offline-2026-10-16.json",
+      "bytes": 5718,
+      "sha256": "775d9e21ef375bb30b0f2c1500f4a4cf9c294aae1c5cb957ac147978b6adf76e"
+    },
+    {
+      "path": "mobile/security/android-artifact-2026-10-16.json",
+      "bytes": 5711,
+      "sha256": "44b67f11ddca1351515dfbad06f291e178e00758bb284e37def6ba6b8cbf8e6f"
+    },
+    {
+      "path": "mobile/security/android-ci-2026-10-16.json",
+      "bytes": 3354,
+      "sha256": "cfdf39d8df36ec3d55da587d101dc8b4ff16823c549e805036198879f9cfba79"
+    },
+    {
+      "path": "mobile/security/android-final-download-2026-10-16.json",
+      "bytes": 351,
+      "sha256": "70958945694fd44842f8950a036e50dc9bbf4618f7b2e93e59255c54d1f10690"
+    },
+    {
+      "path": "mobile/security/android-lint-review-2026-10-16.json",
+      "bytes": 1764,
+      "sha256": "c715cbea67beafeca0947479c0e4e25f44bac7b39ffa173b735ba3dc91371917"
+    },
+    {
+      "path": "mobile/security/approved-round-2026-10-17.json",
+      "bytes": 5190,
+      "sha256": "b36374ff81705df9f7bb06caf912419d0d472ff377d5d9aa6b0690c177ee791b"
+    },
+    {
+      "path": "mobile/security/audit-after.json",
+      "bytes": 31036,
+      "sha256": "170de575340ea2e03e193d7aa3b4b02b0a4f8d77637d469a2f1a690d2a8f9fa6"
+    },
+    {
+      "path": "mobile/security/audit-before.json",
+      "bytes": 41228,
+      "sha256": "7d49c2acabb60f60db0122163ce68c75eec20cabaa0afe3d9c672867b4caee47"
+    },
+    {
+      "path": "mobile/security/audit-forge-removal-2026-10-16.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "mobile/security/audit-package-replacements-2026-10-16.json",
+      "bytes": 367,
+      "sha256": "a948bae1fcdb0ad6d64f02956651c52c64b7e15e46315bcb5594cbb59aa1236b"
+    },
+    {
+      "path": "mobile/security/audit-picomatch-2026-10-20.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "mobile/security/audit-recheck-2026-10-15.json",
+      "bytes": 31942,
+      "sha256": "10d204eeb75425d86a92d50b8ae904254c9c4e3d0d244dc5af90ade90da7cb65"
+    },
+    {
+      "path": "mobile/security/audit-snyk-followup-2026-10-15.json",
+      "bytes": 31000,
+      "sha256": "109e941db1ec8ba69b2a539792b1593cc79f9a5a99767a33a4c79ec3bfc7a1d2"
+    },
+    {
+      "path": "mobile/security/audit-ui-polish-2026-10-20.json",
+      "bytes": 367,
+      "sha256": "8b1a9046894590f6e2d417a42552bfecb75588e30254089fe5094f3339b17f46"
+    },
+    {
+      "path": "mobile/security/camera-menu-2026-10-16.json",
+      "bytes": 2562,
+      "sha256": "c46f1d72e36a42c9455f72b6e7629abad0cf8d4648fa3bbd4e36e59d2e706ee7"
+    },
+    {
+      "path": "mobile/security/database-rehearsal-2026-10-16.json",
+      "bytes": 955,
+      "sha256": "c63229e3ee8324df66b40ac77f6b9ea172dbf21aea1ebefb79edf498b6819a5a"
+    },
+    {
+      "path": "mobile/security/dependency-remediation-2026-10-16.json",
+      "bytes": 3152,
+      "sha256": "7de684740a13c53e56f53ab51ce62b4129197dfd5e55aeb109907580fae83594"
+    },
+    {
+      "path": "mobile/security/dependency-remediation-backend-audit-2026-10-16.json",
+      "bytes": 364,
+      "sha256": "137783f884b43171a9d47a33101d43303b66b51e3ba264094e1da9358236b0a2"
+    },
+    {
+      "path": "mobile/security/dependency-remediation-mobile-audit-2026-10-16.json",
+      "bytes": 28187,
+      "sha256": "9e5e447415e158462c91d57f504f35bda0b8cadb6de2a7fc5f9808f5b52ec8d3"
+    },
+    {
+      "path": "mobile/security/dependency-remediation-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "18d9b202d4c5ae6df5702d8ae245178810f720f36aa0f9886da5c749c4191fff"
+    },
+    {
+      "path": "mobile/security/device-feedback-api-secrets-2026-10-16.json",
+      "bytes": 366,
+      "sha256": "3fa153a7855fe5809f31aa6803806512aaaab2c1a47f83590784d7a945687c0f"
+    },
+    {
+      "path": "mobile/security/device-feedback-mobile-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "b853cdf8a72c3bdca2b1354178cea0c1a6be686949c1d25ab2dde0518df65f3e"
+    },
+    {
+      "path": "mobile/security/durable-daily-cap-2026-10-16.json",
+      "bytes": 1558,
+      "sha256": "389048e4edfa9c5d650a75bc5eb1cb6ae98770da8261b9f27e9b52155d3d1fa3"
+    },
+    {
+      "path": "mobile/security/engineering-backend-audit-2026-10-16.json",
+      "bytes": 3995,
+      "sha256": "bd68db153c8ce8c19d470644d3667f3bc193083ef1ba5fc7a75c3ceaa7714032"
+    },
+    {
+      "path": "mobile/security/engineering-closeout-2026-10-16.json",
+      "bytes": 1864,
+      "sha256": "842437d9a941f39cfd189d0f2e7e6d8b00928b438cd91a23ab0c056530a1224d"
+    },
+    {
+      "path": "mobile/security/engineering-mobile-audit-2026-10-16.json",
+      "bytes": 30409,
+      "sha256": "bd04e886f23ca0d453ae5d5d8694ec7f030c9f84d9462978bd2472ab3391833f"
+    },
+    {
+      "path": "mobile/security/engineering-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "a0220f41e69a090ff3f0fd9c955c32e658e22809cfd34d4e77e08975603ee28a"
+    },
+    {
+      "path": "mobile/security/ios-artifact-2026-10-15.json",
+      "bytes": 10441,
+      "sha256": "933f3495f80b42e7e1003d8e488ea99adfafd3bbd0b14d606f62125317e6c860"
+    },
+    {
+      "path": "mobile/security/ios-artifact-latest.json",
+      "bytes": 10441,
+      "sha256": "933f3495f80b42e7e1003d8e488ea99adfafd3bbd0b14d606f62125317e6c860"
+    },
+    {
+      "path": "mobile/security/ios-native-probe-source.txt",
+      "bytes": 4031,
+      "sha256": "60516bb42d79381b160c584622092ec88a97975bf2cc387a5ce167f732bae551"
+    },
+    {
+      "path": "mobile/security/ios-native-runtime-2026-10-15.json",
+      "bytes": 1676,
+      "sha256": "f290d7db8773610c8655a91b098e51f5cac0f0e6b24bd63a75f25653b524dca9"
+    },
+    {
+      "path": "mobile/security/ios-unsigned-probe-2026-10-15.json",
+      "bytes": 734,
+      "sha256": "ea5f6e510f1b2aa585e60174e0d680930c3e1058caec9bea0120b65ce0d6af0e"
+    },
+    {
+      "path": "mobile/security/local-api-ready-2026-10-16.json",
+      "bytes": 3528,
+      "sha256": "a6b65a4e3ad24cb862b9308b38057d9c11adfeaac4ac9f3078d3b4e890d30bf7"
+    },
+    {
+      "path": "mobile/security/local-api-ready-api-secrets-2026-10-16.json",
+      "bytes": 366,
+      "sha256": "a57a2383b6c51ab704b7f4b4d5176a149d60d73426684f9405268571c27aba2a"
+    },
+    {
+      "path": "mobile/security/local-api-ready-mobile-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "2d509d118c311846dd50ab82620a8968bc9bc39e26bcf41df277c6900e01393c"
+    },
+    {
+      "path": "mobile/security/local-environment-api-secrets-2026-10-16.json",
+      "bytes": 366,
+      "sha256": "7bbabeba963de43d8a11ebc64b0e3d3784bc78189a56910c29cf861a3658ec51"
+    },
+    {
+      "path": "mobile/security/local-environment-mobile-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "802bc288c6fc59e94e08cd83d865758512821db14c48d7a0a5c5c04fb40d9623"
+    },
+    {
+      "path": "mobile/security/monorepo-layout-2026-10-16.json",
+      "bytes": 1424,
+      "sha256": "e2a4853722ad14e7d28d91070d48fdc9b2a97487a7efef408bec1efc66d7f73c"
+    },
+    {
+      "path": "mobile/security/monorepo-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "d3dd147ef41349ab746a1a8e6cf174e82e7117ba1fb637c9c1625fa6ae6e95aa"
+    },
+    {
+      "path": "mobile/security/patches.json",
+      "bytes": 10710,
+      "sha256": "12e8f1ca98895b2fb7c791ccebbe89c08c712a3706189cbdba609e748c23fdaf"
+    },
+    {
+      "path": "mobile/security/picomatch-remediation-2026-10-20.json",
+      "bytes": 5240,
+      "sha256": "8e66acbe0a0f0675c78374c1873f600270d0477bb247d311bdcaf23c58d83c85"
+    },
+    {
+      "path": "mobile/security/project-review-database-2026-10-16.json",
+      "bytes": 955,
+      "sha256": "dbfb4234a59e8186fcba386fcc3adc3fff0881e4914dfbf63f0174357bfc43d9"
+    },
+    {
+      "path": "mobile/security/project-review-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "0a0a647065d3f83682fedcc4b49636ec21a655eb7f0d77a72675daa6b5a3646c"
+    },
+    {
+      "path": "mobile/security/release-audit-backend-2026-10-16.json",
+      "bytes": 3995,
+      "sha256": "bd68db153c8ce8c19d470644d3667f3bc193083ef1ba5fc7a75c3ceaa7714032"
+    },
+    {
+      "path": "mobile/security/release-audit-mobile-2026-10-16.json",
+      "bytes": 32077,
+      "sha256": "5df39fe6f03c906604160b8ee2d4fa61037c74b8726da43bf1ad21d4828d0dbb"
+    },
+    {
+      "path": "mobile/security/release-followup-2026-10-19.json",
+      "bytes": 1787,
+      "sha256": "aebbf47df98491d46c3a2f74e32e105d47e2b2e1afbdf563da101aa6c2afec2b"
+    },
+    {
+      "path": "mobile/security/release-followup-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "e200aaccab8111e2d518dad800e9d72a9092c81bff2fdd007fd687fa09f43070"
+    },
+    {
+      "path": "mobile/security/repository-split-2026-10-16.json",
+      "bytes": 1325,
+      "sha256": "7cfe318d006d7edfd17c892a33b9aa5ce24269c3659630d0d9327aec72ea627f"
+    },
+    {
+      "path": "mobile/security/sdk-inventory-2026-10-16.json",
+      "bytes": 8605,
+      "sha256": "2108a13e864feafbdd4f0681e37f19c72f7e23c9614f5ef6c927c2867b6ed163"
+    },
+    {
+      "path": "mobile/security/secrets-ai-lifecycle-2026-10-17.json",
+      "bytes": 362,
+      "sha256": "30fa9fe2023e3800437f22ebf5a1510747d46a85ec789b901962b3a444b8d0a9"
+    },
+    {
+      "path": "mobile/security/secrets-android-followup-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "70d02d6baafa074d53d19a6c137cb90346a9c0d397a6454866fc68f123d3c8e5"
+    },
+    {
+      "path": "mobile/security/secrets-api-source-2026-10-15.json",
+      "bytes": 366,
+      "sha256": "61aa7a2fe9f51b48265ca0bb7975426739a4c2e9835d71e47fd249f9faf049e9"
+    },
+    {
+      "path": "mobile/security/secrets-approved-round-2026-10-17.json",
+      "bytes": 362,
+      "sha256": "87c7fcefa528736ace485ac7423593f3e477749c80f4547b70c1e8dc165c7556"
+    },
+    {
+      "path": "mobile/security/secrets-review-2026-10-15.json",
+      "bytes": 1905,
+      "sha256": "e9d35ccfb7a797b12e5bdc167d1cea658f1b998f046dddc95fb2903b43cef810"
+    },
+    {
+      "path": "mobile/security/secrets-source-2026-10-15.json",
+      "bytes": 362,
+      "sha256": "2beb2d9260dea2c1caf3fbc5a68822c45f1b5757a6631be77d72ad7172b42aaf"
+    },
+    {
+      "path": "mobile/security/secrets-staging-lifecycle-2026-10-17.json",
+      "bytes": 362,
+      "sha256": "050ab1019c74acf8b615372426eea5dbf556adaa10cf13a91fc9d809e74cf922"
+    },
+    {
+      "path": "mobile/security/security-checks-2026-10-15.json",
+      "bytes": 2045,
+      "sha256": "9f4e938f7548fab3a7d9caf7900d151b14f953d0cec7fc3df14fe6dda2832465"
+    },
+    {
+      "path": "mobile/security/snyk-dev-before-2026-10-16.json",
+      "bytes": 43882,
+      "sha256": "d662cf4a3cf5c7a6a16f50beae05fa8994aa16d838cbb3463d314ecab0e77e84"
+    },
+    {
+      "path": "mobile/security/snyk-dev-final-2026-10-16.json",
+      "bytes": 2734,
+      "sha256": "bb2105cedb6f79fa2dc80e1dd09472143693d139a9af16ea1333535d21a3a17d"
+    },
+    {
+      "path": "mobile/security/snyk-final-residual-2026-10-16.json",
+      "bytes": 1095,
+      "sha256": "53811c7267ad841741eb8bcd0cb99c36e7be28e54755a01204916d5f0f1e0574"
+    },
+    {
+      "path": "mobile/security/snyk-native-followup-2026-10-16.json",
+      "bytes": 852,
+      "sha256": "767af9698805be770ea3046583017414e56f1b2cdee3d489c06a91fe188fe69e"
+    },
+    {
+      "path": "mobile/security/snyk-picomatch-2026-10-20.json",
+      "bytes": 212320,
+      "sha256": "1cc3fa47602bb7c6ab22429879051773700a9e3535529cd4e705d52565c679e6"
+    },
+    {
+      "path": "mobile/security/snyk-rescan-2026-10-15.json",
+      "bytes": 1773,
+      "sha256": "db1de920dce620f2fff70a8d92ac895db8cec47487166cf550b75e32e0fbbbc6"
+    },
+    {
+      "path": "mobile/security/snyk-ui-polish-2026-10-20.json",
+      "bytes": 212320,
+      "sha256": "1cc3fa47602bb7c6ab22429879051773700a9e3535529cd4e705d52565c679e6"
+    },
+    {
+      "path": "mobile/security/staging-ai-recovery-2026-10-16.json",
+      "bytes": 3318,
+      "sha256": "f66f66dbf382298bdc4d9da40f9b61a769ff3ede227cf1d342dd68e264e7f516"
+    },
+    {
+      "path": "mobile/security/staging-android-artifact-2026-10-16.json",
+      "bytes": 5807,
+      "sha256": "fd18ee01b4e4326cada69fc132f70717b476b2ad3748de2926eba4e6eaaf7be4"
+    },
+    {
+      "path": "mobile/security/staging-api-secrets-2026-10-16.json",
+      "bytes": 366,
+      "sha256": "62c58c4645f27bbf2e2a980b2ec7dee8e623cea6985dfa1ab0491b310915fb9b"
+    },
+    {
+      "path": "mobile/security/staging-auth-2026-10-16.json",
+      "bytes": 634,
+      "sha256": "47bfbfd20d9b96020096c11c02907146e3c4fab272033c94aa3bb9de26336ce7"
+    },
+    {
+      "path": "mobile/security/staging-device-access-2026-10-16.json",
+      "bytes": 4118,
+      "sha256": "b8a78beb998dfeebabdd12abae34f80f6896f3cb47091faf8de844d3ca212851"
+    },
+    {
+      "path": "mobile/security/staging-lifecycle-2026-10-17.json",
+      "bytes": 4383,
+      "sha256": "f1197d3a5f91ca4e9ce4fc9bdb9437908816a5de0bae012e1c85e60b635f174a"
+    },
+    {
+      "path": "mobile/security/staging-lifecycle-provider-2026-10-17.json",
+      "bytes": 2390,
+      "sha256": "41baf13a1588ed73a6160118b6ead5722fa14f6e08f7a2640d90578767e03140"
+    },
+    {
+      "path": "mobile/security/staging-mobile-secrets-2026-10-16.json",
+      "bytes": 362,
+      "sha256": "35845019c843a1fdc199660793353b64609ca4c9434b16793efc06b20e9ebad7"
+    },
+    {
+      "path": "mobile/security/ui-polish-2026-10-20.json",
+      "bytes": 5024,
+      "sha256": "774096b651085c9fdfd96ab01d3d85e2938efe14e311979d7254ef780f1c7a8c"
+    },
+    {
+      "path": "mobile/src/app/(app)/_layout.tsx",
+      "bytes": 2804,
+      "sha256": "144784bce7d373d00354ca76e4f4d692a039c04af5f7cb2173e71a0db4beffd7"
+    },
+    {
+      "path": "mobile/src/app/(app)/cook.tsx",
+      "bytes": 9629,
+      "sha256": "fe8e41c55e8096f793b12306c4f37aa0d734cc3d9bf90d9241d260d68117c53f"
+    },
+    {
+      "path": "mobile/src/app/(app)/index.tsx",
+      "bytes": 8845,
+      "sha256": "b419a0da815f00dd4ba42edab26111e063b032f7f9ccc2821c59f54552237156"
+    },
+    {
+      "path": "mobile/src/app/(app)/meal-plan.tsx",
+      "bytes": 16057,
+      "sha256": "3c437a89f428d68c9e421262d82ab48af0177f6177f98b2d40b5d5e41d62970c"
+    },
+    {
+      "path": "mobile/src/app/(app)/pantry.tsx",
+      "bytes": 14775,
+      "sha256": "783eb3e2099523cc5b2259ac1ef38bfe94758b9f307623ed1be1e861a7dbe116"
+    },
+    {
+      "path": "mobile/src/app/(app)/premium.tsx",
+      "bytes": 6789,
+      "sha256": "72b22b2759b1c0f8ee783550b7057c7dcbb1cbf30b7ba6f36f690d5094b18d6c"
+    },
+    {
+      "path": "mobile/src/app/(app)/profile.tsx",
+      "bytes": 8549,
+      "sha256": "2dc1b6e260cecd8358d1b8efa14b7d69d190edeb1aea352d7faae49cca80ff46"
+    },
+    {
+      "path": "mobile/src/app/(app)/report.tsx",
+      "bytes": 3408,
+      "sha256": "b49cde0d95d6f02d4f63a68cb5de142c5221ccfb99465cd21b83f1835c5f9b46"
+    },
+    {
+      "path": "mobile/src/app/(app)/saved-recipes.tsx",
+      "bytes": 2887,
+      "sha256": "e84ab36027b2769252870a08f12eb84401959699fce129d20ed1cff7fc56da53"
+    },
+    {
+      "path": "mobile/src/app/(app)/scan.tsx",
+      "bytes": 18668,
+      "sha256": "0090a479781725011bdb96e3bfd700ac74ce26ee2ba7f5a26cbea5bee6639802"
+    },
+    {
+      "path": "mobile/src/app/(auth)/_layout.tsx",
+      "bytes": 359,
+      "sha256": "2ec0d6cf9b45c9c99ef0e0f8006068d996309b3766578ab11489bd8cc77f86c9"
+    },
+    {
+      "path": "mobile/src/app/(auth)/forgot-password.tsx",
+      "bytes": 1937,
+      "sha256": "726d2a5092ec5d8363082d3590511a7d64c811d90340051ed7ff4c0e59c6815b"
+    },
+    {
+      "path": "mobile/src/app/(auth)/login.tsx",
+      "bytes": 121,
+      "sha256": "ec6fd349f7f186e1b65ca8f43ff8b5f8492cbcffae4a9b8c4a0e1ca407b1d844"
+    },
+    {
+      "path": "mobile/src/app/(auth)/reset-password.tsx",
+      "bytes": 1776,
+      "sha256": "2ded3f7cc4b7c24884deea2e1e3e414ea8f1400c356da7fdc55a5ca0837dd5e1"
+    },
+    {
+      "path": "mobile/src/app/(auth)/signup.tsx",
+      "bytes": 123,
+      "sha256": "9a565160c8c9db4f3516cd1c5350637f74acc461846afc8a36210f214f6e0015"
+    },
+    {
+      "path": "mobile/src/app/_layout.tsx",
+      "bytes": 3786,
+      "sha256": "5f2c09986e694b25bfc62ff73833812e7da0f5bd5d2e62ef20c76ab71ef2b5d6"
+    },
+    {
+      "path": "mobile/src/app/auth/callback.tsx",
+      "bytes": 1245,
+      "sha256": "146a1493ce64b4ac929c3d67825203fe5b5b59df805294d268f2be9d997683de"
+    },
+    {
+      "path": "mobile/src/app/error.tsx",
+      "bytes": 854,
+      "sha256": "99702031a6c0a525461686d1bdf16be4428514fd3408b9db2519d46702a20bc1"
+    },
+    {
+      "path": "mobile/src/components/auth-form.tsx",
+      "bytes": 5868,
+      "sha256": "6c6e6110774a7bd16771b00e503e356b80438999b68f0577415a4d2e33c1624f"
+    },
+    {
+      "path": "mobile/src/components/release/ai-recovery.tsx",
+      "bytes": 6927,
+      "sha256": "c70dafc73680fedf5b8365d96fa1e83d192e0f0104174d91c395f1e26f06e63c"
+    },
+    {
+      "path": "mobile/src/components/release/gates.tsx",
+      "bytes": 5612,
+      "sha256": "1a84c4e6c2e508cfa616e90094d99f19f123d30651bf2f800bf33891fc544306"
+    },
+    {
+      "path": "mobile/src/components/release/pantry-editor.tsx",
+      "bytes": 5390,
+      "sha256": "a30b334dc45128cac09fe64c350f59efce6a23b635083f233efb27a6391fab52"
+    },
+    {
+      "path": "mobile/src/components/release/quota-status.tsx",
+      "bytes": 1676,
+      "sha256": "e0c0a61ea0936708d04b9f0410c4422530ad2b16d733bd4633d9c63dfc8812d5"
+    },
+    {
+      "path": "mobile/src/components/release/recipe-actions.tsx",
+      "bytes": 2777,
+      "sha256": "38ec7bc317ca672db087d7847f97f89409bb109759603d3efd30610534cc488d"
+    },
+    {
+      "path": "mobile/src/components/release/recommendations.tsx",
+      "bytes": 5505,
+      "sha256": "d204ef5fb825494d77c83146e2f3aa905996766e0e6dfb6eb2bbc0cd66b1bac4"
+    },
+    {
+      "path": "mobile/src/components/release/runtime.tsx",
+      "bytes": 3491,
+      "sha256": "b95eda3b26e446fd6bea3d98c7dfee929db04862457a98806423fd026366bf02"
+    },
+    {
+      "path": "mobile/src/components/ui/button.tsx",
+      "bytes": 1647,
+      "sha256": "070bc7951aa0e47a6220d1529452dcb164bee8d21ae0b8f185f3420ed15eff07"
+    },
+    {
+      "path": "mobile/src/components/ui/card.tsx",
+      "bytes": 2449,
+      "sha256": "7a43ee5e09722ac66b83eba67b9de1b03e9567fb3c398189621e1cc0555b25e7"
+    },
+    {
+      "path": "mobile/src/components/ui/chip.tsx",
+      "bytes": 1704,
+      "sha256": "58a0d1d1dc4daf34bdd580c3509d6903ef276f0e8bf419c3013e812913cfb768"
+    },
+    {
+      "path": "mobile/src/components/ui/feedback.tsx",
+      "bytes": 5307,
+      "sha256": "7ed6b31e9c8f2160d8d82e96d9f02d63fc0eb5bd491006fd1945acea89ae9fed"
+    },
+    {
+      "path": "mobile/src/components/ui/field.tsx",
+      "bytes": 1837,
+      "sha256": "534d045168e46f731cb2ef852d5e8af9be4cdca79bceb354d2ed3fec0b898dd8"
+    },
+    {
+      "path": "mobile/src/components/ui/index.ts",
+      "bytes": 534,
+      "sha256": "360a70f9776ba0c69210bdd95520e1b1262dc9ccf5dfc29125c5014749ad9d7e"
+    },
+    {
+      "path": "mobile/src/components/ui/motion-view.tsx",
+      "bytes": 2845,
+      "sha256": "1d26b6843e390bdb697cb0d78eecf4d9f19b0d9bfd0753645cd28122542cfdd5"
+    },
+    {
+      "path": "mobile/src/components/ui/pressable-scale.tsx",
+      "bytes": 2921,
+      "sha256": "8bf7fbd8675c7422ad493e13138da42c1c0746daaa39a672021dccfc63fc6249"
+    },
+    {
+      "path": "mobile/src/components/ui/recipe-ticket.tsx",
+      "bytes": 5758,
+      "sha256": "87b1752fb88522510f3c1fe7a9a3b237718c9d2f6a6aaafe391ac7d6e18d052d"
+    },
+    {
+      "path": "mobile/src/components/ui/screen.tsx",
+      "bytes": 2883,
+      "sha256": "aa334932af226b58f2c50ff7e80189abfeb138fc95f28a086d0f58b18a0a98cc"
+    },
+    {
+      "path": "mobile/src/components/ui/ticket.tsx",
+      "bytes": 845,
+      "sha256": "11189d00cdf6586a3a81d341627b471951a9be4d0c2e613ccd490de2ae192cfd"
+    },
+    {
+      "path": "mobile/src/global.css",
+      "bytes": 59,
+      "sha256": "cc1a7ad0d019ddb1d32d0ecb588ba0ac26ce41d8625dd6c366348b25f83a28ec"
+    },
+    {
+      "path": "mobile/src/lib/api.ts",
+      "bytes": 7553,
+      "sha256": "979ccee1688935e71daf5999bf69c37dfe696c8b4dd34b02ad5cddbd0f084086"
+    },
+    {
+      "path": "mobile/src/lib/auth.tsx",
+      "bytes": 7079,
+      "sha256": "1d600c5e4dc1a5d0d34ce85dd57bc6e85b07a76e712f1b12c6d074f479d76eaf"
+    },
+    {
+      "path": "mobile/src/lib/expiry.ts",
+      "bytes": 1797,
+      "sha256": "9061bb791c1002fa3c97b4a058f224119a96e83af596e47a28933031881b6dd7"
+    },
+    {
+      "path": "mobile/src/lib/notifications.ts",
+      "bytes": 4338,
+      "sha256": "9044f2b591d11e269b9884264f968fa999ce112b2d615a516e97fad670839ca3"
+    },
+    {
+      "path": "mobile/src/lib/release/ai-error.ts",
+      "bytes": 1080,
+      "sha256": "388eca08d0fec3fbdd72cbe9862e5c63bb90fa0bdb1d5a79365d33129f34122c"
+    },
+    {
+      "path": "mobile/src/lib/release/ai-recovery.ts",
+      "bytes": 6377,
+      "sha256": "3fb1d46929034ce16033b9048f2cdc12b5f83dc83d6ede78f561907b33567500"
+    },
+    {
+      "path": "mobile/src/lib/release/billing.ts",
+      "bytes": 2238,
+      "sha256": "811fae383a3a34c633a198f2403db12514eaa6199f600442a5dd6f2a532f62c1"
+    },
+    {
+      "path": "mobile/src/lib/release/callback.ts",
+      "bytes": 1263,
+      "sha256": "18efc99c93475c1db8c31c6073f1e5f67c8477792887c765faab57ae5db042fb"
+    },
+    {
+      "path": "mobile/src/lib/release/contracts.ts",
+      "bytes": 4424,
+      "sha256": "d60fb52304d185a368a250a004353fab075f85765c93bd48e3dcb67f939ec151"
+    },
+    {
+      "path": "mobile/src/lib/release/kitchen-data.tsx",
+      "bytes": 2223,
+      "sha256": "70c21dbcdd3c32acd793ed24d13d9b27a4376562b80ad7486d6acdab773d42a1"
+    },
+    {
+      "path": "mobile/src/lib/release/kitchen-store.ts",
+      "bytes": 3766,
+      "sha256": "92f874254ba8489a02f2bb1753c5af11ecf296f4ac5330ae5fe37b602f34b01a"
+    },
+    {
+      "path": "mobile/src/lib/release/locale.ts",
+      "bytes": 2069,
+      "sha256": "98600870dc07bc1de6341969e1d506e3b2af3e1249c8bb54e254249dcd9f3d78"
+    },
+    {
+      "path": "mobile/src/lib/release/meal-plan.ts",
+      "bytes": 805,
+      "sha256": "a598ba7f462b12b20b9841477a5c8a873107385f899da861732c6d3c29f887fb"
+    },
+    {
+      "path": "mobile/src/lib/release/messages.ts",
+      "bytes": 31091,
+      "sha256": "46965e5b3a0b8f1d87c67b297aa53ac77a1bbd2eb3c4f98df6155805d6b3a697"
+    },
+    {
+      "path": "mobile/src/lib/release/photos.ts",
+      "bytes": 2081,
+      "sha256": "73b96d7cc07d1905dfad079e303c1c2e42f10af2be55a857ea6b1ef39f5a60c8"
+    },
+    {
+      "path": "mobile/src/lib/release/recipes.ts",
+      "bytes": 789,
+      "sha256": "f1b7363b8acb83b4004437bf2cf3d112019b410ec3c8417031795ed9b84c7677"
+    },
+    {
+      "path": "mobile/src/lib/release/recommendations.ts",
+      "bytes": 4899,
+      "sha256": "d712d1feea8c21eeaa90331f9493900e3517d1e80bc0a8c7a94fc0d077d2555c"
+    },
+    {
+      "path": "mobile/src/lib/release/request.ts",
+      "bytes": 2839,
+      "sha256": "d3baca578fce23f58972b9c425b14377fb8340e64934864558a14f7d3c006a0e"
+    },
+    {
+      "path": "mobile/src/lib/release/session-storage.ts",
+      "bytes": 2513,
+      "sha256": "c612a25fd7bfd9505cd2b35cf991390b1c71bf0b65728e1a57eeb545bcb7247f"
+    },
+    {
+      "path": "mobile/src/lib/release/state.tsx",
+      "bytes": 8061,
+      "sha256": "86c05e781a9ce060ff4a5b037fc65304abf247bed2fa57671772a43cfa8db6b7"
+    },
+    {
+      "path": "mobile/src/lib/release/storage.ts",
+      "bytes": 750,
+      "sha256": "4baefacdef0a9f89e43f10f97d582be436677d2c6d20967c7e53c281d1b6d1a1"
+    },
+    {
+      "path": "mobile/src/lib/release/telemetry.ts",
+      "bytes": 3987,
+      "sha256": "306a416c4159a6cf04d7db6f2801d5ca4d82b31ec7264cec17614ddf1d09d957"
+    },
+    {
+      "path": "mobile/src/lib/supabase.ts",
+      "bytes": 1227,
+      "sha256": "8ce90b7f84347a9ed3362eff8c6d46f746126ab4fece5d123e65ae3a901cb469"
+    },
+    {
+      "path": "mobile/src/lib/types.ts",
+      "bytes": 1143,
+      "sha256": "b558ebe0f688652e661aabaa94b1de7e38a06603c0959cfb678e4c42042a1e8b"
+    },
+    {
+      "path": "mobile/src/theme/motion.ts",
+      "bytes": 932,
+      "sha256": "2dbe8a39f32c0d5fe7947190dcbd39a68309c18ade7dc5f988121e58c859a4d0"
+    },
+    {
+      "path": "mobile/src/theme/tokens.js",
+      "bytes": 3159,
+      "sha256": "b3bca7342dc25a1c09b475dcb415229b15099ad1ecb63e279aa10e4b89467336"
+    },
+    {
+      "path": "mobile/src/theme/use-modal-focus.ts",
+      "bytes": 1196,
+      "sha256": "0b1b5aa2a5d1b69db11affe546bb6463ab826db974a7f24fb3bb041be084d44c"
+    },
+    {
+      "path": "mobile/src/theme/use-reduced-motion.ts",
+      "bytes": 999,
+      "sha256": "c18f34d803d2f1dde35e0008ff979572b6c4b15d3c3cab1434373bfd25560074"
+    },
+    {
+      "path": "mobile/tailwind.config.js",
+      "bytes": 573,
+      "sha256": "f4e97b7b45c60536db0fe51a8e9037db37ad9c170e200f89e0cf815ab7a80273"
+    },
+    {
+      "path": "mobile/tests/ai-error.test.ts",
+      "bytes": 970,
+      "sha256": "e9fa38ab2c8a58363d4406300faea5528f2c286bddf185a88c5b1262cae4ee0e"
+    },
+    {
+      "path": "mobile/tests/ai-gate.test.tsx",
+      "bytes": 3155,
+      "sha256": "169f229b16d5f98ba57bae4fc24989098d9484b9d8f6ba733138e20cd9d4defe"
+    },
+    {
+      "path": "mobile/tests/ai-recovery-ui.test.tsx",
+      "bytes": 4694,
+      "sha256": "fe9307f27bd9ab239fb6c1d5c0c9b3159887d4366504637d6d6f11f589695db1"
+    },
+    {
+      "path": "mobile/tests/ai-recovery.test.ts",
+      "bytes": 5138,
+      "sha256": "8a703f9bc5ad04236b2b5ae1b6e12923817e97bee3b5f28cabae36ae1ef2e6aa"
+    },
+    {
+      "path": "mobile/tests/api.test.ts",
+      "bytes": 7689,
+      "sha256": "dddd7ece0ff34a769f54f5d2507d5ed5425477bc83dbe4a6673b2fae47ac3465"
+    },
+    {
+      "path": "mobile/tests/billing.test.ts",
+      "bytes": 1892,
+      "sha256": "d8b24aaf8143581a7a989c1aa029dc4218515e5a4a0cb42b57905ee5665fcd30"
+    },
+    {
+      "path": "mobile/tests/callback.test.ts",
+      "bytes": 1206,
+      "sha256": "264fd9d9b55aeddd04978958e62d6b63efb064ee53735ae86cc3a35300b738ec"
+    },
+    {
+      "path": "mobile/tests/contracts.test.ts",
+      "bytes": 3957,
+      "sha256": "7438860d9ba885a0dca33a10a90368c74c7b99f37ccdefc08c8e8aba6f8a3173"
+    },
+    {
+      "path": "mobile/tests/dependency-security.node.cjs",
+      "bytes": 20266,
+      "sha256": "d0de1c40ea982771c54a1006a975295c85c1f4f32e2ea6c99c824a74113fdf9f"
+    },
+    {
+      "path": "mobile/tests/meal-plan.test.ts",
+      "bytes": 1907,
+      "sha256": "d1559bf5c4a577bb9d7b6c58c64134bb6f33fc038c0259eceb6facd8d451b9e0"
+    },
+    {
+      "path": "mobile/tests/motion.test.tsx",
+      "bytes": 4438,
+      "sha256": "b34d66a8038a0cebffe2ead240fcb2e57dcd876ed72f8de0ac83d6b349351d41"
+    },
+    {
+      "path": "mobile/tests/notifications.test.ts",
+      "bytes": 4412,
+      "sha256": "76ddce331bafe361a3d78ca08be296bb6cd172139cf49dece0277900cede32e4"
+    },
+    {
+      "path": "mobile/tests/photos.test.ts",
+      "bytes": 2809,
+      "sha256": "b28dbd12487a9a1883c2929202ba2ffaff42e12d439fced33164b5dbef7e8dce"
+    },
+    {
+      "path": "mobile/tests/premium.test.tsx",
+      "bytes": 5491,
+      "sha256": "cebf888aba289415c1043fe41a48446485720cf9bf58060b98ae684922d46ec3"
+    },
+    {
+      "path": "mobile/tests/privacy.test.ts",
+      "bytes": 2904,
+      "sha256": "08920507fd2ea5b4fe15fde906022907087f5a3d897b3603917d71f74a6cadd5"
+    },
+    {
+      "path": "mobile/tests/quota-state.test.tsx",
+      "bytes": 1501,
+      "sha256": "397c5625590961e47fe68fc61691d15acc62c18701a644bf55e25edfa7752688"
+    },
+    {
+      "path": "mobile/tests/recommendation-flow.test.tsx",
+      "bytes": 13975,
+      "sha256": "260f1a3f83fd289f55d527410ca9b513e26522ad4155ddd74113d70c2ecdd874"
+    },
+    {
+      "path": "mobile/tests/recommendations.test.ts",
+      "bytes": 7643,
+      "sha256": "11d7d4eac3f14846c23378fa88e8e8ae0d25e3e35bfbb1618226e61ae5d537b7"
+    },
+    {
+      "path": "mobile/tests/request.test.ts",
+      "bytes": 4497,
+      "sha256": "b492df046bae2e412dc82f50c2db8b20a196bc7dc8903f9b5206ce421b52571c"
+    },
+    {
+      "path": "mobile/tests/scan-menu.test.tsx",
+      "bytes": 18825,
+      "sha256": "182104937e0af303793cee964a85653a5ffdec6fd766c85f2eb91fc2c38e6e35"
+    },
+    {
+      "path": "mobile/tests/secrets-scanner.node.cjs",
+      "bytes": 3197,
+      "sha256": "a1307c435cc86e226f79729c1fd3cfbeb470f2fd0ca392a735c2ea460288453e"
+    },
+    {
+      "path": "mobile/tests/session-storage.test.ts",
+      "bytes": 2481,
+      "sha256": "aa2ad22a6844b8ca48684de8170159f7dcb1abcd8dfc16ce5772f704cff9ad70"
+    },
+    {
+      "path": "mobile/tests/setup.ts",
+      "bytes": 630,
+      "sha256": "e9eae30688219d741642948cc5b9f8e7d3c951c17b950be9f9dfb107963b0312"
+    },
+    {
+      "path": "mobile/tests/test_android_artifact.py",
+      "bytes": 1896,
+      "sha256": "f8d74aaa1f35f0a2449d3270108870c2d6561007f64f936d7080529f27f75f84"
+    },
+    {
+      "path": "mobile/tsconfig.json",
+      "bytes": 389,
+      "sha256": "c67a724de92f78dd74280c80339302d89a4d7f22c42dcb5fcc78b115b793def9"
+    },
+    {
+      "path": "mobile/vendor/chef-ai-expo-certificate-crypto-1.0.0.tgz",
+      "bytes": 5597,
+      "sha256": "f9c81f4eef949db729a29bcc49e93d1b06dea1adbd991054881841b8021fd73e"
+    },
+    {
+      "path": "mobile/vendor/expo-certificate-crypto/README.md",
+      "bytes": 2408,
+      "sha256": "3fa0640701fd7139c00bfcc328f0c34e64418147a34e2ea7f8d446c667e6f73e"
+    },
+    {
+      "path": "mobile/vendor/expo-certificate-crypto/code-signing.cjs",
+      "bytes": 12493,
+      "sha256": "ca839c2afc5dd3534206624f906cd06bb506affc681f5ab636f34a2e1b05d282"
+    },
+    {
+      "path": "mobile/vendor/expo-certificate-crypto/code-signing.d.ts",
+      "bytes": 2302,
+      "sha256": "b467cef1854682e2f324de1850eaa340fdaa48b8e0b0dd7fded612e20dd75da9"
+    },
+    {
+      "path": "mobile/vendor/expo-certificate-crypto/index.cjs",
+      "bytes": 361,
+      "sha256": "f1257b3c1f3a59e89ebd68a259f3f5b7b99edaae2e631d4c9ed8d85d09bb2730"
+    },
+    {
+      "path": "mobile/vendor/expo-certificate-crypto/package.json",
+      "bytes": 630,
+      "sha256": "faa9764b05fdf0896b0ee7ffe5120502b5e710d64cbe4523b01ca4c672d135d2"
+    },
+    {
+      "path": "scripts/backend-glob-compatibility-trial.cjs",
+      "bytes": 7528,
+      "sha256": "6c669d0acf1e1ddbb2bf7ba22d949c3ed55a6a227848bd0dbcc0f0776f558ed3"
+    },
+    {
+      "path": "scripts/backend-re2-glob-trial.cjs",
+      "bytes": 9684,
+      "sha256": "1855fe90dea31a651192177bf32db26328b8fd792a35ae49e9bff3550c35cedf"
+    },
+    {
+      "path": "scripts/check-environment-templates.cjs",
+      "bytes": 2236,
+      "sha256": "635c3814cd4508def33e59175c8a01b757d35dd82ebdff7634fa9114fee71147"
+    },
+    {
+      "path": "scripts/environment-templates.test.cjs",
+      "bytes": 1828,
+      "sha256": "2fc788531c22e74f16c7cf769f617857497b091efd3d7daae3a2ead0e2e5eae3"
+    },
+    {
+      "path": "scripts/picomatch-independent-verification.cjs",
+      "bytes": 4128,
+      "sha256": "3bbdf143606c061b739dff58238a3c02d15098de38af947e43b7cae3d6b4d85e"
+    },
+    {
+      "path": "scripts/picomatch-integrity-review.cjs",
+      "bytes": 2400,
+      "sha256": "aef307d0e77c52b3c45705444c6247ccabfc9a200c48181211ebd11c217fd102"
+    },
+    {
+      "path": "scripts/picomatch-reachability-review.cjs",
+      "bytes": 8036,
+      "sha256": "a61cea9fa5cf4f4bd2bea48ec1965703d7e98f24281721a2247dd9396251db1f"
+    },
+    {
+      "path": "scripts/picomatch-regression.cjs",
+      "bytes": 4897,
+      "sha256": "a9a49571e1ee15eababd0b979548ea6dd3431dfbac94323542e5d0af43bd777f"
+    },
+    {
+      "path": "scripts/picomatch-verification-worker.cjs",
+      "bytes": 5861,
+      "sha256": "9fccb68b6b108b370f233a62fb5d7821fd708a13ce6994fa01ba4d224729102d"
+    },
+    {
+      "path": "scripts/picomatch-verification.test.cjs",
+      "bytes": 7460,
+      "sha256": "ae8cea7aa43f5bc96d038d191d3f69bf4484b48a24176de976ea769abd794094"
+    }
+  ]
+}

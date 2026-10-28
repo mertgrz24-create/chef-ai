@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "patches": [
+    {
+      "path": "@next/eslint-plugin-next/dist/utils/get-root-dirs.js",
+      "beforeHash": "886677432990a735e5ebdfb345ff1cbd40e264f9947a8432eeeb254b3a926bde",
+      "afterHash": "f4e3556e42a073f2750a13325d81ba56e4ee8b271ef1e5d14b350abb3a6ec270",
+      "edits": [
+        {
+          "before": "        onlyDirectories: true",
+          "after": "        onlyDirectories: true,\n        absolute: require(\"path\").isAbsolute(rootDir)"
+        }
+      ],
+      "content": null
+    },
+    {
+      "path": "fast-glob/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+      "afterHash": "6666c5f8aaf12bbf244e573b7a6b6d49d2a2f90c1eb7e3fc6571245255f09616",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "4.0.7"
+    },
+    {
+      "path": "tinyglobby/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "ce57c04e04994b83e2ca566170fa192e6fe19d710bea6da00ce2f76d01c0dea4",
+      "afterHash": "edbe3b29b4f0e8a30a2232bf7c86cec828c703d3f321e7ee3362f4399ffa1779",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "4.0.4"
+    },
+    {
+      "path": "next/dist/compiled/picomatch/index.js",
+      "beforeHash": "607dc79784c1161c33076903769dba23e63d9d9ccfe3c4695a32ebe3a5ab892d",
+      "afterHash": "ce39dd3164f3996fa8239605d4962b5046eb07fc887d6c0df0181f5ccd81ccbf",
+      "edits": [
+        {
+          "before": "if(l>p){throw new SyntaxError(`Input length: ${l}, exceeds maximum allowed length: ${p}`)}",
+          "after": "if(l>p){throw new SyntaxError(`Input length: ${l}, exceeds maximum allowed length: ${p}`)}if(/[+*]\\([^)]*[|*+(]/.test(t)||/(?:[+*]\\([^()|*+]*\\)){4,}/.test(t)){throw new SyntaxError(\"Chef-AI: unsafe repeated extglob pattern rejected\")}"
+        }
+      ]
+    }
+  ]
+}

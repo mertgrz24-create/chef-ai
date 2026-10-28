@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-10-19T21:27:03.878536+00:00",
+  "scope": "isolated backend matcher compatibility trial; no runtime dependency replacement",
+  "candidate": "minimatch@10.2.6",
+  "candidateDependencies": {
+    "": {
+      "name": "chef-backend-glob-compatibility-trial",
+      "version": "1.0.0",
+      "dependencies": {
+        "minimatch": "10.2.6"
+      }
+    },
+    "node_modules/balanced-match": {
+      "version": "4.0.4",
+      "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-4.0.4.tgz",
+      "integrity": "sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==",
+      "license": "MIT",
+      "engines": {
+        "node": "18 || 20 || >=22"
+      }
+    },
+    "node_modules/brace-expansion": {
+      "version": "5.0.12",
+      "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.12.tgz",
+      "integrity": "sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^4.0.2"
+      },
+      "engines": {
+        "node": "20 || >=22"
+      }
+    },
+    "node_modules/minimatch": {
+      "version": "10.2.6",
+      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-10.2.6.tgz",
+      "integrity": "sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==",
+      "license": "BlueOak-1.0.0",
+      "dependencies": {
+        "brace-expansion": "^5.0.8"
+      },
+      "engines": {
+        "node": "18 || 20 || >=22"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    }
+  },
+  "result": "REJECTED_NOT_PROMOTED",
+  "comparisons": 53,
+  "equivalent": 45,
+  "mismatches": 8,
+  "candidateTimeouts": 5,
+  "patchedBaselineTimeouts": 0,
+  "backendSecurityTests": {
+    "passed": 64,
+    "failed": 0
+  },
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "npmAuditVulnerabilities": 0,
+  "backendSnyk": {
+    "status": "OPEN",
+    "uniqueAdvisories": 1,
+    "dependencyPaths": 2,
+    "id": "SNYK-JS-PICOMATCH-21248802"
+  },
+  "candidateDependencySnyk": {
+    "status": "PASS",
+    "dependencyCount": 3,
+    "note": "Isolated minimatch dependencies only. Not a migrated backend or proof of runtime ReDoS safety."
+  },
+  "patchIntegrity": "PASS",
+  "protectedFilesUnchanged": {
+    "backend/package.json": true,
+    "backend/package-lock.json": true,
+    "backend/lib/mobile/dependency-patches.json": true,
+    "mobile/package.json": true,
+    "mobile/package-lock.json": true,
+    "mobile/security/patches.json": true
+  },
+  "hawkScan": "BLOCKED: API key and repository scan configuration unavailable; no DAST performed",
+  "notPerformed": [
+    "build",
+    "deploy",
+    "remote migration",
+    "production changes",
+    "real AI calls",
+    "mobile rescans",
+    "native tests",
+    "database tests"
+  ],
+  "trialSha256": "6c669d0acf1e1ddbb2bf7ba22d949c3ed55a6a227848bd0dbcc0f0776f558ed3"
+}

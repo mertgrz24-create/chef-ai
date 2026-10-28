@@ -1,0 +1,10 @@
+{
+  "active": false,
+  "scope": "Deployment handoff only; does not register a scheduler",
+  "method": "GET",
+  "path": "/api/mobile/maintenance",
+  "scheduleUtc": "0 * * * *",
+  "authorizationEnvironmentVariable": "CRON_SECRET",
+  "requiredConfiguration": ["MOBILE_REPORT_RETENTION_DAYS"],
+  "note": "Verify scheduler/hosting eligibility without enabling paid services. Activate only with explicit deployment authorization. Staging vercel.json remains cron-disabled."
+}

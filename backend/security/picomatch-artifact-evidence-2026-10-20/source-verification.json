@@ -1,0 +1,19 @@
+{
+  "originalSourceFilesChanged": [],
+  "isolatedSourceFilesChangedByBuild": [],
+  "packages": {
+    "mobile": {
+      "checkedFiles": 83605,
+      "originalChanged": [],
+      "cloneChanged": [],
+      "manifestSha256": "1edd7676386c86ed07f86638f79a9bc428fba679924b40ef8ef827f30bc269e1"
+    },
+    "backend": {
+      "checkedFiles": 24437,
+      "originalChanged": [],
+      "cloneChanged": [],
+      "manifestSha256": "480f8006e5a0fcfe5d7b5de1285f65543b342958e11c3e1886f0d8c350a43734"
+    }
+  },
+  "scope": "Files on disk including untracked and uncommitted; not unsaved editor buffers. Private dotenv files and IDE settings intentionally excluded from inputs."
+}

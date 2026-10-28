@@ -1,0 +1,205 @@
+{
+  "candidate": "minimatch@10.2.6",
+  "productionChanged": false,
+  "candidateLoads": 4,
+  "comparisons": 53,
+  "equivalent": 45,
+  "mismatches": [
+    {
+      "key": "tinyglobby/negated-extglob",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      }
+    },
+    {
+      "key": "tinyglobby/literal-parentheses",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts"
+        ],
+        "async": [
+          "src/a.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts"
+        ],
+        "async": [
+          "src/(a).ts"
+        ]
+      }
+    },
+    {
+      "key": "tinyglobby/dynamic:src/(a).ts",
+      "equal": false,
+      "baseline": true,
+      "candidate": false
+    },
+    {
+      "key": "tinyglobby/dynamic:src/+(a",
+      "equal": false,
+      "baseline": true,
+      "candidate": false
+    },
+    {
+      "key": "next-alias/negated-extglob",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/.hidden.ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ],
+        "async": [
+          "src/(a).ts",
+          "src/a*.ts",
+          "src/a.ts",
+          "src/b.ts"
+        ]
+      }
+    },
+    {
+      "key": "next-alias/literal-parentheses",
+      "equal": false,
+      "baseline": {
+        "sync": [
+          "src/a.ts"
+        ],
+        "async": [
+          "src/a.ts"
+        ]
+      },
+      "candidate": {
+        "sync": [
+          "src/(a).ts"
+        ],
+        "async": [
+          "src/(a).ts"
+        ]
+      }
+    },
+    {
+      "key": "next-alias/dynamic:src/(a).ts",
+      "equal": false,
+      "baseline": true,
+      "candidate": false
+    },
+    {
+      "key": "next-alias/dynamic:src/+(a",
+      "equal": false,
+      "baseline": true,
+      "candidate": false
+    }
+  ],
+  "attacks": [
+    {
+      "pattern": "+(*)b",
+      "baseline": {
+        "bounded": true,
+        "result": "false"
+      },
+      "candidate": {
+        "bounded": false,
+        "error": "ETIMEDOUT",
+        "result": ""
+      }
+    },
+    {
+      "pattern": "+(*a)",
+      "baseline": {
+        "bounded": true,
+        "result": "false"
+      },
+      "candidate": {
+        "bounded": false,
+        "error": "ETIMEDOUT",
+        "result": ""
+      }
+    },
+    {
+      "pattern": "*(a*)b",
+      "baseline": {
+        "bounded": true,
+        "result": "false"
+      },
+      "candidate": {
+        "bounded": false,
+        "error": "ETIMEDOUT",
+        "result": ""
+      }
+    },
+    {
+      "pattern": "+(a|aa)",
+      "baseline": {
+        "bounded": true,
+        "result": "false"
+      },
+      "candidate": {
+        "bounded": false,
+        "error": "ETIMEDOUT",
+        "result": ""
+      }
+    },
+    {
+      "pattern": "+(ab|abab)",
+      "baseline": {
+        "bounded": true,
+        "result": "false"
+      },
+      "candidate": {
+        "bounded": false,
+        "error": "ETIMEDOUT",
+        "result": ""
+      }
+    }
+  ],
+  "verdict": "NOT_PROMOTED",
+  "limitations": "Experimental scan adapter is deliberately incomplete; passing fixture cases is not full API compatibility or security proof."
+}

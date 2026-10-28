@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-10-20T09:53:45.324679+00:00",
+  "workingDirectory": "/Users/mertgurbuz/chef-ai",
+  "isolatedDirectory": "/private/tmp/chef-picomatch-artifacts-cv7t643f",
+  "outputDirectories": {
+    "mobile": "/private/tmp/chef-picomatch-artifacts-cv7t643f/mobile-output",
+    "backend": "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/backend/.next"
+  },
+  "sourceManifestSha256": "ee9e03c6e5b93bbd84620a315018d8c69e38a7635a0ab3d216801f3b56726382",
+  "files": [
+    {
+      "path": "analyze-artifacts.cjs.txt",
+      "sha256": "29ba33678d4129e9cdd28a52514d4a1c53ecb271585443d4290375695d96653b",
+      "bytes": 6596
+    },
+    {
+      "path": "android-modules.json.gz",
+      "sha256": "7f810ec90d62077c95eb9da217c2bd36074d17c27cabb64e25d5a887f715c949",
+      "bytes": 194489
+    },
+    {
+      "path": "android-output-files.json",
+      "sha256": "43058d9fa59ec6bbca252d331c995954c6ee4ab7d992377076c51c61ba674fb7",
+      "bytes": 11360
+    },
+    {
+      "path": "artifact-analysis.json",
+      "sha256": "86f2fb1b0b112632ed22425c9193e4916fecbdaca86a99c33355204c81070fb4",
+      "bytes": 31035
+    },
+    {
+      "path": "backend-build.log",
+      "sha256": "c3e081a5304a076f8c815639ad44dce1369823cde9f7137d1cc11032f370fe92",
+      "bytes": 3010
+    },
+    {
+      "path": "backend-execution.json",
+      "sha256": "93e7282add8f34732615132cd01c58445585e5a4b378c16d014a87dc9b6ed51f",
+      "bytes": 1193
+    },
+    {
+      "path": "backend-installed-files.json.gz",
+      "sha256": "3247ccddb9a6dcdf62e2b8ff66dcfc5935f4fc175a1350b9b358f0cd5fc24136",
+      "bytes": 1071232
+    },
+    {
+      "path": "backend-output-files.json",
+      "sha256": "4065af48f65d185915645cc5528dae969636a084011650b882e8b1fdca91765e",
+      "bytes": 45934
+    },
+    {
+      "path": "backend-traced-files.json.gz",
+      "sha256": "c22912b6f4671b63340834b1484e7ce3304877ff4a6586328dfb168769e36d7b",
+      "bytes": 42248
+    },
+    {
+      "path": "backend-webpack-build.log",
+      "sha256": "60fe82f9a6128f34a8eada8ced2843618dace4c91b8421daabe1cb7721fb211e",
+      "bytes": 2040
+    },
+    {
+      "path": "backend-webpack-execution.json",
+      "sha256": "d88a85a3dd008c62183f35fd9cb63e998f426b7db2da865425c7620117236851",
+      "bytes": 1211
+    },
+    {
+      "path": "git-status.txt",
+      "sha256": "22af1cf71c38765f9381fafe4a60709c65a583ff619921c6e006dca821598b06",
+      "bytes": 1816
+    },
+    {
+      "path": "image-worker.cjs.txt",
+      "sha256": "6bab0120ee8ae2bc0179b39da68ebd1856598f320a40852999c49ae66d0eb64c",
+      "bytes": 2439
+    },
+    {
+      "path": "ios-modules.json.gz",
+      "sha256": "45376bdb645a01436ab47ca1386390bbff1c802cb2c6eeb04a9e53afef1b505a",
+      "bytes": 188887
+    },
+    {
+      "path": "ios-output-files.json",
+      "sha256": "3d482026d839dbf54f185312b101367e08e5e55fadb04299dc10b4f4ca4897fc",
+      "bytes": 10697
+    },
+    {
+      "path": "mobile-build.log",
+      "sha256": "91943b1612a9373b444aacc2084914d9e28a92659fe1245f79d322543fd6d0d0",
+      "bytes": 9457
+    },
+    {
+      "path": "mobile-execution.json",
+      "sha256": "4fecfb55d26e16140c66eaa1e328e9ef9971f68f5bcc0a8b59e57939eb45ad26",
+      "bytes": 1463
+    },
+    {
+      "path": "mobile-installed-files.json.gz",
+      "sha256": "4605f2dfeb60fcba1d8a6f08f290bb1ffb3c01259a523c7edf0fb8ea68611423",
+      "bytes": 3677370
+    },
+    {
+      "path": "mobile-map-source-identity.json",
+      "sha256": "392bded9ffc916a17357fd7ebab1192c096fd8d94bdb03a2ff68af407efe4409",
+      "bytes": 10404
+    },
+    {
+      "path": "mobile-output-files.json",
+      "sha256": "7e11597c40e77ec7d79a2ae08a804385c30ad91c5ab722adf9c2123ed09b0394",
+      "bytes": 12884
+    },
+    {
+      "path": "next-image-bounded-attempt1.json",
+      "sha256": "23aefb8f5187d8e123833f852e0e7fad28f2a482515ef28c0f4502b34431a9b6",
+      "bytes": 6702
+    },
+    {
+      "path": "next-image-bounded.json",
+      "sha256": "107e786bf72b17d630c78b5652d306f15cff7161dec1dbd7a67661a2bb1876ad",
+      "bytes": 13786
+    },
+    {
+      "path": "offline.sb.txt",
+      "sha256": "ac5d4f2b103250d248c54651c315c51e33817b2465616ed35de9c8e0e35126eb",
+      "bytes": 233
+    },
+    {
+      "path": "run-build.py.txt",
+      "sha256": "6e793a4b39fc0c467fbdb254c33b00e2236c9b101dd929aa3fb18587c582aeee",
+      "bytes": 2456
+    },
+    {
+      "path": "run-image-check.py.txt",
+      "sha256": "a8ed287c423302dc17acb365a2dfb2e4d0c357e01b0751fc7361612ff8799911",
+      "bytes": 1050
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "ee9e03c6e5b93bbd84620a315018d8c69e38a7635a0ab3d216801f3b56726382",
+      "bytes": 77733
+    },
+    {
+      "path": "source-verification.json",
+      "sha256": "1ed813760de831d9c672ed476ffe3f7443a2a37dfd1a059d0374b08e17d23d3a",
+      "bytes": 666
+    },
+    {
+      "path": "verify-source.py.txt",
+      "sha256": "d930d2f046e8fd4707a51d863f23f3291ffee5e47504d93716b495f88429f6bd",
+      "bytes": 1490
+    }
+  ]
+}

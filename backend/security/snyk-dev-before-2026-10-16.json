@@ -1,0 +1,901 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-JS-URIJS-19963961",
+      "title": "Improper Encoding or Escaping of Output",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+      "credit": [
+        "Wayde Shi"
+      ],
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "js",
+      "severity": "medium",
+      "cvssScore": 6.9,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "uri-js",
+      "references": [
+        {
+          "url": "https://github.com/garycourt/uri-js/issues/106",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/garycourt/uri-js/blob/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae/src/uri.ts%23L103-L141",
+          "title": "Vulnerable Code"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "medium",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "cvssV3BaseScore": 6.5,
+          "modificationTime": "2026-09-19T01:30:40.075585Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "medium",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "cvssV3BaseScore": 6.5,
+          "modificationTime": "2026-09-23T05:40:05.741862Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "assigner": "Snyk",
+          "severity": "medium",
+          "baseScore": 6.9,
+          "cvssVersion": "4.0",
+          "modificationTime": "2026-10-01T04:01:43.880088Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+          "assigner": "Snyk",
+          "severity": "medium",
+          "baseScore": 5.3,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-01T04:01:43.880088Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "assigner": "NVD",
+          "severity": "medium",
+          "baseScore": 6.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-09-19T01:30:40.075585Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "assigner": "Red Hat",
+          "severity": "medium",
+          "baseScore": 6.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-09-23T05:40:05.741862Z"
+        }
+      ],
+      "description": "## Overview\n[uri-js](https://github.com/garycourt/uri-js) is a RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript.\n\nAffected versions of this package are vulnerable to Improper Encoding or Escaping of Output via `pctDecChars()`, which decodes invalid and overlong percent-encoded sequences into ASCII metacharacters. An attacker can craft percent-encoded payloads to bypass platform decoder validation and inject path traversal or CRLF sequences that downstream consumers process without filtering.\n## Remediation\nThere is no fixed version for `uri-js`.\n## References\n- [GitHub Issue](https://github.com/garycourt/uri-js/issues/106)\n- [Vulnerable Code](https://github.com/garycourt/uri-js/blob/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae/src/uri.ts#L103-L141)\n",
+      "epssDetails": {
+        "percentile": "0.31384",
+        "probability": "0.00400",
+        "modelVersion": "v2026.06.15"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2026-93751"
+        ],
+        "CWE": [
+          "CWE-116"
+        ]
+      },
+      "packageName": "uri-js",
+      "proprietary": false,
+      "creationTime": "2026-09-20T09:02:23.860081Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2026-09-18T19:43:53Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "npm",
+      "publicationTime": "2026-09-20T09:02:24.049424Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2026-10-01T04:01:43.880088Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "medium",
+      "from": [
+        "chef-ai-backend@0.1.0",
+        "eslint@9.39.5",
+        "@eslint/eslintrc@3.3.6",
+        "ajv@6.15.0",
+        "uri-js@4.4.1"
+      ],
+      "upgradePath": [
+        false,
+        "eslint@10.0.0"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "uri-js",
+      "version": "4.4.1",
+      "__filename": "/Users/mertgurbuz/chef-ai/backend/node_modules/uri-js/package.json",
+      "parentDepType": "dev"
+    },
+    {
+      "id": "SNYK-JS-URIJS-19963963",
+      "title": "Infinite loop",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "credit": [
+        "Wayde Shi"
+      ],
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "js",
+      "severity": "high",
+      "cvssScore": 8.7,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "uri-js",
+      "references": [
+        {
+          "url": "https://github.com/garycourt/uri-js/issues/105",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/garycourt/uri-js/blob/4.4.0/src/uri.ts%23L349",
+          "title": "Vulnerable Code"
+        },
+        {
+          "url": "https://github.com/garycourt/uri-js/blob/4.4.0/src/uri.ts%23L352-L376",
+          "title": "Vulnerable Code"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2026-09-18T18:30:36.522367Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2026-09-23T05:40:51.138450Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 8.7,
+          "cvssVersion": "4.0",
+          "modificationTime": "2026-10-13T16:08:08.601575Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-13T16:08:08.601575Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "NVD",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-09-18T18:30:36.522367Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-09-23T05:40:51.138450Z"
+        }
+      ],
+      "description": "## Overview\n[uri-js](https://github.com/garycourt/uri-js) is a RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript.\n\nAffected versions of this package are vulnerable to Infinite loop via the `removeDotSegments` function, which loops infinitely when a path segment begins with Unicode line separators (U+2028) or paragraph separators (U+2029). An attacker can trigger this by passing such a path to `removeDotSegments` directly, or through the `normalize` or `resolve` functions with IRI handling enabled, blocking the Node.js event loop indefinitely until heap exhaustion.\n## Remediation\nThere is no fixed version for `uri-js`.\n## References\n- [GitHub Issue](https://github.com/garycourt/uri-js/issues/105)\n- [Vulnerable Code](https://github.com/garycourt/uri-js/blob/4.4.0/src/uri.ts#L349)\n- [Vulnerable Code](https://github.com/garycourt/uri-js/blob/4.4.0/src/uri.ts#L352-L376)\n",
+      "epssDetails": {
+        "percentile": "0.50451",
+        "probability": "0.00684",
+        "modelVersion": "v2026.06.15"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2026-93690"
+        ],
+        "CWE": [
+          "CWE-835"
+        ]
+      },
+      "packageName": "uri-js",
+      "proprietary": false,
+      "creationTime": "2026-09-20T09:04:44.397511Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2026-09-18T17:35:20Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "npm",
+      "publicationTime": "2026-09-20T09:04:44.578622Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2026-10-13T16:08:08.601575Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "chef-ai-backend@0.1.0",
+        "eslint@9.39.5",
+        "@eslint/eslintrc@3.3.6",
+        "ajv@6.15.0",
+        "uri-js@4.4.1"
+      ],
+      "upgradePath": [
+        false,
+        "eslint@10.0.0"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "uri-js",
+      "version": "4.4.1",
+      "__filename": "/Users/mertgurbuz/chef-ai/backend/node_modules/uri-js/package.json",
+      "parentDepType": "dev"
+    },
+    {
+      "id": "SNYK-JS-URIJS-20341609",
+      "title": "Uncaught Exception",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L/E:P",
+      "credit": [
+        "Unknown"
+      ],
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "js",
+      "severity": "medium",
+      "cvssScore": 5.3,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "uri-js",
+      "references": [
+        {
+          "url": "https://github.com/garycourt/uri-js/issues/103",
+          "title": "GitHub Issue"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "medium",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "cvssV3BaseScore": 4.3,
+          "modificationTime": "2026-10-01T01:17:12.611658Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "medium",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "cvssV3BaseScore": 4.3,
+          "modificationTime": "2026-10-01T05:47:32.684371Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P",
+          "assigner": "Snyk",
+          "severity": "medium",
+          "baseScore": 5.3,
+          "cvssVersion": "4.0",
+          "modificationTime": "2026-10-02T14:02:57.861616Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L/E:P",
+          "assigner": "Snyk",
+          "severity": "medium",
+          "baseScore": 4.3,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-02T14:02:57.861616Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "assigner": "NVD",
+          "severity": "medium",
+          "baseScore": 4.3,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-01T01:17:12.611658Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "assigner": "Red Hat",
+          "severity": "medium",
+          "baseScore": 4.3,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-01T05:47:32.684371Z"
+        }
+      ],
+      "description": "## Overview\n[uri-js](https://github.com/garycourt/uri-js) is a RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript.\n\nAffected versions of this package are vulnerable to Uncaught Exception in the `parse()` function of `src/schemes/mailto.ts`, whose `to` branch calls `hfield[1].split(\",\")` directly, while the `subject`, `body`, and default branches all route through `unescapeComponent()`, which short-circuits on a missing value. An attacker can crash the process by supplying a mailto URI whose query carries a bare `to` token with no `=value`, such as `mailto:?to`, so splitting on `=` yields a one element array and the undefined second element is dereferenced. This requires the application to pass an attacker-influenced string to `URI.parse()`, `URI.resolve()`, `URI.normalize()`, or `URI.equal()`, none of which wrap the scheme handler in a `try`/`catch`, and whether the throw terminates the process or only fails the one request depends on the host's own error handling.\n## Remediation\nThere is no fixed version for `uri-js`.\n## References\n- [GitHub Issue](https://github.com/garycourt/uri-js/issues/103)\n",
+      "epssDetails": {
+        "percentile": "0.22618",
+        "probability": "0.00319",
+        "modelVersion": "v2026.06.15"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2026-103387"
+        ],
+        "CWE": [
+          "CWE-248"
+        ]
+      },
+      "packageName": "uri-js",
+      "proprietary": false,
+      "creationTime": "2026-10-01T04:03:21.753828Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2026-09-30T22:22:43Z",
+      "exploitDetails": {
+        "sources": [
+          "Snyk"
+        ],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Proof of Concept",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Proof of Concept",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "npm",
+      "publicationTime": "2026-10-01T04:03:21.933002Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2026-10-02T14:02:57.861616Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "medium",
+      "from": [
+        "chef-ai-backend@0.1.0",
+        "eslint@9.39.5",
+        "@eslint/eslintrc@3.3.6",
+        "ajv@6.15.0",
+        "uri-js@4.4.1"
+      ],
+      "upgradePath": [
+        false,
+        "eslint@10.0.0"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "uri-js",
+      "version": "4.4.1",
+      "__filename": "/Users/mertgurbuz/chef-ai/backend/node_modules/uri-js/package.json",
+      "parentDepType": "dev"
+    },
+    {
+      "id": "SNYK-JS-ZOD-20510278",
+      "title": "Allocation of Resources Without Limits or Throttling",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "credit": [
+        "Unknown"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<4.6.6"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "4.6.6"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "js",
+      "severity": "high",
+      "cvssScore": 8.7,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "zod",
+      "references": [
+        {
+          "url": "https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/colinhacks/zod/issues/1872",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/colinhacks/zod/issues/6643",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/colinhacks/zod/pull/6652",
+          "title": "GitHub PR"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2026-10-02T01:14:58.272283Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2026-10-15T06:10:12.646580Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 8.7,
+          "cvssVersion": "4.0",
+          "modificationTime": "2026-10-15T06:10:12.924091Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-15T06:10:12.924091Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "NVD",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-02T01:14:58.272283Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2026-10-15T06:10:12.646580Z"
+        }
+      ],
+      "description": "## Overview\n[zod](https://www.npmjs.org/package/zod) is a TypeScript-first schema declaration and validation library with static type inference\n\nAffected versions of this package are vulnerable to Allocation of Resources Without Limits or Throttling via the `handleArrayResult` parse logic in `$ZodArray`, which accumulates every validation issue for each failing element in a large array with no cap or early termination. An attacker can submit a large array to an application using an array schema without a length constraint, causing the process to allocate excessive issue objects and crash due to out-of-memory conditions.\n## Remediation\nUpgrade `zod` to version 4.6.6 or higher.\n## References\n- [GitHub Commit](https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd)\n- [GitHub Issue](https://github.com/colinhacks/zod/issues/1872)\n- [GitHub Issue](https://github.com/colinhacks/zod/issues/6643)\n- [GitHub PR](https://github.com/colinhacks/zod/pull/6652)\n",
+      "epssDetails": {
+        "percentile": "0.26981",
+        "probability": "0.00350",
+        "modelVersion": "v2026.06.15"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2023-54404"
+        ],
+        "CWE": [
+          "CWE-770"
+        ]
+      },
+      "packageName": "zod",
+      "proprietary": false,
+      "creationTime": "2026-10-05T09:27:47.556871Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2026-10-01T18:19:14Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "npm",
+      "publicationTime": "2026-10-05T09:27:47.722784Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2026-10-15T06:10:12.924091Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "chef-ai-backend@0.1.0",
+        "eslint-config-next@16.4.1",
+        "eslint-plugin-react-hooks@7.1.1",
+        "zod@4.4.3"
+      ],
+      "upgradePath": [
+        false,
+        "eslint-config-next@16.4.1",
+        "eslint-plugin-react-hooks@7.1.1",
+        "zod@4.6.7"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "zod",
+      "version": "4.4.3",
+      "__filename": "/Users/mertgurbuz/chef-ai/backend/node_modules/zod/package.json",
+      "parentDepType": "dev"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 360,
+  "org": "mertgrz24",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "npm",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false,
+    "autoApproveIgnores": false,
+    "approvalWorkflowEnabled": false
+  },
+  "summary": "4 vulnerable dependency paths",
+  "remediation": {
+    "unresolved": [
+      {
+        "id": "SNYK-JS-ZOD-20510278",
+        "title": "Allocation of Resources Without Limits or Throttling",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "credit": [
+          "Unknown"
+        ],
+        "semver": {
+          "vulnerable": [
+            "<4.6.6"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "4.6.6"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "js",
+        "severity": "high",
+        "cvssScore": 8.7,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "zod",
+        "references": [
+          {
+            "url": "https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/colinhacks/zod/issues/1872",
+            "title": "GitHub Issue"
+          },
+          {
+            "url": "https://github.com/colinhacks/zod/issues/6643",
+            "title": "GitHub Issue"
+          },
+          {
+            "url": "https://github.com/colinhacks/zod/pull/6652",
+            "title": "GitHub PR"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2026-10-02T01:14:58.272283Z"
+          },
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2026-10-15T06:10:12.646580Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 8.7,
+            "cvssVersion": "4.0",
+            "modificationTime": "2026-10-15T06:10:12.924091Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2026-10-15T06:10:12.924091Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "NVD",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2026-10-02T01:14:58.272283Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2026-10-15T06:10:12.646580Z"
+          }
+        ],
+        "description": "## Overview\n[zod](https://www.npmjs.org/package/zod) is a TypeScript-first schema declaration and validation library with static type inference\n\nAffected versions of this package are vulnerable to Allocation of Resources Without Limits or Throttling via the `handleArrayResult` parse logic in `$ZodArray`, which accumulates every validation issue for each failing element in a large array with no cap or early termination. An attacker can submit a large array to an application using an array schema without a length constraint, causing the process to allocate excessive issue objects and crash due to out-of-memory conditions.\n## Remediation\nUpgrade `zod` to version 4.6.6 or higher.\n## References\n- [GitHub Commit](https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd)\n- [GitHub Issue](https://github.com/colinhacks/zod/issues/1872)\n- [GitHub Issue](https://github.com/colinhacks/zod/issues/6643)\n- [GitHub PR](https://github.com/colinhacks/zod/pull/6652)\n",
+        "epssDetails": {
+          "percentile": "0.26981",
+          "probability": "0.00350",
+          "modelVersion": "v2026.06.15"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2023-54404"
+          ],
+          "CWE": [
+            "CWE-770"
+          ]
+        },
+        "packageName": "zod",
+        "proprietary": false,
+        "creationTime": "2026-10-05T09:27:47.556871Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2026-10-01T18:19:14Z",
+        "exploitDetails": {
+          "sources": [],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Not Defined",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Not Defined",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "npm",
+        "publicationTime": "2026-10-05T09:27:47.722784Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2026-10-15T06:10:12.924091Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "chef-ai-backend@0.1.0",
+          "eslint-config-next@16.4.1",
+          "eslint-plugin-react-hooks@7.1.1",
+          "zod@4.4.3"
+        ],
+        "upgradePath": [
+          false,
+          "eslint-config-next@16.4.1",
+          "eslint-plugin-react-hooks@7.1.1",
+          "zod@4.6.7"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "isPinnable": false,
+        "isRuntime": false,
+        "name": "zod",
+        "version": "4.4.3",
+        "severityWithCritical": "high"
+      }
+    ],
+    "upgrade": {
+      "eslint@9.39.5": {
+        "upgradeTo": "eslint@10.0.0",
+        "upgrades": [
+          "uri-js@4.4.1",
+          "uri-js@4.4.1",
+          "uri-js@4.4.1"
+        ],
+        "vulns": [
+          "SNYK-JS-URIJS-19963961",
+          "SNYK-JS-URIJS-19963963",
+          "SNYK-JS-URIJS-20341609"
+        ]
+      }
+    },
+    "patch": {},
+    "ignore": {},
+    "pin": {}
+  },
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 4,
+  "projectName": "chef-ai-backend",
+  "foundProjectCount": 2,
+  "displayTargetFile": "package.json",
+  "hasUnknownVersions": false,
+  "path": "/Users/mertgurbuz/chef-ai/backend"
+}

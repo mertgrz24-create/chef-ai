@@ -1,0 +1,66 @@
+ M .gitignore
+ M CLAUDE.md
+ M PROGRESS.md
+ M README.md
+ M mobile/.env.example
+ M mobile/.gitignore
+ M mobile/AGENTS.md
+ M mobile/EAS_BUILD.md
+ M mobile/app.json
+ M mobile/eas.json
+ M mobile/metro.config.js
+ M mobile/package-lock.json
+ M mobile/package.json
+ M mobile/src/app/(app)/_layout.tsx
+ M mobile/src/app/(app)/cook.tsx
+ M mobile/src/app/(app)/index.tsx
+ M mobile/src/app/(app)/meal-plan.tsx
+ M mobile/src/app/(app)/pantry.tsx
+ M mobile/src/app/(app)/profile.tsx
+ M mobile/src/app/(app)/scan.tsx
+ M mobile/src/app/(auth)/_layout.tsx
+ M mobile/src/app/(auth)/login.tsx
+ M mobile/src/app/(auth)/signup.tsx
+ M mobile/src/app/_layout.tsx
+ D mobile/src/components/ui.tsx
+ M mobile/src/lib/api.ts
+ M mobile/src/lib/auth.tsx
+ M mobile/src/lib/expiry.ts
+ M mobile/src/lib/notifications.ts
+ M mobile/src/lib/supabase.ts
+ M mobile/src/lib/types.ts
+ M mobile/tailwind.config.js
+ M mobile/tsconfig.json
+?? .claude/settings.json
+?? .github/
+?? .vscode/
+?? AGENTS.md
+?? backend/
+?? mobile/app.config.js
+?? mobile/docs/
+?? mobile/eslint.config.js
+?? mobile/jest.config.cjs
+?? mobile/locales/
+?? mobile/plugins/
+?? mobile/scripts/apply-security-patches.cjs
+?? mobile/scripts/check-android-artifact.py
+?? mobile/scripts/check-ios-artifact.py
+?? mobile/scripts/local-environment.cjs
+?? mobile/scripts/scan-secrets.cjs
+?? mobile/scripts/validate-release.cjs
+?? mobile/security/
+?? mobile/src/app/(app)/premium.tsx
+?? mobile/src/app/(app)/report.tsx
+?? mobile/src/app/(app)/saved-recipes.tsx
+?? mobile/src/app/(auth)/forgot-password.tsx
+?? mobile/src/app/(auth)/reset-password.tsx
+?? mobile/src/app/auth/
+?? mobile/src/app/error.tsx
+?? mobile/src/components/auth-form.tsx
+?? mobile/src/components/release/
+?? mobile/src/components/ui/
+?? mobile/src/lib/release/
+?? mobile/src/theme/
+?? mobile/tests/
+?? mobile/vendor/
+?? scripts/

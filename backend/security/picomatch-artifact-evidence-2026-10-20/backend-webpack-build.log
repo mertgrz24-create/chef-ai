@@ -1,0 +1,59 @@
+▲ Next.js 16.4.1 (webpack)
+✓ Running next.config.mjs took 7ms
+
+  Creating an optimized production build ...
+(node:83391) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///private/tmp/chef-picomatch-artifacts-cv7t643f/source/backend/tailwind.config.ts?id=1792489623909 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /private/tmp/chef-picomatch-artifacts-cv7t643f/source/backend/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ Compiled successfully in 4.3s
+  Running TypeScript ...
+  Finished TypeScript in 1265ms ...
+  Collecting page data using 9 workers ...
+  Generating static pages using 9 workers (0/28) ...
+  Generating static pages using 9 workers (7/28) 
+  Generating static pages using 9 workers (14/28) 
+  Generating static pages using 9 workers (21/28) 
+✓ Generating static pages using 9 workers (28/28) in 109ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /api/account
+├ ƒ /api/billing/status
+├ ƒ /api/billing/webhook
+├ ƒ /api/content-reports
+├ ƒ /api/health-export
+├ ƒ /api/meal-image
+├ ƒ /api/meal-plan
+├ ƒ /api/meal-plan/generate
+├ ƒ /api/meal-plan/regenerate-day
+├ ƒ /api/meals-eaten
+├ ƒ /api/mobile/ai-status
+├ ƒ /api/mobile/analytics
+├ ƒ /api/mobile/config
+├ ƒ /api/mobile/maintenance
+├ ƒ /api/mobile/staging-info
+├ ƒ /api/pantry
+├ ƒ /api/pantry/[id]
+├ ƒ /api/privacy/consents
+├ ƒ /api/profile
+├ ƒ /api/push/register
+├ ƒ /api/push/send-expiry-alerts
+├ ƒ /api/push/unregister
+├ ƒ /api/recipes
+├ ƒ /api/recipes/[id]
+├ ƒ /api/recipes/history
+├ ƒ /api/recipes/modify
+├ ƒ /api/recipes/save
+├ ƒ /api/referral
+├ ƒ /api/shopping-list
+├ ƒ /api/vision
+└ ƒ /recipe/[id]
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

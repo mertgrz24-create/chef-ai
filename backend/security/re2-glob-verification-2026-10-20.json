@@ -1,0 +1,108 @@
+{
+  "recordedAt": "2026-10-19T21:34:13.140011+00:00",
+  "verdict": "NOT_PROMOTED",
+  "candidate": "globrex@0.1.2 + re2js@2.8.8",
+  "scope": "isolated child-process matching experiment, no runtime replacement",
+  "compatibility": {
+    "total": 55,
+    "equivalent": 40,
+    "different": 15,
+    "candidateLoads": 6
+  },
+  "boundedProbes": {
+    "budgetPerProcessMs": 1000,
+    "matchCompleted": 8,
+    "explicitlyRejected": 1,
+    "timeouts": 0,
+    "note": "Bounded examples are not a full security proof; matcher semantics intentionally differ from patched literalization for one repeated extglob."
+  },
+  "line49": {
+    "file": "mobile/package.json",
+    "dependency": "tailwindcss@3.4.19",
+    "snykPath": [
+      "tailwindcss@3.4.19",
+      "chokidar@3.6.0",
+      "anymatch@3.1.3",
+      "picomatch@2.3.2"
+    ],
+    "status": "SCANNER_OPEN"
+  },
+  "currentBackendTests": 64,
+  "currentMobileTests": 150,
+  "currentMobileDependencyTests": 19,
+  "lint": {
+    "backend": "PASS",
+    "mobile": "PASS"
+  },
+  "typecheck": {
+    "backend": "PASS",
+    "mobile": "PASS"
+  },
+  "audit": {
+    "backend": 0,
+    "mobile": 0
+  },
+  "snyk": {
+    "backend": {
+      "unique": 1,
+      "paths": 2
+    },
+    "mobile": {
+      "unique": 1,
+      "paths": 28
+    },
+    "sandbox": {
+      "unique": 0,
+      "paths": 0,
+      "note": "Only two candidate dependencies, not a migrated application"
+    }
+  },
+  "protectedFilesUnchanged": {
+    "mobile/package.json": true,
+    "mobile/package-lock.json": true,
+    "backend/package.json": true,
+    "backend/package-lock.json": true,
+    "mobile/security/patches.json": true,
+    "backend/lib/mobile/dependency-patches.json": true
+  },
+  "candidateDependencyLockSnapshot": {
+    "name": "chef-re2-glob-trial-20261020",
+    "lockfileVersion": 3,
+    "requires": true,
+    "packages": {
+      "": {
+        "dependencies": {
+          "globrex": "0.1.2",
+          "re2js": "2.8.8"
+        }
+      },
+      "node_modules/globrex": {
+        "version": "0.1.2",
+        "resolved": "https://registry.npmjs.org/globrex/-/globrex-0.1.2.tgz",
+        "integrity": "sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==",
+        "license": "MIT"
+      },
+      "node_modules/re2js": {
+        "version": "2.8.8",
+        "resolved": "https://registry.npmjs.org/re2js/-/re2js-2.8.8.tgz",
+        "integrity": "sha512-E2FVgqD2mzJ+ZmMSHLnkOvZ7PiZ4FgMdfVCA3YsJWs9gtyoaKmUMxyVPCXS1yK209/mz3XkdT7kr3OlMWW2Fww==",
+        "license": "MIT",
+        "engines": {
+          "node": ">=20.0.0"
+        }
+      }
+    }
+  },
+  "helperSha256": "1855fe90dea31a651192177bf32db26328b8fd792a35ae49e9bff3550c35cedf",
+  "dast": "BLOCKED: HawkScan API key/repository scan configuration unavailable",
+  "notPerformed": [
+    "build",
+    "deploy",
+    "remote migration",
+    "production or staging changes",
+    "real AI",
+    "native verification",
+    "database verification",
+    "runtime dependency replacement"
+  ]
+}

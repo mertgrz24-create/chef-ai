@@ -1,0 +1,546 @@
+[
+  {
+    "group": "allowed",
+    "exitCode": 0,
+    "elapsedSeconds": 0.09009066699999999,
+    "stdout": {
+      "group": "allowed",
+      "results": [
+        {
+          "length": 35,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 2.2865830000000003,
+          "error": null
+        },
+        {
+          "length": 3026,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.1445000000000007,
+          "error": null
+        },
+        {
+          "length": 2827,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.5181249999999977,
+          "error": null
+        },
+        {
+          "length": 2427,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 0.8667090000000002,
+          "error": null
+        },
+        {
+          "length": 2527,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 0.9343749999999957,
+          "error": null
+        },
+        {
+          "length": 2877,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.4009169999999997,
+          "error": null
+        },
+        {
+          "length": 2877,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 0.8884159999999994,
+          "error": null
+        },
+        {
+          "length": 2927,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.024792000000005,
+          "error": null
+        },
+        {
+          "length": 2920,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.0583750000000052,
+          "error": null
+        },
+        {
+          "length": 2827,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 0.7980840000000029,
+          "error": null
+        },
+        {
+          "length": 826,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.661332999999992,
+          "error": null
+        },
+        {
+          "length": 2830,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.1367919999999998,
+          "error": null
+        }
+      ],
+      "totalValidations": 1200,
+      "maxBatchMs": 2.2865830000000003,
+      "configImages": {
+        "deviceSizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840
+        ],
+        "imageSizes": [
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ],
+        "path": "/_next/image",
+        "loader": "default",
+        "loaderFile": "",
+        "domains": [],
+        "disableStaticImages": false,
+        "minimumCacheTTL": 14400,
+        "formats": [
+          "image/webp"
+        ],
+        "maximumRedirects": 3,
+        "maximumResponseBody": 50000000,
+        "dangerouslyAllowLocalIP": false,
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "attachment",
+        "localPatterns": [
+          {
+            "pathname": "**",
+            "search": ""
+          }
+        ],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "images.pexels.com"
+          }
+        ],
+        "qualities": [
+          75
+        ],
+        "unoptimized": false,
+        "customCacheHandler": false
+      },
+      "regexes": [
+        {
+          "hostname": "/^(?:^(?:images\\.pexels\\.com)$)$/",
+          "pathname": "/^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$/"
+        }
+      ],
+      "network": "OS denied; pure validateParams only; no fetch/start server"
+    },
+    "error": ""
+  },
+  {
+    "group": "denied",
+    "exitCode": 0,
+    "elapsedSeconds": 0.070688292,
+    "stdout": {
+      "group": "denied",
+      "results": [
+        {
+          "length": 43,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 1.205083000000002,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 3034,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.38179199999999724,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2835,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.38074999999999903,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2435,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.3760830000000013,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2535,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.7088329999999985,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2885,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.39512500000000017,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2885,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.29954100000000494,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2935,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.298333999999997,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2928,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.6224580000000017,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2835,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.24262500000000387,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 834,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.9007080000000016,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 2838,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.26883300000000077,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 26,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.05750000000000455,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 1528,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.18154200000000031,
+          "error": "\"url\" parameter is not allowed"
+        }
+      ],
+      "totalValidations": 1400,
+      "maxBatchMs": 1.205083000000002,
+      "configImages": {
+        "deviceSizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840
+        ],
+        "imageSizes": [
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ],
+        "path": "/_next/image",
+        "loader": "default",
+        "loaderFile": "",
+        "domains": [],
+        "disableStaticImages": false,
+        "minimumCacheTTL": 14400,
+        "formats": [
+          "image/webp"
+        ],
+        "maximumRedirects": 3,
+        "maximumResponseBody": 50000000,
+        "dangerouslyAllowLocalIP": false,
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "attachment",
+        "localPatterns": [
+          {
+            "pathname": "**",
+            "search": ""
+          }
+        ],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "images.pexels.com"
+          }
+        ],
+        "qualities": [
+          75
+        ],
+        "unoptimized": false,
+        "customCacheHandler": false
+      },
+      "regexes": [
+        {
+          "hostname": "/^(?:^(?:images\\.pexels\\.com)$)$/",
+          "pathname": "/^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$/"
+        }
+      ],
+      "network": "OS denied; pure validateParams only; no fetch/start server"
+    },
+    "error": ""
+  },
+  {
+    "group": "boundary",
+    "exitCode": 0,
+    "elapsedSeconds": 0.06087820899999999,
+    "stdout": {
+      "group": "boundary",
+      "results": [
+        {
+          "length": 3071,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 2.445292000000002,
+          "error": null
+        },
+        {
+          "length": 3072,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.0912089999999992,
+          "error": null
+        },
+        {
+          "length": 3073,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.015625,
+          "error": "\"url\" parameter is too long"
+        },
+        {
+          "length": 4096,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.015166000000000679,
+          "error": "\"url\" parameter is too long"
+        }
+      ],
+      "totalValidations": 400,
+      "maxBatchMs": 2.445292000000002,
+      "configImages": {
+        "deviceSizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840
+        ],
+        "imageSizes": [
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ],
+        "path": "/_next/image",
+        "loader": "default",
+        "loaderFile": "",
+        "domains": [],
+        "disableStaticImages": false,
+        "minimumCacheTTL": 14400,
+        "formats": [
+          "image/webp"
+        ],
+        "maximumRedirects": 3,
+        "maximumResponseBody": 50000000,
+        "dangerouslyAllowLocalIP": false,
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "attachment",
+        "localPatterns": [
+          {
+            "pathname": "**",
+            "search": ""
+          }
+        ],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "images.pexels.com"
+          }
+        ],
+        "qualities": [
+          75
+        ],
+        "unoptimized": false,
+        "customCacheHandler": false
+      },
+      "regexes": [
+        {
+          "hostname": "/^(?:^(?:images\\.pexels\\.com)$)$/",
+          "pathname": "/^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$/"
+        }
+      ],
+      "network": "OS denied; pure validateParams only; no fetch/start server"
+    },
+    "error": ""
+  },
+  {
+    "group": "local",
+    "exitCode": 0,
+    "elapsedSeconds": 0.06483833300000003,
+    "stdout": {
+      "group": "local",
+      "results": [
+        {
+          "length": 10,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.2098330000000033,
+          "error": null
+        },
+        {
+          "length": 2802,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.3362499999999997,
+          "error": null
+        },
+        {
+          "length": 2402,
+          "allowed": true,
+          "iterations": 100,
+          "elapsedMs": 1.4146670000000015,
+          "error": null
+        },
+        {
+          "length": 14,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.11216699999999946,
+          "error": "\"url\" parameter is not allowed"
+        },
+        {
+          "length": 21,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.013791999999995141,
+          "error": "\"url\" parameter cannot be a protocol-relative URL (//)"
+        },
+        {
+          "length": 18,
+          "allowed": false,
+          "iterations": 100,
+          "elapsedMs": 0.07758299999999707,
+          "error": "\"url\" parameter cannot be recursive"
+        }
+      ],
+      "totalValidations": 600,
+      "maxBatchMs": 1.4146670000000015,
+      "configImages": {
+        "deviceSizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840
+        ],
+        "imageSizes": [
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ],
+        "path": "/_next/image",
+        "loader": "default",
+        "loaderFile": "",
+        "domains": [],
+        "disableStaticImages": false,
+        "minimumCacheTTL": 14400,
+        "formats": [
+          "image/webp"
+        ],
+        "maximumRedirects": 3,
+        "maximumResponseBody": 50000000,
+        "dangerouslyAllowLocalIP": false,
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "attachment",
+        "localPatterns": [
+          {
+            "pathname": "**",
+            "search": ""
+          }
+        ],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "images.pexels.com"
+          }
+        ],
+        "qualities": [
+          75
+        ],
+        "unoptimized": false,
+        "customCacheHandler": false
+      },
+      "regexes": [
+        {
+          "hostname": "/^(?:^(?:images\\.pexels\\.com)$)$/",
+          "pathname": "/^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$/"
+        }
+      ],
+      "network": "OS denied; pure validateParams only; no fetch/start server"
+    },
+    "error": ""
+  }
+]

@@ -1,0 +1,834 @@
+{
+  "sourceManifestSha256": "ee9e03c6e5b93bbd84620a315018d8c69e38a7635a0ab3d216801f3b56726382",
+  "copies": [
+    {
+      "id": "mobile-anymatch",
+      "path": "mobile/node_modules/anymatch/node_modules/picomatch",
+      "version": "2.3.2",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 27999,
+          "sha256": "f4653b68a1883a32f852083c1b93381ce87f44c6855ce1f01854d39d0563c98c"
+        },
+        {
+          "path": "index.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4563,
+          "sha256": "980225ab847a88a784f6d315557b8434f7742b2551ce20e354455c61b938c0a5"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 34870,
+          "sha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 9956,
+          "sha256": "2cb169cbe17d356036c5f62a377318b85e30817877e59797842aec9d8b15f54b"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9189,
+          "sha256": "227fcc994a477ea95c5a0435d32783566334c6bd0dcc4a103029735ad8c9c535"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1885,
+          "sha256": "809fc29cf35ab0aa76b99cad29182f62c0ae598902481d10f9868eaef71981ee"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1912,
+          "sha256": "63264d817e856a4bff57d4304f2b38d2964a4f6df520eb169e7bcdb619f13e9a"
+        }
+      ]
+    },
+    {
+      "id": "mobile-jest-util",
+      "path": "mobile/node_modules/jest-util/node_modules/picomatch",
+      "version": "2.3.2",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 27999,
+          "sha256": "f4653b68a1883a32f852083c1b93381ce87f44c6855ce1f01854d39d0563c98c"
+        },
+        {
+          "path": "index.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4563,
+          "sha256": "980225ab847a88a784f6d315557b8434f7742b2551ce20e354455c61b938c0a5"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 34870,
+          "sha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 9956,
+          "sha256": "2cb169cbe17d356036c5f62a377318b85e30817877e59797842aec9d8b15f54b"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9189,
+          "sha256": "227fcc994a477ea95c5a0435d32783566334c6bd0dcc4a103029735ad8c9c535"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1885,
+          "sha256": "809fc29cf35ab0aa76b99cad29182f62c0ae598902481d10f9868eaef71981ee"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1912,
+          "sha256": "63264d817e856a4bff57d4304f2b38d2964a4f6df520eb169e7bcdb619f13e9a"
+        }
+      ]
+    },
+    {
+      "id": "mobile-micromatch",
+      "path": "mobile/node_modules/micromatch/node_modules/picomatch",
+      "version": "2.3.2",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 27999,
+          "sha256": "f4653b68a1883a32f852083c1b93381ce87f44c6855ce1f01854d39d0563c98c"
+        },
+        {
+          "path": "index.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4563,
+          "sha256": "980225ab847a88a784f6d315557b8434f7742b2551ce20e354455c61b938c0a5"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 34870,
+          "sha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 9956,
+          "sha256": "2cb169cbe17d356036c5f62a377318b85e30817877e59797842aec9d8b15f54b"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9189,
+          "sha256": "227fcc994a477ea95c5a0435d32783566334c6bd0dcc4a103029735ad8c9c535"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1885,
+          "sha256": "809fc29cf35ab0aa76b99cad29182f62c0ae598902481d10f9868eaef71981ee"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1912,
+          "sha256": "63264d817e856a4bff57d4304f2b38d2964a4f6df520eb169e7bcdb619f13e9a"
+        }
+      ]
+    },
+    {
+      "id": "mobile-readdirp",
+      "path": "mobile/node_modules/readdirp/node_modules/picomatch",
+      "version": "2.3.2",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 27999,
+          "sha256": "f4653b68a1883a32f852083c1b93381ce87f44c6855ce1f01854d39d0563c98c"
+        },
+        {
+          "path": "index.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4563,
+          "sha256": "980225ab847a88a784f6d315557b8434f7742b2551ce20e354455c61b938c0a5"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 34870,
+          "sha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 9956,
+          "sha256": "2cb169cbe17d356036c5f62a377318b85e30817877e59797842aec9d8b15f54b"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9189,
+          "sha256": "227fcc994a477ea95c5a0435d32783566334c6bd0dcc4a103029735ad8c9c535"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1885,
+          "sha256": "809fc29cf35ab0aa76b99cad29182f62c0ae598902481d10f9868eaef71981ee"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1912,
+          "sha256": "63264d817e856a4bff57d4304f2b38d2964a4f6df520eb169e7bcdb619f13e9a"
+        }
+      ]
+    },
+    {
+      "id": "mobile-root",
+      "path": "mobile/node_modules/picomatch",
+      "version": "4.0.7",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 28319,
+          "sha256": "a69b87120fe2b9cb8f9057eaef6b9f9887f803e02185ca2f431e8162f6312220"
+        },
+        {
+          "path": "index.js",
+          "bytes": 479,
+          "sha256": "02ae26406508e28f9ba0865be16cf77f0b33de6c4d4d49c212c4176df1d5625a"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4552,
+          "sha256": "c28f952d2758261fe5428a121add485cc25b03e0193633f649de903dc0e5e222"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 36064,
+          "sha256": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 10722,
+          "sha256": "fdd249d7ffff853f3bb1c77eafc8baa1a437bea85a94c35877b83c6a40d9ca94"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9483,
+          "sha256": "6457a1764e5c2e543cc3a0c00ce12ebb3764097628868198370b64d4e642aaae"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1994,
+          "sha256": "f04604f70cd1a3f6ace80b84766468674ff38b4bb83818d2ef1d81fc6355f935"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1915,
+          "sha256": "479b70b87aa7b44344d62c8a459ae7e53dd2bca6c61f1396bd55e63e9de73fc6"
+        },
+        {
+          "path": "posix.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        }
+      ]
+    },
+    {
+      "id": "backend-fast-glob",
+      "path": "backend/node_modules/fast-glob/node_modules/picomatch",
+      "version": "4.0.7",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 28319,
+          "sha256": "a69b87120fe2b9cb8f9057eaef6b9f9887f803e02185ca2f431e8162f6312220"
+        },
+        {
+          "path": "index.js",
+          "bytes": 479,
+          "sha256": "02ae26406508e28f9ba0865be16cf77f0b33de6c4d4d49c212c4176df1d5625a"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4552,
+          "sha256": "c28f952d2758261fe5428a121add485cc25b03e0193633f649de903dc0e5e222"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 36064,
+          "sha256": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 10722,
+          "sha256": "fdd249d7ffff853f3bb1c77eafc8baa1a437bea85a94c35877b83c6a40d9ca94"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9483,
+          "sha256": "6457a1764e5c2e543cc3a0c00ce12ebb3764097628868198370b64d4e642aaae"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1994,
+          "sha256": "f04604f70cd1a3f6ace80b84766468674ff38b4bb83818d2ef1d81fc6355f935"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1915,
+          "sha256": "479b70b87aa7b44344d62c8a459ae7e53dd2bca6c61f1396bd55e63e9de73fc6"
+        },
+        {
+          "path": "posix.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        }
+      ]
+    },
+    {
+      "id": "backend-tinyglobby",
+      "path": "backend/node_modules/tinyglobby/node_modules/picomatch",
+      "version": "4.0.4",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 28332,
+          "sha256": "abaa6b58484e1f252b8d40b949b53602f5f2d7e6990f20d85fe6174ca5cb802f"
+        },
+        {
+          "path": "index.js",
+          "bytes": 479,
+          "sha256": "02ae26406508e28f9ba0865be16cf77f0b33de6c4d4d49c212c4176df1d5625a"
+        },
+        {
+          "path": "lib/constants.js",
+          "bytes": 4552,
+          "sha256": "c28f952d2758261fe5428a121add485cc25b03e0193633f649de903dc0e5e222"
+        },
+        {
+          "path": "lib/parse.js",
+          "bytes": 34651,
+          "sha256": "93c544c3468841f51d030be4acf7bc8cc494d7a2b160b0eabffc32f5e5598bc0"
+        },
+        {
+          "path": "lib/picomatch.js",
+          "bytes": 10091,
+          "sha256": "bbe9824eae8210954eac016e1fa1ac6174093557f30a72e91621d74a6c25e170"
+        },
+        {
+          "path": "lib/scan.js",
+          "bytes": 9189,
+          "sha256": "227fcc994a477ea95c5a0435d32783566334c6bd0dcc4a103029735ad8c9c535"
+        },
+        {
+          "path": "lib/utils.js",
+          "bytes": 1994,
+          "sha256": "f04604f70cd1a3f6ace80b84766468674ff38b4bb83818d2ef1d81fc6355f935"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1896,
+          "sha256": "b8deb10b4e1f7cc2fe8236a70995f4c6b5ec3ecf93f02f2b6427a8600d2c1d20"
+        },
+        {
+          "path": "posix.js",
+          "bytes": 60,
+          "sha256": "5695ff5dfcd5a338a40630bd506056f2950bcb08fe1cc068519cbbfe60add480"
+        }
+      ]
+    },
+    {
+      "id": "backend-next-vendor",
+      "path": "backend/node_modules/next/dist/compiled/picomatch",
+      "version": null,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        },
+        {
+          "path": "index.js",
+          "bytes": 23909,
+          "sha256": "607dc79784c1161c33076903769dba23e63d9d9ccfe3c4695a32ebe3a5ab892d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 116,
+          "sha256": "bcb6e75087cfe22755400218f098b6b36805627e5f54171abf58454f6484ac47"
+        }
+      ]
+    }
+  ],
+  "mobile": {
+    "ios": {
+      "bundle": "mobile-output/_expo/static/js/ios/entry-ebbfd2dbbd68192844ac6999a6bf9c93.js",
+      "bundleSha256": "65803ce9b88fd383198360a48d14f6732275e23e64a0228d16336e089ffb6fa9",
+      "mapSha256": "444777c4b2202aee7b24ea0108c8002ae81c57db3e5d29f14fba175247ebed2e",
+      "sourceCount": 2659,
+      "moduleDefinitions": 2651,
+      "unmappedModuleDefinitions": 0,
+      "missingSourceContents": 0,
+      "targetOwnershipMatches": [
+        {
+          "id": "mobile-anymatch",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-jest-util",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-micromatch",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-readdirp",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-root",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-fast-glob",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-tinyglobby",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-next-vendor",
+          "sourcePaths": []
+        }
+      ],
+      "targetSourceHashMatches": [],
+      "platformSpecificSources": [
+        "/node_modules/react-native/Libraries/Utilities/Platform.ios.js",
+        "/node_modules/react-native/Libraries/StyleSheet/PlatformColorValueTypes.ios.js",
+        "/node_modules/react-native/Libraries/NativeComponent/BaseViewConfig.ios.js",
+        "/node_modules/react-native/Libraries/Components/AccessibilityInfo/legacySendAccessibilityEvent.ios.js",
+        "/node_modules/react-native/Libraries/Network/RCTNetworking.ios.js",
+        "/node_modules/react-native/Libraries/Alert/RCTAlertManager.ios.js",
+        "/node_modules/react-native/Libraries/Image/Image.ios.js",
+        "/node_modules/react-native/Libraries/Components/DrawerAndroid/DrawerLayoutAndroid.ios.js",
+        "/node_modules/react-native/Libraries/Utilities/BackHandler.ios.js",
+        "/node_modules/react-native/Libraries/StyleSheet/PlatformColorValueTypesIOS.ios.js",
+        "/node_modules/react-native/Libraries/Settings/Settings.ios.js",
+        "/node_modules/react-native/Libraries/Components/ToastAndroid/ToastAndroid.ios.js",
+        "/node_modules/react-native-reanimated/src/css/native/managers/validatePseudoStyles.ios.ts",
+        "/node_modules/expo-glass-effect/build/GlassView.ios.js",
+        "/node_modules/expo-glass-effect/build/GlassContainer.ios.js",
+        "/node_modules/expo-glass-effect/build/isLiquidGlassAvailable.ios.js",
+        "/node_modules/expo-glass-effect/build/isGlassEffectAPIAvailable.ios.js",
+        "/node_modules/react-native-screens/src/components/tabs/host/TabsHost.ios.tsx",
+        "/node_modules/react-native-screens/src/components/tabs/screen/TabsScreen.ios.tsx",
+        "/node_modules/expo-router/build/react-navigation/elements/MaskedView.ios.js",
+        "/node_modules/expo-router/build/native-tabs/utils/optionsIconConverter.ios.js",
+        "/node_modules/expo-router/build/link/zoom/ZoomTransitionEnabler.ios.js",
+        "/node_modules/expo-router/build/link/zoom/zoom-transition-context-providers.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarButton/native.ios.js",
+        "/node_modules/expo-router/build/toolbar/native.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarMenu/native.ios.js",
+        "/node_modules/expo-router/build/link/zoom/useZoomHref.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarSearchBarSlot/native.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarSpacer/native.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarView/native.ios.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/processHeaderItemsForPlatform.ios.js",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/StackHeaderConfig.ios.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/ios/StackHeaderItemSpacer.ios.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/ios/StackHeaderItem.ios.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/ios/iconUtils.ios.ts",
+        "/node_modules/react-native-screens/src/components/gamma/scroll-to-top-guard/ScrollToTopGuard.ios.tsx",
+        "/node_modules/expo-router/build/link/zoom/usePreventZoomTransitionDismissal.ios.js",
+        "/node_modules/expo-router/build/head/ExpoHead.ios.js"
+      ],
+      "nativeInteropSources": [
+        "/node_modules/react-native-css-interop/dist/runtime/native/api.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/shared.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/appearance-observables.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/native-interop.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/conditions.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/unit-observables.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/globals.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/render-component.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/styles.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolve-value.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/text-shadow.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/shorthand.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/unwrap-components.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/stylesheet.js"
+      ],
+      "moduleInventorySha256": "5cdf15326543822a3a2d842022d9a75b23d66f6e3bf178641abc849d6572c444",
+      "assetReferences": 61,
+      "outputManifestSha256": "3d482026d839dbf54f185312b101367e08e5e55fadb04299dc10b4f4ca4897fc"
+    },
+    "android": {
+      "bundle": "mobile-output/_expo/static/js/android/entry-41102a5a286d3b84de4066c5845d98f5.js",
+      "bundleSha256": "593f2c99ef5669ef4b21cc626d2c795bc6d8a48ff5d26739ca45c6192335fe9a",
+      "mapSha256": "aba9c259f1e37d5cf415c20880cc15896f95539f2d901399bae7f509ab109f53",
+      "sourceCount": 2749,
+      "moduleDefinitions": 2741,
+      "unmappedModuleDefinitions": 0,
+      "missingSourceContents": 0,
+      "targetOwnershipMatches": [
+        {
+          "id": "mobile-anymatch",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-jest-util",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-micromatch",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-readdirp",
+          "sourcePaths": []
+        },
+        {
+          "id": "mobile-root",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-fast-glob",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-tinyglobby",
+          "sourcePaths": []
+        },
+        {
+          "id": "backend-next-vendor",
+          "sourcePaths": []
+        }
+      ],
+      "targetSourceHashMatches": [],
+      "platformSpecificSources": [
+        "/node_modules/react-native/Libraries/Utilities/Platform.android.js",
+        "/node_modules/react-native/Libraries/StyleSheet/PlatformColorValueTypes.android.js",
+        "/node_modules/react-native/Libraries/NativeComponent/BaseViewConfig.android.js",
+        "/node_modules/react-native/Libraries/Components/AccessibilityInfo/legacySendAccessibilityEvent.android.js",
+        "/node_modules/react-native/Libraries/Network/RCTNetworking.android.js",
+        "/node_modules/react-native/Libraries/Alert/RCTAlertManager.android.js",
+        "/node_modules/react-native/Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.android.js",
+        "/node_modules/react-native/Libraries/Image/Image.android.js",
+        "/node_modules/react-native/Libraries/Components/DrawerAndroid/DrawerLayoutAndroid.android.js",
+        "/node_modules/react-native/Libraries/Utilities/BackHandler.android.js",
+        "/node_modules/react-native/Libraries/Components/ToastAndroid/ToastAndroid.android.js",
+        "/node_modules/react-native-is-edge-to-edge/dist/index.android.mjs",
+        "/node_modules/react-native-screens/src/components/tabs/host/TabsHost.android.tsx",
+        "/node_modules/react-native-screens/src/components/tabs/screen/TabsScreen.android.tsx",
+        "/node_modules/expo-router/build/react-navigation/elements/MaskedView.android.js",
+        "/node_modules/expo-router/build/native-tabs/utils/optionsIconConverter.android.js",
+        "/node_modules/expo-router/build/native-tabs/utils/materialIconConverter.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarButton/native.android.js",
+        "/node_modules/expo-router/build/toolbar/AnimatedItemContainer.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/ToolbarItemBadge.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/defaults.android.js",
+        "/node_modules/expo-router/build/color/materialColor.android.js",
+        "/node_modules/expo-router/build/toolbar/native.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarMenu/native.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarSearchBarSlot/native.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarSpacer/native.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/StackToolbarView/native.android.js",
+        "/node_modules/expo-router/build/layouts/stack-utils/toolbar/processHeaderItemsForPlatform.android.js",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/StackHeaderConfig.android.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/stack/header/android/StackHeaderSubview.android.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/split/SplitHost.android.tsx",
+        "/node_modules/react-native-screens/src/components/gamma/split/SplitScreen.android.tsx",
+        "/node_modules/expo-notifications/build/TopicSubscriptionModule.android.js",
+        "/node_modules/expo-notifications/build/getNotificationChannelsAsync.android.js",
+        "/node_modules/expo-notifications/build/getNotificationChannelAsync.android.js",
+        "/node_modules/expo-notifications/build/setNotificationChannelAsync.android.js",
+        "/node_modules/expo-notifications/build/deleteNotificationChannelAsync.android.js",
+        "/node_modules/expo-notifications/build/getNotificationChannelGroupsAsync.android.js",
+        "/node_modules/expo-notifications/build/getNotificationChannelGroupAsync.android.js",
+        "/node_modules/expo-notifications/build/setNotificationChannelGroupAsync.android.js",
+        "/node_modules/expo-notifications/build/deleteNotificationChannelGroupAsync.android.js",
+        "/node_modules/expo-router/build/head/ExpoHead.android.js"
+      ],
+      "nativeInteropSources": [
+        "/node_modules/react-native-css-interop/dist/runtime/native/api.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/shared.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/appearance-observables.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/native-interop.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/conditions.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/unit-observables.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/globals.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/render-component.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/styles.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolve-value.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/text-shadow.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/resolvers/shorthand.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/unwrap-components.js",
+        "/node_modules/react-native-css-interop/dist/runtime/native/stylesheet.js"
+      ],
+      "moduleInventorySha256": "7249a724d5b803557c24794aadc9e3fb5e1ed5a936bc104f0c041fad358a6626",
+      "assetReferences": 65,
+      "outputManifestSha256": "43058d9fa59ec6bbca252d331c995954c6ee4ab7d992377076c51c61ba674fb7"
+    }
+  },
+  "backend": {
+    "buildId": "4rMvm_GO_3GD1QpDCCm6E",
+    "compiler": "webpack; default Turbopack blocked by network sandbox local port bind",
+    "traceFiles": 36,
+    "tracedFiles": 777,
+    "missingTraceFiles": [],
+    "copies": [
+      {
+        "id": "mobile-anymatch",
+        "files": []
+      },
+      {
+        "id": "mobile-jest-util",
+        "files": []
+      },
+      {
+        "id": "mobile-micromatch",
+        "files": []
+      },
+      {
+        "id": "mobile-readdirp",
+        "files": []
+      },
+      {
+        "id": "mobile-root",
+        "files": []
+      },
+      {
+        "id": "backend-fast-glob",
+        "files": []
+      },
+      {
+        "id": "backend-tinyglobby",
+        "files": []
+      },
+      {
+        "id": "backend-next-vendor",
+        "files": [
+          {
+            "path": "node_modules/next/dist/compiled/picomatch/index.js",
+            "owners": [
+              "next-server.js.nft.json"
+            ],
+            "exists": true,
+            "sha256": "607dc79784c1161c33076903769dba23e63d9d9ccfe3c4695a32ebe3a5ab892d"
+          },
+          {
+            "path": "node_modules/next/dist/compiled/picomatch/package.json",
+            "owners": [
+              "next-server.js.nft.json"
+            ],
+            "exists": true,
+            "sha256": "bcb6e75087cfe22755400218f098b6b36805627e5f54171abf58454f6484ac47"
+          }
+        ]
+      }
+    ],
+    "imagesConfig": {
+      "deviceSizes": [
+        640,
+        750,
+        828,
+        1080,
+        1200,
+        1920,
+        2048,
+        3840
+      ],
+      "imageSizes": [
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        384
+      ],
+      "path": "/_next/image",
+      "loader": "default",
+      "loaderFile": "",
+      "domains": [],
+      "disableStaticImages": false,
+      "minimumCacheTTL": 14400,
+      "formats": [
+        "image/webp"
+      ],
+      "maximumRedirects": 3,
+      "maximumResponseBody": 50000000,
+      "dangerouslyAllowLocalIP": false,
+      "dangerouslyAllowSVG": false,
+      "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+      "contentDispositionType": "attachment",
+      "localPatterns": [
+        {
+          "pathname": "**",
+          "search": ""
+        }
+      ],
+      "remotePatterns": [
+        {
+          "protocol": "https",
+          "hostname": "images.pexels.com"
+        }
+      ],
+      "qualities": [
+        75
+      ],
+      "unoptimized": false,
+      "customCacheHandler": false
+    },
+    "imageManifest": {
+      "version": 1,
+      "images": {
+        "deviceSizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840
+        ],
+        "imageSizes": [
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ],
+        "path": "/_next/image",
+        "loader": "default",
+        "loaderFile": "",
+        "domains": [],
+        "disableStaticImages": false,
+        "minimumCacheTTL": 14400,
+        "formats": [
+          "image/webp"
+        ],
+        "maximumRedirects": 3,
+        "maximumResponseBody": 50000000,
+        "dangerouslyAllowLocalIP": false,
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "attachment",
+        "localPatterns": [
+          {
+            "pathname": "^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$",
+            "search": ""
+          }
+        ],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "^(?:^(?:images\\.pexels\\.com)$)$",
+            "pathname": "^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$"
+          }
+        ],
+        "qualities": [
+          75
+        ],
+        "unoptimized": false,
+        "customCacheHandler": false,
+        "sizes": [
+          640,
+          750,
+          828,
+          1080,
+          1200,
+          1920,
+          2048,
+          3840,
+          32,
+          48,
+          64,
+          96,
+          128,
+          256,
+          384
+        ]
+      }
+    },
+    "imageRuntimeTrace": [
+      {
+        "path": "node_modules/next/dist/server/image-optimizer.js",
+        "owners": [
+          "next-server.js.nft.json"
+        ],
+        "exists": true,
+        "sha256": "b599e7d1483e6df7d941ca23c45a00c2b3db3903869180e1384ab4558af644ba"
+      },
+      {
+        "path": "node_modules/next/dist/shared/lib/match-local-pattern.js",
+        "owners": [
+          "next-server.js.nft.json"
+        ],
+        "exists": true,
+        "sha256": "cc23677cf4fc74d286018f8d5f045e51e443942f3856c3f050d5ba911e3333f4"
+      },
+      {
+        "path": "node_modules/next/dist/shared/lib/match-remote-pattern.js",
+        "owners": [
+          "next-server.js.nft.json"
+        ],
+        "exists": true,
+        "sha256": "badb6bbe2005556fcb6ed70e39b2327475bf6da0e7ac5ccf32e9983e5ee18c20"
+      }
+    ]
+  },
+  "manifests": {
+    "mobile": "7e11597c40e77ec7d79a2ae08a804385c30ad91c5ab722adf9c2123ed09b0394",
+    "backend": "4065af48f65d185915645cc5528dae969636a084011650b882e8b1fdca91765e",
+    "backendTraced": "b40f812b49eeb6967c1d72f3baf7d1e854607321af62fc833e1bbe7afa515ffb"
+  }
+}

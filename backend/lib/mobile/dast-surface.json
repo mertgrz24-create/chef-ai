@@ -1,0 +1,214 @@
+{
+  "scope": "Existing isolated staging API only; this is a source inventory, not an OpenAPI scan specification or scan result.",
+  "stagingProject": "chef-ai-staging",
+  "previewUrl": "https://chef-ai-staging-ediir63l3-mertgrz24s-projects.vercel.app",
+  "routes": [
+    {
+      "path": "/api/account",
+      "methods": [
+        "DELETE"
+      ],
+      "source": "app/api/account/route.ts"
+    },
+    {
+      "path": "/api/billing/status",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/billing/status/route.ts"
+    },
+    {
+      "path": "/api/billing/webhook",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/billing/webhook/route.ts"
+    },
+    {
+      "path": "/api/content-reports",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/content-reports/route.ts"
+    },
+    {
+      "path": "/api/health-export",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/health-export/route.ts"
+    },
+    {
+      "path": "/api/meal-image",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/meal-image/route.ts"
+    },
+    {
+      "path": "/api/meal-plan/generate",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/meal-plan/generate/route.ts"
+    },
+    {
+      "path": "/api/meal-plan/regenerate-day",
+      "methods": [
+        "PATCH"
+      ],
+      "source": "app/api/meal-plan/regenerate-day/route.ts"
+    },
+    {
+      "path": "/api/meal-plan",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/meal-plan/route.ts"
+    },
+    {
+      "path": "/api/meals-eaten",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "source": "app/api/meals-eaten/route.ts"
+    },
+    {
+      "path": "/api/mobile/analytics",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/mobile/analytics/route.ts"
+    },
+    {
+      "path": "/api/mobile/config",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/mobile/config/route.ts"
+    },
+    {
+      "path": "/api/mobile/maintenance",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/mobile/maintenance/route.ts"
+    },
+    {
+      "path": "/api/pantry/{id}",
+      "methods": [
+        "DELETE"
+      ],
+      "source": "app/api/pantry/[id]/route.ts"
+    },
+    {
+      "path": "/api/pantry",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "source": "app/api/pantry/route.ts"
+    },
+    {
+      "path": "/api/privacy/consents",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/privacy/consents/route.ts"
+    },
+    {
+      "path": "/api/profile",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "source": "app/api/profile/route.ts"
+    },
+    {
+      "path": "/api/push/register",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/push/register/route.ts"
+    },
+    {
+      "path": "/api/push/send-expiry-alerts",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/push/send-expiry-alerts/route.ts"
+    },
+    {
+      "path": "/api/push/unregister",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/push/unregister/route.ts"
+    },
+    {
+      "path": "/api/recipes/{id}",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/recipes/[id]/route.ts"
+    },
+    {
+      "path": "/api/recipes/history",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/recipes/history/route.ts"
+    },
+    {
+      "path": "/api/recipes/modify",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/recipes/modify/route.ts"
+    },
+    {
+      "path": "/api/recipes",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/recipes/route.ts"
+    },
+    {
+      "path": "/api/recipes/save",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/recipes/save/route.ts"
+    },
+    {
+      "path": "/api/referral",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/referral/route.ts"
+    },
+    {
+      "path": "/api/shopping-list",
+      "methods": [
+        "GET"
+      ],
+      "source": "app/api/shopping-list/route.ts"
+    },
+    {
+      "path": "/api/vision",
+      "methods": [
+        "POST"
+      ],
+      "source": "app/api/vision/route.ts"
+    }
+  ],
+  "requirements": [
+    "Authorized Snyk API & Web account; verify Free entitlement, remaining quota and rescan limits; no trial, upgrade or overage",
+    "Dedicated disposable staging users, no production data",
+    "Configured authentication and synthetic pantry/private recipe/plan fixtures",
+    "Preserve Vercel protection; use a secret bypass header, never URL parameters or committed secrets",
+    "AI/payment/push feature flags remain false until their own acceptance",
+    "Coverage/auth/health quality gate before interpreting results"
+  ]
+}

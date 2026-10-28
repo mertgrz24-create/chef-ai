@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-10-16T17:50:08.428Z",
+  "localOrigin": "http://127.0.0.1:3000",
+  "hostedOrigin": "https://chef-ai-staging-nu.vercel.app",
+  "checks": [
+    "Independent local backend configuration and AI readiness",
+    "Existing hosted staging capabilities unchanged",
+    "Synthetic staging account signs in successfully",
+    "Authenticated profile through separated backend",
+    "Local backend writes synthetic pantry record",
+    "Hosted staging reads the same committed record",
+    "Separated backend deletes only its disposable verification account",
+    "Cascade cleanup and hosted rejection of deleted session"
+  ],
+  "passed": 8,
+  "syntheticCleanup": true,
+  "providerGenerationInvoked": false,
+  "nativeBuild": false,
+  "productionBuild": false,
+  "deployment": false
+}

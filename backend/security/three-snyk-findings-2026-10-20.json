@@ -1,0 +1,276 @@
+{
+  "recordedAt": "2026-10-20T09:12:47.089660+00:00",
+  "localDate": "2026-10-20",
+  "timezone": "Europe/Istanbul",
+  "commit": "9edc2dc45c1b1f56f484f22a156fa27e38ffe88a",
+  "sourceState": "dirty working tree including untracked backend and scripts; commit alone does not identify tested source",
+  "node": "v24.14.0",
+  "platform": "Darwin arm64",
+  "beforeProofs": [
+    {
+      "case": "old-summary-arbitrary-local-path",
+      "exit": 0,
+      "observedAttempts": 1
+    },
+    {
+      "case": "old-summary-arbitrary-local-path",
+      "exit": 0,
+      "observedAttempts": 1
+    },
+    {
+      "case": "old-worker-arbitrary-module",
+      "exit": 0,
+      "markerCreated": true
+    }
+  ],
+  "beforeSourceHashes": {
+    "backend/lib/mobile/summarize-provider-usage.cjs": "bf5cc3095e3768cf5c85e219ebd01cb4d34e4c98c387bb1fca799a3a2b64f0be",
+    "scripts/picomatch-independent-verification.cjs": "63cb3c39f9da9ff7212b862e5532adf278c637224f84beb42808be40f8e95786"
+  },
+  "sourceHashes": {
+    "backend/lib/mobile/summarize-provider-usage.cjs": "6ee1170da6e6b619c4e23fa85ea328c080d2d678e672e560387b56278cee6a36",
+    "backend/lib/mobile/security.test.cjs": "a5794356110d448e3173187b202d1f75e303b34e842be08df948513ccc2a2e2a",
+    "scripts/picomatch-independent-verification.cjs": "3bbdf143606c061b739dff58238a3c02d15098de38af947e43b7cae3d6b4d85e",
+    "scripts/picomatch-verification-worker.cjs": "9fccb68b6b108b370f233a62fb5d7821fd708a13ce6994fa01ba4d224729102d",
+    "scripts/picomatch-verification.test.cjs": "ae8cea7aa43f5bc96d038d191d3f69bf4484b48a24176de976ea769abd794094",
+    "mobile/package.json": "1fea30e7a30287a8e5c620581da9b1c7a48af92a1c8818d4a9bf1c54c9cb76d4",
+    "mobile/package-lock.json": "08e9c2890ebe15d058f7ca066f84988e8196994cee1c5d7536dbe5eaf083c2c7",
+    "backend/package.json": "7a6c8b7a528b26e051bd8b3a80c546fcf0edcf39ee48fa90824178f9a99fca0a",
+    "backend/package-lock.json": "95b1b6303891d71b6022acf723006ac49863c051e53e37c46c213d1036550b1a",
+    "mobile/security/patches.json": "12e8f1ca98895b2fb7c791ccebbe89c08c712a3706189cbdba609e748c23fdaf",
+    "backend/lib/mobile/dependency-patches.json": "48df43b6f2b9232b5b3603b26d71d4346b1829a00bf47911672cb04b16193698"
+  },
+  "sourceUnchangedDuringFinalCodeScan": true,
+  "preservedPackageLockPatchHashes": {
+    "mobile/package.json": "1fea30e7a30287a8e5c620581da9b1c7a48af92a1c8818d4a9bf1c54c9cb76d4",
+    "mobile/package-lock.json": "08e9c2890ebe15d058f7ca066f84988e8196994cee1c5d7536dbe5eaf083c2c7",
+    "backend/package.json": "7a6c8b7a528b26e051bd8b3a80c546fcf0edcf39ee48fa90824178f9a99fca0a",
+    "backend/package-lock.json": "95b1b6303891d71b6022acf723006ac49863c051e53e37c46c213d1036550b1a",
+    "mobile/security/patches.json": "12e8f1ca98895b2fb7c791ccebbe89c08c712a3706189cbdba609e748c23fdaf",
+    "backend/lib/mobile/dependency-patches.json": "48df43b6f2b9232b5b3603b26d71d4346b1829a00bf47911672cb04b16193698",
+    "mobile/node_modules/@expo/code-signing-certificates/build/main.js": "354ff8d46f052d12dbc631bb4d907efced2d41f2a1b9864f42b45f1b00a4b524",
+    "mobile/node_modules/@expo/code-signing-certificates/build/main.d.ts": "12cc831af04ca6c29a3ecf6e150b5035a00bc12e8256a107d49f39c75cd7bba8",
+    "mobile/node_modules/node-forge/package.json": "faa9764b05fdf0896b0ee7ffe5120502b5e710d64cbe4523b01ca4c672d135d2",
+    "mobile/node_modules/node-forge/index.cjs": "f1257b3c1f3a59e89ebd68a259f3f5b7b99edaae2e631d4c9ed8d85d09bb2730",
+    "mobile/node_modules/node-forge/code-signing.cjs": "ca839c2afc5dd3534206624f906cd06bb506affc681f5ab636f34a2e1b05d282",
+    "mobile/node_modules/node-forge/code-signing.d.ts": "b467cef1854682e2f324de1850eaa340fdaa48b8e0b0dd7fded612e20dd75da9",
+    "mobile/node_modules/anymatch/node_modules/picomatch/lib/parse.js": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+    "mobile/node_modules/jest-util/node_modules/picomatch/lib/parse.js": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+    "mobile/node_modules/micromatch/node_modules/picomatch/lib/parse.js": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+    "mobile/node_modules/picomatch/lib/parse.js": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+    "mobile/node_modules/readdirp/node_modules/picomatch/lib/parse.js": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+    "backend/node_modules/@next/eslint-plugin-next/dist/utils/get-root-dirs.js": "f4e3556e42a073f2750a13325d81ba56e4ee8b271ef1e5d14b350abb3a6ec270",
+    "backend/node_modules/fast-glob/node_modules/picomatch/lib/parse.js": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+    "backend/node_modules/tinyglobby/node_modules/picomatch/lib/parse.js": "93c544c3468841f51d030be4acf7bc8cc494d7a2b160b0eabffc32f5e5598bc0"
+  },
+  "findings": [
+    {
+      "finding": "A",
+      "id": "SNYK-JS-PICOMATCH-21248802",
+      "status": "UNRESOLVED",
+      "mitigation": "partial; unchanged",
+      "snyk": "OPEN: mobile 28 / backend 2 paths"
+    },
+    {
+      "finding": "B",
+      "id": null,
+      "status": "FIXED",
+      "scope": "local CLI argv-to-file-read removed; stdin data retained",
+      "snyk": "ROOT CODE SCAN: 0 findings; historical individual issue ID unavailable"
+    },
+    {
+      "finding": "C",
+      "id": null,
+      "status": "FIXED",
+      "scope": "arbitrary worker module paths removed; fixed loaders and bounded parent launch",
+      "snyk": "ROOT CODE SCAN: 0 findings; historical individual issue ID unavailable"
+    }
+  ],
+  "checks": [
+    {
+      "check": "mobile-tests",
+      "exit": 0
+    },
+    {
+      "check": "mobile-dependency",
+      "exit": 0
+    },
+    {
+      "check": "mobile-lint",
+      "exit": 0
+    },
+    {
+      "check": "mobile-typescript",
+      "exit": 0
+    },
+    {
+      "check": "backend-tests",
+      "exit": 0
+    },
+    {
+      "check": "backend-lint",
+      "exit": 0
+    },
+    {
+      "check": "backend-typescript",
+      "exit": 0
+    },
+    {
+      "check": "worker-tests",
+      "command": [
+        "node",
+        "--test",
+        "--test-timeout=10000",
+        "scripts/picomatch-verification.test.cjs"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "root-scripts-lint",
+      "command": [
+        "backend/node_modules/.bin/eslint",
+        "--no-config-lookup",
+        "--rule",
+        "no-unused-vars: error",
+        "scripts/picomatch-independent-verification.cjs",
+        "scripts/picomatch-verification-worker.cjs",
+        "scripts/picomatch-verification.test.cjs"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "picomatch-after",
+      "command": [
+        "node",
+        "scripts/picomatch-independent-verification.cjs"
+      ],
+      "exit": 2
+    },
+    {
+      "check": "snyk-mobile",
+      "exit": 1,
+      "paths": 28,
+      "ids": [
+        "SNYK-JS-PICOMATCH-21248802"
+      ],
+      "error": null
+    },
+    {
+      "check": "snyk-backend",
+      "exit": 1,
+      "paths": 2,
+      "ids": [
+        "SNYK-JS-PICOMATCH-21248802"
+      ],
+      "error": null
+    },
+    {
+      "check": "audit-mobile",
+      "exit": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    },
+    {
+      "check": "audit-backend",
+      "exit": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "error": null
+    },
+    {
+      "check": "snyk-code-final",
+      "exit": 0,
+      "findings": 0,
+      "coverage": [
+        [
+          {
+            "files": 33,
+            "isSupported": true,
+            "lang": ".cjs",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 2,
+            "isSupported": true,
+            "lang": ".html",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 7,
+            "isSupported": true,
+            "lang": ".js",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 3,
+            "isSupported": true,
+            "lang": ".mjs",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 3,
+            "isSupported": true,
+            "lang": ".py",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 97,
+            "isSupported": true,
+            "lang": ".ts",
+            "type": "SUPPORTED"
+          },
+          {
+            "files": 52,
+            "isSupported": true,
+            "lang": ".tsx",
+            "type": "SUPPORTED"
+          }
+        ]
+      ]
+    }
+  ],
+  "counts": {
+    "mobileTests": 150,
+    "mobileSuites": 20,
+    "dependencyTests": 19,
+    "backendTests": 66,
+    "workerTests": 9,
+    "oracleAssertions": 432,
+    "redosProbes": 24,
+    "redosTimeouts": 17
+  },
+  "hawkScan": {
+    "status": "BLOCKED",
+    "cli": "6.6.0",
+    "reason": "No HAWK_API_KEY, ~/.hawk/hawk.properties or project scan config; no account/paid service setup",
+    "skillsStatus": "cached status current; latest remote status unavailable"
+  },
+  "notRun": [
+    "build",
+    "bundle",
+    "deploy",
+    "remote migration",
+    "native artifact verification",
+    "real AI calls",
+    "production/staging requests"
+  ],
+  "limits": [
+    "Installed dependency contents remain trusted; fixed-target checks are not a general sandbox against a malicious local installer.",
+    "128 MiB V8 heap limit is not an OS-level total memory sandbox.",
+    "Snyk Code coverage is reported by extension; no per-file manifest in its SARIF output. Target files are not gitignored.",
+    "No universal matcher security or deployed artifact security claim."
+  ]
+}

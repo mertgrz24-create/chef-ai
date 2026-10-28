@@ -1,0 +1,6 @@
+(version 1)
+(allow default)
+(deny network*)
+(deny file-read* (subpath "/Users/mertgurbuz"))
+(deny file-write*)
+(allow file-write* (subpath "/private/tmp/chef-picomatch-artifacts-cv7t643f") (literal "/dev/null") (literal "/dev/tty"))

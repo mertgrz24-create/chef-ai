@@ -1,0 +1,382 @@
+{
+  "recordedAt": "2026-10-19T21:44:01.646Z",
+  "node": "v24.14.0",
+  "method": "Separate closed-form semantic oracle and bounded adjacent-group probes; not an external human audit",
+  "budgetMs": 1000,
+  "verdict": "INCOMPLETE_MITIGATION_RELEASE_BLOCK",
+  "results": [
+    {
+      "area": "mobile",
+      "relative": "node_modules/anymatch/node_modules/picomatch",
+      "version": "2.3.2",
+      "patched": true,
+      "parserSha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.8678329999999992
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "mobile",
+      "relative": "node_modules/jest-util/node_modules/picomatch",
+      "version": "2.3.2",
+      "patched": true,
+      "parserSha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.9182500000000005
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "mobile",
+      "relative": "node_modules/micromatch/node_modules/picomatch",
+      "version": "2.3.2",
+      "patched": true,
+      "parserSha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.8768329999999995
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "mobile",
+      "relative": "node_modules/picomatch",
+      "version": "4.0.7",
+      "patched": true,
+      "parserSha256": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.89175
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "mobile",
+      "relative": "node_modules/readdirp/node_modules/picomatch",
+      "version": "2.3.2",
+      "patched": true,
+      "parserSha256": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.8631669999999989
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "backend",
+      "relative": "node_modules/fast-glob/node_modules/picomatch",
+      "version": "4.0.7",
+      "patched": true,
+      "parserSha256": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.9287500000000009
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "backend",
+      "relative": "node_modules/tinyglobby/node_modules/picomatch",
+      "version": "4.0.4",
+      "patched": true,
+      "parserSha256": "93c544c3468841f51d030be4acf7bc8cc494d7a2b160b0eabffc32f5e5598bc0",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "COMPLETED",
+          "status": 0,
+          "signal": null,
+          "matchingStarted": true,
+          "result": {
+            "result": false,
+            "elapsedMs": 0.8865840000000009
+          }
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    },
+    {
+      "area": "backend",
+      "relative": "node_modules/next/dist/compiled/picomatch",
+      "version": "vendored version not declared",
+      "patched": false,
+      "parserSha256": "607dc79784c1161c33076903769dba23e63d9d9ccfe3c4695a32ebe3a5ab892d",
+      "oracle": {
+        "passed": true,
+        "assertions": 54
+      },
+      "probes": [
+        {
+          "name": "previous-single-repeated-wildcard",
+          "pattern": "+(*a)",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-plus-runs",
+          "pattern": "+(a)+(a)+(a)+(a)+(a)+(a)+(a)+(a)b",
+          "inputLength": 97,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        },
+        {
+          "name": "adjacent-star-runs",
+          "pattern": "*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)*(ab)c",
+          "inputLength": 129,
+          "outcome": "TIMEOUT",
+          "status": null,
+          "signal": "SIGTERM",
+          "error": "ETIMEDOUT",
+          "matchingStarted": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "lockfileCopies": 7,
+    "extraVendoredCopies": 1,
+    "passingOracleAssertions": 432,
+    "totalProbes": 24,
+    "timeouts": 17
+  },
+  "limits": "Synthetic local Node tests. No deployed service, production/native artifact, remote exploitable HTTP path, universal matcher complexity or external review certification established."
+}

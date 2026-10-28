@@ -1,0 +1,14 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),{performance}=require('node:perf_hooks');
+const base=__dirname,config=JSON.parse(fs.readFileSync(base+'/source/backend/.next/required-server-files.json','utf8')).config;
+const {ImageOptimizerCache}=require('./source/backend/node_modules/next/dist/server/image-optimizer');
+const pm=require('./source/backend/node_modules/next/dist/compiled/picomatch');
+const group=process.argv[2];if(!['allowed','denied','boundary','local'].includes(group))throw Error('Unknown fixed scenario');
+const origin='https://images.pexels.com';const payloads=['photo.jpg','a'.repeat(3000),'a/'.repeat(1400)+'b','+(a)'.repeat(600)+'b','*(ab)'.repeat(500)+'c','%2F'.repeat(950)+'x','%2E'.repeat(950)+'x','.'.repeat(2900)+'x','a'.repeat(2890)+'.jpg','(a|aa)+'.repeat(400)+'!','🚀'.repeat(400),'a?x='+('*?[]()!+'.repeat(350))];
+let cases=[];
+if(group==='allowed')cases=payloads.map(p=>({url:origin+'/'+p,allowed:true}));
+if(group==='denied')cases=payloads.map(p=>({url:'https://images.pexels.com.invalid/'+p,allowed:false})).concat([{url:'http://images.pexels.com/a',allowed:false},{url:'https://'+('a'.repeat(1500))+'.images.pexels.com/a',allowed:false}]);
+if(group==='boundary')cases=[3071,3072,3073,4096].map(n=>({url:origin+'/'+ 'a'.repeat(n-origin.length-1),allowed:n<=3072}));
+if(group==='local')cases=[{url:'/photo.jpg',allowed:true},{url:'/'+ 'a/'.repeat(1400)+'b',allowed:true},{url:'/'+ '+(a)'.repeat(600)+'b',allowed:true},{url:'/photo.jpg?x=1',allowed:false},{url:'//images.pexels.com/x',allowed:false},{url:'/_next/image?url=a',allowed:false}];
+const results=[];let maxMs=0;
+for(const c of cases){const start=performance.now();let result;for(let i=0;i<100;i++){result=ImageOptimizerCache.validateParams({headers:{accept:'image/webp'}},{url:c.url,w:'640',q:'75'},config,false);assert.equal(!result.errorMessage,c.allowed,group+' length '+c.url.length+': '+result.errorMessage)}const ms=performance.now()-start;maxMs=Math.max(maxMs,ms);results.push({length:c.url.length,allowed:c.allowed,iterations:100,elapsedMs:ms,error:result.errorMessage??null})}
+console.log(JSON.stringify({group,results,totalValidations:cases.length*100,maxBatchMs:maxMs,configImages:config.images,regexes:config.images.remotePatterns.map(p=>({hostname:String(pm.makeRe(p.hostname)),pathname:String(pm.makeRe(p.pathname??'**',{dot:true}))})),network:'OS denied; pure validateParams only; no fetch/start server'}));

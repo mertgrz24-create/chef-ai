@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@layer base {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+}
+
+/*
+  "Mise en Place" design system.
+  Palette — Pantry & Zest: deep pantry green + one electric-lime accent.
+  Existing var names (--bg, --bg-card, --accent, …) are preserved so the
+  dashboard keeps rendering; only their values change here.
+*/
+:root {
+  /* surfaces */
+  --bg: #f5f6f1;          /* chalk — cool paper, not cream */
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --surface-2: #eceee6;   /* subtle raised */
+  --border: #e2e4da;
+  --border-subtle: #edeee8;
+
+  /* text */
+  --text-primary: #17180f;   /* ink */
+  --text-secondary: #4a4e42;
+  --text-muted: #6b6f62;     /* darkened from #8a8e80 — that failed WCAG AA (3.09:1 on chalk) */
+
+  /* brand — pantry green */
+  --brand: #1e3a2f;
+  --brand-ink: #f5f6f1;      /* text on brand */
+
+  /* accent — electric lime (the one bold move) */
+  --accent: #cdf23e;
+  --accent-ink: #17180f;     /* dark text on lime */
+  --accent-light: #f2f8dc;   /* faint lime wash */
+  --accent-border: #dcecb0;
+
+  /* functional — expiry / warmth */
+  --clay: #e8623d;
+
+  /* motion — Emil Kowalski's strong custom eases; the CSS built-ins
+     (ease-out, ease-in-out) are too weak to feel intentional. */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Shadows tinted with the brand's own ink/pantry-green instead of flat
+     black — generic box-shadow is one of the most common "AI slop" tells. */
+  --shadow-brand: 0 25px 60px -15px rgba(23, 42, 33, 0.45);
+}
+
+/* Authored as a real class rather than Tailwind's `shadow-[var(...)]`
+   bracket syntax — Tailwind's arbitrary-value type inference doesn't
+   reliably recognize a bare var() reference as a shadow value, so that
+   form silently produces no rule. A plain class also composes correctly
+   with a later `hover:shadow-[...]` utility (cascade order decides,
+   unlike an inline style which would always win regardless of :hover). */
+.shadow-brand {
+  box-shadow: var(--shadow-brand);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* The site already gives its own scale/press feedback on tap; the
+     browser's default gray flash just fights it. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Anchor nav (#features, #pricing, #how-it-works) glides instead of
+   jump-cutting. Gated behind no-preference so reduced-motion users keep
+   the instant jump, which is the correct behavior for them. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Display face carries the personality — used with restraint on headings.
+   text-wrap: balance keeps wrapped headlines from stranding a single
+   orphaned word on the last line. */
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Mono is the kitchen-ticket texture: labels, timings, quantities, tags. */
+.font-mono-ticket {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Perforated edge — the signature "kitchen chit" motif. */
+.ticket-edge {
+  --perf: 7px;
+  -webkit-mask:
+    radial-gradient(var(--perf) at var(--perf) 50%, #0000 98%, #000) left / 51% 100% repeat-y,
+    radial-gradient(var(--perf) at calc(100% - var(--perf)) 50%, #0000 98%, #000) right / 51% 100% repeat-y;
+  mask:
+    radial-gradient(var(--perf) at var(--perf) 50%, #0000 98%, #000) left / 51% 100% repeat-y,
+    radial-gradient(var(--perf) at calc(100% - var(--perf)) 50%, #0000 98%, #000) right / 51% 100% repeat-y;
+}
+
+/* Torn-edge strip — the perforation idea extended past the Hero card to a
+   full section boundary, so the "receipt paper" motif isn't confined to
+   one component. A thin same-color strip sits flush against a section's
+   bottom edge; the mask bites scalloped notches out of it so the section
+   below peeks through, instead of the two sections meeting on a flat line. */
+.ticket-tear {
+  --perf: 8px;
+  -webkit-mask: radial-gradient(var(--perf) at 50% 100%, #0000 98%, #000) bottom / calc(var(--perf) * 2) 100% repeat-x;
+  mask: radial-gradient(var(--perf) at 50% 100%, #0000 98%, #000) bottom / calc(var(--perf) * 2) 100% repeat-x;
+}
+
+/* Paper grain — a faint noise texture for the dark "ticket paper" surfaces
+   (Hero, AppScreens, Footer). Real receipt paper has texture; flat color
+   fill didn't reflect that. Pure CSS/SVG, no JS, costs nothing at runtime. */
+.paper-grain {
+  position: relative;
+}
+.paper-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+/* Visible keyboard focus — brand-consistent (lime accent), works on both
+   the dark pantry-green and light chalk surfaces. Nothing defined this
+   before, which is a real gap for keyboard users. */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

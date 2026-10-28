@@ -1,0 +1,90 @@
+[33m› [1m[@sentry/react-native/expo][22m Missing config for [1morganization, project[22m. Environment variables will be used as a fallback during the build. https://docs.sentry.io/platforms/react-native/manual-setup/[0m
+Bytecode makes the app startup faster, disabling bytecode is highly discouraged and should only be used for debugging purposes.
+Using src/app as the root directory for Expo Router.
+React Compiler enabled
+Starting Metro Bundler
+
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+ WARN  The package /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router contains an invalid package.json configuration. Consider raising this issue with the package maintainer(s).
+Reason: The resolution for "/private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store" defined in "exports" is /private/tmp/chef-picomatch-artifacts-cv7t643f/source/mobile/node_modules/expo-router/build/global-state/router-store.js, however this file does not exist. Falling back to file-based resolution.
+Android Bundled 36081ms node_modules/expo-router/entry.js (2739 modules)
+iOS Bundled 36081ms node_modules/expo-router/entry.js (2651 modules)
+Creating asset map
+
+› Assets (72):
+node_modules/@expo-google-fonts/bricolage-grotesque/200ExtraLight/BricolageGrotesque_200ExtraLight.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/300Light/BricolageGrotesque_300Light.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/400Regular/BricolageGrotesque_400Regular.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/500Medium/BricolageGrotesque_500Medium.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/600SemiBold/BricolageGrotesque_600SemiBold.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/700Bold/BricolageGrotesque_700Bold.ttf (91KB)
+node_modules/@expo-google-fonts/bricolage-grotesque/800ExtraBold/BricolageGrotesque_800ExtraBold.ttf (91KB)
+node_modules/@expo-google-fonts/instrument-sans/400Regular_Italic/InstrumentSans_400Regular_Italic.ttf (70KB)
+node_modules/@expo-google-fonts/instrument-sans/400Regular/InstrumentSans_400Regular.ttf (68KB)
+node_modules/@expo-google-fonts/instrument-sans/500Medium_Italic/InstrumentSans_500Medium_Italic.ttf (70KB)
+node_modules/@expo-google-fonts/instrument-sans/500Medium/InstrumentSans_500Medium.ttf (68KB)
+node_modules/@expo-google-fonts/instrument-sans/600SemiBold_Italic/InstrumentSans_600SemiBold_Italic.ttf (70KB)
+node_modules/@expo-google-fonts/instrument-sans/600SemiBold/InstrumentSans_600SemiBold.ttf (68KB)
+node_modules/@expo-google-fonts/instrument-sans/700Bold_Italic/InstrumentSans_700Bold_Italic.ttf (70KB)
+node_modules/@expo-google-fonts/instrument-sans/700Bold/InstrumentSans_700Bold.ttf (68KB)
+node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
+node_modules/@expo-google-fonts/space-mono/400Regular_Italic/SpaceMono_400Regular_Italic.ttf (113KB)
+node_modules/@expo-google-fonts/space-mono/400Regular/SpaceMono_400Regular.ttf (98KB)
+node_modules/@expo-google-fonts/space-mono/700Bold_Italic/SpaceMono_700Bold_Italic.ttf (103KB)
+node_modules/@expo-google-fonts/space-mono/700Bold/SpaceMono_700Bold.ttf (97KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf (130KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Entypo.ttf (66KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/EvilIcons.ttf (13KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Feather.ttf (56KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome.ttf (166KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf (134KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf (34KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf (203KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf (209KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf (68KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf (424KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Fontisto.ttf (314KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Foundation.ttf (57KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf (390KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf (1.3MB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialIcons.ttf (357KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Octicons.ttf (69KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/SimpleLineIcons.ttf (54KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Zocial.ttf (26KB)
+node_modules/expo-router/assets/arrow_down.png (9.5KB)
+node_modules/expo-router/assets/arrow_right.xml (307B)
+node_modules/expo-router/assets/checkmark.xml (312B)
+node_modules/expo-router/assets/error.png (469B)
+node_modules/expo-router/assets/file.png (138B)
+node_modules/expo-router/assets/forward.png (188B)
+node_modules/expo-router/assets/pkg.png (364B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon.png (8 variations | 359B)
+node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 variations | 592B)
+node_modules/expo-router/assets/sitemap.png (465B)
+node_modules/expo-router/assets/unmatched.png (4.8KB)
+
+› android bundles (2):
+_expo/static/js/android/entry-41102a5a286d3b84de4066c5845d98f5.js (6.9MB)
+_expo/static/js/android/entry-41102a5a286d3b84de4066c5845d98f5.js.map (22MB)
+
+› ios bundles (2):
+_expo/static/js/ios/entry-ebbfd2dbbd68192844ac6999a6bf9c93.js (6.8MB)
+_expo/static/js/ios/entry-ebbfd2dbbd68192844ac6999a6bf9c93.js.map (21MB)
+
+› Files (2):
+assetmap.json (37KB)
+metadata.json (8.2KB)
+
+Exported: /private/tmp/chef-picomatch-artifacts-cv7t643f/mobile-output

@@ -1,0 +1,20 @@
+import pathlib,json,hashlib
+base=pathlib.Path(__file__).parent;root=pathlib.Path('/Users/mertgurbuz/chef-ai')
+def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+manifest=json.loads((base/'evidence/source-manifest.json').read_text());changed=[];copychanges=[]
+for f in manifest['files']:
+ p=root/f['path'];c=base/'source'/f['path']
+ if not p.is_file() or digest(p)!=f['sha256']:changed.append(f['path'])
+ if not c.is_file() or digest(c)!=f['sha256']:copychanges.append(f['path'])
+packages={}
+for area in ('mobile','backend'):
+ rows=json.loads((base/'evidence'/f'{area}-installed-files.json').read_text());original=[];clone=[]
+ for f in rows:
+  for directory,diffs in [(root/area,original),(base/'source'/area,clone)]:
+   p=directory/f['path']
+   if 'symlink' in f:
+    if not p.is_symlink() or str(p.readlink())!=f['symlink']:diffs.append(f['path'])
+   elif not p.is_file() or digest(p)!=f['sha256']:diffs.append(f['path'])
+ packages[area]={'checkedFiles':len(rows),'originalChanged':original,'cloneChanged':clone,'manifestSha256':digest(base/'evidence'/f'{area}-installed-files.json')}
+result={'originalSourceFilesChanged':changed,'isolatedSourceFilesChangedByBuild':copychanges,'packages':packages,'scope':'Files on disk including untracked and uncommitted; not unsaved editor buffers. Private dotenv files and IDE settings intentionally excluded from inputs.'}
+(base/'evidence/source-verification.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))

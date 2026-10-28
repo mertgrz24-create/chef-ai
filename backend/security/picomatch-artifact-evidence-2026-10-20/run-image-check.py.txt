@@ -1,0 +1,12 @@
+import pathlib,subprocess,json,time
+base=pathlib.Path(__file__).parent
+results=[]
+for group in ['allowed','denied','boundary','local']:
+ start=time.monotonic()
+ try:
+  p=subprocess.run(['/usr/bin/sandbox-exec','-f',str(base/'offline.sb'),'/usr/local/bin/node','--max-old-space-size=128',str(base/'image-worker.cjs'),group],env={'PATH':'/usr/local/bin:/usr/bin:/bin','HOME':str(base/'home'),'TMPDIR':str(base/'tmp'),'NODE_ENV':'production','NEXT_TELEMETRY_DISABLED':'1'},cwd=base/'source/backend',capture_output=True,text=True,timeout=3)
+  result={'group':group,'exitCode':p.returncode,'elapsedSeconds':time.monotonic()-start,'stdout':json.loads(p.stdout) if p.returncode==0 else None,'error':p.stderr[-4000:]}
+ except subprocess.TimeoutExpired: result={'group':group,'timedOut':True,'elapsedSeconds':time.monotonic()-start}
+ results.append(result)
+(base/'evidence/next-image-bounded.json').write_text(json.dumps(results,indent=2)+'\n')
+print(json.dumps([{k:r[k] for k in ['group','exitCode','timedOut','elapsedSeconds'] if k in r}for r in results]))

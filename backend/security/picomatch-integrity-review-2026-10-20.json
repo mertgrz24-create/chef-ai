@@ -1,0 +1,14 @@
+[
+  {
+    "area": "mobile",
+    "checks": 5,
+    "passed": 5,
+    "installedFilesUntouched": true
+  },
+  {
+    "area": "backend",
+    "checks": 5,
+    "passed": 5,
+    "installedFilesUntouched": true
+  }
+]

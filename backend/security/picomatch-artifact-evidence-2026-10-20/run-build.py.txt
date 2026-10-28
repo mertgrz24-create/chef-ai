@@ -1,0 +1,24 @@
+import os, pathlib, subprocess, json, time, signal, sys, hashlib
+base=pathlib.Path(__file__).parent
+name=sys.argv[1]
+project='mobile' if name=='mobile' else 'backend'
+cwd=base/'source'/project
+common={'PATH':'/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin','HOME':str(base/'home'),'TMPDIR':str(base/'tmp'),'CI':'true','NODE_ENV':'production','EXPO_NO_DOTENV':'1','EXPO_NO_TELEMETRY':'1','EXPO_OFFLINE':'1','NEXT_TELEMETRY_DISABLED':'1','SENTRY_DISABLE_AUTO_UPLOAD':'true','SENTRY_DISABLE_TELEMETRY':'1','LANG':'en_US.UTF-8','TZ':'UTC'}
+if project=='mobile':
+ common.update(EXPO_PUBLIC_APP_ENV='staging',EXPO_PUBLIC_API_URL='https://api.example.invalid',EXPO_PUBLIC_SUPABASE_URL='https://db.example.invalid',EXPO_PUBLIC_SUPABASE_ANON_KEY='sb_publishable_synthetic_local_artifact_only',EXPO_PUBLIC_AUTH_ORIGIN='https://auth.example.invalid')
+ command=['/usr/local/bin/node','node_modules/expo/bin/cli','export','--platform','ios','--platform','android','--source-maps','--dump-assetmap','--no-bytecode','--max-workers','2','--output-dir',str(base/'mobile-output')]
+else:
+ common.update(NEXT_PUBLIC_SUPABASE_URL='https://db.example.invalid',NEXT_PUBLIC_SUPABASE_ANON_KEY='sb_publishable_synthetic_local_artifact_only',ANTHROPIC_API_KEY='synthetic-local-artifact-not-a-secret',GEMINI_API_KEY='synthetic-local-artifact-not-a-secret')
+ command=['/usr/local/bin/node','node_modules/next/dist/bin/next','build']
+ if name=='backend-webpack': command+=['--webpack']
+full=['/usr/bin/sandbox-exec','-f',str(base/'offline.sb')]+command
+record={'command':command,'cwd':str(cwd),'environment':common,'network':'OS sandbox deny network*','timeoutSeconds':420,'sourceManifestSha256':hashlib.sha256((base/'evidence/source-manifest.json').read_bytes()).hexdigest(),'started':time.time()}
+(base/'evidence'/f'{name}-execution.json').write_text(json.dumps(record,indent=2)+'\n')
+with (base/'evidence'/f'{name}-build.log').open('w') as log:
+ p=subprocess.Popen(full,cwd=cwd,env=common,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+ try:record['exitCode']=p.wait(timeout=420)
+ except subprocess.TimeoutExpired:
+  os.killpg(p.pid,signal.SIGKILL);p.wait();record['exitCode']=p.returncode;record['timedOut']=True
+record['elapsedSeconds']=round(time.time()-record['started'],2)
+(base/'evidence'/f'{name}-execution.json').write_text(json.dumps(record,indent=2)+'\n')
+print(json.dumps({'build':name,'exitCode':record['exitCode'],'elapsedSeconds':record['elapsedSeconds']}))

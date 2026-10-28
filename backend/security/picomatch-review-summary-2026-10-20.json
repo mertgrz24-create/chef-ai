@@ -1,0 +1,78 @@
+{
+  "recordedAt": "2026-10-19T21:44:30.022548+00:00",
+  "verdict": "BLOCK_INCOMPLETE_MITIGATION",
+  "externalIndependentAudit": false,
+  "method": "Separate closed-form oracle and adversarial probes, same assistant; not a third-party certification",
+  "exposure": {
+    "currentApiUserControlledPattern": "NOT_DEMONSTRATED_IN_REVIEWED_SOURCE",
+    "backendRoutes": 30,
+    "backendLocalFiles": 48,
+    "mobileRouteFiles": 18,
+    "mobileLocalFiles": 64,
+    "nativewindClosureFiles": 22,
+    "imageValidatorCases": 12,
+    "imageCompilePatterns": [
+      "images.pexels.com",
+      "**"
+    ],
+    "releaseArtifactExposure": "NOT_VERIFIED",
+    "limitations": [
+      "External packages generally treated as leaves, not full taint analysis",
+      "No build or remote environment inspected"
+    ]
+  },
+  "verification": {
+    "lockfileCopies": 7,
+    "extraVendoredCopies": 1,
+    "passingOracleAssertions": 432,
+    "totalProbes": 24,
+    "timeouts": 17
+  },
+  "findingFamilies": [
+    "Adjacent repeated groups bypass local ambiguity guard",
+    "Next vendored matcher not covered by existing patch manifest",
+    "Previous documentation overstated mitigation completeness"
+  ],
+  "integrityChecksPassed": 10,
+  "regressions": {
+    "mobile": 150,
+    "mobileDependency": 19,
+    "backend": 64,
+    "lint": "PASS_BOTH",
+    "typecheck": "PASS_BOTH",
+    "npmAudit": {
+      "mobile": 0,
+      "backend": 0
+    },
+    "newAdversarialAuditExitCode": 2
+  },
+  "snyk": {
+    "rerunThisTurn": false,
+    "priorAuthenticatedEvidence": "snyk-re2-trial-{mobile,backend}-2026-10-20.json",
+    "mobilePaths": 28,
+    "backendPaths": 2,
+    "packageAndLockHashesUnchanged": true
+  },
+  "preservation": {
+    "preExistingCodeJsonSqlFilesUnchanged": 261,
+    "existingPatchManifestsAndInstalledHashes": "PASS"
+  },
+  "helperSha256": {
+    "scripts/picomatch-independent-verification.cjs": "63cb3c39f9da9ff7212b862e5532adf278c637224f84beb42808be40f8e95786",
+    "scripts/picomatch-reachability-review.cjs": "a61cea9fa5cf4f4bd2bea48ec1965703d7e98f24281721a2247dd9396251db1f",
+    "scripts/picomatch-integrity-review.cjs": "aef307d0e77c52b3c45705444c6247ccabfc9a200c48181211ebd11c217fd102"
+  },
+  "notPerformed": [
+    "dependency changes",
+    "runtime app changes",
+    "security patch changes",
+    "build",
+    "deploy",
+    "migration",
+    "production/staging requests",
+    "AI calls",
+    "paid service",
+    "native artifact verification"
+  ],
+  "hawkScan": "BLOCKED: CLI6.6.0/skills current; API key and scan configuration unavailable"
+}

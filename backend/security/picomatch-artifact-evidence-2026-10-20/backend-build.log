@@ -1,0 +1,73 @@
+▲ Next.js 16.4.1 (Turbopack)
+✓ Running next.config.mjs took 10ms
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+
+  Creating an optimized production build ...
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred:
+Failed to write app endpoint /route
+
+Caused by:
+- [project]/app/globals.css [app-client] (css)
+- creating new process
+- binding to a port
+- Operation not permitted (os error 1)
+
+Debug info:
+- Execution of get_all_written_entrypoints_with_issues_operation failed
+- Execution of EntrypointsOperation::new failed
+- Execution of all_entrypoints_write_to_disk_operation failed
+- Execution of output_assets_operation failed
+- Execution of <AppEndpoint as Endpoint>::output failed
+- Failed to write app endpoint /route
+- Execution of AppEndpoint::output failed
+- Execution of whole_app_module_graph_operation failed
+- Execution of *Project::get_all_additional_entries failed
+- Execution of ModuleGraph::from_graphs failed
+- Execution of ModuleGraph::from_graphs_inner failed
+- Execution of SingleModuleGraph::new_with_entries failed
+- [project]/app/globals.css [app-client] (css)
+- Execution of primary_chunkable_referenced_modules failed
+- Execution of <CssModule as Module>::references failed
+- Execution of parse_css failed
+- Execution of <PostCssTransformedAsset as Asset>::content failed
+- Execution of PostCssTransformedAsset::process failed
+- Execution of evaluate_webpack_loader failed
+- creating new process
+- binding to a port
+- Operation not permitted (os error 1)
+
+> Build error occurred
+Error [TurbopackInternalError]: Failed to write app endpoint /route
+
+Caused by:
+- [project]/app/globals.css [app-client] (css)
+- creating new process
+- binding to a port
+- Operation not permitted (os error 1)
+
+Debug info:
+- Execution of get_all_written_entrypoints_with_issues_operation failed
+- Execution of EntrypointsOperation::new failed
+- Execution of all_entrypoints_write_to_disk_operation failed
+- Execution of output_assets_operation failed
+- Execution of <AppEndpoint as Endpoint>::output failed
+- Failed to write app endpoint /route
+- Execution of AppEndpoint::output failed
+- Execution of whole_app_module_graph_operation failed
+- Execution of *Project::get_all_additional_entries failed
+- Execution of ModuleGraph::from_graphs failed
+- Execution of ModuleGraph::from_graphs_inner failed
+- Execution of SingleModuleGraph::new_with_entries failed
+- [project]/app/globals.css [app-client] (css)
+- Execution of primary_chunkable_referenced_modules failed
+- Execution of <CssModule as Module>::references failed
+- Execution of parse_css failed
+- Execution of <PostCssTransformedAsset as Asset>::content failed
+- Execution of PostCssTransformedAsset::process failed
+- Execution of evaluate_webpack_loader failed
+- creating new process
+- binding to a port
+- Operation not permitted (os error 1)
+    at <unknown> (TurbopackInternalError: Failed to write app endpoint /route) {
+  location: undefined
+}
