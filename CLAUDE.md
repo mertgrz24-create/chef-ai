@@ -1,11 +1,7 @@
-# CLAUDE.md — Chef-AI (mobil app repo)
+# Chef-AI uygulama reposu
 
-Bu repo artık sadece **mobil uygulamayı** (`mobile/`, Expo/React Native) içerir. Web sitesi + API backend ayrı bir repo'da: [chef-ai-web](https://github.com/mertgrz24/chef-ai-web).
+Güncel kurallar için `AGENTS.md` dosyasını oku.
 
-Mobil geliştirme kuralları için: [mobile/CLAUDE.md](mobile/CLAUDE.md) ve [mobile/AGENTS.md](mobile/AGENTS.md).
+Bu repo `mobile/` istemcisini ve `backend/` sunucusunu birlikte içerir. Tanıtım sitesi ayrı `chef-ai-web` reposundadır. Mobil ve backend aynı repoda olmasına rağmen ayrı çalışır ve HTTP ile haberleşir. Sunucu anahtarları yalnız `backend/.env.local` içinde kalır; mobil pakete girmez.
 
-## Repo sınırı
-
-- İki repo arasında dosya-sistemi bağımlılığı yok — mobil app, prod API'ye `EXPO_PUBLIC_API_URL` üzerinden HTTP ile bağlanır (bkz. `mobile/src/lib/api.ts`)
-- Supabase şeması (migration'lar) `chef-ai-web` repo'sunda tutulur
-- Bu repo'daki `PROGRESS.md`, projenin V1'den beri tüm geçmişini (hem web hem mobil) içerir — kronolojik günlük olarak burada kalıyor
+Mobil kuralları: `mobile/AGENTS.md` ve `mobile/CLAUDE.md`. Backend kuralları: `backend/AGENTS.md`. Kullanıcının yeni build/deploy almama talimatı devam ediyor. Geçmiş ayrım kayıtları `PROGRESS.md` içinde korunur.

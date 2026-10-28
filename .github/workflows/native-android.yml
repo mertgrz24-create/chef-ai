@@ -1,0 +1,73 @@
+name: Android native validation
+# Run deliberately after staging public configuration has been set. No store upload.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/android-native-validation-20261016']
+concurrency:
+  group: android-native-validation
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: mobile
+    env:
+      CI: '1'
+      EXPO_PUBLIC_APP_ENV: staging
+      EXPO_PUBLIC_SUPABASE_URL: https://vcyqtbzhfanbpclfhibv.supabase.co
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.STAGING_SUPABASE_ANON_KEY }}
+      EXPO_PUBLIC_API_URL: ${{ vars.STAGING_API_URL }}
+      SENTRY_DISABLE_AUTO_UPLOAD: 'true'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;27.1.12297006' 'cmake;3.22.1'
+      - run: npm ci
+      - run: npm run test:security
+      - run: python3 tests/test_android_artifact.py
+      - name: Require staging public configuration
+        run: node -e 'for (const k of ["EXPO_PUBLIC_SUPABASE_ANON_KEY","EXPO_PUBLIC_API_URL"]) if (!process.env[k]) throw new Error("Missing " + k)'
+      - run: npx expo prebuild --platform android --no-install
+      - name: Compile arm64 release validation APK
+        id: compile
+        run: ./gradlew app:assembleRelease -Pandroid.lint.useK2Uast=false -PreactNativeArchitectures=arm64-v8a '-Dorg.gradle.jvmargs=-Xmx3g -XX:MaxMetaspaceSize=1g' --no-daemon --max-workers=2
+        working-directory: mobile/android
+      # AGP 8.12 K2 UAST crashes on Worklets' applied Kotlin build scripts
+      # (Google issue 430991549). Keep all lint checks; use its supported K1 frontend.
+      - name: Android release lint
+        run: ./gradlew app:lintRelease -Pandroid.lint.useK2Uast=false -PreactNativeArchitectures=arm64-v8a '-Dorg.gradle.jvmargs=-Xmx3g -XX:MaxMetaspaceSize=1g' --no-daemon --max-workers=2
+        working-directory: mobile/android
+      - name: Inspect merged manifest, ELF and APK alignment
+        if: ${{ always() && steps.compile.conclusion == 'success' }}
+        run: |
+          export PATH="$ANDROID_HOME/build-tools/36.0.0:$PATH"
+          python3 scripts/check-android-artifact.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: android-native-validation
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: warn
+          path: |
+            mobile/android-native-evidence.json
+            mobile/android/app/build/reports/lint-results-release.*
+            mobile/android/app/build/intermediates/lint_*_report/**
+            mobile/android/app/build/outputs/apk/release/app-release.apk

@@ -4,11 +4,36 @@
 
 ## 📍 Şu an neredeyiz?
 
-**Aktif Faz:** V5 — UI redesign ("Mise en Place") + **mobil app'e geçiş** (Expo/React Native)  
-**Aktif Mikro-Adım:** ✅ **Repo ikiye bölündü** — bu repo (`chef-ai`) artık sadece mobil app'i içeriyor, web sitesi + API [chef-ai-web](https://github.com/mertgrz24/chef-ai-web) repo'sunda ve Vercel oradan deploy ediyor. Sıradaki: EAS build + store yayını (`mobile/EAS_BUILD.md`)  
-**Son güncelleme:** 30 Temmuz 2026  
+**Aktif Faz:** V5 — mobil yayın hazırlığı (Expo/React Native).
+**Aktif Mikro-Adım:** TR/EN, auth kurtarma, güvenli API, onboarding/AI izni, özel tarif kaydı adapter’ı, RevenueCat/restore, push/analytics/Sentry ve CI eklendi. Otomatik kontroller geçti; gerçek backend, native release, mağaza ve güvenlik kapıları bekliyor. Yayın hazır sayılmıyor. Ayrıntılar: `mobile/docs/RELEASE_READINESS.md`.
+
+**Son güncelleme:** 15 Ekim 2026
+
 **Canlı URL:** https://chef-ai-puce-zeta.vercel.app — artık `chef-ai-web` repo'sunun `main`'inden deploy oluyor  
 **Bu repo'nun kapsamı:** sadece `mobile/` (+ bu proje günlüğü). Next.js kodu (`app/`, `components/`, `lib/`, `types/`, `public/`, `supabase/`) bu repo'dan tamamen silindi — geçmişi hâlâ `git log`'da duruyor, güncel hali `chef-ai-web`'de.
+
+### 15 Ekim 2026 — Krem yüzey paleti
+- Kullanıcı isteğiyle beyaz/chalk yüzeyler sıcak krem ailesine çevrildi: zemin `#F5F0E5`, kart/alan/sekme yüzeyleri `#FFF9EF`, ikincil yüzey `#EBE3D3`, ayraçlar `#DDD3C1`. Pantry green ve lime korundu; değişiklik ortak token kaynağından tüm ekranlara yansıyor.
+
+### 15 Ekim 2026 — Açık defter arayüz revizyonu
+- Kullanıcı tercihiyle chalk/beyaz yüzeyler, pantry green ana aksiyonlar ve ölçülü lime vurgular uygulandı. Bricolage Grotesque, Instrument Sans ve Space Mono korundu. Redesign Existing Projects, Frontend Design, Design Critique ve Accessibility Review skill yönergeleri yeniden gözden geçirildi; Expo SDK 57 dokümantasyonu incelendi.
+- Today tek yemek hazırlama aksiyonu, satır içi kiler özeti ve öncelikli malzemelerle düzenlendi. Pantry listeyle açılıyor; + ile açılan ekleme formu başarılı kayıttan sonra kapanıyor ve klavye gizleniyor.
+- Cook üretimden sonra doğrudan tarif sayfasına geçiyor; malzemeleri değiştirme ve eski tarife dönme korunuyor. Ortak tarif sayfası süreler, malzemeler, numaralı yöntem (yanıt numaralıysa), mutfak notu ve besin bilgilerini gösteriyor.
+- Haftalık plan yatay gün seçicisi ve iki öğün özetiyle açılıyor; detaylar iOS page sheet içinde ortak tarif bileşenini kullanıyor. Tek öğün/tüm hafta yenileme kilitleri korundu. Scan, Profile, auth ve sekme çubuğu açık yüzeylere uyarlandı.
+- Doğrulama: Expo lint ve TypeScript sıfır hata/uyarı; Android Hermes export başarılı. 320×568 ve 390×844 yerel web senaryolarında auth doğrulama/e-posta onayı, pantry ekleme/silme hatası, tarif başarı/hata/limit, plan boş/hata/detay/çift yenileme ve Scan kısmi kayıt/tekrar deneme geçti; tarayıcı çalışma zamanı hatası yok.
+- Native örnek veri önizlemesi iPhone 17 Pro ve iPhone 17 simülatörlerinde açıldı; ana ekran, pantry formu, Cook sonucu ve haftalık öğün detayları görsel olarak incelendi. Prod API/AI veya gerçek hesap işlemleri yapılmadı. Android emülatör/SDK olmadığı için Android native görsel kontrolü bekliyor. HawkScan preflight tekrar denendi: hawk CLI ve API anahtarı yok; güvenlik taraması çalıştırılamadı.
+
+### 15 Ekim 2026 — Mobil UI polish
+- Mevcut kaydedilmemiş UI taslağı üzerine çalışıldı: renk/tipografi token’ları, ortak Screen/Header/Button/Field/Chip/Card/Ticket ve loading/empty/error/success bileşenleri tamamlandı. İngilizce ve beş sekmeli yapı korundu; API/veri sözleşmeleri değişmedi.
+- Today artık yükleme hatasını boş kiler olarak göstermiyor. Pantry’de alan etiketleri, görünür ekleme/silme geri bildirimi ve küçük ekran/klavye açıkken kaydırılabilir ekleme paneli var.
+- Cook boş seçimi engelliyor, üretim hatasında mevcut tarifi koruyor, yapılandırılmamış tarif yanıtını da gösteriyor. Ortak RecipeTicket haftalık plan detaylarında da kullanılıyor; çalışmayan Premium CTA eklenmedi.
+- Scan: kamera izni ve picker hataları, tekrar analiz, boş sonuç/seçim, limit durumları; kısmi pantry kaydında yalnızca başarısız malzemeler yeniden ekleniyor.
+- Meal Plan: ilk yükleme hatası ile 404 boş durum ayrıldı; yenileme istekleri sıraya kilitlendi, eski GET yanıtlarının yeni planı ezmesi engellendi. Profile ve auth: işlem geri bildirimi, alan bazlı doğrulama, e-posta onayı ve hesap silme onayı.
+- iOS Expo Go’da Worklets/Hermes native çökmesi gözlendi. Bu ekranların basış/skeleton animasyonları React Native Animated’a taşındı; native giriş ve doğrulama ekranı açıldı, yazılım klavyesiyle kontrol edildi. Sistem reduced-motion tercihi destekleniyor.
+- QA: TypeScript + Expo lint + Android Hermes bundle export başarılı; 320×568 ve 390×844 web önizlemesinde yerel sahte API yanıtlarıyla auth doğrulama/onay, pantry ekleme/silme hatası, tarif başarı/hata/limit, plan boş/hata/detay ve çift yenileme, scan kısmi kayıt/yeniden deneme kontrol edildi. Gerçek prod API/AI mutasyonları yapılmadı.
+- Native UI önizlemesi: `/private/tmp/chef-ai-ui-preview` altında üretimden bağımsız, yalnızca örnek veri kullanan kopya açıldı. Today/Pantry/Scan/Cook/Profile ve haftalık plan iPhone 17 Pro’da görüntülendi; Cook’ta örnek tarif hazırlandı. Today hızlı işlem kartlarının native’de üst üste gelmesine neden olan iç `flex-1` kaldırıldı; TypeScript ve lint yeniden geçti. Üretim auth/API kodu değiştirilmedi.
+- Kalan doğrulama: Android SDK/emülatör bu ortamda bulunmadığından Android ekran görüntüsü alınamadı; kamera/gerçek AI ve push uçtan uca cihaz QA’sı bekliyor. HawkScan CLI ve HAWK_API_KEY yok; DAST taraması çalıştırılamadı.
+- Aşağıdaki Temmuz tarihli backend/EAS açık işleri tarihsel kayıt niteliğinde; bu seansta prod ortamında yeniden doğrulanmadı. EAS_BUILD.md içindeki eski Bearer/merge blocker’ı 30 Temmuz repo ayrımı kaydıyla tutarsız, yayın öncesi mevcut backend durumundan doğrulanmalı.
 
 ### 🏗️ Mimari kararı (14 Tem 2026)
 **Landing = web, App = mobil.** Next.js landing page pazarlama yüzü olarak Vercel'de kalır; asıl uygulama **Expo/React Native** ile indirilebilir mobil app olur (App Store + Play Store). 17 API route + Supabase **ortak backend** olarak iki istemciye de hizmet eder.
@@ -638,3 +663,381 @@ Yeni bir Claude Code konuşması açtığında şunu yapıştır:
 - Next.js 16 + Tailwind v4 ile başladık ama 14 + v3'e geri döndük (doğru karar)
 - create-next-app'in "boş olmayan klasör"e yüklenmemesi sorunu CLAUDE.md'yi /tmp'ye taşıyarak çözüldü
 - İlk git commit alındı
+
+
+## 15 Ekim 2026 — Mobil yayın hazırlığı
+
+- Krem/yeşil/lime tasarım korundu; TR/EN ve ölçü tercihleri, üç adımlı onboarding, sürümlü ayrı AI aktarım izni eklendi.
+- Auth recovery/verification callback allowlist, yeniden gönderim sınırı, AppState yenilemesi, tek 401 refresh, güvenli oturum saklama ve hesap temizliği tamamlandı.
+- API timeout/şema/GET retry, hesap izolasyonu, offline/bakım/minimum sürüm ve hata sınırı eklendi.
+- Fotoğraf önizleme/onay, 1600px/4MB JPEG normalizasyonu, geçici dosya temizliği ve gerçek ack isteyen raporlama eklendi.
+- Özel kaydetme/geçmiş, RevenueCat aylık satın alma/restore, server üyelik kontrolü, push yaşam döngüsü ve opt-in analytics adapter’ları hazırlandı. Backend capability doğrulanmadan yeni entegrasyonlar açılmıyor.
+- Lint/TypeScript ve 9 suite/59 test geçti. Mock tarayıcı akışı ile iOS Expo Go login/recovery görsel kontrolü yapıldı; signed build/gerçek cihaz/ikinci cihaz/backend/beta doğrulanmadı.
+- CI, 20 madde kanıt matrisi, API sözleşmeleri, mağaza taslak paketi ve yayın/geri dönüş rehberi eklendi. Production kontrolü eksik kanıtları reddediyor.
+- Güvenlik engeli: audit sonrası 54 high/20 moderate bağımlılık bulgusu sürüyor. HawkScan CLI/API key yok; DAST çalıştırılmadı. Backend veya prod servisleri değiştirilmedi; mağazaya gönderim yapılmadı.
+
+
+## 15 Ekim 2026 — Güvenlik düzeltmeleri ve yetkilendirilmiş API hazırlığı
+
+- Güncel mobil audit 75 bulgu ile başladı (55 high/20 moderate). image-size, decode-uri-component, selector-parser ve uuid düzeltildi; yayımlanmış düzeltmesi bulunmayan braces/node-forge/sprintf-js için hash kontrollü, kurulumda uygulanan yerel yamalar ve saldırı regresyonları eklendi. Ham npm audit 59 uyarı göstermeyi sürdürüyor (54 high/5 moderate); uyarılar gizlenmedi, güvenlik yayın kapısı pending.
+- Mobil: 64 uygulama testi + 9 bağımlılık güvenlik testi, lint, TypeScript, Expo sürüm uyumu ve üç platform bundle export geçti. İzole iOS/Android native prebuild geçti; signed native build veya gerçek ödeme/push testi yapılmadı.
+- Kullanıcı API kapsamını chef-ai-web için açıkça onayladı. Tanıtım sayfaları değiştirilmedi. Özel/idempotent kayıt, config, izin/raporlar, server-only atomik AI kotası/istek kaydı, profil yetki koruması, RevenueCat doğrulama/webhook, push/receipt, processor silme kuyruğu ve anonim günlük analytics kaynakları eklendi.
+- API repo bağımlılık güncellemesi kritik Next bulgusunu giderdi; ham audit 17→7 (kalanlar yerel yamalı braces zinciri). 26 Node testi ve izole PostgreSQL 17 güvenlik/kota/eşzamanlılık kontrolleri geçti; Next build doğrulandı. Gerçek Supabase migration/deploy yapılmadı.
+- Vercel hesabı ve chef-ai projesi salt okunur doğrulandı. Supabase bağlantısı bu çalışma sırasında kuruldu; staging şeması, servis hesapları/ürünleri, gerçek entegrasyon, native QA ve beta hâlâ yayın engeli. HawkScan CLI/anahtar eksikliği nedeniyle DAST çalıştırılamadı.
+
+## 15 Ekim 2026 — Supabase bağlantısı ve gerçek şema incelemesi
+
+- Mevcut chef-ai projesi yeniden etkinleştirildi; durum ACTIVE_HEALTHY. Salt okunur katalog incelemesi altı ana tablo/RLS ve mevcut fonksiyon yetkilerini doğruladı. Uygulama satırları okunmadı; uzak migration veya veri değişikliği yapılmadı.
+- Supabase danışmanı: handle_new_user search_path, handle_new_user/rls_auto_enable gereksiz istemci EXECUTE yetkileri, eski kredi RPC yetkileri ve kapalı leaked-password koruması. API reposuna altıncı tetikleyici hardening migration eklendi; signup tetikleyicisi ve yetkileri yerel testte doğrulandı. apply_referral kimlik doğrulamalı kullanım için ayrıca gözden geçirilecek.
+- Altı migration, SQL güvenlik kontrolleri ve iki bağlantılı eşzamanlılık/101 cihaz deduplication testi izole PostgreSQL üzerinde geçti; 26 API Node testi tekrar geçti. Yerel recipes fixture tipi gerçek jsonb şemasıyla hizalandı.
+- Kullanıcı mertgrz24's Org altında staging projesini onayladı. get_cost aracı bağlantıda UNAVAILABLE döndü; maliyet doğrulanamadığı için proje oluşturulmadı. Alternatif yönetim paneli oturum açmayı bekliyor. Ücretli plan veya production deploy açılmadı.
+
+## 15 Ekim 2026 — Ayrı staging veritabanı hazır
+
+- Kullanıcı oturum açtıktan sonra panelde Free plan doğrulandı; chef-ai-staging (vcyqtbzhfanbpclfhibv), ap-south-1 bölgesinde oluşturuldu. Otomatik tablo API grant'leri kapalı, otomatik RLS açık. Ücretli plan seçilmedi.
+- Boş temel şema ve altı güvenlik migration'ı sadece staging'e uygulandı. Üretim verisi/kullanıcısı kopyalanmadı; production migration veya API deploy yapılmadı.
+- Gerçek staging PostgreSQL üzerinde sentetik kullanıcılar ile signup, RPC yetkileri, profil Premium koruması, hesap izolasyonu/özel tarif, kota, idempotency, tek iade, rapor limiti, üyelik sıralaması ve analytics kontrolleri geçti. Testler rollback edildi; auth/profiles/recipes/AI jobs sayıları 0 doğrulandı. Bu test gerçek istemci oturumu/SMTP/ödeme testi değildir.
+- Staging security advisor: apply_referral için 1 bilinçli authenticated-definer uyarısı; istemci yetkileri kapalı dokuz service-only tabloda policy bulunmaması için bilgilendirme. Uyarılar gizlenmedi. Ayrı staging API deployment, gerçek servis ayarları ve native/beta kanıtları hâlâ bekliyor.
+
+## 15 Ekim 2026 — Staging API ve gerçek oturum doğrulaması
+
+- Vercel'de ayrı chef-ai-staging projesi oluşturuldu. Preview ortamı yalnızca staging Supabase'e bağlı; sunucu anahtarı sensitive, AI/ödeme/push/analytics ve cron kapalı. Son Preview build: dpl_2FvuGduCJFq9iT2kUiHUtUmdE9c5 (READY).
+- Yerel API + gerçek Supabase oturumlarında 13 kontrol geçti. Yayımlanan son Preview üzerinde 13 API kontrolü + 3 gerçek hesap silme kontrolü tekrar geçti: özel tarif/idempotency, ikinci istemciyle tarif ve kiler kalıcılığı, hesap izolasyonu, Premium/RPC yetki reddi, oturum sahibinin silinmesi ve eski token reddi. Sentetik kullanıcılar temizlendi; son sayımlar 0.
+- Eski API yollarının ham hata logları sınırlı kod helper'ına alındı. 27 Node güvenlik testi, TypeScript ve lint (0 error, iki eski UI warning) geçti. Vercel build'de hash kontrollü bağımlılık yamaları doğrulandı.
+- Vercel ilk deploy'u Production etiketlediği için ayrı staging projesinde yalnızca sır/API içermeyen statik başlangıç sayfası kullanıldı; sonraki gerçek API build'leri Preview hedefinde. İlk cron sınırı hatası ücretli plana geçmeden, yalnızca geçici staging kopyasının cron'unu kapatarak çözüldü. Mevcut chef-ai production API/web deploy edilmedi.
+- Yayıncı adı/destek e-postası/yasal alan adı kullanıcı tarafından sonraya bırakıldı. Gerçek AI, SMTP, RevenueCat sandbox, Sentry symbolication, push cihaz teslimi, signed native build, mağaza ve beta kapıları açık. Ham audit uyarıları ve HawkScan erişim eksikliği sürüyor; yayın onayı verilmedi.
+
+## 15 Ekim 2026 — Bağlantı sonrası güvenlik takibi
+
+- Supabase skill ve güncel changelog incelendi. Staging security advisor aynı 1 authenticated-referral uyarısı ve servis tablolarına ait 9 bilgilendirmeyi döndürdü; uyarıları kapatmak için erişim genişletilmedi.
+- npm registry'de braces 3.0.3, node-forge 1.4.0 ve sprintf-js 1.1.3 hâlâ latest. Kurulu gerçek bağımlılıklara ait 9 güvenlik kontrolü tekrar geçti.
+- Yeni ham mobil audit 61 (56 high/5 moderate); iki yeni üst paket adı nativewind/react-native-css-interop, aynı üç kök advisory'den etkileniyor. Eski/yeni raporlar birlikte korundu; API audit hâlâ 7 high. Hiçbir risk acceptance/exclusion eklenmedi.
+- Supabase staging TLS 1.3 bağlantısı/sertifika doğrulaması geçti; minimum iOS/Android cihaz matrisi ayrıca bekliyor.
+- HawkScan 6.6.0 resmî manifestten indirildi, SHA256 doğrulandı, ~/.local/bin/hawk kuruldu; version/config/skills ön kontrolleri geçti. StackHawk tarayıcı girişi başlatıldı; kullanıcı oturumu bekleniyor. Henüz DAST çalışmadı, ücretli hesap/deneme açılmadı. 28 API yolu/31 HTTP metodu envanteri hazırlandı.
+- Yayın kanıtları staging başarısını ve kalan üretim/native/servis eksiklerini ayrı gösterecek şekilde güncellendi; yasal bilgiler kullanıcı isteğiyle bekliyor.
+
+## 15 Ekim 2026 — Kullanıcı tercihi: ücretsiz Snyk
+
+- Kullanıcı ücretli StackHawk yerine Snyk istedi. Bekleyen HawkScan tarayıcı giriş süreci durduruldu; ücretli hesap/deneme açılmadı. HawkScan girişini otomatik yeniden başlatma.
+- Resmî Snyk Free planı Open Source/Code taramalarını destekliyor. Çalışan API taraması ayrı Snyk API & Web ürününde; ürün sayfası aylık tek uygulama taraması için Free seçeneği sunuyor. Gerçek hesap hakkı/kota ve yeniden tarama sınırı doğrulanmadan işlem açılmayacak. Snyk taraması henüz yapılmadı; güvenlik kapısı pending.
+
+## 15 Ekim 2026 — VS Code Snyk bulguları
+
+- Kullanıcı mevcut Snyk eklentisinden 5 bağımlılık ve 2 kod bulgusunu paylaştı. Expo CLI’nin eski Zod kopyası kapsamlı olmayan, yalnızca CLI’ye uygulanan override ile 4.6.7’ye geçirildi. Gerçek DevTools/MCP şemaları ve üç platform export doğrulandı.
+- deepmerge kaynak/CJS/UMD ve Worklets TS/JS/C++ için altı hash kontrollü yama eklendi; toplam 16 dosya. deepmerge saldırısı özgün kaynakta üretildi, yamada engellendi. Worklets üretici düzeltmesi mevcut Reanimated 4.5.1 ile uyumlu 0.10.1’e taşındı; yeni 0.12.2/0.13.0 sürümüne uyumsuz geçiş yapılmadı. Native yardımcı RN JSI başlıklarıyla derlendi; tam native build/çalışma testi bekliyor.
+- Test token’ı çalışma anında üretiliyor. Password→Parola arayüz çevirisi gerçek parola olmadığı için yanlış pozitif olarak belgelendi; taramadan gizlenmedi.
+- Temiz npm ci, 64 uygulama testi + 12 güvenlik regresyonu, lint, TypeScript, Expo uyumu ve iOS/Android/web export geçti. Ham npm audit 59 (54 high/5 moderate); uyarılar korunuyor.
+- Mevcut VS Code Snyk hesabında yeniden tarama başlatıldı: Open Source 5→4 (2 high/2 medium), Zod kalktı. Kaynak yamaları paket sürümünü değiştirmediği için kalanlar görünür. Code sonucu bekleniyor; Secrets kapalı. Ücretli servis açılmadı, güvenlik yayın kapısı pending.
+
+Worklets ek native kontrol / native follow-up: gerçek yamalı `Serializable.cpp` dosyasının tamamı, kurulu RN/Worklets başlıklarıyla C++20 `-DNDEBUG -fsyntax-only` kontrolünden geçti. Debug kontrolü CocoaPods bağımlılığı `glog/logging.h` henüz kurulmadığı için tamamlanmadı. Bu sonuç linklenmiş iOS/Android binary veya native çalışma testi değildir.
+
+Snyk son yeniden tarama: ilk Code isteği API timeout verdi; tek tekrar başarıyla tamamlandı. Toplam **7→5**: Open Source 4 (2 high/2 medium), Code 1 medium (Password→Parola çeviri etiketi). Test token bulgusu kalktı; IaC bulgusuz, Secrets hâlâ kapalı. Ekran görüntüsü ve elle aktarılmış UI kanıt kaydı saklandı. Uyarılar gizlenmedi; kaynak yamaları bağımsız/native onay yerine geçmez.
+
+## 15 Ekim 2026 — Secrets ve gerçek iOS native güvenlik kontrolleri
+
+- Snyk Secrets proje için açıldı; organizasyon özelliği kapalı. Ücretli paket/deneme açılmadan Gitleaks 8.30.1 ile mobil/API kaynakları ve mevcut Git geçmişleri tarandı: 0 kaynak/geçmiş bulgusu. Ignored .env envanterindeki beş eşleşme anon anahtarları ve yerel sunucu anahtarları; modlar 0600 yapıldı. Kaynak snapshot'ları silindi, değerler yazdırılmadı. Normal native pakette dört sunucu anahtarı değeri bulunmadı.
+- Çevrimdışı scanner/CI eklendi; gerçek sahte anahtar ve geçmişte silinmiş anahtar yakalama, hatada başarısız olma kanıtları geçti. CI aksiyonları resmî repolardan doğrulanan commit SHA'larına sabitlendi. Android APK izin/ELF/ZIP 16 KB denetleyicisi ve manuel CI hazırlandı; henüz uzakta çalıştırılmadı. Betiklerin serbest yol parametrelerine ait Snyk uyarıları sabit proje yolları/komutlarıyla giderildi; final tarama ayrıca kaydedilecek.
+- Face ID açıklaması kaldırıldı; Android backup/overlay kapatıldı; yeni oturum yazıları WHEN_UNLOCKED_THIS_DEVICE_ONLY kullanıyor. Lint/TS, 65 uygulama + 12 bağımlılık + 2 scanner + 4 ELF parser testi geçti.
+- Xcode 26.6 / iOS SDK 26.5 ARM64 Release simülatör derlemesi geçti. İlk imzasız Keychain yetki hatası doğru Xcode simülatör imzasıyla çözüldü; korumalar gevşetilmedi. Hermes'te gerçek RN↔UI prototip aktarımı ve uzun Unicode Keychain yaz/oku, uygulama yeniden açılışı, silme dahil 10 native kontrol geçti. Normal uygulamada 222 dosya/16 gizlilik manifesti incelendi; test probe'u pakette yok. Probe normal uygulamayla değiştirildi, giriş ekranı oturum hatası olmadan açılıyor. Servis uyarısı mevcut API'ye yeni mobil sözleşmeler henüz yayımlanmadığı için korunuyor.
+- Mac'te Android SDK/Java yok; kullanıcı daha fazla alan açamıyor. Android/gerçek cihaz/dağıtım imzası, bağımsız yama incelemesi, kimlik doğrulamalı DAST ve gerçek servis/mağaza kapıları açık. Normal simülatör app+dSYM saklandı, yalnızca bu işin oluşturduğu 3+ GB native ara dosyalar temizlendi. Production deploy veya mağaza yayını yapılmadı.
+
+16 Ekim kapanış kaydı: Secrets ve iOS yerel alt kontrolleri tamamlandı; Android/DAST/bağımsız inceleme ve üretim API/şema kapıları açık. Sıradaki yayın işleri docs/NATIVE_SECURITY.md içinde sıralandı. 65+12+2+4 otomatik test ve 10 gerçek iOS native kontrolü geçti; uzakta CI çalıştırılmadı.
+
+Android uzak alternatif: mevcut private GitHub repo erişimi doğrulandı. Ücretsiz Actions kotası API (404) ve panel (bağlantı kesildi) üzerinden doğrulanamadı; kullanıcıdan ücretsiz kota/ücretli kullanımın kapalı olduğu bilgisi istendi. Kaynak push veya ücret doğurabilecek runner başlatılmadı.
+
+## 16 Ekim 2026 — Ücretsiz GitHub Actions doğrulaması ve Android başlangıcı
+
+- Kullanıcının açık GitHub hesabında Actions kotası doğrulandı: 436/2.000 dakika kullanılmış, 1.564 dakika kalmış; depolama 0/0,5 GB. Hesap geneli Actions bütçesi $0, durdurma kutusu açık, geçerli ödeme yöntemi yok. Faturalandırma ayarları değiştirilmedi.
+- Yerel main/index ve WIP korunarak ayrı codex/android-native-validation-20261016 dalına mobil kaynak snapshot’ı gönderildi. Bu snapshot yalnız Android workflow’unu içeriyor; standart Ubuntu runner, 45 dakika sınırı, bir gün artifact saklama. Staging public anahtar/API değişkenleri ayarlandı; protected Preview gerçek native API doğrulaması sayılmıyor.
+- İlk Android run: https://github.com/mertgrz24/chef-ai/actions/runs/38809519194 — başladı; sonuç/gerçek APK denetimi henüz bekleniyor. Push öncesi Gitleaks: 160 kaynak dosyası, kaynak/geçmiş 0 bulgu.
+
+Android ilk gerçek artifact: run 38810065531 ARM64 Release APK üretti (56.788.137 bayt), fakat Worklets tam lint K2 motoru KaModule iç hatasıyla durdu. Yerel APK incelemesi: 26 ELF/ZIP native hizalama geçti, probe yok, 1.376 dosyada dört bilinen yerel sunucu değeriyle eşleşme yok. Tam lint kapatılmadan K1 analiz seçeneğiyle ve ayrı assemble/lint/artifact adımlarıyla run 38812576433 başlatıldı. Ön iki kurulum/snapshot hatası da kanıtta korundu; genel sonuç henüz pending.
+
+Android run 38812576433, uygulama vital lint’inde gerçek 4 ExtraTranslation hatası buldu: iOS NSCamera/NSPhotoLibrary izin çevirileri Android kaynaklarına yazılıyordu. EN/TR native locale dosyaları Expo’nun desteklediği ios nesnesine alındı; gerçek Expo çözümleyicisiyle regresyon eklendi ve temiz Android prebuild kaynaklarında iOS anahtarı bulunmadığı doğrulandı. Lint kuralı/baseline/suppression eklenmedi. Yerel lint/TS, 65 uygulama ve 13 güvenlik/yapılandırma testi geçti. Yeni run 38816907980 devam ediyor.
+
+## 16 Ekim 2026 — Android native CI tamamlandı
+
+- Run https://github.com/mertgrz24/chef-ai/actions/runs/38822859339, commit 3313a6477a71f6b71f3af369371375067d35f8ac: Release assembly, tam lint, gerçek ARM64 APK manifest/26 ELF/SDK zipalign 16 KB kontrolleri ve artifact upload geçti (~32 dakika). API33 splash kaynağı sürümlü dizine ayrıldı; kamera donanımı opsiyonel bildirildi. Hiçbir lint kuralı susturulmadı.
+- Yerel lint/TypeScript, 65 uygulama testi, 15 güvenlik/yapılandırma regresyonu ve 4 ELF parser testi geçti. Son kaynak/geçmiş Secrets kontrolünde 0 bulgu.
+- Son CI arşivinin yerel indirmesi ağ timeout nedeniyle tamamlanmadı. Yerelde saklanan önceki APK raporunun run 38816907980 kökeni açıkça belirtildi; son CI başarısı bununla karıştırılmıyor. Fiziksel cihaz, final IPA/AAB ve diğer ABI kontrolleri açık.
+- Kullanıcı mevcut Snyk hesabına Safari’de giriş yaptı. Kullanım ekranı private manifest 12/200, IaC 0/300, Code 0/100 gösteriyor; bunlar DAST hakkı sayılmadı. API & Web SSO account-not-accessible sayfasına ulaştı, ücretli paket/deneme açılmadı ve DAST başlatılmadı.
+- Bağımsız yama incelemesi, erişilebilir staging API, gerçek SMTP/ödeme/push/Sentry, hukuki bilgiler ve beta/mağaza kapıları açık. Production deploy/yayın yapılmadı.
+
+## 16 Ekim 2026 — Telefona erişilebilir staging API
+
+- Ayrı chef-ai-staging Vercel projesinin sabit HTTPS adresi: https://chef-ai-staging-nu.vercel.app. Bu adres Vercel oturumu/bypass anahtarı gerektirmiyor; Preview koruması korunuyor. Platformun bu staging projesindeki Production target kullanıldı; müşteri production API/DB değişmedi. Fonksiyonlar ayrı staging DB ile aynı bom1 bölgesinde.
+- Exact chefai://auth/callback yönlendirmesi kullanıcının eylem anındaki açık onayıyla staging Supabase’e eklendi. 16 doğrudan HTTP kalıcılık/izolasyon/silme kontrolü ve 6 auth token/redirect kontrolü geçti. Gerçek SMTP kurulmadı; e-posta teslimi doğrulanmadı. Telefona ayrı, önceden doğrulanmış sentetik test hesabı hazırlandı; bilgiler sadece özel yerel Downloads dosyasında.
+- Yeni Gemini anahtarı kullanıcı tarafından özel geçici dosyaya yazıldı ve yalnız staging sunucusuna aktarıldı. Model seçimi sunucu env’iyle yapılabiliyor; production varsayılanı korunuyor. Mac’te gerçek yapılandırılmış tarif üretildi, ancak hosted istekler model/bölge değişimine rağmen sağlayıcı 503 verdi. AI kabulü yapılmış sayılmadı; AI/localized-AI staging bayrakları tekrar kapatıldı.
+- Staging test bilgilendirme API sayfası eklendi; production hukuki metni değildir, varsayılan production/başka DB’de 404 regresyonu var. Güvenli kategori tabanlı staging teşhisi ham sağlayıcı hatası, URL, token veya içerik loglamıyor. 30 API güvenlik testi ve TypeScript geçti; lint 0 hata/4 mevcut uyarı. İki repo kaynak/geçmiş Secrets taraması 0 bulgu.
+- Yeni Android run https://github.com/mertgrz24/chef-ai/actions/runs/38905484217 başarılı; APK indirmesi sürüyor. Önceki APK korumalı Preview adresine bağlı olduğundan yenisiyle değiştirilmeli. Ayrıntılar mobile/docs/STAGING_DEVICE_TEST.md içinde.
+
+Android staging APK teslimi: run38905484217 artifact12049860632 indirildi; arşiv SHA-256 GitHub digest ile eşleşti. APK bütünlüğü ve sabit staging URL’si doğrulandı; incelenen 6 bilinen sunucu değeriyle literal eşleşme 0. Dosya Downloads/Chef-AI-Staging-2026-10-16.apk olarak hazır. AI/provider, SMTP, ödeme/push ve gerçek cihaz kabulü açık; tüm akışlar tamamlandı denmedi. Geçici sunucu anahtarı/env/test kimlik bilgisi kopyaları temizlendi; kullanıcıya ayrılan test hesabı ve özel giriş notu korundu.
+
+
+## 16 Ekim 2026 — Cihaz geri bildirimi: silme bağlantısı, AI hata ayrımı ve auth e-posta hazırlığı
+
+- Ortak hesap silme web bağlantısı kaldırıldı; yalnız Profile'daki kırmızı gerçek silme eylemi kaldı. Kullanıcının tarayıcıda uzun metin görme bildirimi staging bilgilendirme linkiyle örtüşüyor; gerçek API arızası doğrulanmadı.
+- Staging sentetik auth/profil/kiler/tarif cascade kontrolü rollback ile geçti; gerçek hesap silinmedi, production/şema değiştirilmedi. Silme API'sinin kimlik ve başarısızlık yollarına regresyon testi eklendi.
+- Beş AI endpoint'inde güvenli sağlayıcı hata kategorileri ve mobil TR/EN hata sunumu eklendi; haftalık planda her 403'ün kota sayılması düzeltildi. Hosted 503 ve AI-off durumu açık engel; yeni başarılı canlı AI kanıtı yok.
+- Kullanıcı gerçek cihazda doğrulama e-postasının çalıştığını bildirdi. Chef-AI markalı doğrulama/reset HTML şablonları ve SMTP rehberi hazırlandı; alan adı/gönderici/SMTP bilgileri olmadan etkinleştirilmedi.
+- Mobil 72 test, API 34 test, iki TypeScript kontrolü geçti. Mobil lint temiz; API lint 0 hata/önceden mevcut 4 uyarı. Gitleaks mobil178/API128 dosya, kaynak ve yerel geçmişte sıfır bulgu.
+- Kullanıcı talebiyle **yeni build veya deploy alınmadı**; kaynak düzeltmeleri mevcut APK'ya yansımadı. Ayrıntılı oturum dökümü: `mobile/docs/DEVICE_FEEDBACK_2026-10-16.md`.
+
+
+## 16 Ekim 2026 — AI 503 toparlanması: staging üzerinde gerçek kabul geçti
+
+- Google model listesi ve doğrudan çağrı/log karşılaştırması: anahtar geçerli; 503 nedeni sağlayıcı yüksek talebi. Yeni `gemini-3.5-flash-lite` staging modeli seçildi; API güncellendi. Müşteri production ve mobil build değişmedi.
+- JSON çıktı modu ve boş çıktı reddi eklendi. Yalnız staging'de açık sağlayıcı 503'ünde bir ek çağrı, 2–3sn bekleme ve ortak110sn bütçe; ağ/timeout/kota hatasında otomatik tekrar yok. Mevcut idempotency ve uygulama kaydı tek kalıyor. İşlem başına en fazla iki sağlayıcı çağrısı sınırı maliyet notuna işlendi.
+- **13 gerçek hosted HTTP kabulü geçti:** EN/TR tarif, özel kayıt/tekrar/yeni giriş geçmişi, rapor, kamuya açık yemek fotoğrafı analizi, 7 günlük plan/yeniden okuma, öğün yenileme, izin verme/geri çekme. Test hesabı temizlendi.
+- API36 test ve TypeScript geçti; lint0 hata/4 mevcut uyarı. Sabit staging origin'de `ai=true`, `localizedAi=true`; satın alma/push/analytics kapalı. Yeni APK alınmadı; mevcut APK'yı kapatıp açmak yeterli.
+- Güncel dağıtım `dpl_GovLsMia88j1dCSkmUS2zpVTgMJ5` (bom1). Ayrıntı ve kanıt: `mobile/docs/AI_RECOVERY_2026-10-16.md`, `mobile/security/staging-ai-recovery-2026-10-16.json`. Fiziksel cihaz kabulü ve önceki production/yayın/güvenlik kapıları açık.
+
+
+## 16 Ekim 2026 — Yerel staging/production ayrımı (build/deploy yok)
+
+- Mobil `.env` artık staging Supabase ve hosted staging API'ye bağlı; APP_ENVstaging. `.env.example` de aynı public varsayılanları gösteriyor. Gemini/service-role mobil dosyaya konmadı.
+- Eski kök `.env.local` ve mobil production `.env`, otomatik yüklenmeyen `~/.config/chef-ai/env-backups/` tarihli özel yedeğe taşındı (0700/0600). Production servisleri ve anahtarları değiştirilmedi.
+- Mobil config yerel aşamada proje/API/public anahtar eşleşmesini ve public secret sızıntısını kontrol ediyor. Gerçek staging config geçti; beş karışık/production/public-secret örneği reddedildi.
+- API reposuna staging-only `.env.local`, örnek ayar ve development-server guard eklendi. İki server key güvenli aktarımı tamamlanamadığından **boş**; yerel API başlamayı reddediyor. Bu bir tamamlanmış yerel API entegrasyonu değildir. Mobil çalışan hosted staging API üzerinden geliştirilebilir.
+- Mobil/API TypeScript ve lint kontrolleri geçti (API4 mevcut uyarı). Yeni build, native workflow, Metro veya deploy başlatılmadı. Rehber: `mobile/docs/LOCAL_DEVELOPMENT.md`.
+
+
+## 16 Ekim 2026 — Bağımsız yerel API tamamlandı (build/deploy yok)
+
+- Önceki yerel ortam ayrımındaki iki eksik alan tamamlandı: mevcut staging Supabase service-role ve mevcut yeni Gemini anahtarı authenticated sağlayıcı panellerinden okunup yalnız API `.env.local` dosyasına kaydedildi (0600, Git dışında). Yeni anahtar/hesap oluşturulmadı; production yedeğindeki değerler kullanılmadı.
+- `npm run env:check` geçti; service-role JWT staging proje/rolü ve gerçek Supabase hazırlık sorguları doğrulandı. Gemini yapılandırılmış model erişimi200 döndü; yerel AI/TR bayrakları açıldı. Diğer servis bayrakları kapalı.
+- Next development API yalnız `127.0.0.1:3000` üzerinde başlatıldı. Hosted API'ye proxy bağımlılığı yok; doğrudan staging Supabase ve Google'a bağlanıyor.
+- **16 gerçek yerel entegrasyon kontrolü geçti:** 13 tarif/izin/özel kayıt/geçmiş/rapor/fotoğraf/haftalık plan/öğün yenileme ve 3 hesap silme/hesap izolasyonu/silinmiş oturum reddi. Tüm sentetik hesaplar temizlendi.
+- Mobil varsayılan API hâlâ hosted staging; mevcut APK değiştirilmedi, sunucu LAN'a açılmadı. Yeni build, EAS/native workflow veya backend deploy yapılmadı. Rehber güncellendi: `mobile/docs/LOCAL_DEVELOPMENT.md`; kanıt `mobile/security/local-api-ready-2026-10-16.json`.
+
+
+## 16 Ekim 2026 — mobil / tanıtım / backend üçlü repo ayrımı
+
+Kullanıcının talebiyle API ve sunucu ayarları `chef-ai-web` reposundan bağımsız `chef-ai-backend` reposuna taşındı. Kaydedilmemiş güvenlik/AI düzeltmeleri dahil kaynaklar önce kopyalanıp hash ile doğrulandı; API route'ları, servisler, tipler, Supabase migration/e-posta şablonları ve public recipe işlevi yeni backend'de. Tanıtım sayfası ve statik davet sayfası web'de kaldı. Gerçek staging `.env.local` yalnız backend'de,0600 ve Git dışında; mobil public ayarları değişmedi. Web bağımlılıkları/sunucu cron'ları ayrıldı, güvenlik bağımlılık yamaları korundu.
+
+Mevcut hosted staging adresi/artefaktı ve telefondaki APK korundu. Yerel API development sunucusu yeni backend reposuna alındı. Yeni build veya deployment yapılmadı. Önceki günlükteki web/API konumları tarihsel kayıttır; güncel sözleşme sahibi backend'dir. Production geçişi, SMTP/yasal bilgiler, DAST, native/beta ve mağaza kapıları bu taşıma ile tamamlanmış sayılmaz. Ayrıntı: backend `docs/REPOSITORY_SPLIT.md`.
+
+Ayrım doğrulaması: backend36güvenlik testi ve8yerel/hosted sentetik entegrasyon kontrolü geçti; geçici hesap temizlendi. Web/mobile kaynaklarında ve backend başlangıç snapshot/geçmişinde sır taraması0bulgu. Backend GitHub özel repo hazır; web/mobile push edilmedi, yeni build/deploy tetiklenmedi. Tanıtım3001/API3000 development portlarında; canlı staging aynı artefaktla çalışır.
+
+
+## 16 Ekim 2026 — mobil ve backend aynı uygulama reposunda
+
+Kullanıcının seçtiği sade düzen uygulandı: `mobile/` ve `backend/` chef-ai reposunda, tanıtım ayrı chef-ai-web reposunda. Önceki standalone backend çalışma dizini buraya taşındı;115 kaynak dosyası taşıma öncesi/sonrası SHA-256 ile doğrulandı. API/servis işlevi değişmedi. Nested .git bırakılmadı; önceki backend Git geçmişi özel kurtarma alanında, GitHub standalone repo tarihsel snapshot olarak korundu. Mobildeki kaydedilmemiş işler ve Git indeksi sıfırlanmadı.
+
+Sunucu anahtarları yalnız `backend/.env.local` içinde 0600 / Git dışında; mobile/.env yalnız public staging değerlerinde. Paketler/lock dosyaları bağımsız, mobil-backend ilişkisi HTTP üzerinden. Yerel API yeni dizinden 3000 portunda; tanıtım ayrı repoda 3001. Güncel yönergeler/MD'ler düzenlendi; önceki üç repo kayıtları tarihsel tutuldu.
+
+Staging Supabase/Vercel ve mevcut APK değişmedi. Yeni build/deploy/push veya native CI çalıştırılmadı. İleride monorepo Git deploy'u yapılacaksa Vercel Root Directory backend; Expo/EAS çalışma dizini mobile olmalıdır. Ayrıntı: backend/docs/MONOREPO.md.
+
+Güncel taşıma kontrolü: 64 işlevsel API/servis/SQL dosyası değişmeden korundu; backend TypeScript ve ortam kontrolü geçti. Yerel/hosted config200 ve AI/TR hazır; kimliksiz korumalı istekler401. Git kaynak/yerel geçmiş sır taramasında0bulgu; sunucu anahtarları mobile/.env içinde yok. Önceki testler tekrar çalıştırılmadı; yeni AI üretimi veya hesap/veri mutasyonu yapılmadı. Kanıt: mobile/security/monorepo-layout-2026-10-16.json.
+
+
+## 16 Ekim 2026 — yayın engellerinin yeniden kontrolü ve kalıcı günlük AI limiti
+
+Güncel20madde/24kabul kapısı yeniden incelendi; stale503/AI-off backend kaydı düzeltildi. Raw npm: mobil56high/5moderate, backend7high; kök braces/node-forge/sprintf-js yerel yamalarının bütünlüğü ve15mobil regresyonu geçti. Backend36güvenlik testi ve TypeScript geçti. Audit uyarıları/bağımsız inceleme/DAST halen açık; ücretli servis açılmadı.
+
+Global AI limiti job satırlarından hesaplandığından hesap silme/cleanup ile azalabiliyordu. UTC gün+sayısı tutan kimliksiz counter ve atomic rezervasyon migration hazırlandı, local SQL lifecycle ve farklı hesapların son kota yarışı geçti. Yalnız staging Supabase üzerinde uygulandı; RLS/grant/search_path doğrulandı,5gerçek staging replay/başarısızlık/kota/hesap silme kontrolü geçti. Sentetik hesap temizlendi; AI sağlayıcı çağrısı0. Production değişmedi; bu kesin dolar/token muhasebesi değildir.
+
+Backend non-build CI kaynak kontrolü monorepoya eklendi; uzak CI/push/build/deploy yapılmadı. Güncel sıralı engeller: mobile/docs/RELEASE_BLOCKERS_2026-10-16.md. SMTP/yasal bilgiler, abonelik, push/Sentry, production yedek/restore/işletim, final native/beta/mağaza kanıtları bekliyor.24gate pending kaldı.
+
+
+## 16 Ekim 2026 — kamera/önizleme ve haftalık menü mobil düzeltmeleri
+
+İzin yalnız kullanıcı eylemiyle ve canAskAgain uygunsa istenir; kalıcı ret/Settings dönüşü ve Scan'den ayrıldıktan sonra kamera açmama eklendi. Android pending picker sonucu önizlemeye kurtarılır; tam görsel yüklenmeden ve Analyze onayı olmadan gönderilmez. Görsel değiştirme/iptal, kota elle ekleme alternatifi ve unmount upload/normalizasyon temizliği düzeltildi.
+
+Haftalık menüde TR işlem kimliği/loading eşleşmesi, offline ilk açılış spinner'ı, gün sırası/tarih doğrulaması ve eski read yanıtının yeni planı ezmesi düzeltildi. Öğün detayları/önceki plan hatada ve offline korunur.95test/14suite ve15güvenlik regresyonu, TypeScript/lint geçti;23yeni test eklendi. Gerçek OS izin/kamera/activity kabulü yapılmadı. Backend'in DB hatasını404 yapması ayrıca açık. Yeni build/deploy/push veya gerçek AI çağrısı yok; kurulu APK kaynak düzeltmelerini almadı. Detay: mobile/docs/CAMERA_MENU_FIXES_2026-10-16.md.
+
+Aynı turdaki ek kontrol: haftalık plan GET kaynağında DB hata/boş durum ayrımı maybeSingle ile düzeltildi; gerçek boş404, DB hatası500. Kimlik/kapsam/ham hata sızdırmama regresyonu eklendi. Backend37test ve TypeScript geçti; lint0hata/4eskiuyarı. Yeni deploy olmadığı için hosted sürüm eski handler'ı kullanıyor. Mobil95Jest ve lint/TypeScript tekrar geçti.
+
+
+## 2026-10-16 — Kullanıcı erişimi gerektirmeyen yayın hazırlığı kapanışı
+
+İki env şablonu doğru mobil/sunucu sınırlarıyla korundu; şablon kuralları CI ve regresyonlara bağlandı. Yedi legacy API girişinde bounded JSON, Pantry gerçek tarih/uzunluk, Profile sayısal sütun sınırları ve bakım ayarı ön kontrolü tamamlandı. Sentry bilinmeyen alanları göndermez; teknik debug/stack alanları sınırlanır. Yedi migration temiz sentetik yerel DB'de, eşzamanlı kota/push ve yedek/geri yükleme kontrolleriyle geçti; geçici DB/yedekler temizlendi. Production provası değildir. Backend CI hazırlandı, remote çalıştırılmadı.
+
+97 mobil/14 suite, 15 dependency, 41 API, 3 secrets/şablon, 4 ELF-denetleyici testi; iki TypeScript/lint ve Expo uyumluluk kontrolü geçti (backend4 mevcut lint uyarısı). Gitleaks kaynak/geçmiş0. Raw audit mobil53 yüksek/5 orta, backend7 yüksek: güvenlik kapısı, bağımsız inceleme ve DAST açık. Build/deploy/push/harcama yok, kurulu APK değişmedi. Tüm 24 harici/native/production kabul kapısı pending. Ayrıntı ve yalnız kullanıcı işleri: [ENGINEERING_CLOSEOUT](mobile/docs/ENGINEERING_CLOSEOUT_2026-10-16.md), [OWNER_ACTIONS](mobile/docs/OWNER_ACTIONS.md).
+
+
+## 2026-10-16 — Bağımlılık güvenliği: backend sıfır, mobil orta bulgular sıfır
+
+Mobil scoped js-yaml4.3.2 geçişiyle eski YAML/argparse/sprintf-js ağaçtan kaldırıldı; sprintf yaması artık yok. Backend Tailwind/PostCSS4.3.3 ve Next lint root-glob için tinyglobby0.2.17 alias + mutlak yol uyumluluk yamasıyla braces zinciri tamamen kaldırıldı. İki gerçek temiz npm ci,97 mobil/15 bağımlılık/42 backend testi, TS/lint ve Expo uyumluluğu geçti. Backend raw audit0; mobil54 yüksek/0orta. Önceki53'e göre ek üst kayıt değişmeyen react-native-purchases via react-native; kökler braces/node-forge ve yayımlanmış upstream düzeltme yok. Mobil15 dosya yaması hâlâ bütünlük/regresyonla korunuyor; bağımsız inceleme ve finalnative kapısı açık. Build/deploy/push/ücretli tarama yok. [Ayrıntı](mobile/docs/DEPENDENCY_REMEDIATION_2026-10-16.md).
+
+
+## 2026-10-16 — Snyk altı bulgunun takibi
+
+VS Code Snyk ekranındaki dört mobil bağımlılık ve iki kod bulgusu doğrulandı. Backend webhook testi sabit HMAC anahtarı/authorization yerine her çalışmada kriptografik rastgele değer üretir ve test sonunda önceki ortamı geri yükler. Mobil giriş formu mevcut Your password / Parolan çevirisini kullanır; parola değeri sanılan gereksiz Password: Parola etiketi kaldırıldı. TR/EN etiket regresyonu geçti.
+
+Gerçek Snyk yeniden taraması tamamlandı: 6 → 4 toplam, 0 yeni; Code Security ve IaC temiz, Open Source 2 yüksek/2 orta. Kalan braces/node-forge/deepmerge/Worklets bulguları kapatılmadı veya gizlenmedi. İlk üçü için yayımlanmış düzeltme yok; Worklets güvenli sürümü mevcut Expo native eşleşmesinden farklı. Mevcut 15 kaynak yamasının bütünlüğü ve 15 bağımlılık regresyonu, 42 backend testi, 4 locale/privacy testi, iki TypeScript ve değişen kod dosyalarının ESLint kontrolleri geçti. Bu kanıtlar bağımsız güvenlik onayı veya kurulu APK doğrulaması değildir.
+
+HawkScan 6.6.0 mevcut ancak API anahtarı/yerel oturum yok; DAST çalışmadı, hesap açılmadı. Yeni build/deploy/push yapılmadı. Ayrıntı: mobile/security/SNYK_FINDINGS.md içindeki son takip kaydı.
+
+
+## 2026-10-16 — Kalan dört Snyk bağımlılığı için kaynak düzeltmeleri
+
+Braces/deepmerge, kaynakları incelenen tam sürüme sabitlenmiş npm forklarıyla değiştirildi. Forge, birleşmemiş PR1152'nin ceba34402e329f0365134f23fe19898756527d65 commit arşivine sabitlendi; kendi sürümü1.4.1-0, resmi yayımlanmış düzeltme değil. Daha sıkı canonical NULL doğrulaması hash kontrollü postinstall yaması olarak korunuyor. Sürüm uydurma veya bulgu gizleme yapılmadı.
+
+Resmi Worklets0.13.0 için Expo58/RN0.88/React19.3/Reanimated4.7.1 uyumlu kaynak geçişi uygulandı. Jest/RNTL async API ve TypeScript uyarlamaları yapıldı. Expo58 ağacından image-size/decode-uri-component/query-string kalktı; eski geçiş yamaları kaldırıldı. Mobil yama manifesti15dosyadan1Forge dosyasına indi.
+
+Temiz bağımlılık kurulumu,17gerçek-bağımlılık güvenlik regresyonu, final TypeScript/lint/npm ls ve kurulu Expo tablosuyla offline uyumluluk kontrolü geçti. Registry npm audit0; tam uygulama Jest suite'i Expo58 sonrasında çalıştırılmadı. Eski97test/native sonuçları yeni kaynak için kabul kanıtı değildir.
+
+Snyk son tamamlanan günlük22:45'te1OSS/0Code/0IaC bildiriyor; panel eski sürümleri gösteriyor. CLI son taraması401: eklenti oturumunun erişim token'ı süresi dolmuş. Kalan bulgunun kimliği logdan belirlenemedi; kullanıcıdan Snyk yeniden oturum/tarama istendi. **Snyk0 doğrulanmadı; kapanış açık.** HawkScan6.6.0 hazır, anahtar/oturum yok; DAST çalışmadı.
+
+Yeni build/deploy/push/OTA yok, APK ve staging değişmedi. Expo57 APK bu kaynağı yüklememeli; gelecekte izinli native build/cihaz kabulü gerekir. Kaynak/provenance ve kanıt: mobile/security/PACKAGE_REPLACEMENTS_2026-10-16.md; raw audit: mobile/security/audit-package-replacements-2026-10-16.json.
+
+
+## 2026-10-16 — Son Snyk bulgusunun kimliği doğrulandı
+
+Kullanıcı ekranı açıp yeniden taradı; eklentinin tamamlanan sonucu1total/0new:1highOSS,0Code/0IaC. Kalan node-forge1.4.1-0, CVE-2026-85393 / SNYK-JS-NODEFORGE-19635204 (CVSS8.7). Önceki kimliği belirsiz kalan bulgu/oturum engeli bu başarılı UI taramasıyla açıklığa kavuştu.
+
+ExpoCLI ve sertifika kütüphanesi aynı yamalı Forge kopyasını yüklüyor; nested DigestAlgorithm ve canonical NULL kontrolü kaynakta mevcut, hash bütünlük kontrolü geçti. Snyk advisory tüm sürümleri(*) eşleştiriyor; npm en son1.4.0, düzeltmePR1152açık ve yayımlanmış güvenli sürüm yok. Kaynak mitigasyonu ile tarayıcı kapanışı ayrı: **Snyk1high halen açık**. Ignore/sürüm uydurma yapılmadı; bu takipte kod değişmedi/test/build/deploy/push yok. Ayrıntı: mobile/security/SNYK_FINDINGS.md; gözlem kaydı: mobile/security/snyk-final-residual-2026-10-16.json.
+
+
+## 2026-10-16 — Reload Window sonrası güvenlik çalışmasının doğrulanması
+
+Önceki sohbetin sonundaki Forge kaldırma ve temiz Snyk sonuçları diskte doğrulandı: mobile/security/FORGE_REMOVAL_2026-10-16.md, mobil/backend snyk-dev-final raporları. Bu kayıt önceki Snyk1high/oturum engeli kayıtlarının tarihsel olduğunu açıklar; geçmiş kayıtlar korunur. Bu turda Snyk yeniden çalıştırılmadı.
+
+Mobil/backend güvenlik sınırları,28APIroute, Supabase migrationları, sertifika adaptörü/bağımlılıklar, sır taraması ve CI gözden geçirildi. İki ek sorun regresyonlarla yeniden üretildi ve düzeltildi: getSession beklerken hesap değişiminde eski ekran isteğinin yeni hesaba gönderilmesi; hatalı AI JSON/şemasının ham metin üzerinden başarılı tarif sayılması. Oturum yenilemede aynı kullanıcı kontrolü eklendi. Yeni testler önce başarısız, düzeltmeler sonrası başarılı.
+
+Son doğrulama:99mobil/14suite,17bağımlılık,43backend,3sır/şablon ve4artifact-denetleyici testi geçti; iki lint/TypeScript temiz. Güncel npm audit mobil0/backend0. Gitleaks kaynak/geçmiş0. İki ortam kontrolü geçti; dotenv dosyaları0600/Gitdışı. Yedi migration, roller/RLS/kota/cascade/eşzamanlılık ve sentetik yedek/restore izole yerel PostgreSQL üzerinde geçti; test DB'leri temizlendi, sunucu durduruldu. Canlı veritabanına dokunulmadı.
+
+HawkScan6.6.0 mevcut fakat anahtar/oturum yok; DAST yapılmadı. Expo/Jest online öneri farkı önceki kayıtta sürüyor; uzakta CI çalıştırılmadı. Yeni native/gerçek cihaz, bağımsız kripto incelemesi ve production/servis kabul kapıları açık. Build/deploy/push/OTA yok; APK ve hosted staging korunuyor. Detay/kanıt: mobile/security/PROJECT_REVIEW_2026-10-16.md.
+
+
+## 2026-10-17 — Onaylı tekrar kullanım turu: A–D ve kota görünürlüğü
+
+Today mevcut son20 özel tarif/haftalık plan/kilerden deterministik en fazla3 öneri sunar; filtre/detay AI veya yeniden indirme başlatmaz. Süre bilinmiyor/uygun hızlı sonuç yok ayrılır; sıfır eşleşme kiler uyumu değildir. Hesap kapsamlı bellek deposu, mutation invalidation ve gün/hafta yenilenmesi eklendi. Mevcut RecipeTicket ve tasarım kullanıldı. Kiler düzenleme revision CAS ile eklendi; migration yalnız yerelde uygulandı. Ödeme kapalıyken de sunucu kota bilgileri gösterilir; limit seçilmedi/değişmedi.
+
+119mobil/17suite +17bağımlılık,51backend,3sır/şablon ve4artifact birim testi; TS/lint, npm audit0/0, Gitleaks0/0. İzole PostgreSQL8migration/6grup ve gerçek paralel PATCH200+409, RLS ve sentetik restore geçti. Gerçek sağlayıcı çağrısı0. Paket/lock/yamaların tur başlangıcına göre hashleri değişmedi.
+
+Sağlayıcı gözlemi tüm mevcut dispatch'leri ölçer; eksik token/ücret bilinmiyor kalır. **Genel limit kabul açığı:** mevcut staging503 retry2çağrı/1günlükrezervasyon; bu sayaç politikası değiştirilmedi ve kapanmış sayılmadı. Belirsiz timeout/kilit/iade/durum/temizlik ayrı E onayı bekliyor. Snyk yeni tarama ve HawkScanDAST yapılmadı (Hawk anahtarı/oturumu yok). Yeni build/deploy/push/OTA/uzak migration/ücretli işlem yok. Staging ve APK değişmedi; native/yayın kapıları açık. Ayrıntı: mobile/docs/APP_REUSE_ROUND_2026-10-17.md.
+
+
+## 2026-10-17 — Onaylanan E kuralları ve dispatch sınırı yerelde tamamlandı
+
+Kullanıcının120sn normal bekleme/5dk belirsizlik, kesin sonuçta veya deadline'da kilit bırakma, tek seferlik orijinal UTC ayına iade,24saat sonuç/30gün özet/90gün ölçüm kararları uygulandı. Yeni begin_mobile_ai_v2 + dispatch başına atomik izin, mevcut503 tekrarını genel sınıra dahil eder; sayısal limit/model/retry politikası değişmedi. Eski guard gelecekteki yarım rollout'ta ölçümsüz üretim yapamasın diye bloklanır. Plan ve değiştirilmiş tarif yazmaları hak/sonuç ile aynı transaction'da; geç/iade edilmiş iş yeni veri yazamaz. Mobil yalnız mevcut durum GET'i ile kurtarır; owner'a özel içeriksiz pointer, Cook/Scan/Plan tekrar kullanımı ve çıkış/hesap izolasyonu eklendi.
+
+134mobil/19suite +17bağımlılık,61backend,3sır/şablon,4artifact birim testi, iki TS/lint; audit0/0 ve Gitleaks0/0.9migration/8grup izole PostgreSQL ve sentetik restore; izin ve sonuçlandırma yarışları, geç plan fence'i, tek iade, UTC ay,24/30/90saklama, RLS/roller/hesap silme ve korunmuş Pantry200+409 geçti. Gerçek sağlayıcı çağrısı0.
+
+Saatlik temizlik kodu/etkin olmayan zamanlayıcı örneği hazır; uzak görev açılmadı. Yeni build/deploy/push/OTA/uzak migration/ücretli servis yok; staging/APK değişmedi. HawkScan6.6.0 hazır ama anahtar/oturum yok, DAST çalışmadı; Snyk yeni tarama değil. Hosting120sn desteği, gerçek entegrasyon/native/cron ve önceki mağaza/servis kapıları açık. Rapor: mobile/docs/AI_LIFECYCLE_2026-10-17.md.
+
+
+## 2026-10-17 — Açık izinle staging geçişi ve saatlik temizlik
+
+Yalnız chef-ai-staging Supabase/Vercel doğrulandı; eski AI girişi durdurulup pending0 iken Pantry/lifecycle uygulandı. Yeni backend READY/config kontrolünden sonra sabit staging adresi dpl_BQ3DtEYmjqvt44t6gy3HcSfEBWPs'a yönlendirildi. Ayrı staging projesinin Vercel production target etiketi gerçek uygulama production'ı değildir. Production/push/mobil build/OTA yok.
+
+Supabase pg_cron job1 chef-ai-staging-ai-cleanup aktif,0 * * * * UTC. Aynı job kısa5s doğrulamasında3 scheduler başarısı verdi; saatlik düzene geri alındı. Vercel cron kapalı; ek ücretli plan/servis açılmadı.
+
+Ayrıca onaylanan4 AI işi/8 çağrı bütçesiyle13 entegrasyon kontrolü geçti: TR tarif, fotoğraf,7gün plan ve teköğün yenileme;4 sağlayıcı çağrısı, retry gerekmedi. Replay/status ek çağrı tüketmedi. Kiler200+409, özel kayıt/yeniden giriş/izolasyon, hak1/1/2, deadline iadesi/geç yazma reddi ve2 hesap silme HTTP kontrolü geçti. Test auth/job/ölçüm kalanı0 SQL ile doğrulandı. Ayrı rollback24saat/30gün/90gün saklama ve güncel sayaç korunmasını doğruladı. Eksik token/ücret0 sayılmadı.
+
+Advisors0ERROR; değiştirilmemiş referral/kapalı leaked-password protection2WARN; sunucu client izinleri kapalı. DAST/native/SMTP/production/store kabulü yapılmadı.61backend/lint geçti. Rapor: mobile/docs/STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md; içeriksiz kanıtlar mobile/security/staging-lifecycle*.json.
+
+
+## 2026-10-19 — Yayın engelleri takibi ve push hesap izolasyonu
+
+Güncel belgeler/kod gözden geçirildi. Push izin/token/API bekleyişindeki hesap değişimi yarışı kapatıldı: captured owner, API beklenen kullanıcı kontrolü, yeni hesaba yerel token yazmama ve detach sırasında eski aktif/sıradaki kayıtları geçersiz kılma. Altı yeni regresyon eklendi; bildirim servisi açılmadı.
+
+140mobil/19suite +17bağımlılık,61backend,3secrets/şablon testi; iki lint/TypeScript geçti. Güncel npm audit0/0. Gitleaks394kaynak dosya/yerel Git geçmişinde0/0. HawkScan6.6.0 mevcut, anahtar ve proje yapılandırması yok; DAST tamamlanmadı. Son Snyk16Ekim kanıtı; yeni tarama yapılmadı.
+
+Staging yalnız SELECT ile kontrol edildi:57doğal saat başı +3önceki hızlı doğrulama=60başarılı temizlik/0hata; aktif0 * * * *; expired pending0. Production, yeni mobil/backend build, deploy, OTA, push, migration veya gerçek AI çağrısı yok. Paket/lock/yamalar ve sayısal limitler değişmedi. APK aynı; yeni kaynak telefona uygulanmış değil.
+
+Güncel RELEASE_BLOCKERS_2026-10-19.md ve OWNER_ACTIONS.md yazıldı; eski belgeler tarihsel olarak işaretlendi,24nihai yayın kapısı pending korundu. Dış girdiler: hukuk/SMTP/mağaza ve Premium kararları/Sentry-push erişimi/bağımsız DAST/native-beta/production onayı. Kanıt: mobile/security/release-followup-2026-10-19.json.
+
+
+## 2026-10-20 — Onaylı son ürün/UI polish turu
+
+Eski Son Geliştirme Turu MD'si uygulama planı olarak ele alındı; güncel kaynakta öneri/Pantry edit/kota görünürlüğü DONE doğrulandı, yeniden yazılmadı. emil-design-eng, design-critique ve accessibility-review uygulandı. Ortak native-driver MotionView, kesilebilir basış/chip geçişleri, canlı Reduced Motion ve modal odak yardımcısı; Today tek kart hedefi/stagger, Pantry sunucu onayı sonrası tek satır giriş/edit/silme çıkışı, Cook sonuç/kayıt feedback, Scan preview/chip ve Meal Plan gün/öğün geçişleri tamamlandı. Krem/yeşil/lime, fontlar ve beş sekme korundu.
+
+Yeni regresyonlar: animasyonda draft/aksiyon korunması, unmount ve preference yarışları, server ack öncesi silme/saved başarısı göstermeme, çift üretim/kayıt/silme, hızlı gün/detay seçimi, sıfır hakta detay ve boş içerikten Cook yalnız navigasyon. Backend gerçek üç read route'u provider/SDK spy ile dispatch0/SDK0/kota yazması0 doğruluyor. Son mobil test sayısı ve tarama kanıtı mobile/security/ui-polish-2026-10-20.json içinde. Backend62test, iki lint/TypeScript,17bağımlılık güvenlik ve3secrets/şablon testi geçti. İzole PostgreSQL9migration/8grup ve sentetik restore geçti; kendi geçici DB/cluster temizlendi.
+
+Güncel npm audit mobil0/backend0. Yeni authenticated snyk test --dev: tek ortak yüksek SNYK-JS-PICOMATCH-21248802/CVE-2026-112366 (yayın19Ekim19:21UTC), mobil28/backend2bağımlılık yolu; fixedIn boş. Eski temiz Snyk raporu bu yeni bulguyu kapatmaz. Ignore/suppression yok; paket/lock/yama/SQL başlangıç hashleri korundu. Ayrı bağımlılık düzeltmesi açık yayın engeli. HawkScan6.6.0 anahtar/proje config yok:BLOCKED; DAST çalışmadı. Native görsel/60fps/ekran okuyucu kabulü NOT RUN.
+
+Yeni mobil/backend build, deploy, uzak migration, OTA, Git push, mağaza, push/analytics aktivasyonu, gerçek AI veya yeni ücretli servis işlemi yok. Hosted staging/APK ve production korunuyor. Detay: mobile/docs/UI_POLISH_2026-10-20.md; yeni raw Snyk/audit raporları her paketin security dizininde. Nihai yayın kapıları pending kaldı.
+
+
+## 2026-10-20 — Picomatch ReDoS kaynak mitigasyonu ve yeni taramalar
+
+Kullanıcının açık izniyle SNYK-JS-PICOMATCH-21248802/CVE-2026-112366 incelendi. Registry latest4.0.7 ve advisory(*)/fixedIn[] doğrulandı; açık PR194 tüm saldırı sınıfını kapatan yayımlanmış çözüm sayılmadı. Tek branch tekrarlı wildcard saldırısı bounded Node sürecinde timeout ile tekrar üretildi.
+
+Mevcut hash/postinstall mekanizmasına mobil5/backend2parse.js yaması eklendi: wildcard/quantifier/nested-group belirsizliğini mevcut literalization yoluna alma ve genel literal prefix çakışmasını engelleme. Önceki6mobil/1backend yama girdisi aynen korundu. Paket/lock ve uygulama/SQL kaynakları değişmedi. Riskli/karmaşık tekrarlı extglobların literal yorumlanması uyumluluk sınırı olarak belgelendi.
+
+İki temiz npm ci,150mobil/20suite,19bağımlılık,64backend,3secrets/şablon, iki lint/TypeScript ve yama bütünlük kontrolü geçti. Gerçek Tailwind/micromatch/anymatch/readdirp/tinyglobby/Next ESLint adapter regresyonları başarılı. Ortak test yardımcısı iki CI path filtresine bağlandı; uzak workflow tetiklenmedi. npm audit0/0. Secrets kaynak/geçmiş sonucu makine kanıtında.
+
+Yeniden authenticated Snyk --dev aynı tek yüksek advisory gösteriyor: mobil28/backend2yol. Ignore/suppression, paket yeniden adlandırma, sürüm uydurma veya risk acceptance yok. Kaynak mitigasyonu tamamlandı; Snyk katalog/yayın kapısı açık. HawkScan6.6.0/güncel skill var; API key/proje config yok, DAST BLOCKED. Build/deploy/OTA/push/uzak migration/gerçek AI/ücretli servis yok; staging/APK/production korunuyor. Rapor: mobile/security/PICOMATCH_REMEDIATION_2026-10-20.md.
+
+
+## 2026-10-20 — Backend izole Picomatch alternatif uyumluluk denemesi
+
+Kullanıcının onayıyla Minimatch10.2.6 yalnız repo dışındaki geçici bağımlılık alanına kuruldu; izole alt süreçte iki gerçek tinyglobby tüketicisi ve Next ESLint root dizini keşfi karşılaştırıldı. Deneme yardımcısı scripts/backend-glob-compatibility-trial.cjs, uygulamaya import edilmiyor. İlk dar adapter27/53, terminal /** uyarlamasından sonra45/53 eşdeğer sonuç verdi; kalan8 fark gizli dosya/negatif extglob, parantez ve dynamic sınıflandırması. Bilinen5 sentetik saldırının tamamında aday1sn süreç sınırını aştı; mevcut yamalı matcher5/5 tamamlandı. Aday REDDEDİLDİ; runtime paket/lock/yamalar değiştirilmedi.
+
+Mevcut backend64test, lint/TypeScript ve yama bütünlüğü geçti; npm audit0. Yeni authenticated Snyk --dev gerçek backend’de tek yüksek Picomatch advisory/2yol göstermeye devam ediyor. Ayrı adayın3bağımlılığı Snyk’te temiz; bu sonuç backend temizliği veya çalışma zamanı güvenliği sayılmadı. Önceki mobil/backend package-lock ve yama manifestlerinin hashleri korundu. HawkScan6.6.0/güncel skill mevcut, API key/proje config yok: DAST BLOCKED.
+
+Yeni build/deploy/uzak migration/AI/ücretli servis yok; staging/production/APK değişmedi. Mobil tarama/native/DB testi bu backend denemesinde yeniden çalıştırılmadı. Rapor ve yeni makine kanıtları: backend/security/PICOMATCH_COMPATIBILITY_TRIAL_2026-10-20.md. Yayın engeli açık kalıyor; mevcut kaynak mitigasyonu korunuyor.
+
+
+## 2026-10-20 — Picomatch için bağımsız RE2JS yaklaşımı ve 49. satır kontrolü
+
+Kullanıcının isteğiyle başka çözüm izole alanda denendi: globrex0.1.2 yalnız glob derleyici, re2js2.8.8 geri izleme yapmayan eşleştirme motoru. Paketler repo dışına ignore-scripts ile kuruldu; gerçek node_modules/package/lock/yamalar değiştirilmedi. scripts/backend-re2-glob-trial.cjs yalnız alt süreçte iki backend tüketicisi ve mobil Anymatch/Micromatch probunu çalıştırıyor; uygulamaya import yok.
+
+İyileştirilmiş denemede55karşılaştırma/40eşdeğer/15fark;8tekrarlı extglob saldırısı süre aşmadan tamamlandı,1hatalı POSIX girişi açık hatayla reddedildi. Native eşleştirme fallback’i yok. Negatif extglob/lookahead, escape/brace/seçenekler ve Micromatch özel API eksikleri nedeniyle NOT PROMOTED. Bu sonucun evrensel güvenlik veya tam API uyumu olmadığı belirtildi.
+
+49. satır mobile/package.json Tailwind girdisi; yeni Snyk raporu tailwindcss3.4.19 → chokidar3.6.0 → anymatch3.1.3 → picomatch2.3.2 yolunu doğruluyor. Diğer yollar da açık: mobil28/backend2aynı yüksek advisory; fixedIn boş. Adayın2bağımlılığı Snyk’te temiz ancak gerçek uygulama taraması sayılmadı.
+
+Yeni150mobil/20suite,19mobil bağımlılık ve64backend testi; iki lint/TypeScript ve yama bütünlüğü geçti. npm audit0/0. Paket/lock/yama başlangıç hashleri korundu. HawkScan6.6.0/güncel skill var; key/proje config yok, DAST BLOCKED. Yeni build/deploy/uzak migration/AI/ücretli servis yok; staging/production/APK değişmedi. Rapor: backend/security/PICOMATCH_RE2_TRIAL_2026-10-20.md; makine kanıtları aynı dizinde.
+
+
+## 2026-10-20 — Picomatch erişilebilirlik ve adversarial yama incelemesi
+
+Adversarial-reviewer skill kullanıldı; dış insan denetimi değil, aynı asistanın farklı kapalı-form oracle/yeni saldırı kurgusu olarak açıklandı. 30API rotası/48yerel dosya,18mobil app girişi/64yerel dosya ve22NativeWind/CSS interop dosyası incelendi; doğrudan matcher importu/literal olmayan yükleme/yerel çözümleme açığı0. Dış paketler genel olarak yaprak; tam taint veya release bundle incelemesi değil. Gerçek Next image validator12sentetik çağrıda yalnız sabit images.pexels.com/** desenlerini derledi, kullanıcı URL’si metin olarak kaldı. HTTP/AI/servis isteği yapılmadı.
+
+Yeni kritik kabul kanıtı: art arda gelen +(a) ve *(ab) grupları yamalı7kopyanın tamamında1sn eşleştirme sınırını aştı. Lockfile dışında Next/dist/compiled/picomatch kopyası da bulundu; önceki +(*a) dahil3probe onda timeout. Toplam24probe/17timeout; tüm süreçler eşleştirme aşamasına ulaştı. Ayrı küçük-girdi semantik oracle432assertion geçti. Yama bütünlüğü geçici kopyalarda10/10tamper/missing kontrolünü geçti; bu yeterlilik kanıtı değil. Yeni audit aracı exit2:FAIL; standart eski testler bunun yerine PASS sayılmadı.
+
+Mevcut150mobil/20suite,19bağımlılık,64backend, iki lint/TypeScript ve npm audit0/0 geçti. Bu tur Snyk yeniden çalıştırılmadı; aynı package/lock hashleriyle önceki authenticated28mobil/2backend yolu kanıtı korundu. HawkScan6.6.0/güncel skill var, API key/config yok:DAST BLOCKED. Önceden mevcut uygulama/SQL/JSON/paket/yama kaynak hashleri korundu; yalnız yeni inceleme yardımcıları/kanıtlar ve MD güncellendi.
+
+Karar:BLOCK_INCOMPLETE_MITIGATION. Mevcut kaynakta kullanıcı kontrollü glob deseniyle uzak saldırı gösterilmedi; ancak koruma tam değil ve dağıtılmış artifact doğrulanmadı. Önceki “yalnız katalog engeli” ifadesi yeni üst notlarla düzeltildi, tarihçe silinmedi. Sonraki teknik iş ardışık grup koruması/Next iç kopyası ve genişletilmiş regresyon kabulü. Yeni build/deploy/OTA/push/migration/ücretli servis/production-staging isteği yok. Rapor: backend/security/PICOMATCH_REACHABILITY_REVIEW_2026-10-20.md.
+
+## 2026-10-20 — Onaylı üç Snyk bulgusu planı: iki araç düzeltmesi
+
+Path Traversal: summarize-provider-usage.cjs artık dosya yolu argümanı kabul etmiyor; yalnız stdin JSONL verisi alıyor. Eski mutlak/symlink okuması sentetik fixture ile gösterildi. Normal/boş/bozuk/tekrarlı veri, bilinmeyen maliyet ve yol reddi kontrolleri geçti; summarize(records) arayüzü korundu, kullanım belgesi güncellendi.
+
+Code Injection: picomatch-independent-verification.cjs içindeki argv kaynaklı require kaldırıldı. Yeni sabit worker sekiz hedef/sabit senaryolarla çalışıyor; literal require, gerçek yol/symlink kontrolü, lock envanteri eşitliği, shell:false, SIGKILL, 1/2sn süre, 64KiB çıktı, 128MiB V8 heap ve sınırlı ortam var. Önceki serbest modül yüklemesi zararsız marker ile gösterildi; yeni 9 test bunu ve kaçışları reddediyor, timeout sonrası çocuk süreç kalmıyor. Mevcut saldırı/oracle testleri zayıflatılmadı.
+
+150 mobil/20 suite, 19 bağımlılık, 66 backend, 9 worker testi; iki lint/TypeScript ve root betik lint/syntax geçti. Paket/lock/yama/kurulum dosyalarının 20 başlangıç hash'i korundu. Yeni npm audit 0/0. Cache/ağ kısıtı aşılarak mevcut tam Snyk CLI ile authenticated taramalar tamamlandı: son kaydedilmiş kaynakta Snyk Code 197 dosya/0 bulgu; Open Source aynı Picomatch advisory ile mobil28/backend2 yol. B/C kaynakta FIXED; önceki Code tekil kimlikleri bilinmiyor, sonuç kök taraması olarak raporlandı.
+
+Picomatch A UNRESOLVED: yeni worker ile 432 oracle assertion geçti ancak 24 probe/17 matching timeout, exit2 sürdü. Mevcut kısmi yama korundu; Next iç kopyası ayrıca açık. HawkScan skill ön kontrolleri yapıldı; CLI6.6.0 var, API key/credentials/config yok: DAST BLOCKED. Kullanıcıdan yeni hesap, ücretli servis veya risk kabulü istenmedi. Build/bundle/deploy/OTA/migration/AI/production-staging işlemi yok; mevcut APK değişmedi. Kaynakta düzeltildi/test edildi, canlıya uygulanmadı. Rapor: backend/security/THREE_SNYK_FINDINGS_2026-10-20.md; kaynak hashleri ve güncel tarama kanıtları aynı dizinde.
+
+## 2026-10-20 — Picomatch yerel çıktı kanıtının yayın listesine bağlanması
+
+Kullanıcı önceki yerel çıktı incelemesini tamamlanmış kabul etti. Picomatch durumu **UNRESOLVED — kısmi mitigasyon mevcut; incelenen uygulama yollarında sömürü gösterilmedi** olarak korundu. Bu kayıt FIXED/risksiz veya risk kabul edildi anlamına gelmez; önceki 24 saldırı denemesindeki 17 timeout açık kalır. B/C düzeltmeleri değiştirilmedi.
+
+[Yerel çıktı raporu](backend/security/PICOMATCH_ARTIFACT_REVIEW_2026-10-20.md) ve [kanıt indeksi](backend/security/picomatch-artifact-evidence-2026-10-20/index.json), [yayın kontrol listesine](mobile/docs/RELEASE_READINESS.md#picomatch--sonraki-onaylı-yayın-derlemesinde-açık-kontroller) ve güncel engel belgesine bağlandı. Sonraki ayrıca onaylı yayın derlemesinde gerçek derleme yöntemi, gerekiyorsa Turbopack çıktı incelemesi, kaynak/lockfile/paket/yama/ilgili ayar karşılaştırması ve final native paket/cihaz kontrolleri dört açık madde olarak tutuldu. Yerel JS export/Next Webpack kanıtı final native paket veya canlı deployment kabulüne dönüştürülmedi; makine tarafından okunan yayın kapıları değiştirilmedi.
+
+Bu tur yalnız üç MD kaydı güncellendi. Yeni yama, paket/fork denemesi, genel tarama, test, build, deploy, ücretli işlem veya risk kabulü yapılmadı. Önceki kaynak/çıktı raporu ve kanıt indeksi değiştirilmedi.
+
+
+## 2026-10-20 — Açık izinle yeni staging Android APK ve iOS simülatör paketi
+
+Kullanıcı yeni paketleri açıkça istedi. Ayrı codex/staging-native-20261020 dalında diskteki kaynak manifestiyle ücretsiz standart GitHub runner kullanıldı; main/indeks ve production korunuyor. İlk run39432735779 iOS işi Xcode26.6/Expo58/RN0.88 ARM64 Release simulator native derlemesini geçti; aynı run Android resmi SDK adının android-37.0 olması nedeniyle başarısızdı. Düzeltilmiş Android native run39433293674 geçti.
+
+Simülatörde oturumsuz kök URL Unmatched Route ve erken recovery yönlendirmesi tekrar üretildi. Yalnız root/auth layout'larında mevcut Stack.Protected hedefleri tamamlandı; yeni dört gerçek-router regresyonu eklendi.154mobil/21suite+19dependency, lint/TypeScript yerelde ve final CI'da geçti. B/C, paket/lock/yama hashleri korundu; deneysel Picomatch prototipi entegre edilmedi.
+
+Native girdi değişmediğinden son JS resmi Expo export:embed ile yeniden üretildi. Android final run39438764645/a664affb3a9d4ce419465f3938c794115795db05: aynı sertifika,1377JS-dışı girdinin byte eşitliği, targetAPI36,31ELF kütüphanesi ve16KB hizalama geçti. Son APK yerel olarak indirildi/hash ve girdiler yeniden doğrulandı. iOS'ta native executable kodu/imza dışı kaynaklar/entitlements aynı kaldı; normal Hermes bundle ve ad-hoc simulator imzası yenilendi, iPhone17/iOS26.5 üzerinde kurulu bundle hash eşitliği ve root/login/recovery geçişleri doğrulandı. JS fix sonrasında full native recompile yapıldığı veya physical-device IPA/AAB kabulü iddia edilmez.
+
+Eski securitycheck simülatör uygulamasının aynı chefai scheme'ini sahiplenmesi ayrıştırıldı:238dosya ile app/data APFS yedeği doğrulandıktan sonra yalnız eski test kurulumu kaldırıldı, keychain silinmedi. Geçici config teşhisi başarılı; diagnostik bundle son paketlere girmedi. APK, iOS archive ve screenshot mobile/artifacts/build-2026-10-20/ altında. Native yöntem/kimlik/hash/izin ve açık kapılar: mobile/docs/NATIVE_TEST_PACKAGES_2026-10-20.md.
+
+Picomatch UNRESOLVED — kısmi mitigasyon mevcut; incelenen uygulama yollarında sömürü gösterilmedi. Önceki17timeout geçerli; yeni genel Snyk/audit turu yok. Hawk preflight mevcut; key/config yok:DAST BLOCKED. Yeni production/backend deploy, migration, OTA, store upload, gerçek AI/ödeme/e-posta gönderimi veya ücretli servis yok. Fiziksel cihaz, final dağıtım ve diğer yayın kapıları pending.
+
+## 2026-10-22 — Önceki iOS önizleme oturumunun belgelenmesi
+
+Mevcut 20 Ekim Expo58 simülatör paketiyle önceki oturumda sentetik staging hesabına normal giriş yapıldı; iPhone17/iOS26.5 üzerinde Today, Pantry, Cook, Scan ve Profile açıldı. Beş yerel ekran görüntüsünün mevcut dosyaları ve hashleri kayıt altına alındı. Son doğrulanan ekran Today; güncel canlı simülatör durumu bu belge turunda kontrol edilmedi.
+
+Hesabın kileri ve kayıtlı tarifleri boştu; dolu tarif/öneri/Scan sonucu kabulü yapılmadı. Cook ücretsiz tarif10/10 ve 1Kasım2026 00:00UTC yenilenmesini gösterdi; limitler değiştirilmedi. Türkçe/İngilizce metin karışıklığı gözlemi açık iş olarak kaydedildi. Haftalık plan giriş kartı görüldü ancak plan/öğün detayına başarılı geçiş doğrulanamadı; tamamlanmış sayılmadı. AI üretimi başlatılmadı; ayrıca sağlayıcı/kota telemetrisi testi yapılmadı.
+
+[Önizleme raporu](mobile/docs/IOS_SIMULATOR_PREVIEW_2026-10-22.md), paket teslim belgesi ve yayın kontrol listesi güncellendi. Önceki testler yeniden çalışmış gibi sunulmadı; tarihsel kayıtlar korundu. Bu tur yalnız MD değişikliği: uygulama/backend kodu, paket/lock/yamalar ve B/C düzeltmeleri değişmedi. Yeni build, deploy, uzak migration, tarama, test veya ücretli işlem yok. Picomatch UNRESOLVED/kısmi mitigasyon ve önceki17timeout korunuyor; yayın kapıları pending.
+
+## 2026-10-28 — Picomatch ardışık grup koruması ve sekme erişilebilirlik dili
+
+Picomatch parse.js yamasına üçüncü düzenleme eklendi (mobil 5, backend 2 kopya): art arda ikiden fazla sınırsız `+(…)`/`*(…)` grubunun üçüncüsünden sonrası literal'e çevrilir. Üç grup ve altı oracle'ı etkilemez; 432 oracle assertion geçti. Next iç kopyası (`next/dist/compiled/picomatch`, korumasız eski sürüm) için fail-closed giriş reddi yaması manifestine eklendi: tekrarlı extglob gövdesinde `| * + (` veya dört ve üzeri ardışık grup varsa SyntaxError. Next yalnız sabit config desenleriyle kullandığı için ters etki beklenmiyor; yine de bu kopya literalize etmez, reddeder.
+
+Bağımsız doğrulama: 24 probe / 0 timeout (önceki 17), exit 0. Bu sonuç sınırlı sentetik probe kabulüdür; tam sertifikasyon, Snyk kapanışı veya dağıtılmış artifact doğrulaması değildir. Snyk advisory'sinde fixedIn hâlâ boş; yeniden taranmadı. Durum: kaynakta kısmi mitigasyon güçlendi, upstream düzeltme gelene kadar UNRESOLVED/izlenecek olarak kalır. Eski "bilinen zafiyetli probe öldürülür" testi artık zafiyetli probe kalmadığı için reddetme/tamamlanma testleriyle değiştirildi; süreç öldürme yolu ayrıca test edilmiyor. Orijinal paketten yamalanmış hale temiz `npm ci` uçtan uca yeniden denenmedi (bütünlük/regresyon araçları geçici kopyalarda geçti).
+
+Dil: Scan sekmesinin `tabBarAccessibilityLabel` değeri çeviri dışı sabit İngilizce'ydi; `t()` ile çevrildi, mesaj eklendi. Yeni test (`tests/locale-tabs.test.tsx`) sekme etiketlerinin dil değişince güncellendiğini ve bu etiketin çevrildiğini doğrular. Tüm `t('…')` çağrılarının `messages.ts` karşılığı olduğu taramayla görüldü. 22 Ekim'deki karışıklığın diğer olası nedenleri (soğuk açılışta cihaz dili ile kayıtlı dil farkı) simülatörde yeniden üretilmedi; dil tutarlılığı tam kabul edilmedi.
+
+Kontroller: mobil 156 test/22 suite, 19 bağımlılık, backend 66, kök betik 11 test geçti; iki lint/TypeScript temiz. Build, deploy, push, migration, AI çağrısı yok.

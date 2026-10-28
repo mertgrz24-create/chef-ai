@@ -1,0 +1,49 @@
+name: Backend checks
+on:
+  push:
+    paths: ['backend/**', 'scripts/picomatch-regression.cjs', '.github/workflows/backend.yml']
+  pull_request:
+    paths: ['backend/**', 'scripts/picomatch-regression.cjs', '.github/workflows/backend.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: node lib/mobile/apply-dependency-patches.cjs --check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:security
+      - name: Start isolated local PostgreSQL (no network listener)
+        run: |
+          task_pg_bin="$(pg_config --bindir)"
+          test -x "$task_pg_bin/initdb"
+          echo "$task_pg_bin" >> "$GITHUB_PATH"
+          task_pg_dir="$(mktemp -d /tmp/chef-ci-postgres-XXXXXX)"
+          mkdir "$task_pg_dir/socket"
+          "$task_pg_bin/initdb" -D "$task_pg_dir/data" -A trust --no-locale
+          "$task_pg_bin/pg_ctl" -D "$task_pg_dir/data" -l "$task_pg_dir/server.log" -o "-h '' -p 55439 -k $task_pg_dir/socket" start
+          echo "CHEF_LOCAL_PGDATA=$task_pg_dir/data" >> "$GITHUB_ENV"
+          echo "CHEF_TEST_PGHOST=$task_pg_dir/socket" >> "$GITHUB_ENV"
+          echo "CHEF_TEST_PGPORT=55439" >> "$GITHUB_ENV"
+      - name: Migration and synthetic backup/restore verification
+        env:
+          CHEF_DATABASE_EVIDENCE: ${{ runner.temp }}/chef-database-evidence.json
+        run: npm run test:database
+      - name: Stop disposable local PostgreSQL
+        if: always() && env.CHEF_LOCAL_PGDATA != ''
+        run: pg_ctl -D "$CHEF_LOCAL_PGDATA" stop -m fast
+      # Version-based warnings remain a release block; do not hide them behind local patches.
+      - run: npm audit --audit-level=high

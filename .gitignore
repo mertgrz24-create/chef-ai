@@ -27,6 +27,14 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local Python tooling output
+__pycache__/
+*.pyc
 
 # vercel
 .vercel
