@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "gates": [
+    {
+      "id": "permissions",
+      "status": "pending",
+      "evidence": "Actual iOS artifact permission/ATS checks passed. Android ARM64 Release APK: forbidden broad permissions absent; backup/debug disabled. Full release lint passed after iOS-only locale scoping, API33 splash versioning and optional camera hardware configuration. Physical prompt/denial/Settings scenarios and final distribution artifacts remain pending. Source update2026-10-16: get/request/canAskAgain, Settings return and Android pending picker handling covered by mocked component tests. Still no physical OS prompt or final artifact acceptance; see CAMERA_MENU_FIXES_2026-10-16.md. UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "legal-links",
+      "status": "pending",
+      "evidence": "Publisher identity, support email and legal domain explicitly deferred by user. Gate remains pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "account-deletion",
+      "status": "pending",
+      "evidence": "Prior staging HTTP deletion checks passed. Current session: synthetic auth/profile/pantry/recipe SQL cascade passed in a rolled-back transaction and route failure/identity regressions passed. User described the old web informational link opening a browser; that link was removed from source. Real Profile red-button native confirmation, production and processor lifecycle remain pending. No build/deploy this session. Latest source-only update2026-10-17: Before account->job cascade, still-linkable provider metrics are deleted; anonymous daily cap is preserved. Disposable local SQL race/cascade test only. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "security",
+      "status": "pending",
+      "evidence": "2026-10-16 raw npm audit: mobile56 high/5 moderate, backend7 high. Root advisories: braces/node-forge/sprintf-js; installed patch integrity and 15 mobile dependency regressions pass, but version warnings and independent review remain unresolved. Backend36 security tests and new durable-cap SQL lifecycle/concurrency checks pass. Staging counter RLS/privileges verified. DAST unavailable (no HawkScan key; user declined paid setup). Production/native final gates remain pending. Latest local closeout: mobile97 / dependency15 / backend41 tests pass; Gitleaks source/history0; seven migrations plus synthetic backup/restore validated locally. Fresh raw npm audit mobile53 high/5 moderate, backend7 high; counts are time-varying, not a new source remediation claim. Independent review/DAST/native/production gates remain pending. See ENGINEERING_CLOSEOUT_2026-10-16.md. Later clean-install remediation: backend full raw audit0; mobile54 high/0 moderate with only braces/node-forge root advisories. Removed sprintf-js/YAML legacy chain; added propagated report entry is unchanged react-native-purchases via react-native. 97 Jest/15 dependency/42 backend checks passed. No build/deploy; independent review and final native gates pending. See DEPENDENCY_REMEDIATION_2026-10-16.md. Latest source-only update2026-10-17: Local approved lifecycle v2 regression:61backend/134mobile+17dependency; atomic dispatch permits, late-write fences, RLS and deletion/metrics isolation. npm audit0/0 and Gitleaks0/0. No fresh Snyk/DAST/native or production verification. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md. Follow-up2026-10-19: see RELEASE_BLOCKERS_2026-10-19.md;140mobile/17dependency/61backend tests, lint/TS and audit0/0 passed, Gitleaks0source/0history. Push owner/queued-registration race fixed locally. Staging cleanup57 natural hourly runs,60 total successes/0failures. No new native build/deploy/AI/production acceptance; final gate pending. UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI. Picomatch source mitigation2026-10-20: all7installed copies hash-patched, clean npm ci both,150mobile/19dependency/64backend tests passed; old patches unchanged. npm audit0/0. Fresh Snyk still reports same all-versions advisory (28mobile/2backend paths); no ignore/relabel/risk acceptance. Source mitigation is not scanner closure. See PICOMATCH_REMEDIATION_2026-10-20.md. DAST/native/final security gate remains pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "authentication",
+      "status": "pending",
+      "evidence": "Staging password login/profile and disposable-account cleanup passed in prior HTTP checks. User reported working Android verification. Real native recovery cold/warm/expired links, branded SMTP and production acceptance remain pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "email-verification",
+      "status": "pending",
+      "evidence": "User reports verification email received and verification working on Android with Supabase sender. Earlier six synthetic token/redirect checks passed without email. Branded SMTP not configured; templates prepared only. Non-team recipient, expired-link native and production delivery acceptance remain pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "password-recovery",
+      "status": "pending",
+      "evidence": "Synthetic recovery token exchange and invalid-token rejection passed without mail. Real SMTP, password-change UI and closed-app callback acceptance remain pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "onboarding",
+      "status": "pending",
+      "evidence": null,
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "core-flow",
+      "status": "pending",
+      "evidence": "13 hosted staging AI acceptance checks passed: consent, EN/TR recipe, replay/private save, fresh-login history, content report, public food-photo scan, seven-day plan/readback, meal regeneration and revocation. Synthetic account cleanup passed. Physical end-to-end UI, actual camera, second device and beta acceptance remain pending; no new native build. Camera preview/explicit analyze, unmount cancellation and weekly stale-read/TR regeneration/offline behavior now covered in mobile source tests. Existing APK does not include these source changes. Latest source-only update2026-10-17: Existing Cook/Scan/Plan result recovery uses status GET only; no new AI dispatch on recovery. Local tests only; native/staging acceptance pending. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md. UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "persistence",
+      "status": "pending",
+      "evidence": "Prior private pantry/recipe isolation and deletion HTTP checks passed. Latest hosted generated recipe saves/replays, fresh-login history and seven-day AI plan readback/regeneration passed. Real second-device/native restart coverage remains pending. Synthetic local backup/restore including ACL/RLS/function checks passed; not proof of a production backup or second-device acceptance. Latest source-only update2026-10-17: Plan/modify result and credit commit atomic; expired jobs cannot write late. Full AI payload24h/tombstone30d/attempt metadata90d local SQL tests pass. Remote cron/migration pending. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "subscriptions",
+      "status": "pending",
+      "evidence": "RevenueCat client and server verified-membership/webhook source exists. Capability false; real store monthly products/prices, approved Premium quotas, server secrets/webhook configuration and sandbox lifecycle evidence are missing.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "restore-purchases",
+      "status": "pending",
+      "evidence": "Restore entries/adapters exist, but real store/RevenueCat integration and reinstall/new-device/account conflict/refund lifecycle remain unverified.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "loading-states",
+      "status": "pending",
+      "evidence": "Weekly offline-first spinner, read cancellation and mutation loading states corrected in source; component tests pass. Physical slow-network/background cases pending; no new build. Latest source-only update2026-10-17: AI normal120s request and max5min bounded recovery tested; after uncertainty user can explicitly check existing result. Native rendering not verified. See AI_LIFECYCLE_2026-10-17.md. UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "empty-states",
+      "status": "pending",
+      "evidence": "Weekly404/no-plan vs non404/error UI separation tested. Backend GET source now uses maybeSingle and returns500 for DB failures; absent data alone returns404. Backend37 regressions pass. No deployment: hosted API still uses earlier handler. Final native states pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "error-states",
+      "status": "pending",
+      "evidence": "36 API security/regression tests passed; provider fixed error codes and staging-only explicit-503 single retry share one 110s budget. No network/timeout/quota retry or invented success. Native error-state acceptance remains pending. Latest source-only update2026-10-17: Not-found/unreachable is not a confirmed refund; server-confirmed terminal errors return one credit. Late or duplicate settlements are fenced in local SQL. See AI_LIFECYCLE_2026-10-17.md.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "connectivity",
+      "status": "pending",
+      "evidence": "Weekly offline-first and offline-with-loaded-details component checks pass; generation disabled offline, GET refresh on reconnect and stale-read guard. Native airplane mode/network handoff remains pending. Latest source-only update2026-10-17: Bounded five-minute recovery, per-account opaque pointer, cancellation/account isolation and confirmed-refund distinction covered locally. No background-mobile polling guarantee. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "push",
+      "status": "pending",
+      "evidence": "Token/claim/dedup/receipt source exists. Hosted staging capability remains false; APNs/FCM credentials, actual-device delivery/tap/unregister/time-zone acceptance and scheduler operation are not verified. Follow-up2026-10-19: see RELEASE_BLOCKERS_2026-10-19.md;140mobile/17dependency/61backend tests, lint/TS and audit0/0 passed, Gitleaks0source/0history. Push owner/queued-registration race fixed locally. Staging cleanup57 natural hourly runs,60 total successes/0failures. No new native build/deploy/AI/production acceptance; final gate pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "telemetry",
+      "status": "pending",
+      "evidence": "Sentry scrub/source-map integration source exists; actual project/DSN and symbolicated release crash evidence missing. Optional product analytics remains off. RevenueCat measurement awaits real products/account integration. Allowlist scrubber regression-tested for unknown SDK fields, malformed data and bounded stack/debug metadata. Real Sentry/native symbolication still requires project and release evidence. Latest source-only update2026-10-17: Content-free durable attempt metadata90d; every authorized SDK dispatch observed, unknown usage/cost remains unknown. Claim may conservatively overcount process-loss cases; not invoice data. Hosted log retention not verified. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "device-matrix",
+      "status": "pending",
+      "evidence": " UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "user-beta",
+      "status": "pending",
+      "evidence": null,
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "backend-contracts",
+      "status": "pending",
+      "evidence": "Hosted staging AI recovery and 13 real acceptance checks previously passed; AI/localizedAi are enabled. 2026-10-16 durable daily operation-cap migration applied only to staging; five real reservation/replay/account-deletion checks passed with zero provider calls. Production contracts, billing/push integrations, backup/restore and operations remain pending. Current API source: chef-ai/backend. See RELEASE_BLOCKERS_2026-10-16.md. Latest source-only update2026-10-17: Lifecycle v2 migration and owner AI-status/quota reconciliation implemented/tested only locally.9migrations/8groups including restore. Hosted staging NOT migrated/deployed; hourly scheduler inactive; hosting120s support unverified. See AI_LIFECYCLE_2026-10-17.md. Staging rollout2026-10-17: backend+Pantry/lifecycle active; Supabase hourly cleanup scheduler-proven;13 integration checks/4 real calls passed; own test accounts/linked metrics removed. Production/native/store/DAST remain pending. See STAGING_LIFECYCLE_ROLLOUT_2026-10-17.md. Follow-up2026-10-19: see RELEASE_BLOCKERS_2026-10-19.md;140mobile/17dependency/61backend tests, lint/TS and audit0/0 passed, Gitleaks0source/0history. Push owner/queued-registration race fixed locally. Staging cleanup57 natural hourly runs,60 total successes/0failures. No new native build/deploy/AI/production acceptance; final gate pending. UI polish2026-10-20: source-only common Animated/Reduced Motion and existing-content reuse acceptance; see UI_POLISH_2026-10-20.md. Backend62 tests and local9migration/8group DB rehearsal passed. npm audit0/0; fresh Snyk has one shared high picomatch advisory (28mobile/2backend dependency paths), not suppressed. Native/DAST/final release acceptance remains pending; no build/deploy/remote migration/paid AI.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "store-accounts",
+      "status": "pending",
+      "evidence": null,
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "store-metadata",
+      "status": "pending",
+      "evidence": null,
+      "verifiedBy": null,
+      "verifiedAt": null
+    },
+    {
+      "id": "native-release-builds",
+      "status": "pending",
+      "evidence": "Android run 38905484217 passed using the stable public staging API. Final APK downloaded; archive digest matched GitHub and stable API URL was found in the package. ARM64 native compilation, full lint, manifest and 26-library/zipalign16KB checks passed; physical device, other ABIs and final IPA/AAB signing remain pending.",
+      "verifiedBy": null,
+      "verifiedAt": null
+    }
+  ]
+}

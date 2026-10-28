@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T21:19:16.064334+00:00",
+  "status": "SOURCE_MITIGATED_SCANNER_OPEN",
+  "advisory": "SNYK-JS-PICOMATCH-21248802",
+  "cve": "CVE-2026-112366",
+  "packagesOrLocksChanged": false,
+  "baselineAttack": "Bounded child process reproduced ETIMEDOUT before patch",
+  "allPreviousPatchEntriesUnchanged": true,
+  "patchedCopies": {
+    "mobile": [
+      {
+        "path": "anymatch/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+        "afterHash": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "2.3.2"
+      },
+      {
+        "path": "jest-util/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+        "afterHash": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "2.3.2"
+      },
+      {
+        "path": "micromatch/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+        "afterHash": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "2.3.2"
+      },
+      {
+        "path": "picomatch/lib/parse.js",
+        "beforeHash": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+        "afterHash": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "4.0.7"
+      },
+      {
+        "path": "readdirp/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+        "afterHash": "48d1b629b80e218baae6454b919d550ac6311699811d937a504e2a6e10643241",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "2.3.2"
+      }
+    ],
+    "backend": [
+      {
+        "path": "fast-glob/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+        "afterHash": "4fc5956100d1ee219f46a154f1dc31ebeea4c226813da834623bdd3afa579236",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "4.0.7"
+      },
+      {
+        "path": "tinyglobby/node_modules/picomatch/lib/parse.js",
+        "beforeHash": "ce57c04e04994b83e2ca566170fa192e6fe19d710bea6da00ce2f76d01c0dea4",
+        "afterHash": "93c544c3468841f51d030be4acf7bc8cc494d7a2b160b0eabffc32f5e5598bc0",
+        "advisory": "SNYK-JS-PICOMATCH-21248802",
+        "version": "4.0.4"
+      }
+    ]
+  },
+  "checks": {
+    "cleanInstallBoth": true,
+    "mobileTests": 150,
+    "mobileSuites": 20,
+    "dependencySecurityTests": 19,
+    "backendTests": 64,
+    "secretsTemplateTests": 3,
+    "lintBoth": "PASS",
+    "typeScriptBoth": "PASS",
+    "patchIntegrityBoth": "PASS",
+    "runtimeConsumers": [
+      "Tailwind content discovery",
+      "micromatch",
+      "anymatch",
+      "readdirp",
+      "tinyglobby",
+      "Next ESLint fast-glob adapter"
+    ],
+    "npmAudit": {
+      "mobile": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "backend": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    "snyk": {
+      "mobile": {
+        "status": "FINDINGS",
+        "pathCount": 28,
+        "uniqueAdvisories": [
+          "SNYK-JS-PICOMATCH-21248802"
+        ]
+      },
+      "backend": {
+        "status": "FINDINGS",
+        "pathCount": 2,
+        "uniqueAdvisories": [
+          "SNYK-JS-PICOMATCH-21248802"
+        ]
+      }
+    },
+    "secrets": {
+      "scanner": "gitleaks",
+      "version": "8.30.1",
+      "observedAt": "2026-10-19T21:19:16.776Z",
+      "repository": "chef-ai",
+      "scope": "Locally available Git refs, tracked and non-ignored untracked files. Ignored local environment files and native/build artifacts require separate inventory/inspection.",
+      "sourceFileCount": 410,
+      "source": [],
+      "history": []
+    }
+  },
+  "compatibilityBoundary": "Risky or complex repeated extglobs literalized; ordinary non-repeating globs preserved. No arbitrary-regex linear-time claim.",
+  "scannerSuppression": false,
+  "packageRelabel": false,
+  "dast": {
+    "status": "BLOCKED",
+    "runtime": "6.6.0",
+    "apiKeyPresent": false,
+    "scanConfigPresent": false
+  },
+  "build": false,
+  "deploy": false,
+  "remoteMigration": false,
+  "providerCalls": 0,
+  "productionTouched": false,
+  "stagingTouched": false,
+  "releaseReady": false,
+  "upstreamObservation": {
+    "latestOfficialVersion": "4.0.7",
+    "snykVulnerableRange": "*",
+    "snykFixedIn": [],
+    "pullRequest194": "open; not applied as a complete security fix"
+  },
+  "baselineCheckedFiles": 181,
+  "baselineChangedFiles": [
+    "backend/lib/mobile/security.test.cjs",
+    "backend/lib/mobile/dependency-patches.json",
+    "mobile/security/patches.json"
+  ],
+  "allApplicationAndSqlFilesUnchanged": true
+}

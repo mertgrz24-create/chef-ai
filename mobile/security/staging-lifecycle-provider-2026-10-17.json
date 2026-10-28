@@ -1,0 +1,106 @@
+{
+  "jobs": [
+    {
+      "status": "succeeded",
+      "operation": "recipes",
+      "http_status": 200,
+      "provider_permits": 1,
+      "finished_attempts": 1
+    },
+    {
+      "status": "succeeded",
+      "operation": "scan",
+      "http_status": 200,
+      "provider_permits": 1,
+      "finished_attempts": 1
+    },
+    {
+      "status": "succeeded",
+      "operation": "plan",
+      "http_status": 201,
+      "provider_permits": 1,
+      "finished_attempts": 1
+    },
+    {
+      "status": "succeeded",
+      "operation": "regenerate",
+      "http_status": 200,
+      "provider_permits": 1,
+      "finished_attempts": 1
+    },
+    {
+      "status": "failed",
+      "operation": "plan",
+      "http_status": 504,
+      "provider_permits": 0,
+      "finished_attempts": 0
+    }
+  ],
+  "usage": [
+    {
+      "kind": "plans",
+      "used": 2
+    },
+    {
+      "kind": "recipes",
+      "used": 1
+    },
+    {
+      "kind": "scans",
+      "used": 1
+    }
+  ],
+  "tokens": [
+    {
+      "attempt": 1,
+      "outcome": "response",
+      "operation": "recipes",
+      "input_tokens": 632,
+      "total_tokens": 971,
+      "cached_tokens": null,
+      "output_tokens": 339,
+      "resolved_model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "thinking_tokens": null
+    },
+    {
+      "attempt": 1,
+      "outcome": "response",
+      "operation": "scan",
+      "input_tokens": 1268,
+      "total_tokens": 1276,
+      "cached_tokens": null,
+      "output_tokens": 8,
+      "resolved_model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "thinking_tokens": null
+    },
+    {
+      "attempt": 1,
+      "outcome": "response",
+      "operation": "plan",
+      "input_tokens": 725,
+      "total_tokens": 5034,
+      "cached_tokens": null,
+      "output_tokens": 4309,
+      "resolved_model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "thinking_tokens": null
+    },
+    {
+      "attempt": 1,
+      "outcome": "response",
+      "operation": "regenerate",
+      "input_tokens": 489,
+      "total_tokens": 909,
+      "cached_tokens": null,
+      "output_tokens": 420,
+      "resolved_model": "gemini-3.5-flash-lite",
+      "requested_model": "gemini-3.5-flash-lite",
+      "thinking_tokens": null
+    }
+  ],
+  "totalProviderPermits": 4,
+  "estimatedCharge": null,
+  "billedCharge": null
+}

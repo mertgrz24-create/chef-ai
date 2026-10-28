@@ -1,0 +1,19 @@
+{
+  "observedOn": "2026-10-16",
+  "source": "Manually observed VS Code UI; not native Snyk JSON export",
+  "visibleOpenSource": {
+    "high": 2,
+    "medium": 2,
+    "total": 4
+  },
+  "visibleWorkingTreeCode": {
+    "medium": 1,
+    "file": "src/lib/release/messages.ts",
+    "line": 170,
+    "review": "UI translation label, not a password"
+  },
+  "newAndroidInspectorWarnings": "Five findings no longer listed after removing arbitrary executable/input/output paths; no ignore added",
+  "secrets": "Project enabled; disabled by Snyk organization. Gitleaks evidence is separate.",
+  "referenceComparison": "UI still reports 7/8 scans; not claimed as a completed global/reference scan or a security clearance",
+  "screenshotLocalPath": "/Users/mertgurbuz/.codex/visualizations/2026/10/15/01a1406a-ce7c-70e0-9375-747fd6972719/snyk-native-followup.png"
+}

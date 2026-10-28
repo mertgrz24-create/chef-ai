@@ -1,60 +1,106 @@
-import { useCallback, useState } from 'react'
+import { PantryEditor } from '@/components/release/pantry-editor'
+import { useKitchenInvalidation } from '@/lib/release/kitchen-data'
+import { t, useLocale } from '@/lib/release/locale'
+import { useCallback, useRef, useState, type ComponentRef } from 'react'
 import {
-  ActivityIndicator,
   FlatList,
-  Pressable,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   Text,
-  TextInput,
   View,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useFocusEffect } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { router, useFocusEffect } from 'expo-router'
 import { apiFetch } from '@/lib/api'
 import type { PantryItem } from '@/lib/types'
 import { expiryLabel, isoInDays, urgencyColor, urgencyOf } from '@/lib/expiry'
-
+import {
+  Button,
+  Chip,
+  EmptyState,
+  Field,
+  LoadingRows,
+  Notice,
+  MotionView,
+  PressableScale,
+  Screen,
+  ScreenHeader,
+} from '@/components/ui'
+import { colors } from '@/theme/tokens'
+import { useRelease } from '@/lib/release/state'
 const EXPIRY_PRESETS = [
-  { label: '3d', days: 3 },
-  { label: '1w', days: 7 },
-  { label: '2w', days: 14 },
-  { label: '1mo', days: 30 },
+  { label: '3 days', days: 3 },
+  { label: '1 week', days: 7 },
+  { label: '2 weeks', days: 14 },
+  { label: '1 month', days: 30 },
 ]
-
 export default function Pantry() {
+  useLocale()
+  const invalidate=useKitchenInvalidation()
+  const { offline, track } = useRelease()
+  const [editing,setEditing]=useState<PantryItem|null>(null)
+  const [rowMotion,setRowMotion]=useState<Record<string,number>>({})
+  const [exiting,setExiting]=useState<Set<string>>(new Set())
+  const editTrigger = useRef<ComponentRef<typeof View>>(null)
+  const editRefs = useRef(new Map<string,ComponentRef<typeof View>>())
+  const [showAdd, setShowAdd] = useState(false)
+  const operation = useRef(false)
+  const requestVersion = useRef(0)
   const [items, setItems] = useState<PantryItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
+  const [notice, setNotice] = useState<string | null>(null)
   const [name, setName] = useState('')
   const [quantity, setQuantity] = useState('')
   const [presetDays, setPresetDays] = useState(7)
   const [adding, setAdding] = useState(false)
-
+  const [removing, setRemoving] = useState<string | null>(null)
+  function highlight(id:string){setRowMotion(previous=>({...previous,[id]:(previous[id]??0)+1}))}
+  function finishRemoval(id:string){
+    setItems(previous=>previous.filter(row=>row.id!==id))
+    setExiting(previous=>{const next=new Set(previous);next.delete(id);return next})
+    setRowMotion(previous=>{const next={...previous};delete next[id];return next})
+  }
   const load = useCallback(async () => {
+    if (operation.current) return
+    const version = ++requestVersion.current
+    setLoading(true)
     try {
-      const { items } = await apiFetch<{ items: PantryItem[] }>('/api/pantry')
+      const { items } = await apiFetch<{
+        items: PantryItem[]
+      }>('/api/pantry')
+      if (version !== requestVersion.current) return
       setItems(items)
-      setError(null)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Could not load pantry.')
+      const currentIds = new Set(items.map(item=>item.id))
+      setExiting(previous=>new Set([...previous].filter(id=>currentIds.has(id))))
+      setRowMotion(previous=>Object.fromEntries(Object.entries(previous).filter(([id])=>currentIds.has(id))))
+      setLoadError(false)
+    } catch {
+      if (version === requestVersion.current) setLoadError(true)
     } finally {
-      setLoading(false)
+      if (version === requestVersion.current) setLoading(false)
     }
   }, [])
-
-  // Refetch whenever the tab regains focus so counts stay current.
   useFocusEffect(
     useCallback(() => {
-      load()
-    }, [load])
+      if (!offline) void load()
+    }, [load, offline]),
   )
-
   async function add() {
-    if (!name.trim() || adding) return
+    if (!name.trim() || operation.current || loading || offline) return
+    operation.current = true
+    ++requestVersion.current
+    setLoading(false)
     setAdding(true)
+    setError(null)
+    setNotice(null)
     try {
-      const { item } = await apiFetch<{ item: PantryItem }>('/api/pantry', {
+      const { item } = await apiFetch<{
+        item: PantryItem
+      }>('/api/pantry', {
         method: 'POST',
         body: JSON.stringify({
           name: name.trim(),
@@ -62,143 +108,252 @@ export default function Pantry() {
           quantity: quantity.trim() || undefined,
         }),
       })
-      // Insert then re-sort by expiry (API returns list sorted asc).
       setItems((prev) =>
-        [...prev, item].sort((a, b) => (a.expiry_date ?? '').localeCompare(b.expiry_date ?? ''))
+        [...prev, item].sort((a, b) =>
+          (a.expiry_date ?? '9999').localeCompare(b.expiry_date ?? '9999'),
+        ),
       )
+      highlight(item.id)
+      invalidate?.('pantry')
+      setNotice(`${item.name} ${t('added to your pantry.')}`)
+      if (items.length === 0) void track('first_ingredient_added')
       setName('')
       setQuantity('')
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Could not add item.')
+      setShowAdd(false)
+      Keyboard.dismiss()
+    } catch {
+      setError(
+        'Couldn’t add this ingredient. Your entry is still here; please try again.',
+      )
     } finally {
       setAdding(false)
+      operation.current = false
     }
   }
-
-  async function remove(id: string) {
-    const prev = items
-    setItems((cur) => cur.filter((i) => i.id !== id)) // optimistic
+  async function remove(item: PantryItem) {
+    if (operation.current || loading || offline || exiting.has(item.id)) return
+    operation.current = true
+    ++requestVersion.current
+    setLoading(false)
+    setRemoving(item.id)
+    setError(null)
+    setNotice(null)
+    // Keep the row visible until confirmed, so failures never look like success.
     try {
-      await apiFetch(`/api/pantry/${id}`, { method: 'DELETE' })
+      await apiFetch(`/api/pantry/${item.id}`, { method: 'DELETE' })
+      setExiting(previous=>new Set(previous).add(item.id))
+      invalidate?.('pantry')
+      setNotice(t('%{name} removed.', { name: item.name }))
     } catch {
-      setItems(prev) // roll back
+      setError(
+        t('Couldn’t remove %{name}. Please try again.', { name: item.name }),
+      )
+    } finally {
+      setRemoving(null)
+      operation.current = false
     }
   }
-
   return (
-    <View className="flex-1 bg-pantry">
-      <SafeAreaView className="flex-1" edges={['top']}>
-        <View className="px-6 pt-6">
-          <Text className="font-mono text-[11px] tracking-[2px] text-zest">YOUR PANTRY</Text>
-          <Text className="mt-2 font-display text-[30px] text-chalk">
-            What&apos;s in the fridge?
-          </Text>
-        </View>
-
-        {/* add bar */}
-        <View className="mx-6 mt-5 rounded-2xl border border-chalk/15 bg-chalk/5 p-4">
-          <View className="flex-row gap-2">
-            <TextInput
-              value={name}
-              onChangeText={setName}
-              placeholder="Add an ingredient"
-              placeholderTextColor="#5f7267"
-              className="flex-1 font-sans text-[15px] text-chalk"
-              onSubmitEditing={add}
-              returnKeyType="done"
-            />
-            <TextInput
-              value={quantity}
-              onChangeText={setQuantity}
-              placeholder="qty"
-              placeholderTextColor="#5f7267"
-              className="w-14 font-mono text-[13px] text-chalk"
-            />
-          </View>
-          <View className="mt-3 flex-row items-center justify-between">
-            <View className="flex-row gap-1.5">
-              {EXPIRY_PRESETS.map((p) => {
-                const active = p.days === presetDays
-                return (
-                  <Pressable
-                    key={p.label}
-                    onPress={() => setPresetDays(p.days)}
-                    className={`rounded-full border px-2.5 py-1 ${
-                      active ? 'border-zest bg-zest' : 'border-chalk/20'
-                    }`}
-                  >
-                    <Text
-                      className={`font-mono text-[11px] ${active ? 'text-ink' : 'text-[#8fa093]'}`}
-                    >
-                      {p.label}
-                    </Text>
-                  </Pressable>
-                )
-              })}
-            </View>
-            <Pressable
-              onPress={add}
-              disabled={!name.trim() || adding}
-              className={`rounded-full bg-zest px-4 py-1.5 ${!name.trim() || adding ? 'opacity-50' : ''}`}
-            >
-              {adding ? (
-                <ActivityIndicator size="small" color="#17180F" />
-              ) : (
-                <Text className="font-mono-bold text-[12px] text-ink">ADD</Text>
-              )}
-            </Pressable>
-          </View>
-        </View>
-
-        {loading ? (
-          <ActivityIndicator className="mt-10" color="#CDF23E" />
-        ) : (
+    <Screen>
+      <SafeAreaView className="flex-1" edges={['top', 'left', 'right']}>
+        <KeyboardAvoidingView
+          className="flex-1"
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
           <FlatList
             data={items}
             keyExtractor={(i) => i.id}
-            contentContainerClassName="px-6 pb-28 pt-4"
-            ListEmptyComponent={
-              <View className="mt-16 items-center px-6">
-                <View className="h-16 w-16 items-center justify-center rounded-full border border-dashed border-chalk/20">
-                  <Ionicons name="file-tray-outline" size={28} color="#5f7267" />
-                </View>
-                <Text className="mt-4 font-display text-[18px] text-chalk">Your pantry is empty</Text>
-                <Text className="mt-1.5 text-center font-sans text-[14px] leading-[21px] text-[#8fa093]">
-                  {error ?? 'Add what you have above, or scan your fridge to fill it fast.'}
-                </Text>
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
+            contentContainerClassName="px-5 pb-8 pt-6"
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={
+              <View className="bg-canvas pb-4">
+                <ScreenHeader
+                  eyebrow={t('YOUR INGREDIENTS')}
+                  title={t('Pantry')}
+                  description={t('%{count} ingredients, ready to use.', {
+                    count: items.length,
+                  })}
+                  action={
+                    <PressableScale
+                      onPress={() => setShowAdd(!showAdd)}
+                      accessibilityLabel={
+                        showAdd ? 'Close ingredient form' : 'Add an ingredient'
+                      }
+                      accessibilityState={{ expanded: showAdd }}
+                      className="h-12 w-12 items-center justify-center rounded-2xl bg-pantry"
+                    >
+                      <Ionicons
+                        name={showAdd ? 'close' : 'add'}
+                        size={24}
+                        color={colors.chalk}
+                      />
+                    </PressableScale>
+                  }
+                />
+                {items.some(item=>item.revision===undefined)?<Notice tone="info" title={t('Editing requires the server update. Adding and removing still work.')}/>:null}
+                {showAdd ? (
+                  <View className="mt-4 rounded-3xl bg-panel p-4">
+                    <View className="flex-row items-start gap-3">
+                      <View className="min-w-0 flex-1">
+                        <Field
+                          label={t('Ingredient')}
+                          value={name}
+                          onChangeText={setName}
+                          placeholder={t('e.g. tomatoes')}
+                          returnKeyType="done"
+                          onSubmitEditing={add}
+                          editable={!adding && !loading}
+                        />
+                      </View>
+                      <View className="w-20">
+                        <Field
+                          label={t('Quantity')}
+                          value={quantity}
+                          onChangeText={setQuantity}
+                          placeholder={t('e.g. 2')}
+                          editable={!adding && !loading}
+                        />
+                      </View>
+                    </View>
+                    <Text className="mb-2 mt-3 font-sans text-label text-secondary">
+                      {t('Use within')}
+                    </Text>
+                    <View className="flex-row flex-wrap gap-2">
+                      {EXPIRY_PRESETS.map((p) => (
+                        <Chip
+                          key={p.days}
+                          label={p.label}
+                          size="sm"
+                          active={p.days === presetDays}
+                          onPress={() => setPresetDays(p.days)}
+                          disabled={adding}
+                        />
+                      ))}
+                    </View>
+                    <View className="mt-3">
+                      <Button
+                        label={t('Add ingredient')}
+                        loadingLabel={t('Adding ingredient\u2026')}
+                        onPress={add}
+                        loading={adding}
+                        disabled={
+                          !name.trim() || !!removing || loading || offline
+                        }
+                      />
+                    </View>
+                  </View>
+                ) : null}
+                {loadError ? (
+                  <Notice
+                    title={t('Your pantry couldn\u2019t load')}
+                    description={t(
+                      'Check your connection. Any ingredients shown may be out of date.',
+                    )}
+                    action={
+                      loading
+                        ? undefined
+                        : { label: 'Try again', onPress: load }
+                    }
+                  />
+                ) : null}
               </View>
+            }
+            ListEmptyComponent={
+              loading ? (
+                <LoadingRows />
+              ) : loadError ? undefined : (
+                <EmptyState
+                  icon="file-tray-outline"
+                  title={t('Your pantry is empty')}
+                  description={t(
+                    'Tap + to add what you have, or scan a photo to fill it faster.',
+                  )}
+                  action={{
+                    label: 'Scan your fridge',
+                    onPress: () => router.navigate('/scan'),
+                  }}
+                />
+              )
             }
             renderItem={({ item }) => {
               const urgency = urgencyOf(item.expiry_date)
               return (
-                <View className="mb-2.5 flex-row items-center rounded-xl border border-chalk/10 bg-chalk/[0.03] px-4 py-3.5">
+                <MotionView animate={!!rowMotion[item.id]||exiting.has(item.id)} transitionKey={rowMotion[item.id]??0} visible={!exiting.has(item.id)} onEntered={()=>setRowMotion(previous=>{if(previous[item.id]!==rowMotion[item.id])return previous;const next={...previous};delete next[item.id];return next})} onExited={()=>finishRemoval(item.id)} style={{marginBottom:8}}><View className="flex-row items-center gap-3 rounded-2xl bg-panel p-4">
                   <View
-                    className="mr-3 h-2.5 w-2.5 rounded-full"
+                    className="h-2 w-2 rounded-full"
                     style={{ backgroundColor: urgencyColor(urgency) }}
                   />
-                  <View className="flex-1">
-                    <Text className="font-sans text-[15px] text-chalk">
+                  <View className="min-w-0 flex-1">
+                    <Text className="font-sans text-body text-content">
                       {item.name}
-                      {item.quantity ? (
-                        <Text className="font-mono text-[12px] text-[#8fa093]">  ·  {item.quantity}</Text>
-                      ) : null}
+                    </Text>
+                    {item.quantity ? (
+                      <Text className="mt-0.5 font-sans text-label text-secondary">
+                        {item.quantity}
+                      </Text>
+                    ) : null}
+                    <Text
+                      className="mt-1 font-sans text-label"
+                      style={{
+                        color:
+                          urgency === 'expired'
+                            ? colors['error-ink']
+                            : urgency === 'soon' || urgency === 'urgent'
+                              ? colors['warm-ink']
+                              : colors.muted,
+                      }}
+                    >
+                      {expiryLabel(item.expiry_date)}
                     </Text>
                   </View>
-                  <Text
-                    className="mr-3 font-mono text-[11px]"
-                    style={{ color: urgencyColor(urgency) }}
+                  <PressableScale nativeRef={node=>{if(node)editRefs.current.set(item.id,node);else editRefs.current.delete(item.id)}} onPress={()=>{editTrigger.current=editRefs.current.get(item.id)??null;setEditing(item)}} disabled={exiting.has(item.id)||item.revision===undefined||!!removing||adding||loading||offline} accessibilityLabel={t('Edit %{name}',{name:item.name})} className="h-11 w-11 items-center justify-center rounded-full border border-line">
+                    <Ionicons name="pencil-outline" size={20} color={colors.pantry}/>
+                  </PressableScale>
+                  <PressableScale
+                    onPress={() => remove(item)}
+                    disabled={exiting.has(item.id)||!!removing || adding || loading || offline}
+                    accessibilityLabel={
+                      removing === item.id
+                        ? t('Removing %{name}', { name: item.name })
+                        : t('Remove %{name}', { name: item.name })
+                    }
+                    accessibilityState={{ busy: removing === item.id }}
+                    className="h-11 w-11 items-center justify-center rounded-full border border-line"
                   >
-                    {expiryLabel(item.expiry_date)}
-                  </Text>
-                  <Pressable onPress={() => remove(item.id)} hitSlop={10}>
-                    <Ionicons name="trash-outline" size={18} color="#5f7267" />
-                  </Pressable>
-                </View>
+                    <Ionicons
+                      name={
+                        removing === item.id
+                          ? 'hourglass-outline'
+                          : 'trash-outline'
+                      }
+                      size={20}
+                      color={colors.muted}
+                    />
+                  </PressableScale>
+                </View></MotionView>
               )
             }}
           />
-        )}
+          {error || notice ? (
+            <View className="px-5 pb-3">
+              <MotionView transitionKey={error??notice??''}><Notice
+                title={error ?? notice ?? ''}
+                tone={error ? 'error' : 'success'}
+                onDismiss={() => {
+                  setError(null)
+                  setNotice(null)
+                }}
+              /></MotionView>
+            </View>
+          ) : null}
+        </KeyboardAvoidingView>
       </SafeAreaView>
-    </View>
+      {editing?<PantryEditor key={editing.id} item={editing} returnFocus={editTrigger} offline={offline} onCancel={()=>setEditing(null)} onSaved={updated=>{
+        setItems(prev=>prev.map(row=>row.id===updated.id?updated:row).sort((a,b)=>(a.expiry_date??'9999').localeCompare(b.expiry_date??'9999')))
+        highlight(updated.id);invalidate?.('pantry');setEditing(null);setNotice(t('Ingredient updated.'))
+      }}/>:null}
+    </Screen>
   )
 }

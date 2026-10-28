@@ -1,0 +1,602 @@
+{
+  "inspected_date": "2026-10-15",
+  "project_ref": "uubfnekqfqgumxpotuzf",
+  "scope": "Read-only schema metadata. No application rows or credentials.",
+  "metadata": {
+    "tables": [
+      {
+        "rls": true,
+        "table": "pantry",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "not_null": true
+          },
+          {
+            "name": "expiry_date",
+            "type": "date",
+            "not_null": true
+          },
+          {
+            "name": "quantity",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "profiles",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "email",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "daily_calorie_goal",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "protein_goal_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "carbs_goal_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "fat_goal_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "water_goal_l",
+            "type": "numeric(3,1)",
+            "not_null": false
+          },
+          {
+            "name": "diet_type",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "goals_updated_at",
+            "type": "timestamp with time zone",
+            "not_null": false
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "recipe_count_this_month",
+            "type": "integer",
+            "not_null": true
+          },
+          {
+            "name": "recipe_count_reset_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "is_premium",
+            "type": "boolean",
+            "not_null": true
+          },
+          {
+            "name": "referral_code",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "referred_by",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "referral_count",
+            "type": "integer",
+            "not_null": true
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "recipes",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "not_null": true
+          },
+          {
+            "name": "ingredients",
+            "type": "jsonb",
+            "not_null": true
+          },
+          {
+            "name": "instructions",
+            "type": "text",
+            "not_null": true
+          },
+          {
+            "name": "macros",
+            "type": "jsonb",
+            "not_null": false
+          },
+          {
+            "name": "diet_context",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "is_public",
+            "type": "boolean",
+            "not_null": true
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "image_url",
+            "type": "text",
+            "not_null": false
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "meal_plans",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "week_start_date",
+            "type": "date",
+            "not_null": true
+          },
+          {
+            "name": "meals",
+            "type": "jsonb",
+            "not_null": true
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "meals_eaten",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "recipe_name",
+            "type": "text",
+            "not_null": true
+          },
+          {
+            "name": "calories",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "protein_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "carbs_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "fat_g",
+            "type": "integer",
+            "not_null": false
+          },
+          {
+            "name": "eaten_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "source",
+            "type": "text",
+            "not_null": false
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "push_tokens",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "not_null": true
+          },
+          {
+            "name": "token",
+            "type": "text",
+            "not_null": true
+          },
+          {
+            "name": "platform",
+            "type": "text",
+            "not_null": false
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "not_null": true
+          }
+        ]
+      }
+    ],
+    "policies": [
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "pantry",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi malzemelerini ekleyebilir",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = user_id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "pantry",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi malzemelerini görebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "pantry",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi malzemelerini güncelleyebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "pantry",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi malzemelerini silebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(auth.uid() = id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi profilini görebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(auth.uid() = id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi profilini güncelleyebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi profilini oluşturabilir",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "((auth.uid() = user_id) OR (is_public = true))",
+        "roles": [
+          "public"
+        ],
+        "tablename": "recipes",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi tariflerini görebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "recipes",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi tariflerini güncelleyebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "recipes",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi tariflerini silebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "recipes",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı tarif ekleyebilir",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = user_id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(is_public = true)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "recipes",
+        "permissive": "PERMISSIVE",
+        "policyname": "anyone can read public recipes",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "meal_plans",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi planlarını görebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "meal_plans",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi planını güncelleyebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "meal_plans",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi planını silebilir",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "meal_plans",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı plan ekleyebilir",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = user_id)"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "meals_eaten",
+        "permissive": "PERMISSIVE",
+        "policyname": "Kullanıcı kendi kayıtlarını yönetir",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = user_id)"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(auth.uid() = user_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "push_tokens",
+        "permissive": "PERMISSIVE",
+        "policyname": "Users manage their own push tokens",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = user_id)"
+      }
+    ],
+    "functions": [
+      {
+        "acl": [
+          "=X/postgres",
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "args": "",
+        "name": "rls_auto_enable",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "=X/postgres",
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "args": "",
+        "name": "handle_new_user",
+        "config": null,
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "args": "p_code text",
+        "name": "apply_referral",
+        "config": [
+          "search_path=public"
+        ],
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "args": "p_limit integer",
+        "name": "consume_recipe_credit",
+        "config": [
+          "search_path=public"
+        ],
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "args": "",
+        "name": "refund_recipe_credit",
+        "config": [
+          "search_path=public"
+        ],
+        "security_definer": true
+      }
+    ]
+  }
+}

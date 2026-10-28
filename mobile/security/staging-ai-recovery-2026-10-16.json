@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-16",
+  "origin": "https://chef-ai-staging-nu.vercel.app",
+  "model": "gemini-3.5-flash-lite",
+  "checks": [
+    {
+      "name": "AI rejects missing transfer consent",
+      "durationMs": 517
+    },
+    {
+      "name": "versioned AI transfer consent is stored",
+      "durationMs": 622
+    },
+    {
+      "name": "English recipe generated with a structured result",
+      "durationMs": 10307
+    },
+    {
+      "name": "AI retry replays the same confirmed result",
+      "durationMs": 633
+    },
+    {
+      "name": "generated recipe saves privately",
+      "durationMs": 359
+    },
+    {
+      "name": "duplicate recipe save returns same record",
+      "durationMs": 402
+    },
+    {
+      "name": "recipe appears in saved history after fresh login",
+      "durationMs": 592
+    },
+    {
+      "name": "recipe content report is confirmed by storage",
+      "durationMs": 831
+    },
+    {
+      "name": "Turkish metric recipe returns structured content",
+      "durationMs": 5861
+    },
+    {
+      "name": "public food photo uploads and identifies visible food",
+      "durationMs": 10885
+    },
+    {
+      "name": "weekly plan generates and persists seven days",
+      "durationMs": 18985
+    },
+    {
+      "name": "a planned dinner regenerates and persists",
+      "durationMs": 19893
+    },
+    {
+      "name": "consent revocation immediately blocks further AI",
+      "durationMs": 2026
+    }
+  ],
+  "status": "passed",
+  "fixtureSource": "https://storage.googleapis.com/generativeai-downloads/images/scones.jpg",
+  "limits": [
+    "Synthetic admin-confirmed account; real SMTP not tested",
+    "Public Google food photo tested; physical camera/gallery interaction still requires device test",
+    "Native UI, billing, push and production not validated"
+  ],
+  "syntheticAccountCleanup": "passed",
+  "deploymentId": "dpl_GovLsMia88j1dCSkmUS2zpVTgMJ5",
+  "deploymentUrl": "https://chef-ai-staging-2k6kqm563-mertgrz24s-projects.vercel.app",
+  "functionRegion": "bom1",
+  "supabaseProjectRef": "vcyqtbzhfanbpclfhibv",
+  "observedAt": "2026-10-16T16:54:24.991789+00:00",
+  "nativeBuildTaken": false,
+  "customerProductionChanged": false,
+  "publicConfiguration": {
+    "status": 200,
+    "capabilities": {
+      "ai": true,
+      "localizedAi": true,
+      "privateRecipes": true,
+      "idempotency": true,
+      "billing": false,
+      "reports": true,
+      "consents": true,
+      "push": false,
+      "analytics": false
+    }
+  },
+  "unitSecurityTests": 36,
+  "typecheck": "passed",
+  "lint": "0 errors; 4 pre-existing warnings",
+  "retryPolicy": "Staging opt-in only; max 2 provider calls per reserved application operation; explicit 503 only; 2-3s jitter; shared 110s; no retry on network uncertainty, timeout, 402 or 429",
+  "retryAcceptance": "Unit-tested; hosted run passed all checks, but no claim that a retry was triggered on a particular hosted call",
+  "secretsScan": {
+    "apiSourceFiles": 131,
+    "mobileSourceFiles": 181,
+    "sourceFindings": 0,
+    "availableHistoryFindings": 0,
+    "scope": "Tracked/non-ignored source and locally available Git refs; ignored environment files and native artifacts excluded"
+  },
+  "temporaryCredentialCleanup": "local key/config files removed after integration; staging server credentials retained only in existing server environment"
+}

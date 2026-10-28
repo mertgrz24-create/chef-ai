@@ -1,0 +1,6 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Chef-AI, seçtiğin malzemeleri tanımlamak için kamera fotoğrafını kullanır.",
+    "NSPhotoLibraryUsageDescription": "Chef-AI, yalnızca seçtiğin fotoğrafı malzeme analizi için kullanır."
+  }
+}

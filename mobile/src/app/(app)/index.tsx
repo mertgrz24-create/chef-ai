@@ -1,166 +1,227 @@
+import { Recommendations } from '@/components/release/recommendations'
+import { useKitchen } from '@/lib/release/kitchen-data'
+import { useRelease } from '@/lib/release/state'
+import { t, useLocale } from '@/lib/release/locale'
 import { useCallback, useState } from 'react'
-import { Pressable, ScrollView, Text, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { type Href, router, useFocusEffect } from 'expo-router'
+import { Text, View } from 'react-native'
+import { router, useFocusEffect } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@/lib/auth'
-import { apiFetch } from '@/lib/api'
-import type { PantryItem } from '@/lib/types'
-import { urgencyColor, urgencyOf } from '@/lib/expiry'
-
-// Static, on-brand cooking wisdom — one per day, no API. Fills the screen with
-// warmth without adding a feature.
+import { expiryLabel, urgencyOf } from '@/lib/expiry'
+import {
+  Button,
+  Notice,
+  PressableScale,
+  Row,
+  ScreenScroll,
+  SectionLabel,
+  Skeleton,
+} from '@/components/ui'
+import { colors } from '@/theme/tokens'
 const TIPS = [
-  'A squeeze of acid — lemon or vinegar — at the end wakes up almost any dish.',
-  'Pat proteins dry before searing. Moisture is the enemy of a good crust.',
-  'Salt pasta water like the sea. It is your only shot at seasoning the pasta itself.',
-  'Rest meat after cooking so the juices settle back in instead of running out.',
-  'Store herbs like flowers: stems in water, a bag over the top. They last twice as long.',
-  'Freeze leftover herbs in olive oil in an ice tray — instant flavor cubes.',
-  'Taste as you go. The recipe is a map, not the territory.',
+  'Finish a dish with lemon or vinegar to brighten its flavor.',
+  'Dry ingredients brown better. Pat them dry before they hit the pan.',
+  'Save a little pasta water to bring a sauce together.',
+  'Let cooked meat rest before slicing.',
+  'Keep herbs in a glass of water in the fridge.',
+  'Freeze extra herbs in olive oil for another day.',
+  'Taste before serving, then adjust salt and acidity.',
 ]
-
-function tipOfDay(): string {
-  const start = Date.UTC(new Date().getUTCFullYear(), 0, 0)
-  const day = Math.floor((Date.now() - start) / 86_400_000)
-  return TIPS[day % TIPS.length]
-}
-
-function QuickAction({
-  icon,
-  title,
-  subtitle,
-  href,
-}: {
-  icon: keyof typeof Ionicons.glyphMap
-  title: string
-  subtitle: string
-  href: Href
-}) {
-  return (
-    <Pressable
-      onPress={() => router.navigate(href)}
-      className="flex-1 rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
-    >
-      <View className="mb-6 h-11 w-11 items-center justify-center rounded-xl bg-zest">
-        <Ionicons name={icon} size={22} color="#17180F" />
-      </View>
-      <Text className="font-sans text-[15px] text-chalk">{title}</Text>
-      <Text className="mt-0.5 font-mono text-[11px] text-[#8fa093]">{subtitle}</Text>
-    </Pressable>
-  )
-}
-
 export default function Today() {
+  useLocale()
+  const { offline } = useRelease()
   const { session } = useAuth()
-  const firstName = session?.user.email?.split('@')[0] ?? 'chef'
-
-  const [pantry, setPantry] = useState<PantryItem[] | null>(null)
-
+  const [tip] = useState(
+    () => TIPS[Math.floor(Date.now() / 86400000) % TIPS.length],
+  )
+  const {store,snapshot}=useKitchen()
+  const pantry=snapshot.pantry.data, error=snapshot.pantry.error, loading=snapshot.pantry.loading
+  const load=store.refresh
   useFocusEffect(
     useCallback(() => {
-      apiFetch<{ items: PantryItem[] }>('/api/pantry')
-        .then(({ items }) => setPantry(items))
-        .catch(() => setPantry([]))
-    }, [])
+      if (!offline) void load()
+    }, [load, offline]),
   )
-
-  const expiringSoon = (pantry ?? []).filter((i) => {
-    const u = urgencyOf(i.expiry_date)
-    return u === 'expired' || u === 'urgent'
-  })
-
+  const needsAttention = (pantry ?? []).filter((item) =>
+    ['expired', 'urgent'].includes(urgencyOf(item.expiry_date) ?? ''),
+  )
+  const name = session?.user.email?.split('@')[0] ?? 'chef'
   return (
-    <View className="flex-1 bg-pantry">
-      <SafeAreaView className="flex-1" edges={['top']}>
-        <ScrollView contentContainerClassName="px-6 pb-28 pt-6" showsVerticalScrollIndicator={false}>
-          <Text className="font-mono text-[11px] tracking-[2px] text-zest">AI KITCHEN DECISION ENGINE</Text>
-          <Text className="mt-1.5 font-sans text-[13px] text-[#8fa093]">Hello, {firstName}</Text>
-
-          <Text className="mt-4 font-display text-[32px] leading-[36px] text-chalk">
-            Tonight&apos;s dinner is already in your <Text className="text-zest">fridge.</Text>
-          </Text>
-
-          {/* pantry count */}
-          <View className="mt-8 flex-row gap-3">
-            <View className="flex-1 rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4">
-              <Text className="font-display text-[32px] text-chalk">{pantry?.length ?? '—'}</Text>
-              <Text className="mt-0.5 font-mono text-[10px] tracking-[1.5px] text-[#8fa093]">
-                IN PANTRY
-              </Text>
-            </View>
-            <View className="flex-1 rounded-2xl border p-4" style={{ borderColor: expiringSoon.length ? '#E8623D55' : '#f5f6f11a' }}>
-              <Text
-                className="font-display text-[32px]"
-                style={{ color: expiringSoon.length ? '#F0913D' : '#F5F6F1' }}
-              >
-                {pantry ? expiringSoon.length : '—'}
-              </Text>
-              <Text className="mt-0.5 font-mono text-[10px] tracking-[1.5px] text-[#8fa093]">
-                EXPIRING SOON
-              </Text>
-            </View>
+    <ScreenScroll>
+      <View className="mb-7 flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <View className="h-8 w-8 items-center justify-center rounded-xl bg-pantry">
+            <Ionicons name="restaurant-outline" size={16} color={colors.zest} />
           </View>
-
-          {/* expiring list */}
-          {expiringSoon.length > 0 ? (
-            <>
-              <Text className="mb-2.5 mt-8 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-                COOK THESE BEFORE THEY GO
-              </Text>
-              <View className="flex-row flex-wrap gap-2">
-                {expiringSoon.map((item) => (
-                  <View
-                    key={item.id}
-                    className="flex-row items-center gap-2 rounded-full border border-chalk/20 px-3 py-1.5"
-                  >
-                    <View
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: urgencyColor(urgencyOf(item.expiry_date)) }}
-                    />
-                    <Text className="font-mono text-[12px] text-[#e4e8dd]">{item.name}</Text>
-                  </View>
-                ))}
-              </View>
-            </>
-          ) : null}
-
-          {/* quick actions */}
-          <Text className="mb-2.5 mt-8 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-            QUICK ACTIONS
+          <Text className="font-display text-display-sm text-pantry">
+            {t('ChefAI')}
           </Text>
-          <View className="flex-row gap-3">
-            <QuickAction icon="scan" title="Scan your fridge" subtitle="PHOTO → ITEMS" href="/scan" />
-            <QuickAction icon="flame" title="Cook something" subtitle="ITEMS → RECIPE" href="/cook" />
-          </View>
-
-          {/* meal plan entry — lives here, not in the tab bar */}
-          <Pressable
-            onPress={() => router.navigate('/meal-plan')}
-            className="mt-3 flex-row items-center rounded-2xl border border-chalk/10 bg-chalk/[0.03] p-4"
-          >
-            <View className="mr-3 h-11 w-11 items-center justify-center rounded-xl bg-zest">
-              <Ionicons name="calendar" size={20} color="#17180F" />
-            </View>
-            <View className="flex-1">
-              <Text className="font-sans text-[15px] text-chalk">This week&apos;s meal plan</Text>
-              <Text className="font-mono text-[11px] text-[#8fa093]">7 days, planned for you</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color="#8fa093" />
-          </Pressable>
-
-          {/* kitchen tip — a ticket, for warmth */}
-          <View className="mt-8 overflow-hidden rounded-2xl bg-surface">
-            <View className="flex-row items-center justify-between bg-ink px-4 py-2.5">
-              <Text className="font-mono text-[11px] tracking-widest text-chalk">KITCHEN TIP</Text>
-              <Ionicons name="bulb" size={13} color="#CDF23E" />
-            </View>
-            <Text className="px-5 py-4 font-sans text-[14px] leading-[21px] text-ink-2">
-              {tipOfDay()}
+        </View>
+        <PressableScale
+          onPress={() => router.navigate('/profile')}
+          accessibilityLabel={t('Open profile')}
+          className="h-11 w-11 items-center justify-center rounded-full border border-line bg-panel"
+        >
+          <Ionicons name="person-outline" size={20} color={colors.pantry} />
+        </PressableScale>
+      </View>
+      <Text className="font-sans text-body-sm text-muted">
+        {t('Hello,')} {name}
+      </Text>
+      <Text
+        accessibilityRole="header"
+        className="mb-6 mt-1 font-display text-display-xl tracking-tight text-pantry"
+      >
+        {t('Your kitchen, today.')}
+      </Text>
+      {error ? (
+        <Notice
+          title={t('Your pantry couldn\u2019t load')}
+          description={t('Check your connection and try again.')}
+          action={loading ? undefined : { label: 'Try again', onPress: load }}
+        />
+      ) : null}
+      <PressableScale
+        onPress={() => router.navigate('/cook')}
+        accessibilityLabel={t('Cook something with your ingredients')}
+        className="overflow-hidden rounded-3xl bg-pantry p-5"
+      >
+        <View className="flex-row items-center justify-between">
+          <View className="rounded-lg bg-chalk/10 px-3 py-1.5">
+            <Text className="font-sans text-meta text-chalk">
+              {t('Made from what you have')}
             </Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+          <Ionicons name="flame-outline" size={28} color={colors.zest} />
+        </View>
+        <Text className="mt-6 font-display text-display-lg text-chalk">
+          {t('What\u2019s for dinner?')}
+        </Text>
+        <Text className="mt-2 max-w-[260px] font-sans text-body-sm text-chalk-2">
+          {t('Pick a few ingredients.')}
+          {'\n'}
+          {t('Find a recipe that puts them to use.')}
+        </Text>
+        <View className="mt-6 min-h-11 flex-row items-center justify-between rounded-xl bg-zest px-4 py-3">
+          <Text className="font-sans-bold text-body-sm text-pantry">
+            {t('Let\u2019s cook')}
+          </Text>
+          <Ionicons name="arrow-forward" size={19} color={colors.pantry} />
+        </View>
+      </PressableScale>
+      <View className="mt-5 flex-row items-center border-b border-line pb-5">
+        {pantry === null && loading ? (
+          <View className="flex-1">
+            <Skeleton className="h-12" />
+          </View>
+        ) : (
+          <>
+            <View className="flex-1">
+              <Text className="font-display text-display-md text-pantry">
+                {pantry?.length ?? '—'}
+                <Text className="font-sans text-label text-muted">
+                  {' '}
+                  {t('in your pantry')}
+                </Text>
+              </Text>
+            </View>
+            <View className="h-7 w-px bg-line" />
+            <View className="flex-1 pl-5">
+              <Text className="font-display text-display-md text-pantry">
+                {pantry ? needsAttention.length : '—'}
+                <Text className="font-sans text-label text-muted">
+                  {' '}
+                  {t('to check soon')}
+                </Text>
+              </Text>
+            </View>
+          </>
+        )}
+      </View>
+      <Recommendations />
+      <SectionLabel>
+        {pantry?.length === 0 ? 'Start with what you have' : 'Use these first'}
+      </SectionLabel>
+      {needsAttention.length ? (
+        <View className="rounded-2xl bg-panel px-4">
+          {needsAttention.slice(0, 3).map((item, index) => (
+            <View
+              key={item.id}
+              className={`flex-row items-center gap-3 py-3.5 ${index ? 'border-t border-line' : ''}`}
+            >
+              <View className="h-9 w-9 items-center justify-center rounded-xl bg-surface-2">
+                <Ionicons name="leaf-outline" size={18} color={colors.pantry} />
+              </View>
+              <Text className="min-w-0 flex-1 font-sans-bold text-body-sm text-pantry">
+                {item.name}
+              </Text>
+              <Text className="font-sans text-meta text-warm-ink">
+                {expiryLabel(item.expiry_date)}
+              </Text>
+            </View>
+          ))}
+          <PressableScale
+            onPress={() => router.navigate('/pantry')}
+            className="min-h-11 flex-row items-center justify-between border-t border-line py-3"
+            accessibilityLabel={t('View pantry')}
+          >
+            <Text className="font-sans-bold text-label text-pantry">
+              {t('View pantry')}
+            </Text>
+            <Ionicons name="arrow-forward" size={16} color={colors.pantry} />
+          </PressableScale>
+        </View>
+      ) : (
+        <View className="rounded-2xl bg-panel p-4">
+          <Text className="mb-4 font-sans text-body-sm text-secondary">
+            {t(
+              pantry?.length === 0
+                ? 'Scan your fridge or add a few ingredients to get started.'
+                : pantry
+                  ? 'Nothing needs using right away. Keep your pantry up to date as you cook.'
+                  : 'Load your pantry to see which ingredients to check first.',
+            )}
+          </Text>
+          <Button
+            label={t('Open pantry')}
+            variant="ghost"
+            onPress={() => router.navigate('/pantry')}
+          />
+        </View>
+      )}
+      <View className="mt-5 border-b border-line pb-2">
+        <Row
+          icon={
+            <Ionicons name="scan-outline" size={21} color={colors.pantry} />
+          }
+          title={t('Scan your fridge')}
+          subtitle="A photo is a good place to start"
+          onPress={() => router.navigate('/scan')}
+          right={
+            <Ionicons name="arrow-forward" size={18} color={colors.pantry} />
+          }
+        />
+        <Row
+          icon={
+            <Ionicons name="calendar-outline" size={21} color={colors.pantry} />
+          }
+          title={t('This week\u2019s meal plan')}
+          subtitle="Breakfast & dinner, all week"
+          onPress={() => router.navigate('/meal-plan')}
+          right={
+            <Ionicons name="arrow-forward" size={18} color={colors.pantry} />
+          }
+        />
+      </View>
+      <View className="mt-6 flex-row items-start gap-3">
+        <Ionicons name="bulb-outline" size={18} color={colors.pantry} />
+        <View className="flex-1">
+          <Text className="mb-1 font-sans-bold text-label text-pantry">
+            {t('A note for your kitchen')}
+          </Text>
+          <Text className="font-sans text-body-sm text-muted">{t(tip)}</Text>
+        </View>
+      </View>
+    </ScreenScroll>
   )
 }

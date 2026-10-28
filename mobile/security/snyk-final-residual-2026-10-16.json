@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-16",
+  "evidence": "Manually observed authenticated VS Code Snyk UI; not a native Snyk JSON export",
+  "status": "All scans are completed",
+  "counts": {
+    "total": 1,
+    "new": 0,
+    "openSourceHigh": 1,
+    "code": 0,
+    "iac": 0
+  },
+  "secrets": "Disabled by Snyk organization",
+  "remaining": {
+    "id": "SNYK-JS-NODEFORGE-19635204",
+    "cve": "CVE-2026-85393",
+    "package": "node-forge",
+    "version": "1.4.1-0",
+    "severity": "high",
+    "cvss": 8.7,
+    "snykAffectedRange": "*",
+    "publishedFixedVersion": null,
+    "paths": [
+      "expo > @expo/cli > node-forge",
+      "expo > @expo/cli > @expo/code-signing-certificates > node-forge"
+    ]
+  },
+  "localMitigation": {
+    "commit": "ceba34402e329f0365134f23fe19898756527d65",
+    "patch": "patches.json: node-forge/lib/rsa.js",
+    "integrityCheck": "passed",
+    "bothConsumerPathsResolveSamePatchedCopy": true,
+    "independentReview": "pending"
+  },
+  "changesThisFollowUp": "Documentation only; no suppression, dependency changes, build, deployment or push",
+  "npmPublishedLatest": "1.4.0"
+}

@@ -1,0 +1,52 @@
+{
+  "observedAt": "2026-10-16",
+  "backendRepository": "https://github.com/mertgrz24/chef-ai-backend",
+  "backendRepositoryPrivate": true,
+  "webApiAndServerSourcesRemovedLocally": true,
+  "webRemoteChangesPushed": false,
+  "mobileRemoteChangesPushed": false,
+  "serverEnv": "chef-ai-backend/.env.local",
+  "serverEnvMode": "0600",
+  "serverEnvIgnored": true,
+  "nativeOrProductionBuild": false,
+  "deployments": false,
+  "hostedStagingOrigin": "https://chef-ai-staging-nu.vercel.app",
+  "hostedDeploymentUnchanged": true,
+  "backendSecurityTests": {
+    "passed": 36,
+    "failed": 0
+  },
+  "backendTypecheck": "passed",
+  "backendLint": {
+    "errors": 0,
+    "preexistingWarnings": 4
+  },
+  "webTypecheck": "passed",
+  "webLint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "dast": "not run; HawkScan key unavailable, user declined paid setup",
+  "scans": {
+    "backend": {
+      "sourceFiles": 114,
+      "sourceFindings": 0,
+      "historyFindings": 0
+    },
+    "web": {
+      "sourceFiles": 44,
+      "sourceFindings": 0,
+      "historyFindings": 0
+    },
+    "mobile": {
+      "sourceFiles": 189,
+      "sourceFindings": 0,
+      "historyFindings": 0
+    }
+  },
+  "integration": {
+    "passed": 8,
+    "syntheticCleanup": true,
+    "evidence": "chef-ai-backend/docs/split-integration-evidence-2026-10-16.json"
+  }
+}

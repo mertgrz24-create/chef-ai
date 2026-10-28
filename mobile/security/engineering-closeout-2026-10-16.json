@@ -1,0 +1,65 @@
+{
+  "observedOn": "2026-10-16",
+  "scope": "Local source checks only; no build/deploy/remote CI",
+  "tests": {
+    "mobile": 97,
+    "mobileSuites": 14,
+    "dependencyRegression": 15,
+    "backendSecurity": 41,
+    "secretsAndEnvironment": 3,
+    "androidArtifactCheckerUnit": 4,
+    "databaseCheckGroups": 5,
+    "databaseMigrations": 7
+  },
+  "typescript": {
+    "mobile": "passed",
+    "backend": "passed"
+  },
+  "lint": {
+    "mobileErrors": 0,
+    "backendErrors": 0,
+    "backendExistingWarnings": 4
+  },
+  "expoDependencyCompatibility": "passed",
+  "yamlWorkflowsParsed": 4,
+  "patchIntegrity": "both passed",
+  "audit": {
+    "mobileHigh": 53,
+    "mobileModerate": 5,
+    "backendHigh": 7,
+    "critical": 0,
+    "securityGate": "pending"
+  },
+  "DAST": "not run: no authenticated scanner configuration/key",
+  "productionRestoreVerified": false,
+  "nativeReleaseVerified": false,
+  "build": false,
+  "deployment": false,
+  "remoteCI": false,
+  "sourceHashes": [
+    {
+      "path": "mobile/src/lib/release/telemetry.ts",
+      "sha256": "306a416c4159a6cf04d7db6f2801d5ca4d82b31ec7264cec17614ddf1d09d957"
+    },
+    {
+      "path": "backend/lib/mobile/validation.ts",
+      "sha256": "adaef686a451bf9091201d47fa2e7fba49bf25c7f1ab243d95c3ca945e52b7df"
+    },
+    {
+      "path": "backend/lib/mobile/verify-database.cjs",
+      "sha256": "558464af95655f3eada349cf316cdd0191f4093ff3778ff6ba5d4c748f1aaeb5"
+    },
+    {
+      "path": "scripts/check-environment-templates.cjs",
+      "sha256": "635c3814cd4508def33e59175c8a01b757d35dd82ebdff7634fa9114fee71147"
+    },
+    {
+      "path": ".github/workflows/backend.yml",
+      "sha256": "4a2c7b9f74f058f3ea9a7c4d51a850a6df372cef3fa0df06fbbed3caf4d2e541"
+    },
+    {
+      "path": ".github/workflows/secrets.yml",
+      "sha256": "1921dd7e8bfd2552645c3c9c86a04ee034e0f91c5c17743801511623c44eadb7"
+    }
+  ]
+}

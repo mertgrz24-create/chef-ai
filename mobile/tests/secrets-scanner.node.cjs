@@ -1,0 +1,56 @@
+const { test } = require('node:test')
+const assert = require('node:assert/strict')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
+const { randomBytes } = require('node:crypto')
+const { execFileSync, spawnSync } = require('node:child_process')
+const scanner = path.resolve(__dirname, '../scripts/scan-secrets.cjs')
+
+test('real scanner rejects untracked secrets and deleted secrets in history without exposing values', () => {
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'chef-scanner-regression-'))
+  try {
+    const repo = path.join(temporary, 'repo')
+    fs.mkdirSync(repo)
+    const git = (...args) => execFileSync('git', args, { cwd: repo, stdio: 'pipe' })
+    const commit = () => { git('add', '-A'); git('-c', 'user.name=Scanner Test', '-c', 'user.email=scanner@example.invalid', 'commit', '-qm', 'fixture') }
+    git('init', '-q')
+    fs.writeFileSync(path.join(repo, 'README.md'), 'Fixture repository\n')
+    commit()
+    const output = path.join(temporary, 'metadata.json')
+    const missingArgument = spawnSync(process.execPath, [scanner, '--repo'], { encoding: 'utf8' })
+    assert.notEqual(missingArgument.status, 0)
+    assert.match(missingArgument.stderr, /Missing value for --repo/)
+    const run = () => spawnSync(process.execPath, [scanner, '--repo', repo, '--output', output], { encoding: 'utf8' })
+    assert.equal(run().status, 0)
+    // Random, syntactically valid test key; never issued by a provider or used remotely.
+    const credential = ['AI', 'za', randomBytes(26).toString('base64url').slice(0, 35)].join('')
+    const file = path.join(repo, 'credential.txt')
+    fs.writeFileSync(file, 'google_api_key=' + credential + '\n')
+    assert.equal(run().status, 1)
+    let report = JSON.parse(fs.readFileSync(output, 'utf8'))
+    assert.ok(report.source.some(x => x.rule === 'gcp-api-key'))
+    assert.equal(report.history.length, 0)
+    commit()
+    fs.unlinkSync(file)
+    commit()
+    const result = run()
+    assert.equal(result.status, 1)
+    report = JSON.parse(fs.readFileSync(output, 'utf8'))
+    assert.equal(report.source.length, 0)
+    assert.ok(report.history.some(x => x.rule === 'gcp-api-key'))
+    assert.ok(!fs.readFileSync(output, 'utf8').includes(credential))
+    assert.ok(!(result.stdout + result.stderr).includes(credential))
+  } finally { fs.rmSync(temporary, { recursive: true, force: true }) }
+})
+
+test('scanner error with an empty report fails closed', () => {
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'chef-scanner-failure-'))
+  try {
+    const binary = path.join(temporary, 'gitleaks')
+    fs.writeFileSync(binary, '#!/usr/bin/env node\nconst fs=require("node:fs"); if(process.argv[2]==="version"){console.log("8.30.1");process.exit(0)} fs.writeFileSync(process.argv[process.argv.indexOf("--report-path")+1],"[]");process.exit(1)\n', { mode: 0o700 })
+    const result = spawnSync(process.execPath, [scanner], { encoding: 'utf8', env: { ...process.env, PATH: temporary + path.delimiter + process.env.PATH } })
+    assert.notEqual(result.status, 0)
+    assert.match(result.stderr, /no clearance/)
+  } finally { fs.rmSync(temporary, { recursive: true, force: true }) }
+})

@@ -1,0 +1,272 @@
+{
+  "scope": "Run 38810065531 APK; offline ELF/ZIP native alignment and probe marker only; aapt2/zipalign and lint remain pending",
+  "apkSHA256": "33b3b90e67d52935ecb2d83a40636670b445174c81dcd8c293f41878029807e3",
+  "apkBytes": 56788137,
+  "nativeLibraries": [
+    {
+      "file": "lib/arm64-v8a/libandroidx.graphics.path.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 20283392
+    },
+    {
+      "file": "lib/arm64-v8a/libanimation-decoder-gif.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 20299776
+    },
+    {
+      "file": "lib/arm64-v8a/libappmodules.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 20578304
+    },
+    {
+      "file": "lib/arm64-v8a/libavif_android.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 21676032
+    },
+    {
+      "file": "lib/arm64-v8a/libc++_shared.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 22577152
+    },
+    {
+      "file": "lib/arm64-v8a/libdatastore_shared_counter.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 23871488
+    },
+    {
+      "file": "lib/arm64-v8a/libexpo-modules-core.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 23887872
+    },
+    {
+      "file": "lib/arm64-v8a/libfbjni.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 25395200
+    },
+    {
+      "file": "lib/arm64-v8a/libgesturehandler.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 25575424
+    },
+    {
+      "file": "lib/arm64-v8a/libgifimage.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 25624576
+    },
+    {
+      "file": "lib/arm64-v8a/libhermestooling.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 25952256
+    },
+    {
+      "file": "lib/arm64-v8a/libhermesvm.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 26099712
+    },
+    {
+      "file": "lib/arm64-v8a/libimagepipeline.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 28590080
+    },
+    {
+      "file": "lib/arm64-v8a/libjsi.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 28606464
+    },
+    {
+      "file": "lib/arm64-v8a/libnative-filters.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 29032448
+    },
+    {
+      "file": "lib/arm64-v8a/libnative-imagetranscoder.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 29065216
+    },
+    {
+      "file": "lib/arm64-v8a/libreact_codegen_rnscreens.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 29655040
+    },
+    {
+      "file": "lib/arm64-v8a/libreact_codegen_safeareacontext.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 30867456
+    },
+    {
+      "file": "lib/arm64-v8a/libreactnative.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 31031296
+    },
+    {
+      "file": "lib/arm64-v8a/libreanimated.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 38027264
+    },
+    {
+      "file": "lib/arm64-v8a/librnscreens.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 39534592
+    },
+    {
+      "file": "lib/arm64-v8a/libsentry-android.so",
+      "loadAlignments": [
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 39649280
+    },
+    {
+      "file": "lib/arm64-v8a/libsentry.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 39682048
+    },
+    {
+      "file": "lib/arm64-v8a/libstatic-webp.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 40419328
+    },
+    {
+      "file": "lib/arm64-v8a/libworklets.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 40927232
+    },
+    {
+      "file": "lib/arm64-v8a/libzstd-kmp.so",
+      "loadAlignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "compressionMethod": 0,
+      "dataOffset": 42041344
+    }
+  ],
+  "probeMarkerAbsent": true,
+  "status": "passed-offline-scope",
+  "filesComparedAgainstLocalServerCredentials": 1376,
+  "localServerValuesCompared": 4,
+  "literalServerCredentialMatches": 0
+}

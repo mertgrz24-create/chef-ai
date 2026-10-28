@@ -1,6 +1,7 @@
 // Shapes returned by the Next.js API routes the app consumes.
 
 export type PantryItem = {
+  revision?: number
   id: string
   name: string
   expiry_date: string | null
@@ -28,6 +29,7 @@ export type StructuredRecipe = {
 }
 
 export type GenerateRecipeResponse = {
+  resultId?: string
   recipe: string
   structured: StructuredRecipe | null
   macros: RecipeMacros | null

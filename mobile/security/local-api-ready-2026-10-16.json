@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-16",
+  "origin": "http://127.0.0.1:3000",
+  "model": "gemini-3.5-flash-lite",
+  "checks": [
+    {
+      "name": "AI rejects missing transfer consent",
+      "durationMs": 495
+    },
+    {
+      "name": "versioned AI transfer consent is stored",
+      "durationMs": 696
+    },
+    {
+      "name": "English recipe generated with a structured result",
+      "durationMs": 7815
+    },
+    {
+      "name": "AI retry replays the same confirmed result",
+      "durationMs": 441
+    },
+    {
+      "name": "generated recipe saves privately",
+      "durationMs": 761
+    },
+    {
+      "name": "duplicate recipe save returns same record",
+      "durationMs": 472
+    },
+    {
+      "name": "recipe appears in saved history after fresh login",
+      "durationMs": 742
+    },
+    {
+      "name": "recipe content report is confirmed by storage",
+      "durationMs": 799
+    },
+    {
+      "name": "Turkish metric recipe returns structured content",
+      "durationMs": 10745
+    },
+    {
+      "name": "public food photo uploads and identifies visible food",
+      "durationMs": 7852
+    },
+    {
+      "name": "weekly plan generates and persists seven days",
+      "durationMs": 19046
+    },
+    {
+      "name": "a planned dinner regenerates and persists",
+      "durationMs": 17432
+    },
+    {
+      "name": "consent revocation immediately blocks further AI",
+      "durationMs": 1109
+    }
+  ],
+  "status": "passed",
+  "fixtureSource": "https://storage.googleapis.com/generativeai-downloads/images/scones.jpg",
+  "limits": [
+    "Synthetic admin-confirmed account; real SMTP not tested",
+    "Public Google food photo tested; physical camera/gallery interaction still requires device test",
+    "Native UI, billing, push and production not validated"
+  ],
+  "syntheticAccountCleanup": "passed",
+  "observedAt": "2026-10-16T17:35:39.384631+00:00",
+  "environment": "local API against staging Supabase and existing Gemini provider",
+  "supabaseProjectRef": "vcyqtbzhfanbpclfhibv",
+  "hostedApiUsedByTest": false,
+  "localEnvironmentCheck": "passed; staging project and service-role JWT verified; no key values recorded",
+  "localListener": "127.0.0.1:3000 only",
+  "accountDeletionChecks": {
+    "count": 3,
+    "status": "passed",
+    "cases": [
+      "requires authenticated caller",
+      "deletes only the authenticated identity and cascades own app records",
+      "rejects deleted account session"
+    ],
+    "syntheticCleanup": "passed"
+  },
+  "totalIntegrationChecks": 16,
+  "credentialStorage": {
+    "path": "chef-ai-web/.env.local",
+    "permissions": "0600",
+    "gitIgnored": true,
+    "mobileContainsServerKeys": false
+  },
+  "geminiCredentialCheck": "Existing configured model metadata returned 200 before enabling local AI flags",
+  "nativeBuildTaken": false,
+  "backendDeploymentTaken": false,
+  "customerProductionChanged": false,
+  "remaining": [
+    "Native camera/gallery and phone-to-local connectivity not tested",
+    "SMTP, store subscriptions, push, analytics and production release gates unchanged"
+  ],
+  "sourceSecretsScan": {
+    "apiFiles": 133,
+    "mobileFiles": 188,
+    "sourceFindings": 0,
+    "availableHistoryFindings": 0,
+    "scope": "Tracked and non-ignored source plus locally available Git refs; ignored private env and development artifacts excluded"
+  },
+  "finalReadiness": {
+    "configStatus": 200,
+    "ai": true,
+    "localizedAi": true,
+    "unauthenticatedPantryStatus": 401,
+    "listenerVerified": "127.0.0.1:3000"
+  },
+  "temporaryCredentialCopyRemoved": true
+}

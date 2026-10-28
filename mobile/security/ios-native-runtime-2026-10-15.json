@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-15",
+  "nativeBuild": "Xcode 26.6 / iOS SDK 26.5 ARM64 Release simulator build succeeded",
+  "signing": "Xcode local simulator signing; not Apple distribution signing",
+  "runtime": {
+    "passed": true,
+    "phase": "complete",
+    "checks": [
+      "Hermes native engine",
+      "RN to UI preserves own proto data",
+      "RN to UI has no inherited attacker flags",
+      "RN to UI preserves normal data",
+      "UI to RN preserves own proto data",
+      "UI to RN has no inherited attacker flags",
+      "UI to RN preserves normal data",
+      "Native keychain long Unicode session round trip",
+      "Native keychain persistence across app restart",
+      "Native keychain session removal"
+    ],
+    "runtime": "Hermes/iOS simulator",
+    "source": "temporary probe; never production route"
+  },
+  "nativePatch": {
+    "file": "react-native-worklets/Common/cpp/worklets/SharedItems/Serializable.cpp",
+    "sha256": "c11c61d0a2e6b30b1d17f7f5bb1b41f03b21ad96c8d6e667c4b1483151a62eb3",
+    "compiledFromInstalledSource": true
+  },
+  "probeBundleSha256": "2ac1607265b2cf3eec2acf85731109ff13b983bc72e9ae1bc6e84b0a25e8638a",
+  "limitations": [
+    "iOS simulator only, not Android or physical devices",
+    "Probe JS bundle was temporary and outside production source",
+    "No production API, user credentials, payment or push test in this probe",
+    "Initial unsigned Keychain failure and rejected manually signed probe superseded by Xcode-signed build; no OS protection disabled"
+  ],
+  "probeReferenceSource": "security/ios-native-probe-source.txt",
+  "probeReferenceSourceSha256": "60516bb42d79381b160c584622092ec88a97975bf2cc387a5ce167f732bae551"
+}

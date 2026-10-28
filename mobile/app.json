@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "chefai",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.chefai.app",
@@ -26,7 +26,18 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "permissions": ["android.permission.CAMERA", "android.permission.READ_MEDIA_IMAGES"]
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ],
+      "allowBackup": false
     },
     "web": {
       "output": "static",
@@ -43,12 +54,18 @@
           "imageWidth": 76
         }
       ],
-      "expo-secure-store",
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": false
+        }
+      ],
       [
         "expo-image-picker",
         {
           "photosPermission": "Chef-AI reads photos you choose so it can identify your ingredients.",
-          "cameraPermission": "Chef-AI uses your camera to identify ingredients from a photo of your fridge."
+          "cameraPermission": "Chef-AI uses your camera to identify ingredients from a photo of your fridge.",
+          "microphonePermission": false
         }
       ],
       [
@@ -56,11 +73,27 @@
         {
           "color": "#1E3A2F"
         }
-      ]
+      ],
+      "expo-localization",
+      [
+        "@sentry/react-native/expo",
+        {}
+      ],
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser",
+      "./plugins/with-android-compat.cjs"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "updates": {
+      "enabled": false
+    },
+    "locales": {
+      "tr": "./locales/tr.json",
+      "en": "./locales/en.json"
     }
   }
 }

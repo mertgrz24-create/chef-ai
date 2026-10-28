@@ -1,0 +1,36 @@
+{
+  "runId": 38816907980,
+  "status": "Historical report: 2 errors fixed; final run 38822859339 full release lint passed",
+  "errors": [
+    {
+      "id": "NewApi",
+      "message": "`android:windowSplashScreenBehavior` requires API level 33 (current min is 24)"
+    },
+    {
+      "id": "PermissionImpliesUnsupportedChromeOsHardware",
+      "message": "Permission exists without corresponding hardware `<uses-feature android:name=\"android.hardware.camera\" required=\"false\">` tag"
+    }
+  ],
+  "warningCounts": {
+    "ScopedStorage": 2,
+    "UnusedAttribute": 1,
+    "LockedOrientationActivity": 1,
+    "NewerVersionAvailable": 2,
+    "PrivateResource": 6,
+    "DiscouragedApi": 1,
+    "UnusedResources": 8,
+    "IconXmlAndPng": 1,
+    "IconLauncherShape": 5,
+    "IconExtension": 25
+  },
+  "review": {
+    "ScopedStorage": "Two removal entries in generated source manifest; broad read/write permissions are absent from actual merged APK (android-artifact-2026-10-16.json). No permission added to silence warning.",
+    "IconExtension": "Generated .webp filenames contain PNG content; resource compilation and APK packaging succeeded. Runtime rendering and store icon appearance remain unverified.",
+    "PrivateResource": "Generated React Native edit-text drawable references AppCompat private resources; compatibility debt recorded.",
+    "orientation": "Existing portrait preference; Android 16 large-screen/adaptive layout tests remain required.",
+    "securityCategoryFindings": 0
+  },
+  "limits": "Lint categorization is not a dependency audit, DAST or device behavior proof. No warning suppression/baseline introduced.",
+  "followupRunId": 38822859339,
+  "warningCountScope": "52 warnings belong to run 38816907980; final XML not downloaded locally."
+}

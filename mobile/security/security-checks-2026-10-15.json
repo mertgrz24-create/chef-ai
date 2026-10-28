@@ -1,0 +1,74 @@
+{
+  "runStarted": "2026-10-15",
+  "finalized": "2026-10-16",
+  "checks": [
+    {
+      "id": "source-and-history-secrets",
+      "status": "verified-local-scope",
+      "evidence": [
+        "secrets-source-2026-10-15.json",
+        "secrets-api-source-2026-10-15.json"
+      ],
+      "limitations": "Ignored environment files separately inventoried; remote refs/providers not scanned"
+    },
+    {
+      "id": "ignored-environment-inventory",
+      "status": "reviewed",
+      "evidence": [
+        "secrets-review-2026-10-15.json"
+      ],
+      "result": "Five expected local configuration matches; file modes 0600; no committed disclosure found"
+    },
+    {
+      "id": "ios-native-runtime",
+      "status": "verified-simulator",
+      "evidence": [
+        "ios-native-runtime-2026-10-15.json"
+      ],
+      "checksPassed": 10
+    },
+    {
+      "id": "ios-normal-artifact",
+      "status": "verified-simulator",
+      "evidence": [
+        "ios-artifact-2026-10-15.json"
+      ],
+      "filesChecked": 222,
+      "privacyManifests": 16
+    },
+    {
+      "id": "android-native",
+      "status": "verified-ci-artifact-scope",
+      "evidence": [
+        "android-ci-2026-10-16.json",
+        "android-artifact-2026-10-16.json"
+      ],
+      "reason": "Remote standard Ubuntu runner: ARM64 Release assembly, full lint and actual APK checks passed. Physical runtime/final AAB/all ABIs remain pending."
+    },
+    {
+      "id": "independent-patch-review",
+      "status": "pending"
+    },
+    {
+      "id": "authenticated-dast",
+      "status": "pending"
+    },
+    {
+      "id": "production-api-schema",
+      "status": "pending-deployment-validation"
+    },
+    {
+      "id": "overall-security-release",
+      "status": "pending"
+    }
+  ],
+  "verification": {
+    "jest": 65,
+    "dependencyRegressions": 15,
+    "scannerRegressions": 2,
+    "elfParserUnitTests": 4,
+    "lint": "passed",
+    "typescript": "passed",
+    "remoteCI": "Android native validation passed: https://github.com/mertgrz24/chef-ai/actions/runs/38822859339"
+  }
+}

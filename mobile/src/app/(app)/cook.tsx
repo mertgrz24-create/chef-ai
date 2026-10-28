@@ -1,74 +1,86 @@
-import { useCallback, useState } from 'react'
-import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useFocusEffect } from 'expo-router'
+import { useRecoveredAi } from '@/components/release/ai-recovery'
+import { recipeResponseSchema } from '@/lib/release/contracts'
+import { QuotaStatus } from '@/components/release/quota-status'
+import { aiErrorMessage } from '@/lib/release/ai-error'
+import { t, useLocale } from '@/lib/release/locale'
+import { useCallback, useRef, useState } from 'react'
+import { Text, View } from 'react-native'
+import { router, useFocusEffect } from 'expo-router'
 import { ApiError, apiFetch } from '@/lib/api'
-import type { GenerateRecipeResponse, PantryItem, StructuredRecipe } from '@/lib/types'
-
-function RecipeTicket({ recipe, macros }: { recipe: StructuredRecipe; macros: GenerateRecipeResponse['macros'] }) {
-  const timing = [recipe.prep_time_min && `PREP ${recipe.prep_time_min}M`, recipe.cook_time_min && `COOK ${recipe.cook_time_min}M`]
-    .filter(Boolean)
-    .join('  ·  ')
-
-  return (
-    <View className="mt-6 overflow-hidden rounded-2xl bg-surface">
-      <View className="flex-row items-center justify-between bg-ink px-4 py-2.5">
-        <Text className="font-mono text-[11px] tracking-widest text-chalk">TONIGHT&apos;S TICKET</Text>
-        {timing ? <Text className="font-mono text-[11px] tracking-widest text-zest">{timing}</Text> : null}
-      </View>
-      <View className="px-5 pb-5 pt-4">
-        <Text className="font-display text-[24px] leading-[28px] text-ink">{recipe.name}</Text>
-
-        <Text className="mb-1.5 mt-4 font-mono-bold text-[10px] tracking-[2px] text-pantry">INGREDIENTS</Text>
-        {recipe.ingredients.map((line, i) => (
-          <View key={`${line}-${i}`} className="mb-1 flex-row gap-2">
-            <Text className="text-pantry">▪</Text>
-            <Text className="flex-1 font-mono text-[12px] text-ink-2">{line}</Text>
-          </View>
-        ))}
-
-        <Text className="mb-1.5 mt-4 font-mono-bold text-[10px] tracking-[2px] text-pantry">METHOD</Text>
-        <Text className="font-sans text-[14px] leading-[21px] text-ink-2">{recipe.instructions}</Text>
-
-        {recipe.chefs_note ? (
-          <View className="mt-4 rounded-lg bg-accent-light p-3">
-            <Text className="font-sans text-[13px] italic text-ink-2">💡 {recipe.chefs_note}</Text>
-          </View>
-        ) : null}
-
-        {macros ? (
-          <>
-            <View className="my-4 border-t border-dashed border-border" />
-            <View className="flex-row justify-between">
-              {[`${macros.calories} KCAL`, `${macros.protein_g} P`, `${macros.carbs_g} C`, `${macros.fat_g} F`].map((m) => (
-                <Text key={m} className="font-mono text-[11px] text-ink-muted">{m}</Text>
-              ))}
-            </View>
-          </>
-        ) : null}
-      </View>
-    </View>
-  )
-}
-
+import { useRelease } from '@/lib/release/state'
+import { AiGate } from '@/components/release/gates'
+import { RecipeActions } from '@/components/release/recipe-actions'
+import type { GenerateRecipeResponse, PantryItem } from '@/lib/types'
+import {
+  BusyState,
+  Button,
+  Chip,
+  Field,
+  LoadingRows,
+  Notice,
+  MotionView,
+  RecipeTicket,
+  ScreenHeader,
+  ScreenScroll,
+  SectionLabel,
+  Ticket,
+} from '@/components/ui'
 export default function Cook() {
-  const [pantry, setPantry] = useState<PantryItem[]>([])
+  useLocale()
+  const { aiAllowed, offline, track, refreshMembership } = useRelease()
+  const operation = useRef(false)
+  const [pantry, setPantry] = useState<PantryItem[] | null>(null)
+  const [pantryError, setPantryError] = useState(false)
+  const [fetching, setFetching] = useState(false)
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [extra, setExtra] = useState('')
-
   const [loading, setLoading] = useState(false)
+  const [animateRecipe, setAnimateRecipe] = useState(false)
   const [result, setResult] = useState<GenerateRecipeResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [editing, setEditing] = useState(false)
   const [limitReached, setLimitReached] = useState(false)
-
+  const load = useCallback(async () => {
+    setFetching(true)
+    try {
+      const { items } = await apiFetch<{
+        items: PantryItem[]
+      }>('/api/pantry')
+      setPantry(items)
+      setPantryError(false)
+      // Ingredients removed from the pantry must not remain silently selected.
+      setSelected(
+        (prev) =>
+          new Set(
+            [...prev].filter((name) => items.some((i) => i.name === name)),
+          ),
+      )
+    } catch {
+      setPantryError(true)
+    } finally {
+      setFetching(false)
+    }
+  }, [])
   useFocusEffect(
     useCallback(() => {
-      apiFetch<{ items: PantryItem[] }>('/api/pantry')
-        .then(({ items }) => setPantry(items))
-        .catch(() => {})
-    }, [])
+      void load()
+    }, [load]),
   )
-
+  const ingredients = [
+    ...new Set([
+      ...selected,
+      ...extra
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean),
+    ]),
+  ]
+  const recovered=useRecoveredAi('recipes')
+  useFocusEffect(useCallback(()=>{
+    if(!recovered?.result)return
+    const parsed=recipeResponseSchema.safeParse(recovered.result.response)
+    if(parsed.success){setAnimateRecipe(true);setResult(parsed.data);setEditing(false);recovered.consume()}
+  },[recovered]))
   function toggle(name: string) {
     setSelected((prev) => {
       const next = new Set(prev)
@@ -77,135 +89,199 @@ export default function Cook() {
       return next
     })
   }
-
   async function fire() {
-    const ingredients = [
-      ...selected,
-      ...extra.split(',').map((s) => s.trim()).filter(Boolean),
-    ]
-    if (ingredients.length === 0 || loading) return
-
+    if (!ingredients.length || operation.current || limitReached || !aiAllowed)
+      return
+    operation.current = true
     setLoading(true)
     setError(null)
-    setLimitReached(false)
-    setResult(null)
     try {
       const data = await apiFetch<GenerateRecipeResponse>('/api/recipes', {
         method: 'POST',
         body: JSON.stringify({ ingredients }),
       })
+      setAnimateRecipe(true)
       setResult(data)
+      void track('recipe_generated')
+      setEditing(false)
     } catch (e) {
-      if (e instanceof ApiError && e.status === 403) {
+      if (
+        e instanceof ApiError &&
+        e.status === 403 &&
+        e.code === 'limit_reached'
+      )
         setLimitReached(true)
-      } else {
-        setError(e instanceof Error ? e.message : 'Could not generate a recipe.')
-      }
+      else
+        setError(
+          aiErrorMessage(
+            e,
+            e instanceof ApiError && e.status === 429
+            ? 'Recipe generation is busy. Wait a moment and try again.'
+              : 'Couldn’t generate a recipe. Your ingredients are still selected; please try again.',
+          ),
+        )
     } finally {
+      void refreshMembership?.()
       setLoading(false)
+      operation.current = false
     }
   }
-
+  const showRecipe = !!result && !editing
   return (
-    <View className="flex-1 bg-pantry">
-      <SafeAreaView className="flex-1" edges={['top']}>
-        <ScrollView contentContainerClassName="px-6 pb-28 pt-6" showsVerticalScrollIndicator={false}>
-          <Text className="font-mono text-[11px] tracking-[2px] text-zest">FIRE A RECIPE</Text>
-          <Text className="mt-2 font-display text-[30px] text-chalk">Cook what you pick.</Text>
-
-          {pantry.length > 0 ? (
-            <>
-              <Text className="mb-2.5 mt-6 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-                FROM YOUR PANTRY
-              </Text>
-              <View className="flex-row flex-wrap gap-2">
-                {pantry.map((item) => {
-                  const on = selected.has(item.name)
-                  return (
-                    <Pressable
-                      key={item.id}
-                      onPress={() => toggle(item.name)}
-                      className={`rounded-full border px-3 py-1.5 ${on ? 'border-zest bg-zest' : 'border-chalk/20'}`}
-                    >
-                      <Text className={`font-mono text-[12px] ${on ? 'text-ink' : 'text-[#e4e8dd]'}`}>
-                        {item.name}
-                      </Text>
-                    </Pressable>
-                  )
-                })}
-              </View>
-            </>
+    <ScreenScroll key={showRecipe ? 'recipe' : 'ingredients'}>
+      <ScreenHeader
+        title={showRecipe ? 'Your recipe' : 'Make a recipe'}
+        description={
+          showRecipe
+            ? undefined
+            : 'Choose what you want to use. We’ll take it from there.'
+        }
+      />
+      <View className="mt-4">
+        <Button
+          variant="ghost"
+          label={t('Saved recipes')}
+          onPress={() => router.navigate('/saved-recipes')}
+        />
+      </View>
+      <QuotaStatus kind="recipes" />
+      <AiGate />
+      {showRecipe && result ? (
+        <>
+          <View className="mb-5 mt-4">
+            <Button
+              label={t('Change ingredients')}
+              variant="ghost"
+              onPress={() => setEditing(true)}
+            />
+          </View>
+          <MotionView animate={animateRecipe} transitionKey={result.resultId??result.recipe} onEntered={()=>setAnimateRecipe(false)}>
+          {result.structured ? (
+            <RecipeTicket recipe={result.structured} macros={result.macros} />
           ) : (
-            <Text className="mt-6 font-sans text-[14px] text-[#8fa093]">
-              No pantry items yet — type a few below, comma-separated.
-            </Text>
-          )}
-
-          <Text className="mb-2 mt-6 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-            OR ADD YOUR OWN
-          </Text>
-          <TextInput
-            value={extra}
-            onChangeText={setExtra}
-            placeholder="e.g. eggs, tomato, feta"
-            placeholderTextColor="#5f7267"
-            className="rounded-xl border border-chalk/15 bg-chalk/5 px-4 py-3.5 font-sans text-[15px] text-chalk"
-          />
-
-          <Pressable
-            onPress={fire}
-            disabled={loading}
-            className={`mt-5 h-13 items-center justify-center rounded-full bg-zest ${loading ? 'opacity-70' : ''}`}
-            style={{ height: 52 }}
-          >
-            {loading ? (
-              <ActivityIndicator color="#17180F" />
-            ) : (
-              <Text className="font-mono-bold text-[13px] tracking-wide text-ink">FIRE RECIPE →</Text>
-            )}
-          </Pressable>
-
-          {loading ? (
-            <Text className="mt-4 text-center font-sans text-[13px] text-[#8fa093]">
-              Reading your ingredients, firing a recipe…
-            </Text>
-          ) : null}
-
-          {error ? <Text className="mt-4 font-sans text-[13px] text-clay">{error}</Text> : null}
-
-          {/* idle guidance — fills the space before a recipe is fired */}
-          {!loading && !result && !limitReached ? (
-            <View className="mt-10">
-              <Text className="mb-4 font-mono text-[10px] tracking-[2px] text-[#8fa093]">
-                HOW IT WORKS
+            <Ticket title={t('YOUR RECIPE')}>
+              <Text className="font-sans text-body text-secondary">
+                {result.recipe}
               </Text>
-              {[
-                { n: '01', t: 'Pick from your pantry, or scan your fridge' },
-                { n: '02', t: 'Fire the recipe — AI builds it around what you have' },
-                { n: '03', t: 'Cook something good, waste nothing' },
-              ].map((step) => (
-                <View key={step.n} className="mb-4 flex-row items-center gap-3">
-                  <Text className="font-mono-bold text-[18px] text-zest">{step.n}</Text>
-                  <Text className="flex-1 font-sans text-[14px] leading-[20px] text-[#c3c8ba]">
-                    {step.t}
-                  </Text>
-                </View>
+            </Ticket>
+          )}
+          </MotionView>
+          <RecipeActions result={result} />
+        </>
+      ) : (
+        <>
+          {result ? (
+            <View className="mt-4">
+              <Button
+                label={t('Back to recipe')}
+                variant="ghost"
+                onPress={() => setEditing(false)}
+                disabled={loading}
+              />
+            </View>
+          ) : null}
+          <View className="mb-3 mt-6 flex-row items-baseline justify-between">
+            <SectionLabel className="">{t('Your ingredients')}</SectionLabel>
+            <Text
+              accessibilityLiveRegion="polite"
+              className="font-sans text-label text-muted"
+            >
+              {ingredients.length}
+              {t('selected')}
+            </Text>
+          </View>
+          {pantry === null && fetching ? <LoadingRows /> : null}
+          {pantryError ? (
+            <Notice
+              title={t('Your pantry couldn\u2019t load')}
+              description={t('You can still enter ingredients below.')}
+              action={
+                fetching ? undefined : { label: 'Reload pantry', onPress: load }
+              }
+            />
+          ) : null}
+          {pantry?.length ? (
+            <View className="flex-row flex-wrap gap-2">
+              {[...new Set(pantry.map((item) => item.name))].map((name) => (
+                <Chip
+                  key={name}
+                  label={name}
+                  active={selected.has(name)}
+                  onPress={() => toggle(name)}
+                  disabled={loading}
+                />
               ))}
             </View>
-          ) : null}
-
-          {limitReached ? (
-            <View className="mt-5 rounded-xl border border-zest/40 bg-zest/10 p-4">
-              <Text className="font-display text-[16px] text-chalk">You&apos;ve used your 10 free recipes</Text>
-              <Text className="mt-1 font-sans text-[13px] text-[#c3c8ba]">
-                Upgrade to Premium for unlimited recipes, photo analysis and weekly plans.
+          ) : pantry ? (
+            <View className="rounded-2xl bg-panel p-4">
+              <Text className="mb-4 font-sans text-body-sm text-secondary">
+                {t(
+                  'Your pantry is empty. Enter ingredients below or scan your fridge.',
+                )}
               </Text>
+              <Button
+                label={t('Scan your fridge')}
+                variant="ghost"
+                onPress={() => router.navigate('/scan')}
+              />
             </View>
           ) : null}
-
-          {result?.structured ? <RecipeTicket recipe={result.structured} macros={result.macros} /> : null}
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+          <View className="mt-6">
+            <Field
+              label={t('Anything else?')}
+              hint={t('Separate ingredients with commas.')}
+              value={extra}
+              onChangeText={setExtra}
+              placeholder={t('e.g. eggs, tomato, feta')}
+              editable={!loading}
+              multiline
+            />
+          </View>
+          <View className="mt-6 rounded-2xl bg-panel p-4">
+            <Text className="mb-4 font-sans text-body-sm text-secondary">
+              {ingredients.length
+                ? t(
+                    '%{count} ingredients ready. Your recipe will include instructions and estimated nutrition.',
+                    { count: ingredients.length },
+                  )
+                : 'Choose or enter at least one ingredient to get started.'}
+            </Text>
+            <Button
+              label={result ? 'Generate another recipe' : 'Generate recipe'}
+              loadingLabel={t('Creating your recipe\u2026')}
+              onPress={fire}
+              loading={loading}
+              disabled={
+                !ingredients.length || limitReached || !aiAllowed || offline
+              }
+            />
+          </View>
+          {loading ? (
+            <BusyState
+              label={t('Finding your next dinner')}
+              description={t(
+                'Keep this screen open while your recipe is prepared.',
+              )}
+            />
+          ) : null}
+          {error ? (
+            <Notice
+              title={t('Your recipe isn\u2019t ready')}
+              description={error}
+              action={{ label: 'Try again', onPress: fire }}
+            />
+          ) : null}
+          {limitReached ? (
+            <Notice
+              tone="info"
+              title={t('Free recipe limit reached')}
+              description={t(
+                'You\u2019ve used the recipes included in your free plan. You can still manage your pantry and revisit your existing recipe.',
+              )}
+            />
+          ) : null}
+        </>
+      )}
+    </ScreenScroll>
   )
 }

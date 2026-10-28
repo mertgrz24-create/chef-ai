@@ -1,0 +1,81 @@
+{
+  "checkedAt": "2026-10-16",
+  "source": "Authenticated GitHub billing UI for mertgrz24",
+  "actionsMinutes": {
+    "included": 2000,
+    "used": 436,
+    "remaining": 1564
+  },
+  "actionsStorageGB": {
+    "included": 0.5,
+    "used": 0
+  },
+  "paidActionsBudgetUSD": 0,
+  "scope": "ARM64 Release validation APK and full lint. Physical runtime, distribution signing/AAB, other ABIs and full security release approval remain pending.",
+  "stopUsageWhenBudgetReached": true,
+  "validPaymentMethod": false,
+  "settingsChanged": false,
+  "runner": "ubuntu-latest standard runner",
+  "timeoutMinutes": 45,
+  "artifactRetentionDays": 1,
+  "snapshotCommit": "3313a6477a71f6b71f3af369371375067d35f8ac",
+  "branch": "codex/android-native-validation-20261016",
+  "runUrl": "https://github.com/mertgrz24/chef-ai/actions/runs/38822859339",
+  "status": "passed-native-ci-scope",
+  "limitations": "Snapshot validation only; no production deployment, signed AAB, physical-device or API integration clearance.",
+  "runs": [
+    {
+      "id": 38809519194,
+      "conclusion": "failure",
+      "reason": "setup-android default requested removed tools package; configured platform-tools instead"
+    },
+    {
+      "id": 38809765910,
+      "conclusion": "failure",
+      "reason": "Snapshot omitted release-evidence.json needed by one security test; included original gate evidence without changing test"
+    },
+    {
+      "id": 38810065531,
+      "conclusion": "failure",
+      "status": "completed",
+      "passed": [
+        "npm ci and integrity-checked dependency patches",
+        "12 dependency regressions",
+        "4 ELF parser tests",
+        "Expo Android prebuild"
+      ],
+      "nativeAssembly": "passed",
+      "lint": "internal K2 UAST crash: Cannot find a KaModule for the VirtualFile; not a passed lint scan",
+      "apkBytes": 56788137
+    },
+    {
+      "id": 38812576433,
+      "status": "completed",
+      "commit": "a565b7963bb4cc8cee882c13ad42c76257e3258d",
+      "reason": "Release vital lint found 4 ExtraTranslation errors: iOS-only permission metadata was generated into Android resources",
+      "conclusion": "failure"
+    },
+    {
+      "id": 38816907980,
+      "status": "completed",
+      "commit": "6245859628f47419db78f7e3f93afbe61d489324",
+      "reason": "Native locale JSON scoped to ios; real Expo resolver regression and regenerated Android resource verification passed locally; 13 dependency/configuration regressions pass",
+      "conclusion": "failure",
+      "nativeAssembly": "passed",
+      "apkInspection": "passed: API36, backup/debug false, 26 ELF libraries and zipalign 16KB",
+      "lint": "2 errors / 52 warnings; splash NewApi and optional camera feature declaration"
+    },
+    {
+      "id": 38822859339,
+      "status": "completed",
+      "commit": "3313a6477a71f6b71f3af369371375067d35f8ac",
+      "reason": "API33 splash resource separated into values-v33; camera features optional. Real prebuild resource/manifest assertions and 15 regressions pass locally; Ubuntu image pinned to 24.04.",
+      "conclusion": "success",
+      "nativeAssembly": "passed",
+      "fullReleaseLint": "passed",
+      "apkInspection": "passed: target API36, backup/debug false, 26 ELF libraries and SDK zipalign16KB"
+    }
+  ],
+  "offlineApkEvidence": "android-apk-offline-2026-10-16.json",
+  "completedAt": "2026-10-15T23:51:40Z"
+}

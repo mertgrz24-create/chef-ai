@@ -1,0 +1,106 @@
+{
+  "observedAt": "2026-10-16T18:57:30.027434+00:00",
+  "scope": "Clean installs and local dependency/API/component checks; no application build or deployment",
+  "auditBefore": {
+    "mobile": {
+      "high": 53,
+      "moderate": 5
+    },
+    "backend": {
+      "high": 7,
+      "moderate": 0
+    }
+  },
+  "auditAfter": {
+    "mobile": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 54,
+      "critical": 0,
+      "total": 54
+    },
+    "backend": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "mobileRootAdvisories": [
+    "braces",
+    "node-forge"
+  ],
+  "addedPropagatedAuditEntry": "react-native-purchases via react-native; installed package/version unchanged",
+  "removedMobilePackages": [
+    "@istanbuljs/load-nyc-config/node_modules/js-yaml",
+    "@istanbuljs/load-nyc-config/node_modules/argparse",
+    "sprintf-js"
+  ],
+  "cleanInstall": {
+    "mobile": "npm ci with postinstall passed; 15 patched files",
+    "backend": "npm ci with postinstall passed; one Next glob compatibility patch"
+  },
+  "checks": {
+    "mobileJest": 97,
+    "mobileSuites": 14,
+    "mobileDependencyTests": 15,
+    "backendTests": 42,
+    "typescript": "both passed",
+    "lint": "mobile clean; backend zero errors/four existing warnings",
+    "expoCompatibility": "passed"
+  },
+  "build": false,
+  "deployment": false,
+  "remoteCI": false,
+  "DAST": "not performed: no authenticated scanner configuration/key; paid setup previously declined",
+  "securityGate": "pending",
+  "sourceHashes": [
+    {
+      "path": "mobile/package.json",
+      "sha256": "144cf3acd278f127af31ec1c35abd5658107b1b979dbccb90b2a4dce22266208"
+    },
+    {
+      "path": "mobile/package-lock.json",
+      "sha256": "cfc19e62242033a7675d7fba81c0a63046d8f42f4850b84e29b0f0c18aff18c8"
+    },
+    {
+      "path": "mobile/security/patches.json",
+      "sha256": "4f0006b0bf8c14d84c9e730f5e6ace2945a071846711a2114b7d7c033968b0fd"
+    },
+    {
+      "path": "mobile/tests/dependency-security.node.cjs",
+      "sha256": "aae01a2e505c7b8bc07253d6c386ef6add027a877dcdc3be1c11a3449f5ad90c"
+    },
+    {
+      "path": "backend/package.json",
+      "sha256": "9e47570c06347c1138912dee3c54abb4d85fc6b3a3f13bebb36648991744b5d7"
+    },
+    {
+      "path": "backend/package-lock.json",
+      "sha256": "3b01208343c6843f98e146e3fcd114c461a2a806c14201b4a5c944f68682894f"
+    },
+    {
+      "path": "backend/lib/mobile/dependency-patches.json",
+      "sha256": "8bcfa5cd13f4e25002c12c4903b34649217dbb7df187834060de5fb9d6a4e4ca"
+    },
+    {
+      "path": "backend/lib/mobile/security.test.cjs",
+      "sha256": "2def85b18ce2652d1b38c1d4b25b099bf765091df461f03afbb03e43a5bf7e41"
+    },
+    {
+      "path": "backend/app/globals.css",
+      "sha256": "cd93a04efff3219b3ef2f3c3471d5f386bc22fc87dacfca986d59c8a6404e1a8"
+    },
+    {
+      "path": "backend/postcss.config.mjs",
+      "sha256": "3aac0d047d7dd505eea362c918e2ddd0436428682c5de5cb18feda70d46aa5cb"
+    },
+    {
+      "path": "backend/tailwind.config.ts",
+      "sha256": "e34783b254408ac0add47fc541b3ae2f63c10904c0608c5f3e046ed9f64b45e3"
+    }
+  ]
+}

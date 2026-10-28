@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-10-15",
+  "source": "Manually observed existing VS Code Snyk extension; not native scanner JSON export",
+  "baseline": {
+    "openSource": {
+      "high": 3,
+      "medium": 2
+    },
+    "code": {
+      "medium": 1,
+      "low": 1
+    },
+    "total": 7
+  },
+  "rescan": {
+    "completed": true,
+    "total": 5,
+    "openSource": {
+      "high": 2,
+      "medium": 2,
+      "packages": [
+        "braces@3.0.3",
+        "node-forge@1.4.0",
+        "deepmerge@4.3.1",
+        "react-native-worklets@0.10.1"
+      ]
+    },
+    "code": {
+      "medium": 1,
+      "file": "mobile/src/lib/release/messages.ts",
+      "line": 170,
+      "finding": "Use of Hardcoded Passwords",
+      "review": "False positive: UI label translation Password -> Parola; not a credential"
+    },
+    "iac": "no findings",
+    "secrets": "disabled; unverified"
+  },
+  "removedFindings": [
+    "zod@3.25.76 (scoped Expo CLI override to 4.6.7)",
+    "tests/api.test.ts static mock token (runtime randomUUID)"
+  ],
+  "sourcePatchStatus": "16 hash-checked files; warnings remain, no ignores or risk acceptance",
+  "verification": {
+    "appTests": 64,
+    "dependencySecurityTests": 12,
+    "lint": "passed",
+    "typescript": "passed",
+    "expoCompatibility": "passed",
+    "bundleExports": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "nativeWorkletsReleaseTranslationUnit": "C++20 syntax check passed; not linked/runtime verified",
+    "nativeDebugCompilation": "blocked: glog/logging.h absent"
+  },
+  "securityReleaseGate": "pending",
+  "retry": "First Code request timed out; one retry completed",
+  "screenshotLocalPath": "/Users/mertgurbuz/.codex/visualizations/2026/10/15/01a1406a-ce7c-70e0-9375-747fd6972719/snyk-rescan-2026-10-15.png"
+}

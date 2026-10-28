@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-16T20:50:23.355Z",
+  "scope": "Disposable local fixture only; not production or staging backup",
+  "migrations": [
+    "20261015000100_mobile_release_foundation.sql",
+    "20261015000200_mobile_ai_security.sql",
+    "20261015000300_mobile_push_delivery.sql",
+    "20261015000400_mobile_revenuecat.sql",
+    "20261015000500_mobile_analytics.sql",
+    "20261015000600_mobile_trigger_hardening.sql",
+    "20261016000100_mobile_ai_durable_daily_cap.sql"
+  ],
+  "checks": [
+    "Fresh synthetic schema and entire release migration chain",
+    "Roles, RLS, quota, cascade and durable-cap SQL assertions",
+    "Concurrent reservation and 101-device push deduplication",
+    "Custom-format backup and restore including synthetic sentinel",
+    "Restored database preserves role/RLS/function/cascade guarantees"
+  ],
+  "passed": true,
+  "providerCalls": 0,
+  "build": false,
+  "deployment": false,
+  "productionRestoreVerified": false
+}

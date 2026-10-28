@@ -1,0 +1,64 @@
+import React, {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
+import {registerRootComponent} from 'expo';
+import {File, Paths} from 'expo-file-system';
+import {runOnUISync} from 'react-native-worklets';
+import {secureSessionStorage} from './src/lib/release/session-storage';
+function Probe() {
+  const [state, setState] = useState('Native security checks running');
+  useEffect(() => {
+    (async () => {
+      const checks: string[] = [];
+      const check = (name: string, condition: boolean) => {if(!condition) throw new Error(name); checks.push(name)};
+      try {
+        const checkpoint = new File(Paths.document, 'native-security-result.json');
+        if (checkpoint.exists) {
+          const previous = JSON.parse(checkpoint.textSync());
+          if (previous.phase === 'awaiting_restart') {
+            checks.push(...previous.checks);
+            check('Native keychain persistence across app restart', await secureSessionStorage.getItem('chef-native-security-probe') === '🍋ş'.repeat(2000));
+            await secureSessionStorage.removeItem('chef-native-security-probe');
+            check('Native keychain session removal', await secureSessionStorage.getItem('chef-native-security-probe') === null);
+            checkpoint.write(JSON.stringify({passed:true, phase:'complete', checks, runtime:'Hermes/iOS simulator', source:'temporary probe; never production route'}));
+            setState('PASS\n' + checks.join('\n'));
+            return;
+          }
+        }
+        check('Hermes native engine', !!(globalThis as any).HermesInternal);
+        const input = JSON.parse('{"__proto__":{"polluted":true},"nested":{"__proto__":{"isAdmin":true}},"safe":42}');
+        const forward = runOnUISync((value) => {
+          'worklet';
+          return {
+            own: Object.prototype.hasOwnProperty.call(value, '__proto__'),
+            nestedOwn: Object.prototype.hasOwnProperty.call(value.nested, '__proto__'),
+            inherited: value.polluted === true || value.nested.isAdmin === true,
+            safe: value.safe,
+            globalClean: ({} as any).polluted === undefined && ({} as any).isAdmin === undefined,
+          };
+        }, input);
+        check('RN to UI preserves own proto data', forward.own && forward.nestedOwn);
+        check('RN to UI has no inherited attacker flags', !forward.inherited && forward.globalClean);
+        check('RN to UI preserves normal data', forward.safe === 42);
+        const returned = runOnUISync(() => {
+          'worklet';
+          return JSON.parse('{"__proto__":{"polluted":true},"nested":{"__proto__":{"isAdmin":true}},"safe":42}');
+        });
+        check('UI to RN preserves own proto data', Object.prototype.hasOwnProperty.call(returned, '__proto__') && Object.prototype.hasOwnProperty.call(returned.nested, '__proto__'));
+        check('UI to RN has no inherited attacker flags', returned.polluted === undefined && returned.nested.isAdmin === undefined && ({} as any).polluted === undefined);
+        check('UI to RN preserves normal data', returned.safe === 42);
+        const key = 'chef-native-security-probe';
+        const value = '🍋ş'.repeat(2000);
+        await secureSessionStorage.setItem(key, value);
+        check('Native keychain long Unicode session round trip', await secureSessionStorage.getItem(key) === value);
+        checkpoint.write(JSON.stringify({passed:true, phase:'awaiting_restart', checks, runtime:'Hermes/iOS simulator'}));
+        setState('RESTART CHECK PENDING\n' + checks.join('\n'));
+      } catch(error) {
+        const result = {passed:false, checks, failedCheck: error instanceof Error ? error.message : 'unexpected'};
+        new File(Paths.document, 'native-security-result.json').write(JSON.stringify(result));
+        setState('FAIL\n' + JSON.stringify(result));
+      }
+    })();
+  }, []);
+  return <View style={{flex:1, backgroundColor:'#F3EDE2', padding:32, paddingTop:100}}><Text style={{color:'#1E3A2F',fontSize:20}}>{state}</Text></View>;
+}
+registerRootComponent(Probe);

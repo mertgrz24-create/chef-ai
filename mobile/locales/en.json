@@ -1,0 +1,6 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Chef-AI uses a photo you take to identify ingredients.",
+    "NSPhotoLibraryUsageDescription": "Chef-AI uses only the photo you select to identify ingredients."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "First unsigned simulator validation; superseded by properly entitled local test when available",
+  "result": {
+    "passed": false,
+    "checks": [
+      "Hermes native engine",
+      "RN to UI preserves own proto data",
+      "RN to UI has no inherited attacker flags",
+      "RN to UI preserves normal data",
+      "UI to RN preserves own proto data",
+      "UI to RN has no inherited attacker flags",
+      "UI to RN preserves normal data"
+    ],
+    "failedCheck": "FunctionCallException: Calling the 'getValueWithKeyAsync' function has failed (at ExpoModulesCore/AsyncFunctionDefinition.swift:123)\n\u2192 Caused by: KeyChainException: Gerekli bir yetki yok. (at ExpoSecureStore/SecureStoreModule.swift:168)"
+  }
+}

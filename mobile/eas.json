@@ -1,6 +1,6 @@
 {
   "cli": {
-    "version": ">= 12.0.0",
+    "version": ">= 16.0.0",
     "appVersionSource": "remote"
   },
   "build": {
@@ -9,6 +9,10 @@
       "distribution": "internal",
       "ios": {
         "simulator": true
+      },
+      "environment": "development",
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "development"
       }
     },
     "preview": {
@@ -18,14 +22,25 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://chef-ai-puce-zeta.vercel.app"
-      }
+        "EXPO_PUBLIC_APP_ENV": "staging"
+      },
+      "environment": "preview"
     },
     "production": {
       "channel": "production",
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://chef-ai-puce-zeta.vercel.app"
+        "EXPO_PUBLIC_APP_ENV": "production"
+      },
+      "environment": "production",
+      "android": {
+        "buildType": "app-bundle"
+      }
+    },
+    "development-device": {
+      "extends": "development",
+      "ios": {
+        "simulator": false
       }
     }
   },

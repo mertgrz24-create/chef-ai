@@ -1,0 +1,157 @@
+{
+  "observedAt": "2026-10-17T11:13:45.992Z",
+  "origin": "https://chef-ai-staging-nu.vercel.app",
+  "supabaseProjectRef": "vcyqtbzhfanbpclfhibv",
+  "checks": [
+    {
+      "name": "unauthenticated status is denied",
+      "passed": true,
+      "durationMs": 589
+    },
+    {
+      "name": "missing consent blocks AI without provider work",
+      "passed": true,
+      "durationMs": 821
+    },
+    {
+      "name": "pantry create and revision readback",
+      "passed": true,
+      "durationMs": 887
+    },
+    {
+      "name": "parallel same-revision HTTP edits give200 and409",
+      "passed": true,
+      "durationMs": 996
+    },
+    {
+      "name": "other account cannot edit or read pantry",
+      "passed": true,
+      "durationMs": 567
+    },
+    {
+      "name": "real Turkish metric recipe and durable result",
+      "passed": true,
+      "durationMs": 2025
+    },
+    {
+      "name": "status recovery and idempotent replay do not regenerate",
+      "passed": true,
+      "durationMs": 649
+    },
+    {
+      "name": "explicit private save persists across fresh login without duplicates",
+      "passed": true,
+      "durationMs": 1482
+    },
+    {
+      "name": "real public food photo analysis",
+      "passed": true,
+      "durationMs": 6790
+    },
+    {
+      "name": "real weekly plan atomically persists seven days",
+      "passed": true,
+      "durationMs": 11154
+    },
+    {
+      "name": "real single-meal renewal keeps other meals and plan identity",
+      "passed": true,
+      "durationMs": 2261
+    },
+    {
+      "name": "one user credit per successful logical operation",
+      "passed": true,
+      "durationMs": 470
+    },
+    {
+      "name": "synthetic five-minute expiry returns credit once and fences late plan writes",
+      "passed": true,
+      "durationMs": 2007
+    }
+  ],
+  "realJobsStarted": 4,
+  "maxProviderCalls": 8,
+  "cleanup": [
+    {
+      "accountDeletionApiPassed": true,
+      "removed": true
+    },
+    {
+      "accountDeletionApiPassed": true,
+      "removed": true
+    }
+  ],
+  "status": "passed",
+  "productionChanged": false,
+  "newMobileBuild": false,
+  "vercelProjectName": "chef-ai-staging",
+  "vercelProjectId": "prj_vWhn3DiZQH0XwiEAyZ4RKGA4SB2T",
+  "deploymentId": "dpl_BQ3DtEYmjqvt44t6gy3HcSfEBWPs",
+  "previousDeploymentId": "dpl_GovLsMia88j1dCSkmUS2zpVTgMJ5",
+  "vercelTargetLabel": "production within dedicated staging project; not application production",
+  "hourlyCleanup": {
+    "provider": "Supabase pg_cron1.6.4",
+    "jobId": 1,
+    "jobName": "chef-ai-staging-ai-cleanup",
+    "scheduleUtc": "0 * * * *",
+    "active": true,
+    "verifiedSchedulerExecutions": 3,
+    "verificationMethod": "Same job temporarily at5s; successful scheduler executions checked, then restored hourly. First natural hourly boundary not awaited.",
+    "cronClientSchemaUsage": false
+  },
+  "migrationHistoryBefore": 8,
+  "migrationHistoryAfter": 12,
+  "newStagingMigrations": [
+    {
+      "version": "20261017110840",
+      "name": "staging_ai_lifecycle_rollout_pause"
+    },
+    {
+      "version": "20261017110934",
+      "name": "pantry_revision"
+    },
+    {
+      "version": "20261017110937",
+      "name": "mobile_ai_lifecycle"
+    },
+    {
+      "version": "20261017111028",
+      "name": "staging_hourly_ai_cleanup"
+    }
+  ],
+  "retentionVerification": {
+    "payload24h": true,
+    "tombstone30d": true,
+    "metrics90d": true,
+    "accountDeletion": true,
+    "currentDayCapPreserved": true,
+    "fixtureRolledBack": true
+  },
+  "fixtureCleanupVerified": {
+    "authRemaining": 0,
+    "jobsRemaining": 0,
+    "providerMetricsRemaining": 0,
+    "accountDeletionHttpChecksPassed": 2
+  },
+  "providerProof": "staging-lifecycle-provider-2026-10-17.json",
+  "providerCallsObserved": 4,
+  "providerMaximumAuthorized": 8,
+  "realJobsMaximumAuthorized": 4,
+  "newRetries": false,
+  "quotasChanged": false,
+  "pricesOrChargesVerified": false,
+  "billingPlanChanged": false,
+  "nativeDeviceUiVerified": false,
+  "advisors": {
+    "newAiRpcClientPermissions": "all denied",
+    "errorFindings": 0,
+    "warningFindings": 2,
+    "warnings": [
+      "Unchanged authenticated apply_referral security-definer RPC",
+      "Auth leaked-password protection disabled"
+    ],
+    "infoFindings": 11,
+    "infoExplanation": "Server-only RLS tables intentionally have no client policy"
+  },
+  "dast": "not run; no authenticated HawkScan session/key"
+}

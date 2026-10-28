@@ -1,0 +1,18 @@
+{
+  "name": "@chef-ai/expo-certificate-crypto",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Expo certificate integration using Node OpenSSL crypto and Peculiar ASN.1 schemas; contains no Forge implementation",
+  "main": "index.cjs",
+  "exports": {
+    ".": "./index.cjs",
+    "./code-signing": { "types": "./code-signing.d.ts", "require": "./code-signing.cjs", "default": "./code-signing.cjs" },
+    "./package.json": "./package.json"
+  },
+  "engines": { "node": ">=22.13.0" },
+  "dependencies": {
+    "@peculiar/asn1-schema": "2.11.0",
+    "@peculiar/asn1-x509": "2.11.0",
+    "@peculiar/asn1-csr": "2.11.0"
+  }
+}

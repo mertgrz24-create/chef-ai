@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "patches": [
+    {
+      "path": "@expo/code-signing-certificates/build/main.js",
+      "beforeHash": "677bb9dab63300b52ead2263e54f1ffbbd292faaa1d7f166d0535a49eec54a74",
+      "afterHash": "354ff8d46f052d12dbc631bb4d907efced2d41f2a1b9864f42b45f1b00a4b524",
+      "content": "\"use strict\";\nmodule.exports = require(\"node-forge/code-signing\");\n"
+    },
+    {
+      "path": "@expo/code-signing-certificates/build/main.d.ts",
+      "beforeHash": "6fbd8011aaa24d66ec516a81afe2863e3492d72965a14c90805defe226d8df6d",
+      "afterHash": "12cc831af04ca6c29a3ecf6e150b5035a00bc12e8256a107d49f39c75cd7bba8",
+      "content": "export * from \"node-forge/code-signing\";\n"
+    },
+    {
+      "path": "node-forge/package.json",
+      "beforeHash": "faa9764b05fdf0896b0ee7ffe5120502b5e710d64cbe4523b01ca4c672d135d2",
+      "afterHash": "faa9764b05fdf0896b0ee7ffe5120502b5e710d64cbe4523b01ca4c672d135d2",
+      "edits": []
+    },
+    {
+      "path": "node-forge/index.cjs",
+      "beforeHash": "f1257b3c1f3a59e89ebd68a259f3f5b7b99edaae2e631d4c9ed8d85d09bb2730",
+      "afterHash": "f1257b3c1f3a59e89ebd68a259f3f5b7b99edaae2e631d4c9ed8d85d09bb2730",
+      "edits": []
+    },
+    {
+      "path": "node-forge/code-signing.cjs",
+      "beforeHash": "ca839c2afc5dd3534206624f906cd06bb506affc681f5ab636f34a2e1b05d282",
+      "afterHash": "ca839c2afc5dd3534206624f906cd06bb506affc681f5ab636f34a2e1b05d282",
+      "edits": []
+    },
+    {
+      "path": "node-forge/code-signing.d.ts",
+      "beforeHash": "b467cef1854682e2f324de1850eaa340fdaa48b8e0b0dd7fded612e20dd75da9",
+      "afterHash": "b467cef1854682e2f324de1850eaa340fdaa48b8e0b0dd7fded612e20dd75da9",
+      "edits": []
+    },
+    {
+      "path": "anymatch/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+      "afterHash": "6958bfbd65141f25a263cf2f8ad30090d097d4d8b5aa38fa19c5f22b8842e92d",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "2.3.2"
+    },
+    {
+      "path": "jest-util/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+      "afterHash": "6958bfbd65141f25a263cf2f8ad30090d097d4d8b5aa38fa19c5f22b8842e92d",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "2.3.2"
+    },
+    {
+      "path": "micromatch/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+      "afterHash": "6958bfbd65141f25a263cf2f8ad30090d097d4d8b5aa38fa19c5f22b8842e92d",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "2.3.2"
+    },
+    {
+      "path": "picomatch/lib/parse.js",
+      "beforeHash": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+      "afterHash": "6666c5f8aaf12bbf244e573b7a6b6d49d2a2f90c1eb7e3fc6571245255f09616",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "4.0.7"
+    },
+    {
+      "path": "readdirp/node_modules/picomatch/lib/parse.js",
+      "beforeHash": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+      "afterHash": "6958bfbd65141f25a263cf2f8ad30090d097d4d8b5aa38fa19c5f22b8842e92d",
+      "edits": [
+        {
+          "before": "const analyzeRepeatedExtglob = (body, options) => {\n",
+          "after": "// Chef-AI CVE-2026-112366 mitigation: keep unbounded wildcard/group\n// quantifiers out of repeated extglob branches. Existing risky-pattern handling\n// literalizes them; ordinary glob stars and non-repeating extglobs are untouched.\nconst hasUnsafeRepeatedBranch = (branch, multiple) => {\n  if (!branch || (multiple && !isPlainBranch(branch))) return true;\n  let escaped = false;\n  let bracket = false;\n  for (const ch of branch) {\n    if (escaped) { escaped = false; continue; }\n    if (ch === '\\\\') { escaped = true; continue; }\n    if (ch === '[') { bracket = true; continue; }\n    if (ch === ']' && bracket) { bracket = false; continue; }\n    if (!bracket && '*+(){}'.includes(ch)) return true;\n  }\n  return false;\n};\n\nconst analyzeRepeatedExtglob = (body, options) => {\n  // This ambiguity guard is independent of the optional recursion depth limit.\n  const safetyBranches = splitTopLevel(body).map(branch => branch.trim());\n  if (safetyBranches.some(branch => hasUnsafeRepeatedBranch(branch, safetyBranches.length > 1)) ||\n      hasRepeatedCharPrefixOverlap(safetyBranches)) return { risky: true };\n\n"
+        },
+        {
+          "before": "      const char = a[0];\n\n      if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {\n        continue;\n      }\n\n",
+          "after": ""
+        },
+        {
+          "before": "    const analysis = analyzeRepeatedExtglob(body, opts);\n",
+          "after": "    const analysis = analyzeRepeatedExtglob(body, opts);\n\n    // Chef-AI: adjacent unbounded groups (`+(a)+(a)...`) split input ambiguously\n    // and backtrack polynomially per group. Allow at most three in a row; literalize more.\n    if (token.type === 'plus' || token.type === 'star') {\n      state.repeatedExtglobRun = state.repeatedExtglobEnd === token.startIndex - 1\n        ? (state.repeatedExtglobRun || 1) + 1\n        : 1;\n      state.repeatedExtglobEnd = state.index;\n      if (state.repeatedExtglobRun > 3) analysis.risky = true;\n    }\n"
+        }
+      ],
+      "advisory": "SNYK-JS-PICOMATCH-21248802",
+      "version": "2.3.2"
+    }
+  ]
+}

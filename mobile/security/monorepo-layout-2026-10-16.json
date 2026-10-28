@@ -1,0 +1,58 @@
+{
+  "observedAt": "2026-10-16",
+  "layout": {
+    "mobile": "mobile/",
+    "backend": "backend/",
+    "marketing": "separate chef-ai-web repository"
+  },
+  "backendSourceFilesVerifiedBeforeDocsEdits": 115,
+  "functionalSourceFilesStillIdentical": 64,
+  "nestedGit": false,
+  "privateServerEnvIgnored": true,
+  "privateServerEnvMode": "0o600",
+  "checks": [
+    {
+      "origin": "http://127.0.0.1:3000",
+      "path": "/api/mobile/config",
+      "status": 200,
+      "ai": true,
+      "localizedAi": true
+    },
+    {
+      "origin": "https://chef-ai-staging-nu.vercel.app",
+      "path": "/api/mobile/config",
+      "status": 200,
+      "ai": true,
+      "localizedAi": true
+    },
+    {
+      "origin": "local",
+      "path": "/api/pantry",
+      "status": 401
+    },
+    {
+      "origin": "local",
+      "path": "/api/recipes/history",
+      "status": 401
+    },
+    {
+      "origin": "local",
+      "path": "/api/account",
+      "status": 401
+    }
+  ],
+  "nativeOrProductionBuild": false,
+  "deployments": false,
+  "remotePush": false,
+  "newAiGeneration": false,
+  "unitTestsRerun": false,
+  "historicalChecks": "Prior 36 security / 8 integration checks retained as historical evidence; not rerun for relocation.",
+  "backendTypecheck": "passed",
+  "secrets": {
+    "scanner": "gitleaks",
+    "sourceFiles": 308,
+    "sourceFindings": 0,
+    "historyFindings": 0
+  },
+  "serverSecretValuesAbsentFromMobileEnv": true
+}

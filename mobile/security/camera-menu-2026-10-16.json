@@ -1,0 +1,83 @@
+{
+  "observedAt": "2026-10-16",
+  "scope": "Mobile source and mocked native component/contract tests; no physical-device acceptance",
+  "jest": {
+    "passedTests": 95,
+    "passedSuites": 14,
+    "newTests": [
+      {
+        "file": "scan-menu.test.tsx",
+        "passed": 18
+      },
+      {
+        "file": "meal-plan.test.ts",
+        "passed": 5
+      }
+    ]
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "dependencySecurityRegressions": 15,
+  "newBuild": false,
+  "deployment": false,
+  "remotePush": false,
+  "newProviderCalls": 0,
+  "physicalDeviceCameraSettingsRecovery": "pending",
+  "nativeVisualAcceptance": "pending",
+  "dast": "not run; credential unavailable and user declined paid setup",
+  "backendEmptyVsError404": "Source fixed and regression-tested; not deployed to hosted staging",
+  "secrets": {
+    "observedAt": "2026-10-16T18:21:12.543Z",
+    "sourceFiles": 322,
+    "sourceFindings": 0,
+    "historyFindings": 0
+  },
+  "backendSecurityTests": 37,
+  "backendTypecheck": "passed",
+  "backendLint": {
+    "errors": 0,
+    "preexistingWarnings": 4
+  },
+  "sources": [
+    {
+      "path": "mobile/src/app/(app)/scan.tsx",
+      "sha256": "b619cc283ed8b097272d2bbcd4c157f0b93f2d3cffddd81b4df2f57d8372a2cb"
+    },
+    {
+      "path": "mobile/src/app/(app)/meal-plan.tsx",
+      "sha256": "d0a75ac84a70d8c84973ace88d71527e5af44c17c7456256d011a075c5198b4a"
+    },
+    {
+      "path": "mobile/src/lib/release/meal-plan.ts",
+      "sha256": "a598ba7f462b12b20b9841477a5c8a873107385f899da861732c6d3c29f887fb"
+    },
+    {
+      "path": "mobile/src/lib/release/contracts.ts",
+      "sha256": "085c1fb0b67b0a2987800bf4bc165de3d2c451ac4f2072424b7d8295ec0bb0fa"
+    },
+    {
+      "path": "mobile/src/lib/release/messages.ts",
+      "sha256": "f6f21b1494eb4c17892858a6f8b5087985b5e4119476c88bcebc3d2a5cd51efe"
+    },
+    {
+      "path": "mobile/src/lib/api.ts",
+      "sha256": "f764244625e16eaffc71153d09285a4154644df29107152ce82238f2d7d74104"
+    },
+    {
+      "path": "backend/app/api/meal-plan/route.ts",
+      "sha256": "fd4aa296ddba4c8e55c74f219f27a833eb9f230b11942b9e3dcb5642bb60245c"
+    },
+    {
+      "path": "backend/lib/mobile/security.test.cjs",
+      "sha256": "9b593266fc7a17e1c6f04b8171439c607ea509750c4041ebdbf203bf474b1e66"
+    },
+    {
+      "path": "mobile/tests/scan-menu.test.tsx",
+      "sha256": "4fa282bdffb90e0ba6d90c340221c638dd4245f6b6f4a3c32a073f4b68225ebc"
+    },
+    {
+      "path": "mobile/tests/meal-plan.test.ts",
+      "sha256": "d1559bf5c4a577bb9d7b6c58c64134bb6f33fc038c0259eceb6facd8d451b9e0"
+    }
+  ]
+}

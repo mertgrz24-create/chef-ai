@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-16",
+  "status": "staging-ai-api-accepted; physical-device-and-release-gates-open",
+  "apiOrigin": "https://chef-ai-staging-nu.vercel.app",
+  "vercelProjectId": "prj_vWhn3DiZQH0XwiEAyZ4RKGA4SB2T",
+  "supabaseProjectRef": "vcyqtbzhfanbpclfhibv",
+  "customerProductionChanged": false,
+  "publicApiAccess": "No Vercel cookie/bypass required on stable staging origin; unauthenticated pantry is 401 JSON",
+  "previewProtection": "Preserved",
+  "callback": "chefai://auth/callback",
+  "callbackApproval": "Explicit user approval in this conversation",
+  "httpIntegrationChecks": 16,
+  "authTokenChecks": 6,
+  "apiUnitSecurityTests": 36,
+  "typecheck": "passed",
+  "lint": "0 errors, 4 warnings (existing hooks and staging script unused variables)",
+  "testAccount": "Dedicated synthetic admin-confirmed account; credentials in private local Downloads file, never in this report",
+  "androidRunId": 38905484217,
+  "androidStatus": "native-ci-passed; downloaded; archive-digest/apk-integrity/staging-origin checked",
+  "ai": {
+    "selectedStagingModel": "gemini-3.5-flash-lite",
+    "providerKey": "User supplied via private local file; stored only on staging server",
+    "localProviderHealth": "Model list and short generation passed; full structured local recipe passed",
+    "hostedAcceptance": "Passed 13 real HTTP checks; see staging-ai-recovery-2026-10-16.json",
+    "latestObservedProviderStatus": 200,
+    "enablement": "Verified enabled on final hosted config: ai=true, localizedAi=true",
+    "limits": {
+      "recipesPerMonth": 10,
+      "scansPerMonth": 10,
+      "plansPerMonth": 3,
+      "globalAttemptsPerDay": 50,
+      "perUserAttemptsPer15Min": 5
+    },
+    "releaseReviewNote": "Global attempt guard currently counts per-user job rows, which cascade on account deletion; independent cost-control review remains required before production AI enablement.",
+    "recoveryPolicy": "Staging opt-in only; max 2 provider calls per reserved application operation; explicit 503 only; 2-3s jitter; shared 110s; no retry on network uncertainty, timeout, 402 or 429",
+    "previousProviderFailure": "Previous models and early Flash-Lite hosted runs returned 503 high demand; historical evidence retained"
+  },
+  "remaining": [
+    "Physical device AI/camera/gallery and second-device persistence acceptance",
+    "Branded custom SMTP, non-team recipient/recovery delivery; user reports existing Android verification works",
+    "RevenueCat/store sandbox and physical push",
+    "Physical device runtime and final store distribution",
+    "Independent security patch review and authenticated DAST",
+    "Production legal/store/beta gates"
+  ],
+  "legal": "Explicit staging-only bilingual information notice; not production policy or terms",
+  "vercelDeploymentId": "dpl_GovLsMia88j1dCSkmUS2zpVTgMJ5",
+  "functionRegion": "bom1",
+  "finalPublicProbes": [
+    {
+      "path": "/api/mobile/config",
+      "status": 200,
+      "contentType": "application/json"
+    },
+    {
+      "path": "/api/pantry",
+      "status": 401,
+      "contentType": "application/json"
+    },
+    {
+      "path": "/api/recipes/history",
+      "status": 401,
+      "contentType": "application/json"
+    },
+    {
+      "path": "/api/account",
+      "status": 405,
+      "contentType": null
+    },
+    {
+      "path": "/api/mobile/staging-info",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8"
+    }
+  ],
+  "apkSha256": "bc3cec50852a4663141e889a55c54e36e2bfa7aa1bdddd74f0053f27a48914d1",
+  "artifactId": 12049860632,
+  "deviceFeedbackSourceUpdate": {
+    "report": "mobile/docs/DEVICE_FEEDBACK_2026-10-16.md",
+    "buildOrDeploy": false,
+    "mobileTests": 72,
+    "apiSecurityTests": 34,
+    "verificationEmail": "user-reported-working-on-Android; Supabase sender; branded SMTP pending",
+    "accountDeletion": "shared information link removed in source; synthetic rolled-back SQL cascade and mocked route checks passed; actual red-button phone flow pending",
+    "ai": "source error classification improved; hosted 503 remains last observed; flags unchanged disabled"
+  },
+  "aiAcceptanceChecks": 13
+}

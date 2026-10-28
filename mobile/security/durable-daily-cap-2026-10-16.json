@@ -1,0 +1,45 @@
+{
+  "observedAt": "2026-10-16T18:02:37.310Z",
+  "project": "vcyqtbzhfanbpclfhibv",
+  "environment": "staging",
+  "migration": "mobile_ai_durable_daily_cap",
+  "checks": [
+    "Successful reservation increments anonymous UTC daily counter",
+    "Failed operation does not refund daily reservation",
+    "Idempotent replay does not consume another reservation",
+    "Durable counter enforces exhausted per-request test cap",
+    "Real hosted account deletion cascades jobs without resetting global daily counter"
+  ],
+  "syntheticAccountCleaned": true,
+  "newProviderCalls": 0,
+  "nativeBuild": false,
+  "backendBuild": false,
+  "deployment": false,
+  "productionChanged": false,
+  "limitation": "Counts application reservations, not exact provider token/dollar cost. Historical deleted attempts cannot be reconstructed.",
+  "localSqlLifecycle": "passed; rolled back",
+  "localCrossAccountConcurrency": "passed; only one final-slot reservation",
+  "backendSecurityTests": 36,
+  "mobileDependencyRegressions": 15,
+  "backendTypecheck": "passed",
+  "newLedgerRls": true,
+  "clientRead": false,
+  "clientReservationRpc": false,
+  "serviceRoleDirectCounterReset": false,
+  "fixedSearchPath": true,
+  "dast": "not run; missing key and user declined paid setup",
+  "hostedStagingFinalCheck": {
+    "status": 200,
+    "capabilities": {
+      "ai": true,
+      "localizedAi": true,
+      "privateRecipes": true,
+      "idempotency": true,
+      "billing": false,
+      "reports": true,
+      "consents": true,
+      "push": false,
+      "analytics": false
+    }
+  }
+}

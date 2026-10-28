@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T21:04:48.728011+00:00",
+  "scope": "Approved source UI polish, local synthetic checks; no native build or live AI",
+  "implementation": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS",
+    "D": "PASS",
+    "skills": [
+      "emil-design-eng",
+      "design:design-critique",
+      "design:accessibility-review"
+    ]
+  },
+  "checks": {
+    "mobileTests": 150,
+    "mobileSuites": 20,
+    "dependencySecurityTests": 17,
+    "backendTests": 62,
+    "secretsTemplateTests": 3,
+    "mobileLint": "PASS",
+    "backendLint": "PASS",
+    "mobileTypeScript": "PASS",
+    "backendTypeScript": "PASS",
+    "npmAudit": {
+      "mobile": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "backend": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    "snyk": {
+      "mobile": {
+        "status": "FINDINGS",
+        "ok": false,
+        "dependencies": 1143,
+        "advisories": [
+          {
+            "id": "SNYK-JS-PICOMATCH-21248802",
+            "package": "picomatch",
+            "severity": "high",
+            "versions": [
+              "2.3.2",
+              "4.0.7"
+            ],
+            "paths": 28,
+            "fixedIn": [],
+            "identifiers": {
+              "CVE": [
+                "CVE-2026-112366"
+              ],
+              "CWE": [
+                "CWE-1333"
+              ]
+            },
+            "publicationTime": "2026-10-19T19:21:10.842984Z"
+          }
+        ],
+        "rawEvidence": "mobile/security/snyk-ui-polish-2026-10-20.json"
+      },
+      "backend": {
+        "status": "FINDINGS",
+        "ok": false,
+        "dependencies": 429,
+        "advisories": [
+          {
+            "id": "SNYK-JS-PICOMATCH-21248802",
+            "package": "picomatch",
+            "severity": "high",
+            "versions": [
+              "4.0.4"
+            ],
+            "paths": 2,
+            "fixedIn": [],
+            "identifiers": {
+              "CVE": [
+                "CVE-2026-112366"
+              ],
+              "CWE": [
+                "CWE-1333"
+              ]
+            },
+            "publicationTime": "2026-10-19T19:21:10.842984Z"
+          }
+        ],
+        "rawEvidence": "backend/security/snyk-ui-polish-2026-10-20.json"
+      }
+    },
+    "secrets": {
+      "scanner": "gitleaks",
+      "version": "8.30.1",
+      "observedAt": "2026-10-19T21:04:12.735Z",
+      "repository": "chef-ai",
+      "scope": "Locally available Git refs, tracked and non-ignored untracked files. Ignored local environment files and native/build artifacts require separate inventory/inspection.",
+      "sourceFileCount": 403,
+      "source": [],
+      "history": []
+    },
+    "database": {
+      "observedAt": "2026-10-19T21:00:45.012Z",
+      "scope": "Disposable local fixture only; not production or staging backup",
+      "migrations": [
+        "20261015000100_mobile_release_foundation.sql",
+        "20261015000200_mobile_ai_security.sql",
+        "20261015000300_mobile_push_delivery.sql",
+        "20261015000400_mobile_revenuecat.sql",
+        "20261015000500_mobile_analytics.sql",
+        "20261015000600_mobile_trigger_hardening.sql",
+        "20261016000100_mobile_ai_durable_daily_cap.sql",
+        "20261017000100_pantry_revision.sql",
+        "20261017000200_mobile_ai_lifecycle.sql"
+      ],
+      "checks": [
+        "Fresh synthetic schema and entire release migration chain",
+        "Roles, RLS, quota, cascade and durable-cap SQL assertions",
+        "Real concurrent dispatch permits, success/failure settlement, late plan fencing and deletion/metrics isolation",
+        "Concurrent reservation and 101-device push deduplication",
+        "Pantry parallel route/SQL200+409, persisted reread and content isolation",
+        "Custom-format backup and restore including synthetic sentinel",
+        "AI lifecycle: dispatch counting, five-minute deadline, original-month refund, atomic writes, retention and account ownership",
+        "Restored database preserves role/RLS/function/cascade guarantees"
+      ],
+      "passed": true,
+      "providerCalls": 0,
+      "build": false,
+      "deployment": false,
+      "productionRestoreVerified": false
+    }
+  },
+  "providerCalls": 0,
+  "quotaPolicyChanged": false,
+  "protectedFilesChecked": 30,
+  "protectedFilesChanged": [],
+  "dast": {
+    "status": "BLOCKED",
+    "runtime": "6.6.0",
+    "apiKeyPresent": false,
+    "configurationPresent": false,
+    "scanPerformed": false
+  },
+  "nativeAcceptance": {
+    "status": "NOT RUN",
+    "reason": "No matching current Expo58 binary verified; no-new-build instruction maintained",
+    "fpsVerified": false,
+    "screenReaderVerified": false
+  },
+  "remoteChanges": false,
+  "build": false,
+  "deploy": false,
+  "paidServiceSignup": false,
+  "productionTouched": false,
+  "stagingTouched": false,
+  "releaseReady": false
+}

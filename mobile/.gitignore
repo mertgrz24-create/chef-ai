@@ -44,3 +44,11 @@ example
 
 # Local secrets — never commit
 .env
+
+# Release credentials and test artifacts
+google-service-account.json
+*service-account*.json
+.sentryclirc
+coverage/
+test-results/
+artifacts/

@@ -1,0 +1,8 @@
+{
+  "runId": 38822859339,
+  "commit": "3313a6477a71f6b71f3af369371375067d35f8ac",
+  "status": "downloaded-and-zip-integrity-checked",
+  "apkBytes": 56787589,
+  "apkSha256": "236485f76b3b07d7173d8d0c1a7c78fc53fc0fad0a23c943e2faf265689dff49",
+  "supersedes": "Earlier local-download timeout; historical penultimate artifact report remains unchanged."
+}

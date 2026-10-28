@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "scope": "local source checks and read-only staging cron follow-up",
+  "changes": [
+    "Pin push operations to captured account",
+    "Invalidate pre-detach registrations with generation counter"
+  ],
+  "checks": {
+    "mobileTests": 140,
+    "mobileSuites": 19,
+    "dependencySecurityTests": 17,
+    "backendTests": 61,
+    "secretsTemplateTests": 3,
+    "lint": "passed both",
+    "typescript": "passed both",
+    "npmAuditMobile": 0,
+    "npmAuditBackend": 0,
+    "secrets": {
+      "scanner": "gitleaks",
+      "version": "8.30.1",
+      "observedAt": "2026-10-19T20:38:48.960Z",
+      "repository": "chef-ai",
+      "scope": "Locally available Git refs, tracked and non-ignored untracked files. Ignored local environment files and native/build artifacts require separate inventory/inspection.",
+      "sourceFileCount": 394,
+      "source": [],
+      "history": []
+    }
+  },
+  "staging": {
+    "project": "vcyqtbzhfanbpclfhibv",
+    "readOnly": true,
+    "cron": {
+      "name": "chef-ai-staging-ai-cleanup",
+      "active": true,
+      "schedule": "0 * * * *",
+      "totalSucceeded": 60,
+      "failed": 0,
+      "naturalHourlyRuns": 57,
+      "firstNaturalRunUTC": "2026-10-17T12:00:00.161266Z",
+      "lastCompletedUTC": "2026-10-19T20:00:00.232417Z"
+    },
+    "expiredPending": 0
+  },
+  "dast": {
+    "runtime": "6.6.0",
+    "apiKeyPresent": false,
+    "completed": false,
+    "reason": "No authenticated scanner access/project configuration; no service signup"
+  },
+  "constraints": {
+    "productionTouched": false,
+    "mobileBuild": false,
+    "backendBuildOrDeploy": false,
+    "remoteMigration": false,
+    "aiProviderCalls": 0,
+    "packagesChanged": false,
+    "quotasChanged": false
+  },
+  "releaseReady": false
+}

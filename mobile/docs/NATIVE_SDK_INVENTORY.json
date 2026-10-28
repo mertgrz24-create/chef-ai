@@ -1,0 +1,943 @@
+{
+  "date": "2026-10-15",
+  "source": "Installed iOS Podfile.lock and SDK privacy manifests; not store declarations or a binary certification",
+  "pods": [
+    {
+      "name": "EXApplication",
+      "version": "57.0.3"
+    },
+    {
+      "name": "EXConstants",
+      "version": "57.0.22"
+    },
+    {
+      "name": "EXJSONUtils",
+      "version": "57.0.2"
+    },
+    {
+      "name": "EXManifests",
+      "version": "57.0.2"
+    },
+    {
+      "name": "Expo",
+      "version": "57.0.30"
+    },
+    {
+      "name": "expo-dev-client",
+      "version": "57.0.20"
+    },
+    {
+      "name": "expo-dev-launcher",
+      "version": "57.0.21"
+    },
+    {
+      "name": "expo-dev-launcher/Main",
+      "version": "57.0.21"
+    },
+    {
+      "name": "expo-dev-launcher/Unsafe",
+      "version": "57.0.21"
+    },
+    {
+      "name": "expo-dev-menu",
+      "version": "57.0.20"
+    },
+    {
+      "name": "expo-dev-menu-interface",
+      "version": "57.0.0"
+    },
+    {
+      "name": "expo-dev-menu/Main",
+      "version": "57.0.20"
+    },
+    {
+      "name": "ExpoAsset",
+      "version": "57.0.20"
+    },
+    {
+      "name": "ExpoCrypto",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoDevice",
+      "version": "57.0.2"
+    },
+    {
+      "name": "ExpoDomWebView",
+      "version": "57.0.1"
+    },
+    {
+      "name": "ExpoFileSystem",
+      "version": "57.0.7"
+    },
+    {
+      "name": "ExpoFont",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoGlassEffect",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoHaptics",
+      "version": "57.0.3"
+    },
+    {
+      "name": "ExpoImage",
+      "version": "57.0.5"
+    },
+    {
+      "name": "ExpoImageManipulator",
+      "version": "57.0.21"
+    },
+    {
+      "name": "ExpoImagePicker",
+      "version": "57.0.20"
+    },
+    {
+      "name": "ExpoKeepAwake",
+      "version": "57.0.2"
+    },
+    {
+      "name": "ExpoLinking",
+      "version": "57.0.13"
+    },
+    {
+      "name": "ExpoLocalization",
+      "version": "57.0.2"
+    },
+    {
+      "name": "ExpoLogBox",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoModulesCore",
+      "version": "57.0.23"
+    },
+    {
+      "name": "ExpoModulesJSI",
+      "version": "57.1.2"
+    },
+    {
+      "name": "ExpoModulesWorklets",
+      "version": "57.0.23"
+    },
+    {
+      "name": "ExpoModulesWorkletsAdapter",
+      "version": "57.0.23"
+    },
+    {
+      "name": "ExpoNotifications",
+      "version": "57.0.23"
+    },
+    {
+      "name": "ExpoRouter",
+      "version": "57.0.28"
+    },
+    {
+      "name": "ExpoSecureStore",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoSplashScreen",
+      "version": "57.0.10"
+    },
+    {
+      "name": "ExpoSymbols",
+      "version": "57.0.3"
+    },
+    {
+      "name": "ExpoSystemUI",
+      "version": "57.0.4"
+    },
+    {
+      "name": "ExpoUI",
+      "version": "57.0.25"
+    },
+    {
+      "name": "ExpoWebBrowser",
+      "version": "57.0.3"
+    },
+    {
+      "name": "EXUpdatesInterface",
+      "version": "57.0.2"
+    },
+    {
+      "name": "FBLazyVector",
+      "version": "0.86.3"
+    },
+    {
+      "name": "hermes-engine",
+      "version": "250829098.0.17"
+    },
+    {
+      "name": "hermes-engine/Pre-built",
+      "version": "250829098.0.17"
+    },
+    {
+      "name": "PurchasesHybridCommon",
+      "version": "19.12.0"
+    },
+    {
+      "name": "RCTDeprecation",
+      "version": "0.86.3"
+    },
+    {
+      "name": "RCTRequired",
+      "version": "0.86.3"
+    },
+    {
+      "name": "RCTSwiftUI",
+      "version": "0.86.3"
+    },
+    {
+      "name": "RCTSwiftUIWrapper",
+      "version": "0.86.3"
+    },
+    {
+      "name": "RCTTypeSafety",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-callinvoker",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core-prebuilt",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/CoreModulesHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/Default",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/DevSupport",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTActionSheetHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTAnimationHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTBlobHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTImageHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTLinkingHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTNetworkHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTSettingsHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTTextHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTVibrationHeaders",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Core/RCTWebSocket",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-CoreModules",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-cxxreact",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-debug",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-debug/redbox",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-defaultsnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-domnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/animated",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/animationbackend",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/animations",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/attributedstring",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/bridging",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/componentregistry",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/componentregistrynative",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/components",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/components/legacyviewmanagerinterop",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/components/root",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/components/scrollview",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/components/view",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/consistency",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/core",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/dom",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/imagemanager",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/leakchecker",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/mounting",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/observers",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/observers/events",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/observers/intersection",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/observers/mutation",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/scheduler",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/telemetry",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/uimanager",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/uimanager/consistency",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Fabric/viewtransition",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/inputaccessory",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/iostextinput",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/modal",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/rncore",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/safeareaview",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/scrollview",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/switch",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/text",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/textinput",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/unimplementedview",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/components/virtualview",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricComponents/textlayoutmanager",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-FabricImage",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-featureflags",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-featureflagsnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-graphics",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-hermes",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-idlecallbacksnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-ImageManager",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-intersectionobservernativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jserrorhandler",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsi",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsiexecutor",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsinspector",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsinspectorcdp",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsinspectornetwork",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsinspectortracing",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsitooling",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-jsitracing",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-logger",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-Mapbuffer",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-microtasksnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-mutationobservernativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "react-native-netinfo",
+      "version": "12.0.1"
+    },
+    {
+      "name": "react-native-safe-area-context",
+      "version": "5.7.0"
+    },
+    {
+      "name": "react-native-safe-area-context/common",
+      "version": "5.7.0"
+    },
+    {
+      "name": "react-native-safe-area-context/fabric",
+      "version": "5.7.0"
+    },
+    {
+      "name": "React-NativeModulesApple",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-networking",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-oscompat",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-perflogger",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-performancecdpmetrics",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-performancetimeline",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTActionSheet",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTAnimation",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTAppDelegate",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTBlob",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTFabric",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTFBReactNativeSpec",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTFBReactNativeSpec/components",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTImage",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTLinking",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTNetwork",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTRuntime",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTSettings",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTText",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RCTVibration",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-rendererconsistency",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-renderercss",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-rendererdebug",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RuntimeApple",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RuntimeCore",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-runtimeexecutor",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-RuntimeHermes",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-runtimescheduler",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-timing",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-utils",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-viewtransitionnativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "React-webperformancenativemodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactAppDependencyProvider",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactCodegen",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactCommon",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactCommon/turbomodule",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactCommon/turbomodule/bridging",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactCommon/turbomodule/core",
+      "version": "0.86.3"
+    },
+    {
+      "name": "ReactNativeDependencies",
+      "version": "0.86.3"
+    },
+    {
+      "name": "RevenueCat",
+      "version": "5.95.0"
+    },
+    {
+      "name": "RNCMaskedView",
+      "version": "0.3.2"
+    },
+    {
+      "name": "RNGestureHandler",
+      "version": "2.32.0"
+    },
+    {
+      "name": "RNPurchases",
+      "version": "10.14.0"
+    },
+    {
+      "name": "RNReanimated",
+      "version": "4.5.1"
+    },
+    {
+      "name": "RNReanimated/apple",
+      "version": "4.5.1"
+    },
+    {
+      "name": "RNReanimated/common",
+      "version": "4.5.1"
+    },
+    {
+      "name": "RNReanimated/view",
+      "version": "4.5.1"
+    },
+    {
+      "name": "RNScreens",
+      "version": "4.26.2"
+    },
+    {
+      "name": "RNScreens/common",
+      "version": "4.26.2"
+    },
+    {
+      "name": "RNSentry",
+      "version": "7.11.0"
+    },
+    {
+      "name": "RNWorklets",
+      "version": "0.10.1"
+    },
+    {
+      "name": "RNWorklets/apple",
+      "version": "0.10.1"
+    },
+    {
+      "name": "RNWorklets/common",
+      "version": "0.10.1"
+    },
+    {
+      "name": "Sentry/HybridSDK",
+      "version": "8.58.0"
+    },
+    {
+      "name": "Yoga",
+      "version": "0.0.0"
+    }
+  ],
+  "uniqueManifests": [
+    {
+      "source": "ios/ChefAI/PrivacyInfo.xcprivacy",
+      "sha256": "b9289ecfec677540a293fba948db7268c02b1d44943fa66b1e7a85ba0c31a252",
+      "tracking": false,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "C617.1"
+          ]
+        },
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "CA92.1"
+          ]
+        },
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "35F9.1"
+          ]
+        }
+      ],
+      "collectedDataTypes": []
+    },
+    {
+      "source": "ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/tvos-arm64/ReactNativeDependencies.framework/ReactNativeDependencies_folly.bundle/PrivacyInfo.xcprivacy",
+      "sha256": "0587d155c56a6f4f0647ebc6b6a0bd026615cd610ee8f209a9786b79a96ad335",
+      "tracking": false,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "C617.1"
+          ]
+        }
+      ],
+      "collectedDataTypes": []
+    },
+    {
+      "source": "ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/tvos-arm64/ReactNativeDependencies.framework/ReactNativeDependencies_boost.bundle/PrivacyInfo.xcprivacy",
+      "sha256": "d3559c988dff940d4f758f37a0ba1863208304e33ab0b97c0e3dd5d3762f5f1d",
+      "tracking": false,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "C617.1"
+          ]
+        },
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "35F9.1"
+          ]
+        }
+      ],
+      "collectedDataTypes": []
+    },
+    {
+      "source": "ios/Pods/PurchasesHybridCommon/ios/PurchasesHybridCommon/PurchasesHybridCommon/PrivacyInfo.xcprivacy",
+      "sha256": "86676ccabdb5115b8907bfe0e1912fd5e2e8edf2716838b7bc890be63eda9282",
+      "tracking": false,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPITypeReasons": [
+            "CA92.1"
+          ],
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults"
+        }
+      ],
+      "collectedDataTypes": []
+    },
+    {
+      "source": "ios/Pods/RevenueCat/Sources/PrivacyInfo.xcprivacy",
+      "sha256": "76c876c73bf37d63b2944d0491e4d9a43d420de78b66512fcca27a484ae92e79",
+      "tracking": false,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "CA92.1"
+          ]
+        }
+      ],
+      "collectedDataTypes": [
+        {
+          "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypePurchaseHistory",
+          "NSPrivacyCollectedDataTypeLinked": false,
+          "NSPrivacyCollectedDataTypeTracking": false,
+          "NSPrivacyCollectedDataTypePurposes": [
+            "NSPrivacyCollectedDataTypePurposeAppFunctionality"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ios/Pods/Sentry/Sources/Resources/PrivacyInfo.xcprivacy",
+      "sha256": "118b16e0e97ffe8b6f1f01b7e04f68e5da764474a4d39d2933b0eeaef3cdc0ca",
+      "tracking": null,
+      "trackingDomains": [],
+      "requiredReasonAPIs": [
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "CA92.1"
+          ]
+        },
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "35F9.1"
+          ]
+        },
+        {
+          "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+          "NSPrivacyAccessedAPITypeReasons": [
+            "C617.1"
+          ]
+        }
+      ],
+      "collectedDataTypes": [
+        {
+          "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypeCrashData",
+          "NSPrivacyCollectedDataTypeLinked": false,
+          "NSPrivacyCollectedDataTypeTracking": false,
+          "NSPrivacyCollectedDataTypePurposes": [
+            "NSPrivacyCollectedDataTypePurposeAppFunctionality"
+          ]
+        },
+        {
+          "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypePerformanceData",
+          "NSPrivacyCollectedDataTypeLinked": false,
+          "NSPrivacyCollectedDataTypeTracking": false,
+          "NSPrivacyCollectedDataTypePurposes": [
+            "NSPrivacyCollectedDataTypePurposeAppFunctionality"
+          ]
+        },
+        {
+          "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypeOtherDiagnosticData",
+          "NSPrivacyCollectedDataTypeLinked": false,
+          "NSPrivacyCollectedDataTypeTracking": false,
+          "NSPrivacyCollectedDataTypePurposes": [
+            "NSPrivacyCollectedDataTypePurposeAppFunctionality"
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Android resolved dependency graph not built",
+    "Actual enabled SDK features/data flows must be reconciled with App Privacy and Data Safety",
+    "Native signed distribution artifacts not inspected"
+  ]
+}

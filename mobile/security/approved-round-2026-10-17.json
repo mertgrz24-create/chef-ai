@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-17",
+  "scope": "Source and disposable local synthetic fixtures; no device, staging, production or store acceptance",
+  "phaseResults": {
+    "A": "passed locally",
+    "B": "passed locally",
+    "C": "passed locally",
+    "D": "passed locally; remote migration pending authorization",
+    "E_quota_visibility": "passed locally",
+    "E_lifecycle": "deferred pending explicit policies and approval",
+    "provider_observation": "passed with fake SDK; no real provider calls",
+    "provider_global_attempt_cap": "acceptance gap confirmed; existing staging retry counts two calls as one daily reservation"
+  },
+  "tests": {
+    "mobile": 119,
+    "mobileSuites": 17,
+    "actualDependencySecurity": 17,
+    "backend": 51,
+    "secretAndEnvironment": 3,
+    "artifactCheckerUnit": 4,
+    "typecheckAndLint": "passed mobile and backend"
+  },
+  "database": {
+    "observedAt": "2026-10-17T09:48:37.860Z",
+    "scope": "Disposable local fixture only; not production or staging backup",
+    "migrations": [
+      "20261015000100_mobile_release_foundation.sql",
+      "20261015000200_mobile_ai_security.sql",
+      "20261015000300_mobile_push_delivery.sql",
+      "20261015000400_mobile_revenuecat.sql",
+      "20261015000500_mobile_analytics.sql",
+      "20261015000600_mobile_trigger_hardening.sql",
+      "20261016000100_mobile_ai_durable_daily_cap.sql",
+      "20261017000100_pantry_revision.sql"
+    ],
+    "checks": [
+      "Fresh synthetic schema and entire release migration chain",
+      "Roles, RLS, quota, cascade and durable-cap SQL assertions",
+      "Concurrent reservation and 101-device push deduplication",
+      "Pantry parallel route/SQL200+409, persisted reread and content isolation",
+      "Custom-format backup and restore including synthetic sentinel",
+      "Restored database preserves role/RLS/function/cascade guarantees"
+    ],
+    "passed": true,
+    "providerCalls": 0,
+    "build": false,
+    "deployment": false,
+    "productionRestoreVerified": false,
+    "temporaryServerStopped": true
+  },
+  "dependencyAudit": {
+    "mobile": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "backend": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "protectedFiles": [
+    {
+      "path": "mobile/package.json",
+      "sha256": "1fea30e7a30287a8e5c620581da9b1c7a48af92a1c8818d4a9bf1c54c9cb76d4",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "mobile/package-lock.json",
+      "sha256": "08e9c2890ebe15d058f7ca066f84988e8196994cee1c5d7536dbe5eaf083c2c7",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/package.json",
+      "sha256": "7a6c8b7a528b26e051bd8b3a80c546fcf0edcf39ee48fa90824178f9a99fca0a",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/package-lock.json",
+      "sha256": "95b1b6303891d71b6022acf723006ac49863c051e53e37c46c213d1036550b1a",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "mobile/security/patches.json",
+      "sha256": "1a85b95689197e38588f08794b0d4197d9daff01c14f52f5094432c39a96b8de",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/lib/mobile/dependency-patches.json",
+      "sha256": "8bcfa5cd13f4e25002c12c4903b34649217dbb7df187834060de5fb9d6a4e4ca",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/lib/ai/transient.ts",
+      "sha256": "66ea9c9727b98b09d1a695a1c13e3c3c376fd04cef7305b8baec9a8d303686e5",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/app/api/mobile/maintenance/route.ts",
+      "sha256": "e18de0aabf34a01ca428f2664fd6b2a6f3fb3f5857c1fb94b1e1bb4606b4cd4e",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/supabase/migrations/20261015000200_mobile_ai_security.sql",
+      "sha256": "b29f40fbf597e4362f5205f523d4edc912337e471ecf547de17fff58431974ce",
+      "unchangedSinceTaskBaseline": true
+    },
+    {
+      "path": "backend/supabase/migrations/20261016000100_mobile_ai_durable_daily_cap.sql",
+      "sha256": "e40485ed6ae9314935348b550d8b80d594bc13a91e9c66372507e8159db9338c",
+      "unchangedSinceTaskBaseline": true
+    }
+  ],
+  "realProviderCalls": 0,
+  "remoteMigrations": 0,
+  "newBuild": false,
+  "deploy": false,
+  "push": false,
+  "newPaidService": false,
+  "freshSnyk": "not run",
+  "hawkDast": "not run: no API key/authenticated session",
+  "openGates": [
+    "E lifecycle policy approval",
+    "Exact dispatch counting in global cap",
+    "Authorized remote revision migration",
+    "Future authorized native build/device and second-device acceptance",
+    "Fresh independent security/DAST and existing store/service gates"
+  ],
+  "secrets": {
+    "scanner": "gitleaks",
+    "version": "8.30.1",
+    "observedAt": "2026-10-17T09:55:01.797Z",
+    "repository": "chef-ai",
+    "scope": "Locally available Git refs, tracked and non-ignored untracked files. Ignored local environment files and native/build artifacts require separate inventory/inspection.",
+    "sourceFileCount": 373,
+    "source": [],
+    "history": []
+  }
+}
