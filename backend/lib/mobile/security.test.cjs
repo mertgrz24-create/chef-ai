@@ -42,6 +42,17 @@ const validBody = {
   instructions: 'Cook.',
   is_public: false,
 }
+test('shopping items require an authenticated owner', async () => {
+  const { GET } = load('app/api/shopping-items/route', {
+    '@/lib/supabase/api': { createApiClient: async () => ({ auth: { getUser: async () => ({ data: { user: null }, error: null }) } }) },
+  })
+  assert.equal((await GET()).status, 401)
+})
+test('shopping batch rejects empty or oversized selections before writing', async () => {
+  const f = pantryFixture(), { POST } = load('app/api/shopping-items/batch/route', f.mocks)
+  for (const names of [[], [''], ['x'.repeat(301)], Array(101).fill('milk')])
+    assert.equal((await POST(request({ names }))).status, 400)
+})
 const request = (value, key = 'request-key-123') =>
   new Request('https://api.example.test/api/recipes/save', {
     method: 'POST',
@@ -1020,6 +1031,20 @@ function pantryFixture(owner='owner') {
 }
 const pantryBody={name:'updated tomato',quantity:null,expiry_date:'2099-02-01',expectedRevision:0}
 const pantryParams={params:Promise.resolve({id:'00000000-0000-4000-8000-000000000001'})}
+test('shopping item updates enforce owner, revision and bounded fields', async () => {
+  const body = { name: 'milk', checked: true, expectedRevision: 0 }
+  const f = pantryFixture(), { PATCH } = load('app/api/shopping-items/[id]/route', f.mocks)
+  const responses = await Promise.all([PATCH(request(body), pantryParams), PATCH(request(body), pantryParams)])
+  assert.deepEqual(responses.map(r => r.status).sort(), [200, 409])
+  const other = pantryFixture('other'), route = load('app/api/shopping-items/[id]/route', other.mocks)
+  assert.equal((await route.PATCH(request(body), pantryParams)).status, 409)
+  for (const change of [{ name: '' }, { name: 'x'.repeat(301) }, { checked: 'yes' }, { expectedRevision: -1 }, { user_id: 'other' }])
+    assert.equal((await PATCH(request({ ...body, ...change }), pantryParams)).status, 400)
+})
+test('shopping item deletion requires a revision', async () => {
+  const { DELETE } = load('app/api/shopping-items/[id]/route', pantryFixture().mocks)
+  assert.equal((await DELETE(new Request('https://example.test/api/shopping-items/id', { method: 'DELETE' }), pantryParams)).status, 400)
+})
 test('D: concurrent PATCH with the same revision returns one 200 and one 409',async()=>{
   const f=pantryFixture(),{PATCH}=load('app/api/pantry/[id]/route',f.mocks)
   const responses=await Promise.all([PATCH(request(pantryBody),pantryParams),PATCH(request({...pantryBody,name:'other'}),pantryParams)])

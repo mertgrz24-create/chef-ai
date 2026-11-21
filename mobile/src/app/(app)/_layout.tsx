@@ -81,6 +81,7 @@ export default function AppLayout() {
       />
       {/* Reached from the Today screen, not the tab bar. */}
       <Tabs.Screen name="meal-plan" options={{ href: null }} />
+      <Tabs.Screen name="shopping-list" options={{ href: null }} />
       <Tabs.Screen name="saved-recipes" options={{ href: null }} />
       <Tabs.Screen name="premium" options={{ href: null }} />
       <Tabs.Screen name="report" options={{ href: null }} />

@@ -9,6 +9,8 @@ export type Candidate = {
     minutes: number | null;
     matches: number;
     urgent: number;
+    matchedIngredients: string[];
+    reviewIngredients: string[];
 };
 export type RecommendationMode = 'pantry' | 'quick';
 export const localDay = (now: Date) => `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -50,12 +52,12 @@ export function recommendations(recipes: SavedRecipe[], plan: MealPlan | null, p
         if (name)
             stock.set(name, (stock.get(name) ?? false) || !!date && date <= localDay(near));
     }
-    const raw: Candidate[] = recipes.map(recipe => ({ key: `saved:${recipe.id}`, source: 'saved', recipe, macros: recipe.macros, minutes: duration(recipe), matches: 0, urgent: 0 }));
+    const raw: Candidate[] = recipes.map(recipe => ({ key: `saved:${recipe.id}`, source: 'saved', recipe, macros: recipe.macros, minutes: duration(recipe), matches: 0, urgent: 0, matchedIngredients: [], reviewIngredients: [] }));
     if (plan?.week_start_date === localWeek(now))
         for (const day of plan.meals)
             for (const meal of ['breakfast', 'dinner'] as const) {
                 const recipe = day[meal];
-                raw.push({ key: `plan:${plan.id}:${day.day}:${meal}`, source: 'plan', recipe, macros: recipe.macros, minutes: duration(recipe), matches: 0, urgent: 0 });
+                raw.push({ key: `plan:${plan.id}:${day.day}:${meal}`, source: 'plan', recipe, macros: recipe.macros, minutes: duration(recipe), matches: 0, urgent: 0, matchedIngredients: [], reviewIngredients: [] });
             }
     const identities=new Set<string>(),unique=new Map<string,Candidate>();
     for(const item of raw) {
@@ -69,7 +71,15 @@ export function recommendations(recipes: SavedRecipe[], plan: MealPlan | null, p
     const candidates=[...unique.values()].map(item=>{
         const names = new Set(item.recipe.ingredients.map(ingredientName).filter((s): s is string => !!s));
         const matched = [...names].filter(name => stock.has(name));
-        return { ...item, matches: matched.length, urgent: matched.filter(name => stock.get(name)).length };
+        const matchedIngredients = item.recipe.ingredients.filter(line => {
+            const name = ingredientName(line);
+            return name !== null && stock.has(name);
+        });
+        const reviewIngredients = item.recipe.ingredients.filter(line => {
+            const name = ingredientName(line);
+            return name === null || !stock.has(name);
+        });
+        return { ...item, matches: matched.length, urgent: matched.filter(name => stock.get(name)).length, matchedIngredients, reviewIngredients };
     });
     const knownTimes = candidates.filter(item => item.minutes !== null).length;
     const eligible = candidates.filter(item => mode === 'quick' ? item.minutes !== null && item.minutes <= 30 : pantry.length === 0 || item.matches > 0);

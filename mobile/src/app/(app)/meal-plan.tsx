@@ -320,6 +320,7 @@ export default function MealPlanScreen() {
                 'Tap a meal for ingredients and cooking steps. Use \u21BB to swap just one.',
               )}
             </Text>
+            <View className="mb-3"><Button label={t('Shopping list')} variant="ghost" onPress={() => router.navigate('/shopping-list')} /></View>
             <Button
               label={t('Regenerate whole week')}
               loadingLabel={t('Planning your week\u2026')}

@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store'
 import { Platform } from 'react-native'
 
-// Preferences and opaque AI recovery pointers only. No recipe, image, password or bearer token is cached here.
+// Preferences, opaque AI recovery pointers and timer metadata only. No recipe, image, password or bearer token is cached here.
 export async function readPreference(key: string): Promise<string | null> {
   if (Platform.OS === 'web')
     return globalThis.localStorage?.getItem(key) ?? null

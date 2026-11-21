@@ -53,6 +53,17 @@ const pantry: PantryItem = { id: '00000000-0000-4000-8000-000000000001', name: '
 const saved = { id: '00000000-0000-4000-8000-000000000002', name: 'Fixture soup', ingredients: ['tomato'], instructions: 'Simmer.', macros: null, is_public: false, created_at: '' };
 beforeEach(() => { mockApi.mockReset(); mockState.aiAllowed = true; mockState.offline = false; mockState.membership = null; mockState.refreshMembership.mockClear(); });
 describe('C — Today with AI enabled', () => {
+    it('shows pantry matches and ingredients to check in recipe details', async () => {
+        mockApi.mockImplementation(async (path) => path === '/api/pantry' ? { items: [pantry] } : path === '/api/recipes/history' ? { recipes: [{ ...saved, ingredients: ['tomato', 'salt, to taste'] }] } : { plan: null });
+        const ui = await render(<KitchenDataProvider><Today /></KitchenDataProvider>);
+        await waitFor(() => expect(ui.getByText('Fixture soup')).toBeTruthy());
+        await fireEvent.press(ui.getByLabelText('View recipe: Fixture soup'));
+        expect(ui.getByText('Found in your pantry')).toBeTruthy();
+        expect(ui.getByText('tomato')).toBeTruthy();
+        expect(ui.getByText('Check these ingredients')).toBeTruthy();
+        expect(ui.getByText('salt, to taste')).toBeTruthy();
+        await ui.unmount();
+    });
     it('opens, filters, opens a detail and returns with zero AI calls or extra downloads', async () => {
         mockApi.mockImplementation(async (path, options) => {
             if (options && (options as {

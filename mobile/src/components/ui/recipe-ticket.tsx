@@ -1,18 +1,24 @@
 import { t, useLocale } from '@/lib/release/locale'
+import { useState } from 'react'
 import { Text, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import type { StructuredRecipe, RecipeMacros } from '@/lib/types'
 import { colors } from '@/theme/tokens'
-export function RecipeTicket({
+import { RecipeShopping } from '@/components/release/recipe-shopping'
+import { CookingMode } from '@/components/release/cooking-mode'
+import { Button } from '@/components/ui/button'
+
+type RecipeTicketProps = { recipe: StructuredRecipe; macros?: RecipeMacros | null; title?: string }
+export function RecipeTicket(props: RecipeTicketProps) {
+  return <RecipeTicketContent key={JSON.stringify([props.recipe.name, props.recipe.ingredients, props.recipe.instructions])} {...props} />
+}
+function RecipeTicketContent({
   recipe,
   macros,
   title = 'YOUR RECIPE',
-}: {
-  recipe: StructuredRecipe
-  macros?: RecipeMacros | null
-  title?: string
-}) {
+}: RecipeTicketProps) {
   useLocale()
+  const [cooking, setCooking] = useState(false)
   const timing = [
     recipe.prep_time_min != null
       ? { label: 'Prep', value: `${recipe.prep_time_min} ${t('min')}` }
@@ -33,6 +39,7 @@ export function RecipeTicket({
   const steps = numbered
     ? lines.map((line) => line.replace(/^\s*\d+[.)]\s*/, ''))
     : null
+  if (cooking) return <CookingMode recipe={recipe} onClose={() => setCooking(false)} />
   return (
     <View className="overflow-hidden rounded-3xl bg-panel">
       <View className="px-5 pb-6 pt-5">
@@ -48,6 +55,7 @@ export function RecipeTicket({
         >
           {recipe.name}
         </Text>
+        <View className="mt-4"><Button label={t('Start cooking')} onPress={() => setCooking(true)} /></View>
         {timing.length ? (
           <View className="mt-5 flex-row flex-wrap gap-x-6 gap-y-3 border-y border-line py-4">
             {timing.map((item) => (
@@ -84,6 +92,7 @@ export function RecipeTicket({
             </Text>
           </View>
         ))}
+        <RecipeShopping ingredients={recipe.ingredients} />
         <Text
           accessibilityRole="header"
           className="mb-4 mt-7 font-display text-display-sm text-pantry"

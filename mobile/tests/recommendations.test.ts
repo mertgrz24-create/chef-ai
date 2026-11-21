@@ -8,6 +8,10 @@ const recipe = (id: string, ingredients = ['tomato']): SavedRecipe => ({ id, nam
 const stock = (name: string, date: string | null = '2026-10-19'): PantryItem => ({ id: name, name, quantity: null, expiry_date: date, created_at: '', revision: 0 });
 const plan = (minutes: number | undefined = 20, week = '2026-10-12'): MealPlan => ({ id: 'plan', user_id: 'a', week_start_date: week, created_at: '', updated_at: '', meals: [{ day: 'monday', breakfast: { ...recipe('breakfast'), macros: undefined, prep_time_min: minutes, cook_time_min: minutes === undefined ? undefined : 5 }, dinner: { ...recipe('dinner', ['egg']), macros: undefined, prep_time_min: 40, cook_time_min: 5 } }] });
 describe('B — deterministic existing-content recommendations', () => {
+    it('separates confirmed pantry matches from ingredients needing review', () => {
+        const result = recommendations([recipe('r', ['2 adet domates', '1 cup milk', 'salt, to taste'])], null, [stock('tomato', null)], 'pantry', now);
+        expect(result.items[0]).toMatchObject({ matchedIngredients: ['2 adet domates'], reviewIngredients: ['1 cup milk', 'salt, to taste'] });
+    });
     it('matches audited TR/EN names without substituting milk products', () => {
         expect(ingredientName(' 2 cups FLOUR ')).toBe('flour');
         expect(ingredientName('1 su bardağı un')).toBe('flour');

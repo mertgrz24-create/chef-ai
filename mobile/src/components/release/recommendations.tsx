@@ -42,7 +42,11 @@ export function Recommendations() {
     <Button label={t('Saved recipes')} variant="ghost" onPress={() => router.navigate('/saved-recipes')}/>
     <View className="mt-2"><Button label={t('Create a new recipe with AI')} onPress={() => router.navigate('/cook')}/></View>
     <Modal visible={!!detail} animationType={reduced ? 'none' : 'slide'} presentationStyle="pageSheet" onShow={onModalShow} onDismiss={onModalDismiss} onRequestClose={() => setSelected(null)}>
-      <View style={{flex:1}} accessibilityViewIsModal><ScreenScroll><View ref={headingRef} accessible accessibilityRole="header" accessibilityLabel={detail?.recipe.name}><Text className="mb-3 font-sans-bold text-body text-pantry">{detail?.recipe.name}</Text></View><Button label={t('Close recipe details')} variant="ghost" onPress={() => setSelected(null)}/>{detail ? <RecipeTicket recipe={detail.recipe} macros={macrosSchema.safeParse(detail.macros).success ? macrosSchema.parse(detail.macros) : null}/> : null}</ScreenScroll></View>
+      <View style={{flex:1}} accessibilityViewIsModal><ScreenScroll><View ref={headingRef} accessible accessibilityRole="header" accessibilityLabel={detail?.recipe.name}><Text className="mb-3 font-sans-bold text-body text-pantry">{detail?.recipe.name}</Text></View><Button label={t('Close recipe details')} variant="ghost" onPress={() => setSelected(null)}/>{detail && snapshot.pantry.loaded && !snapshot.pantry.error && snapshot.pantry.data ? <View className="my-4 rounded-2xl bg-panel p-4">
+        <Text className="mb-2 font-sans text-label text-muted">{t('Pantry names are compared; quantities are not. Check your supplies before cooking.')}</Text>
+        {detail.matchedIngredients.length ? <><Text accessibilityRole="header" className="mt-2 font-sans-bold text-body text-pantry">{t('Found in your pantry')}</Text>{detail.matchedIngredients.map((line, index) => <Text key={`matched-${index}`} className="mt-1 font-sans text-body-sm text-secondary">{line}</Text>)}</> : null}
+        {detail.reviewIngredients.length ? <><Text accessibilityRole="header" className="mt-3 font-sans-bold text-body text-pantry">{t('Check these ingredients')}</Text>{detail.reviewIngredients.map((line, index) => <Text key={`review-${index}`} className="mt-1 font-sans text-body-sm text-secondary">{line}</Text>)}</> : null}
+      </View> : null}{detail ? <RecipeTicket recipe={detail.recipe} macros={macrosSchema.safeParse(detail.macros).success ? macrosSchema.parse(detail.macros) : null}/> : null}</ScreenScroll></View>
     </Modal>
   </View>;
 }

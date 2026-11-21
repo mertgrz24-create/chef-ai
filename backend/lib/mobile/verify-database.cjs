@@ -36,6 +36,7 @@ try {
   file(source, 'lib/mobile/database-security.sql')
   file(source, 'lib/mobile/durable-daily-cap.test.sql')
   file(source, 'lib/mobile/pantry-revision.test.sql')
+  file(source, 'lib/mobile/shopping-items.test.sql')
   file(source, 'lib/mobile/ai-lifecycle.test.sql')
   checks.push('Roles, RLS, quota, cascade and durable-cap SQL assertions')
   run(process.execPath, ['lib/mobile/database-concurrency.test.cjs'], {
@@ -55,6 +56,7 @@ try {
   file(restored, 'lib/mobile/database-security.sql')
   file(restored, 'lib/mobile/durable-daily-cap.test.sql')
   file(restored, 'lib/mobile/pantry-revision.test.sql')
+  file(restored, 'lib/mobile/shopping-items.test.sql')
   file(restored, 'lib/mobile/ai-lifecycle.test.sql')
   checks.push('AI lifecycle: dispatch counting, five-minute deadline, original-month refund, atomic writes, retention and account ownership')
   checks.push('Restored database preserves role/RLS/function/cascade guarantees')

@@ -212,6 +212,13 @@ export default function Today() {
             <Ionicons name="arrow-forward" size={18} color={colors.pantry} />
           }
         />
+        <Row
+          icon={<Ionicons name="basket-outline" size={21} color={colors.pantry} />}
+          title={t('Shopping list')}
+          subtitle={t('Keep your shopping in one place.')}
+          onPress={() => router.navigate('/shopping-list')}
+          right={<Ionicons name="arrow-forward" size={18} color={colors.pantry} />}
+        />
       </View>
       <View className="mt-6 flex-row items-start gap-3">
         <Ionicons name="bulb-outline" size={18} color={colors.pantry} />
